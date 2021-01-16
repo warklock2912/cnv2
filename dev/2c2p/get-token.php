@@ -19,6 +19,9 @@ $paymentDetail->amount = $amount;
 $paymentDetail->currencyCode = $currency_code;
 $paymentDetail->userDefined1 = $customerID;
 $paymentDetail->userDefined2 = "add_card";
+$paymentDetail->userDefined3 = "";
+$paymentDetail->userDefined4 = "";
+$paymentDetail->userDefined5 = "";
 
 
 //Important: Verify response signature
