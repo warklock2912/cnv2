@@ -1,6 +1,6 @@
 <?php
 
-require '../vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 //Reference: https://github.com/lcobucci/jwt
 use Lcobucci\JWT\Builder;
@@ -32,10 +32,10 @@ class PaymentGatewayHelper {
 
         //1) Create JWT builder
         $jwt_builder = new Builder();
-        
+
         //2) Convert request params to array
         $request_params_array = get_object_vars($request_params);
-        
+
         //3) Add individual param into JWT claim
         foreach ($request_params_array as $key => $value) {
 
@@ -48,27 +48,27 @@ class PaymentGatewayHelper {
         //5) Build request payload by using JWT structure (Header.Payload.Signature)
         $request_payload = new stdClass();
         $request_payload->payload = $jwt_token->__toString();
-        
+
         //6) Encode request payload to JSON
         return $request_payload_json = json_encode(get_object_vars($request_payload));
     }
 
     /**
      * Verify API response payload signature.
-     * 
+     *
      * @param string $response_payload_json Response payload from API response.
      * @param string $secret_key Merchant's secret key.
      * @return boolean Return result of verification for signature.
      */
     public function validatePayload($response_payload_json, $secret_key) {
-    
+
         //1) Convert JSON string to string array
         $response_payload_json_array = $this->jsonToArray($response_payload_json);
-    
+
         //2) Retrieve encoded response payload
         $response_payload = !empty($response_payload_json_array[self::PAYLOAD]) ? $response_payload_json_array[self::PAYLOAD] : '';
 
-        //3) Parse response payload to JWT 
+        //3) Parse response payload to JWT
         $jwt_token = (new Parser())->parse((string) $response_payload);
 
         //4) Verify with JWT if TRUE means it's a valid signature else it's invalid signature should return error response to application
@@ -94,25 +94,25 @@ class PaymentGatewayHelper {
      * @return stdClass Return response payload object.
      */
     public function parseAPIResponse($response_payload_json) {
-    
+
         //1) Convert JSON string to string array
         $response_payload_json_array = $this->jsonToArray($response_payload_json);
-        
+
         //2) Retrieve encoded response payload
         $response_payload = !empty($response_payload_json_array[self::PAYLOAD]) ? $response_payload_json_array[self::PAYLOAD] : '';
 
-        //3) Parse response payload to JWT 
+        //3) Parse response payload to JWT
         $jwt_token = (new Parser())->parse((string) $response_payload);
 
         //4) Decode the encoded reponse payload
         $response_payload = base64_decode($jwt_token->getRawPayload());
-        
+
         //5) Convert JSON to object
         $response_payload_object = $this->jsonToObject($response_payload);
 
         return $response_payload_object;
     }
- 
+
     /**
      * For verify payload contained in API response.
      * @param JSON $response_payload_json JSON of response payload.
@@ -132,7 +132,7 @@ class PaymentGatewayHelper {
 
         return json_decode($json);
     }
-  
+
     private function doAPIRequest($api_environment, $request_payload_json) {
 
         //CURL configuration
@@ -150,10 +150,10 @@ class PaymentGatewayHelper {
             ),
             CURLOPT_POSTFIELDS => $request_payload_json
         );
-    
+
         curl_setopt_array($ch, $curl_options);
-    
-        return $api_response = curl_exec($ch); 
+
+        return $api_response = curl_exec($ch);
     }
 }
 
