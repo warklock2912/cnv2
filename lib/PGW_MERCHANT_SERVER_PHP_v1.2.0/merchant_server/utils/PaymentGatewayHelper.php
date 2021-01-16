@@ -1,149 +1,159 @@
 <?php
 
+require '../vendor/autoload.php';
+
+//Reference: https://github.com/lcobucci/jwt
+use Lcobucci\JWT\Builder;
+use Lcobucci\JWT\Signer\Key;
+use Lcobucci\JWT\Signer\Hmac\Sha256;
+use Lcobucci\JWT\Parser;
+use Lcobucci\JWT\ValidationData;
+
 class PaymentGatewayHelper {
 
-    //Method for generate signature by object 
-    public function generateSignature($payment_request_obj, $secret_key) {
+    const PAYLOAD = "payload";
 
-        //1) Convert object to JSON string
-        $raw_json_string = json_encode(get_object_vars($payment_request_obj));
+    private $jwt_sign_algorithm;
 
-        //2) Convert JSON string to string array
-        $json_array = $this->jsonToArray($raw_json_string);
+    public function __construct() {
 
-        //3) Sorting in ascending alphabetical order based on ASCII names
-        $this->sortArray($json_array);
-
-        //4) Convert sorted string array to a string
-        $signature = $this->arraryToString($json_array);
-
-        //5) Generate hashed signature by using HMAC-SHA256 with merchant sercret key 
-        $hashed_signature = $this->hashSignature($signature, $secret_key);
-        
-        return $hashed_signature;
+        //Declare JWT sign algoritm
+        $this->jwt_sign_algorithm = new Sha256();
     }
 
-    //Method for generate signature by JSON string
-    public function generateSignatureByJSONString($raw_json_string, $secret_key) {
+    /**
+     * Generate request payload.
+     *
+     * @param stdClass $request_params Object of request params.
+     * @param string $secret_key Merchant's secret key.
+     * @return JSON Return request payload.
+     */
+    public function generatePayload($request_params, $secret_key) {
 
-        //1) Convert JSON string to string array
-        $json_array = $this->jsonToArray($raw_json_string);
-
-        //2) Sorting in ascending alphabetical order based on ASCII names
-        $this->sortArray($json_array);
-
-        //3) Convert sorted string array to a string
-        $signature = $this->arraryToString($json_array);
-
-        //4) Generate hashed signature by using HMAC-SHA256 with merchant sercret key 
-        $hashed_signature = $this->hashSignature($signature, $secret_key);
+        //1) Create JWT builder
+        $jwt_builder = new Builder();
         
-        return $hashed_signature;
-    }
-
-    //Method for verify API response signature
-    public function validateSignature($encoded_response, $secret_key) {
+        //2) Convert request params to array
+        $request_params_array = get_object_vars($request_params);
         
-        //Decode encoded reponse to JSON string with Base64
-        $raw_response = base64_decode($encoded_response);
+        //3) Add individual param into JWT claim
+        foreach ($request_params_array as $key => $value) {
 
-        //Convert JSON string to string array
-        $json_array = $this->jsonToArray($raw_response);
-        
-        //Keep original signature for compare signature
-        $original_signature = $json_array['signature']; 
-
-        //Clear signature for generate self hashed signature
-        $json_array['signature'] = "";
-
-        //Convert array to JSON after remove signature
-        $raw_json_after_removed_signature = json_encode($json_array); 
-
-        //Generate self hashed signature for verify
-        $self_hashed_signature = $this->generateSignatureByJSONString($raw_json_after_removed_signature, $secret_key); 
-
-        //Verify with both signature if equal means it's a valid signature else it's invalid signature should return error response to application
-        if(strcasecmp($original_signature, $self_hashed_signature) == 0) {
-            return true;
-        } else {
-            return false;
+            $jwt_builder->withClaim($key, $value);
         }
+
+        //4) Sign by using HMAC-SHA256 payload message with merchant sercret key
+        $jwt_token = $jwt_builder->getToken($this->jwt_sign_algorithm, new Key($secret_key));
+
+        //5) Build request payload by using JWT structure (Header.Payload.Signature)
+        $request_payload = new stdClass();
+        $request_payload->payload = $jwt_token->__toString();
+        
+        //6) Encode request payload to JSON
+        return $request_payload_json = json_encode(get_object_vars($request_payload));
     }
+
+    /**
+     * Verify API response payload signature.
+     * 
+     * @param string $response_payload_json Response payload from API response.
+     * @param string $secret_key Merchant's secret key.
+     * @return boolean Return result of verification for signature.
+     */
+    public function validatePayload($response_payload_json, $secret_key) {
     
+        //1) Convert JSON string to string array
+        $response_payload_json_array = $this->jsonToArray($response_payload_json);
+    
+        //2) Retrieve encoded response payload
+        $response_payload = !empty($response_payload_json_array[self::PAYLOAD]) ? $response_payload_json_array[self::PAYLOAD] : '';
+
+        //3) Parse response payload to JWT 
+        $jwt_token = (new Parser())->parse((string) $response_payload);
+
+        //4) Verify with JWT if TRUE means it's a valid signature else it's invalid signature should return error response to application
+        return $jwt_token->verify($this->jwt_sign_algorithm, $secret_key);
+    }
+
+    /**
+     * For API request.
+     *
+     * @param APIEnvironment $api_environment Request to specific API enviroment.
+     * @param JSON $request_payload_json JSON of request payload.
+     * @return JSON Return response payload.
+     */
+    public function requestAPI($api_environment, $request_payload_json) {
+
+        return $response_payload_json = $this->doAPIRequest($api_environment, $request_payload_json);
+    }
+
+    /**
+     * For parse encoded response and convert into stdClass object.
+     *
+     * @param JSON $response_payload_json JSON of response payload.
+     * @return stdClass Return response payload object.
+     */
+    public function parseAPIResponse($response_payload_json) {
+    
+        //1) Convert JSON string to string array
+        $response_payload_json_array = $this->jsonToArray($response_payload_json);
+        
+        //2) Retrieve encoded response payload
+        $response_payload = !empty($response_payload_json_array[self::PAYLOAD]) ? $response_payload_json_array[self::PAYLOAD] : '';
+
+        //3) Parse response payload to JWT 
+        $jwt_token = (new Parser())->parse((string) $response_payload);
+
+        //4) Decode the encoded reponse payload
+        $response_payload = base64_decode($jwt_token->getRawPayload());
+        
+        //5) Convert JSON to object
+        $response_payload_object = $this->jsonToObject($response_payload);
+
+        return $response_payload_object;
+    }
+ 
+    /**
+     * For verify payload contained in API response.
+     * @param JSON $response_payload_json JSON of response payload.
+     * @return boolean Return result payload exists.
+     */
+    public function containPayload($response_payload_json) {
+
+        return !empty($this->jsonToArray($response_payload_json)[self::PAYLOAD]);
+    }
+
     private function jsonToArray($json) {
+
         return json_decode($json, true);
     }
 
     private function jsonToObject($json) {
+
         return json_decode($json);
     }
-    
-    private function multipleToSingleDimensionalArray($array) {
-        return iterator_to_array(new RecursiveIteratorIterator(new RecursiveArrayIterator($array)), 0);
-    }
-    
-    private function convertToStringArray($array) {
-        return array_map('strval', $array);
-    }
-    
-    private function sortArray(&$array) {
-
-        //This sorting setting equivalent to C# sort() 
-        sort($array, SORT_STRING | SORT_FLAG_CASE);
-    }
-    
-    private function arraryToString($array) {
-        return implode($array);
-    }
-    
-    private function hashSignature($signature, $secret_key) {
-        return hash_hmac('sha256', $signature, $secret_key);
-    }
-
-    //Method for API request
-    public function requestAPI($api_env, $payment_request_obj) {
-
-        //Convert object to JSON string (Optional if not using object)
-        $payment_request_json = json_encode(get_object_vars($payment_request_obj));
-
-        //Get encoded API response
-        return $encoded_response = $this->doAPIRequest($api_env, $payment_request_json);
-    }
-
-    private function doAPIRequest($api_env, $raw_json_request) {
+  
+    private function doAPIRequest($api_environment, $request_payload_json) {
 
         //CURL configuration
         $ch = curl_init();
         $curl_options = array(
-            CURLOPT_URL => $api_env,
+            CURLOPT_URL => $api_environment,
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_POST => 1, //Note: Must use POST method
             CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1_2, //Note: Must request with TLS1.2
             CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_HTTPHEADER => array(
-                'Content-Type: application/json',
-                'Accept: application/json'
+                'Content-Type: application/json', //Note: Must use JSON as content type
+                'Accept: text/plain'
             ),
-            CURLOPT_POSTFIELDS => base64_encode($raw_json_request) //Note: Must encode the request before send
+            CURLOPT_POSTFIELDS => $request_payload_json
         );
     
         curl_setopt_array($ch, $curl_options);
     
-        //Get encoded API response 
         return $api_response = curl_exec($ch); 
-    }
-
-    //Method for Parse encoded response and convert into object
-    public function parseAPIResponse($encoded_response) {
-    
-        //Decode encoded reponse to JSON string with Base64
-        $raw_response = base64_decode($encoded_response);
-
-        //Convert JSON string to object
-        $json_object = $this->jsonToObject($raw_response);
-
-        return $json_object;
     }
 }
 
