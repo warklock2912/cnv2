@@ -64,24 +64,23 @@ class Crystal_Twoctwop_Helper_Data extends Mage_Core_Helper_Abstract
         $paymentTokenRequest->userDefined4 = $paymentDetail->userDefined4;
         $paymentTokenRequest->userDefined5 = $paymentDetail->userDefined5;
 
+        Mage::log('START');
         //Important: Generate signature
         $pgw_helper = new PaymentGatewayHelper();
         //Do Payload
         $requestPayloadJson = $pgw_helper->generatePayload($paymentTokenRequest, $secretKey);
-        var_dump($requestPayloadJson);
+        Mage::log($requestPayloadJson);
         //Do Payment Token API request
         $responsePayloadJson = $pgw_helper->requestAPI($apiEnv, $requestPayloadJson);
-var_dump($responsePayloadJson);
-        $result['message'] = 'Invalid Signature';
+        Mage::log($responsePayloadJson);
+
         if($pgw_helper->containPayload($responsePayloadJson)){
-            var_dump($pgw_helper->containPayload($responsePayloadJson));
+            Mage::log('IF1');
+            Mage::log($pgw_helper->containPayload($responsePayloadJson));
             if($pgw_helper->validatePayload($responsePayloadJson, $secretKey)) {
-                echo 2;
-                var_dump($pgw_helper->validatePayload($responsePayloadJson, $secretKey));
-
+                Mage::log('IF2');
+                Mage::log($pgw_helper->validatePayload($responsePayloadJson, $secretKey));
                 $paymentTokenResponse = $pgw_helper->parseAPIResponse($responsePayloadJson);
-
-                var_dump($paymentTokenResponse);
                 if ($paymentTokenResponse->paymentToken && $paymentTokenResponse->paymentToken != '') {
                     $result['status'] = true;
                     $result['payment_response'] = $paymentTokenResponse;
