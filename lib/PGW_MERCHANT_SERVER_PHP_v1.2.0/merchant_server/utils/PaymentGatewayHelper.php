@@ -146,7 +146,7 @@ class PaymentGatewayHelper {
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_HTTPHEADER => array(
                 'Content-Type: application/json', //Note: Must use JSON as content type
-                'Accept: text/plain'
+                'Accept: application/json'
             ),
             CURLOPT_POSTFIELDS => $request_payload_json
         );
