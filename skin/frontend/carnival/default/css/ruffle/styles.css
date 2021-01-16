@@ -1,0 +1,1579 @@
+/* Ruffle CSS */
+.ruffle-index-index{
+    background: #FFF;
+}
+.ruffle-index-index .wrapper {
+    background: #FFF;
+}
+.ruffle-index-index .main-container .main .breadcrumbs {
+    margin-bottom: 0;
+}
+.ruffle-index-index .main-container {
+    /*background: #111111 url("images/ruffle_bg.png") top center no-repeat;*/
+    max-width: 100%;
+    background-size: contain;
+}
+
+.catalog-product-view.ruffle-product-view .main-container{
+    background: #FFF !important;
+}
+
+.ruffle-index-index .main-container .col-main {
+    max-width: 1200px;
+    display: block;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 130px 15px 0;
+}
+.ruffle-index-index .main-container .main .breadcrumbs {
+    margin-bottom: 0;
+}
+.ruffle-index-index .main-container .main .breadcrumbs ul {
+    max-width: 1200px;
+    display: block;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+.ruffle-index-index .page-title h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    color: #000;
+    font-weight: bold;
+}
+.ruffle-index-index .page-title .subtitle {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin-bottom: 10px;
+}
+.ruffle-index-index .ruffle-description {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #000;
+    padding: 30px 0;
+    background: #ebebeb;
+    margin-bottom: -10px;
+}
+.ruffle-index-index .ruffle-description h1 {
+    font-family: 'HelveticaNeue';
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+}
+.ruffle-index-index .ruffle-list .product-info {
+    text-align: left;
+}
+.ruffle-index-index .ruffle-list .product-info .product-brand {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #000;
+    font-weight: bold;
+    text-align: center;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+.ruffle-index-index .ruffle-list .product-info .product-name {text-align: center;}
+.ruffle-index-index .ruffle-list .product-info .product-name a {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #808080;
+}
+.ruffle-index-index .ruffle-list .product-info .price-box {
+    text-align: center;
+}
+.ruffle-index-index .ruffle-list .product-info .price-box .old-price,
+.ruffle-index-index .ruffle-list .product-info .price-box .special-price {
+    display: block;
+    text-align: right;
+}
+.ruffle-index-index .ruffle-list .product-info .price-box .price{
+    font-family:'HelveticaNeue';
+    font-size: 12px;
+    color: #000;
+}
+#join-ruffle-button ,button#join-ruffle-login.button.ruffle-joined{
+    background: transparent;
+    color: #1cbbb4;
+    border: 1px solid #1cbbb4;
+    margin: 30px 0;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 29px;
+}
+#join-ruffle-button:hover ,button#join-ruffle-login.button.ruffle-joined:hover{
+    background: #1cbbb4;
+    color: #ffffff;
+    border: 1px solid #1cbbb4;
+}
+button#join-ruffle-login.button.ruffle-joined:hover{ cursor: pointer !important; }
+.poup-close{
+    position: absolute;
+    right: 15px;
+    top: 5px;
+    font-size: 20px;
+    color: #636363;
+    cursor: pointer;
+}
+.ruffle-product-view .main-container {
+    /*background: #111111 url("images/ruffle_bg.png") top center no-repeat;*/
+    max-width: 100%;
+    background-size: contain;
+}
+.ruffle-product-view .main-container .col-main {
+    max-width: 1200px;
+    display: block;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 92px 15px 0;
+}
+.ruffle-product-view .main-container .main .breadcrumbs {
+    margin-bottom: 0;
+}
+.ruffle-product-view .main-container .main .breadcrumbs ul {
+    max-width: 1200px;
+    display: block;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+.ruffle-product-view .product-view .product-essential:before{
+    height: 100%;
+    top: 0;
+    background: #e8e8e8;
+}
+.ruffle-product-view .product-collateral .toggle-tabs {
+    background: transparent;
+    color: #ffffff;
+    border-color: #ebebeb;
+}
+.ruffle-product-view .product-collateral .toggle-tabs li > span {
+    color: #707070;
+}
+.ruffle-product-view .product-collateral .toggle-tabs li.current > span {
+    color: #000;
+}
+.ruffle-product-view .product-collateral .toggle-tabs li.current > span:before{
+    background-color: #000;
+}
+.ruffle-product-view .product-view .product-shop.tabs {
+    background: transparent;
+    color: #000;
+}
+.ruffle-product-view .product-view .product-shop {
+    padding-top: 20px;
+}
+.ruffle-product-view .product-collateral .tab-container:before {
+    content: none;
+}
+.ruffle-product-view .product-view .product-shop .product-name .h1, .ruffle-product-view .price-box .price, .ruffle-product-view .product-view .product-shop .no-rating a,
+.ruffle-product-view .skip-sizing, .ruffle-product-view .add-to-links a.link-wishlist, .ruffle-product-view #customer-reviews h2, .ruffle-product-view .block-related .block-title h2,
+.ruffle-product-view .products-grid .product-name a {
+    color: #000;
+}
+.ruffle-product-view .product-view .product-shop .price-box .old-price .price {
+    font-size: 16px;
+}
+.ruffle-product-view .product-view .price-box .special-price .price {
+    color: red;
+}
+.ruffle-product-view .product-options dt  label {
+    font-size: 12px;
+    color: #898989;
+}
+.ruffle-product-view .product-view .add-to-links a.link-wishlist:before {
+    background-position: 0 -572px;
+}
+.ruffle-product-view .product-view .sharing-links a.link-facebook {
+    background: url(../../images/icon-black.png) no-repeat 0 -95px;
+}
+.ruffle-product-view .main-container {
+    padding-bottom: 0px;
+}
+.ruffle-product-view .add-to-links,
+.ruffle-product-view .box-review,
+.ruffle-product-view .product-collateral-bottom,
+.ruffle-product-view .product-view .product-shop .no-rating,
+.ruffle-product-view .product-view .product-shop .ratings{
+    display: none;
+}
+
+.ruffle-product-view .product-view .product-shop .extra-info{
+    border-bottom: none;
+    margin: 10px 0 0;
+    padding: 10px 0 0;
+    border-top: solid 1px #EBEBEB;
+}
+
+.ruffle-product-view .product-view .product-shop .extra-info + .price-info{
+    margin-top: -30px;
+}
+
+
+
+.ruffle-index-confirm,
+.ruffle-index-thankyou {
+    background: #111111;
+}
+.ruffle-index-confirm .wrapper, .ruffle-index-thankyou .wrapper {
+    background: #111111;
+    color: #ffffff;
+}
+.ruffle-index-confirm .main-container .main .breadcrumbs, .ruffle-index-thankyou .main-container .main .breadcrumbs {
+    margin-bottom: 0;
+}
+.ruffle-index-confirm .main-container .main .breadcrumbs ul, .ruffle-index-thankyou .main-container .main .breadcrumbs ul {
+    max-width: 1200px;
+    display: block;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+.ruffle-index-confirm .main-container, .ruffle-index-thankyou .main-container {
+    background: url("images/ruffle_confirm_bg.jpg") top center no-repeat;
+    max-width: 100%;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+.ruffle-index-confirm .ruffle-confirm, .ruffle-index-thankyou .ruffle-thankyou {
+    max-width: 420px;
+    margin: 70px auto;
+    overflow: hidden;
+}
+
+.ruffle-index-thankyou .ruffle-thankyou {
+    max-width: 325px;
+    margin: 70px auto;
+    overflow: hidden;
+}
+
+.ruffle-index-confirm .ruffle-confirm h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info{
+    background: #ffffff;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div {
+    padding: 20px;
+    overflow: hidden;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-contact-info {}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-contact-info h3{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #000;
+    font-weight: bold;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-contact-info ul li{
+    font-family: Tahoma;
+    font-size: 14px;
+    color: #262626;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-contact-info ul li label {
+    font-family: Tahoma;
+    font-size: 12px;
+    color: #898989;
+    text-transform: uppercase;
+    min-width: 85px;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info {
+    border-top: 1px solid #ebebeb;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info img {
+    float: left;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info {
+    margin-left: 140px;
+    color: #000000;
+    text-align: left;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info .product-name,
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info .product-brand {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #000;
+    text-align: left;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info .product-name {
+    margin: 0;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info .product-brand {
+    margin: 0 0 10px;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info .options,
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info .price,
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info .qty {
+    font-family: Tahoma;
+    font-size: 14px;
+    color: #000;
+    text-align: left;
+    font-weight: normal;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info .options label,
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info .price label,
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info .qty label{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #363636;
+    text-align: left;
+    min-width: 65px;
+    text-transform: uppercase;
+    font-weight: normal;
+    margin-bottom: 3px;
+}
+.ruffle-index-confirm .confirm-button button.button {
+    background: transparent;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: #1cbbb4;
+    font-weight: bold;
+    border: 1px solid #1cbbb4;
+    margin: 10px 0;
+    height: 45px;
+    line-height: 45px;
+    width: 100%;
+    padding: 0;
+
+}
+.ruffle-index-confirm .back-link {
+    color: #ffffff;
+    font-style: italic;
+    text-transform: uppercase;
+}
+.ruffle-index-confirm .confirm-button button.button:hover {
+    background: #1cbbb4;
+    color: #ffffff;
+    border: 1px solid #1cbbb4;
+}
+.ruffle-index-thankyou .ruffle-thankyou {
+    text-align: center;
+}
+.ruffle-index-thankyou .ruffle-thankyou .page-title h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 42px;
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ffffff;
+    margin-bottom: 25px;
+}
+.ruffle-joined{
+    cursor: not-allowed !important; 
+}
+.ruffle-joined:hover{
+    cursor: not-allowed !important; 
+}
+.ruffle-index-thankyou .ruffle-thankyou h2,
+.ruffle-index-thankyou .ruffle-thankyou p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    color: #ffffff;
+    text-transform: none;
+}
+.ruffle-index-thankyou .ruffle-thankyou h2 a {
+    color: #1cbbb4;
+    font-weight: bold;
+}
+.ruffle-index-thankyou .ruffle-thankyou .actions {
+    margin: 25px 0 0;
+}
+.ruffle-index-thankyou .ruffle-thankyou .actions button.button {
+    background: transparent;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    line-height: 14px;
+    font-weight: bold;
+}
+.ruffle-index-thankyou .ruffle-thankyou .actions button.button:hover {
+    background: #1cbbb4;
+    border: 1px solid #1cbbb4;
+    color: #ffffff;
+}
+
+.ruffle-index-index .ruffle-list{
+  padding: 30px 0;
+}
+
+
+@media (min-width: 1500px) {
+    .ruffle-index-index .main-container .col-main, .ruffle-product-view .main-container .col-main {
+        max-width: 1480px;
+        padding: 180px 15px 0;
+    }
+    .ruffle-product-view .main-container .col-main{
+        padding-top: 0;
+    }
+    .ruffle-index-index .main-container .main .breadcrumbs ul,
+    .ruffle-product-view .main-container .main .breadcrumbs ul,
+    .ruffle-index-confirm .main-container .main .breadcrumbs ul,
+    .ruffle-index-thankyou .main-container .main .breadcrumbs ul {
+        max-width: 1480px;
+    }
+
+  .ruffle-index-index .ruffle-list{
+    min-height: 500px;
+  }
+}
+
+/*
+Ruffle new update MS-2314
+ */
+.my-account .page-title {
+    position: relative;
+}
+
+.my-account .page-title h1{
+    padding: 0 !important;
+}
+
+.my-account .page-title .new-card {
+    position: absolute;
+    top: 0;
+    right: 25px;
+}
+
+.popup-delete-card {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
+    display: block;
+    z-index: 9010;
+    background: #000;
+    background: rgba(0,0,0, 0.6);
+}
+
+.popup-delete-card ul {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 20px 20px 20px;
+}
+.popup-delete-card .popup-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 550px;
+    background: #fff;
+    text-align: center;
+    z-index: 9040;
+    max-height: 600px;
+    padding: 50px 0;
+    max-width: 96%;
+    text-transform: uppercase;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+}
+
+.popup-delete-card h2{
+    color: #000;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.popup-delete-card .text-content{
+    margin: 10px 0;
+    color: #898989;
+    font-size: 12px;
+}
+.popup-delete-card .buttons-set.style1{
+    text-align: center;
+}
+
+.popup-delete-card .buttons-set.style1 .button{
+    float: none;
+}
+
+.popup-delete-card .buttons-set.style1 .button:last-child{
+    margin-right: 0;
+}
+
+.popup-delete-card .close-popup,
+.ruffle-popup .popup-close {
+    position: absolute;
+    right: -40px;
+    top: 0px;
+    cursor: pointer;
+    width: 31px;
+    height: 30px;
+    background: url(images/close.png) no-repeat center center;
+    text-indent: -9999px;
+}
+
+.ruffle-popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
+    display: block;
+    z-index: 9010;
+    background: #000;
+    background: rgba(0,0,0, 0.6);
+}
+
+.ruffle-popup .ruffle-popup-content {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    width: 545px;
+    margin-left: -272px;
+    max-width: 96%;
+    background: #fff;
+    text-align: center;
+    z-index: 9040;
+    padding: 0 0 30px;
+}
+
+.ruffle-popup .step-bar{
+    background: #fafafa;;
+    padding: 13px 10px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.ruffle-popup .step-bar ul{
+    width: 405px;
+    max-width: 80%;
+    margin: 0 auto !important;
+}
+
+.ruffle-popup .step-bar ul li{
+    float: left;
+    width: 33%;
+    text-align: center;
+    position: relative;
+}
+
+.ruffle-popup .step-bar ul li:first-child {
+    text-align: left;
+}
+
+.ruffle-popup .step-bar ul li:not(:first-child):before{
+    content:"";
+    width: 200%;
+    height: 2px;
+    background: #ccc;
+    position: absolute;
+    left: -100%;
+    bottom: 4px;
+}
+
+.ruffle-popup .step-bar ul li.active:not(:first-child):before{
+    background: #000;
+    left: -55%;
+    z-index: 1;
+    width: 100%;
+
+}
+.ruffle-popup .step-bar ul li.active:nth-child(3):before {
+    left: -160%;
+    width: 250%;
+}
+
+.ruffle-popup .step-bar ul li:last-child{
+    text-align: right;
+}
+
+.ruffle-popup .step-bar ul li span{
+    font-size: 11px;
+    font-weight: bold;
+    color:#b7b7b7;
+    position: relative;
+    z-index: 1;
+    padding-bottom: 15px;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+.ruffle-popup .step-bar ul li.active span{
+    color:#000;
+}
+
+.ruffle-popup .step-bar ul li.active span:after{
+    content:"";
+    position: absolute;
+    bottom:0;
+    left:50%;
+    transform: translate(-50% , 0);
+    -webki-transform: translate(-50% , 0);
+    -moz-transform: translate(-50% , 0);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    background: #000;
+}
+
+.ruffle-popup .step-bar ul li:first-child span:before,
+.ruffle-popup .step-bar ul li:last-child span:before
+{
+    content: "";
+    position: absolute;
+    height: 4px;
+    width: 50%;
+    background: #fafafa;
+    bottom: 3px;
+    left: -1px;
+}
+
+.ruffle-popup .step-bar ul li:last-child span:before{
+    left:auto;
+    right: -1px;
+}
+
+.ruffle-popup .popup-title{
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 15px;
+    margin-top: 25px;
+}
+
+.ruffle-popup .fieldset{
+    width: 360px;
+    margin: auto;
+    max-width: calc(100% - 30px);
+}
+
+
+.ruffle-popup .button-set .button{
+    line-height: 24px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.ruffle-popup.ruffle-card-info .omise_new_card_form{
+    padding: 0;
+}
+
+.ruffle-popup .omise_new_card_form input[type=text]{
+    width: 100%;
+}
+
+.ruffle-popup .fieldset{
+    text-align: left;
+}
+
+.ruffle-popup .fieldset input.input-text,
+.ruffle-popup .form-list select{
+    width: 100%;
+}
+
+.ruffle-form-info .radio_tag {
+    padding-top: 10px;
+    border-bottom: solid 1px #f6f6f6;
+    padding-bottom: 2px;
+    overflow-y: hidden;
+}
+
+.ruffle-form-info .radio_tag input[type="radio"]{
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+    opacity: 0;
+    position: absolute;
+}
+
+.ruffle-form-info .radio_tag input[type="radio"] ~ label:before{
+    width: 15px;
+    height: 15px;
+    border: solid 3px #e1e1e1;
+    border-radius: 50%;
+    background: #fff;
+    content:"";
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 10px;
+}
+
+.ruffle-form-info .radio_tag input[type="radio"]:checked ~ label{
+    color: #262626;
+}
+
+.ruffle-form-info .radio_tag input[type="radio"]:checked ~ label:before{
+    background: #1cbbb4;
+}
+
+
+.ruffle-form-info .radio_tag .row_radio label{
+    text-transform: uppercase;
+    color:#707070;
+    font-size: 12px;
+    line-height: 18px;
+    width: auto;
+    float: none;
+}
+
+.ruffle-form-info .radio_tag .row_radio{
+    float: left;
+    width: 50%;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    ul.ruffle-messages > li { max-width: 96%; margin-left: -48%;}
+}
+
+
+.omise-gateway-card-list .my-account .page-title{
+    position: relative;
+    padding: 15px 0;
+    border-bottom: solid 1px #ebebeb;
+    margin-bottom: 10px;
+}
+
+.omise-gateway-card-list .my-account .page-title .new-card{
+    border: solid 1px #1CBBB4;
+    color: #1CBBB4;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    font-weight: bold;
+    font-size: 12px;
+    top: 11px;
+    right: 0;
+    cursor: pointer;
+}
+
+.omise-gateway-card-list .my-account .page-title .new-card:after{
+    content: "+";
+    display: inline-block;
+    margin-left: 3px;
+    font-size: 18px;
+    line-height: 17px;
+    vertical-align: top;
+}
+
+#omise-form,
+.omise_new_card_form{
+    padding: 15px 12px 20px;
+    background: #fafafa;
+    margin-bottom: 20px;
+}
+
+#omise-form h2.legend{
+    color:#000;
+}
+
+
+.omise-gateway-card-list .my-account form .input-text{
+    width: 360px;
+    max-width: 100%;
+}
+
+#omise_gateway_cc_type_exp_div{
+    float: left;
+    width: auto!important;
+}
+
+#omise_gateway_cc_type_exp_div .v-fix,
+#omise_gateway_cc_type_cvv_div .v-fix{
+    width: 100px;
+    margin-right: 0;
+}
+
+#omise_gateway_cc_type_exp_div .v-fix:first-child{
+    margin-right: 10px;
+}
+
+#omise_gateway_cc_type_cvv_div {
+    float: right;
+    width: auto !important;
+}
+
+.ruffle-popup .omise_new_card_form #omise_gateway_cc_type_cvv_div .v-fix{
+    width: 70px;
+}
+
+#omise-form .form-list{
+    width: 360px;
+    max-width: 100%;
+}
+
+#omise-form .form-list >li{
+    width: 100%;
+    overflow: hidden;
+}
+
+#omise-form input[type="checkbox"],
+#my-apps-table.data-table td input[type="checkbox"],
+.omise_new_card_form input[type="checkbox"]{
+    opacity: 0;
+}
+
+#omise-form input[type="checkbox"] ~ label,
+.omise_new_card_form input[type="checkbox"] ~ label{
+    text-transform: uppercase;
+    color: #555;
+}
+
+#omise-form input[type="checkbox"] ~ label:before,
+.omise_new_card_form input[type="checkbox"] ~ label:before,
+#my-apps-table.data-table input[type="checkbox"] ~ label:before {
+    background: url(../../images/check-box.png) no-repeat center top;
+    width: 17px;
+    height: 17px;
+    margin-left: -29px;
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    margin-top: -1px;
+}
+
+#omise-form input[type="checkbox"]:checked ~ label:before,
+.omise_new_card_form input[type="checkbox"]:checked ~ label:before,
+#my-apps-table.data-table input[type="checkbox"]:checked ~ label:before{
+    background-position: center bottom;
+}
+
+#my-apps-table.data-table th{
+    background: #fff;
+    text-align: center;
+    color:#000;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#my-apps-table.data-table tr:nth-child(2n +1){
+    background: #fafafa;
+}
+
+#my-apps-table.data-table td{
+    text-align: center;
+    padding: 15px 10px;
+    vertical-align: middle;
+}
+
+#my-apps-table.data-table td .cart-number{
+    font-size: 16px;
+}
+
+#my-apps-table.data-table td .cart-date{
+    font-size: 11px;
+    color:#898989;
+}
+
+#my-apps-table.data-table td .Visa,
+.list-omise-card li.Visa label span,
+.ruffle-contact-info ul li.Visa span{
+    background: url(../../images/visa-icon.png) no-repeat;
+}
+
+#my-apps-table.data-table td .MasterCard,
+.list-omise-card li.MasterCard label span,
+.ruffle-contact-info ul li.MasterCard span{
+    background: url(../../images/mastercard-icon.png) no-repeat;
+}
+
+#my-apps-table.data-table td .Visa,
+#my-apps-table.data-table td .MasterCard,
+.list-omise-card li.Visa label span,
+.list-omise-card li.MasterCard label span,
+.ruffle-contact-info ul li.Visa span,
+.ruffle-contact-info ul li.MasterCard span{
+    padding-left: 50px;
+    background-size: auto 15px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 0.15rem;
+}
+
+
+.list-omise-card li.Visa label span,
+.list-omise-card li.MasterCard label span,
+.ruffle-contact-info ul li.Visa span,
+.ruffle-contact-info ul li.MasterCard span{
+    background-position: left center;
+}
+
+#my-apps-table.data-table input[type="checkbox"] ~ label{
+    width: 17px;
+    height: 20px;
+    overflow: hidden;
+}
+#my-apps-table.data-table input[type="checkbox"] ~ label:before{
+    margin: 0;
+}
+
+#my-apps-table.data-table td .remove{
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    border:solid 1px #898989;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    text-indent: -9999px;
+    position: relative;
+}
+
+#my-apps-table.data-table td .remove:before,
+#my-apps-table.data-table td .remove:after{
+    content: "";
+    width: 1px;
+    height: 9px;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -5px;
+    margin-left: -1px;
+    background: #898989;
+}
+
+#my-apps-table.data-table td .remove:after{
+    transform: rotate(-45deg);
+}
+
+#my-apps-table.data-table td .remove:hover{
+    border-color: #000;
+}
+
+#my-apps-table.data-table td .remove:hover:before,
+#my-apps-table.data-table td .remove:hover:after{
+    background-color: #000;
+}
+
+.omise_new_card_form{
+    width: 370px;
+    max-width: 100%;
+}
+
+.sp-methods .omise_new_card_form input.cvv{
+    width: 100%!important;
+}
+
+.omise_new_card_form #omise_gateway_cc_number{
+    background-image: none;
+}
+
+.omise_new_card_form li{
+    display: block;
+    overflow: hidden;
+    width: 100%;
+}
+
+.omise_new_card_form .buttons-set{
+    padding: 0!important;
+}
+
+.list-omise-card li{
+    display: block;
+    position: relative;
+    width: 370px;
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+.list-omise-card li input[type="radio"]{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    left:0;
+}
+
+.list-omise-card li input[type="radio"] ~ label{
+    display: block;
+    padding: 10px 20px;
+    border:solid 1px #ececec;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 18px;
+    max-width: 100%;
+    width: 100%;
+    color:#000;
+}
+
+.list-omise-card li input[type="radio"]:disabled ~ label{
+    background: #e2e2e269;
+    opacity: 0.35;
+}
+
+.list-omise-card li input[type="radio"] ~ label:before{
+    background: url(../../images/check-box.png) no-repeat center top;
+    width: 17px;
+    height: 17px;
+    content: "";
+    position: absolute;
+    top:1px;
+    right:1px;
+}
+
+.list-omise-card li input[type="radio"]:checked ~ label{
+    border-color:#000;
+}
+
+.list-omise-card li input[type="radio"]:checked ~ label:before{
+    background-position: center bottom;
+}
+
+.list-omise-card li.new-card input[type="radio"] ~ label{
+    font-size: 14px;
+}
+
+.list-omise-card li.new-card input[type="radio"] ~ label span:before{
+    content: "+";
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 3px;
+}
+
+.list-omise-card li.new-card input[type="radio"] ~ label:before{
+    display: none;
+}
+
+.ruffle-popup .list-omise-card li.new-card input[type="radio"] ~ label{
+    /*border:none;*/
+    line-height: 26px;
+}
+
+.ruffle-popup .list-omise-card li.new-card input[type="radio"] ~ label:after{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left:0;
+    top:0;
+    border:solid 1px #ececec;
+    content: "";
+}
+
+.ruffle-popup .list-omise-card li.new-card input[type="radio"]:checked ~ label:after{
+    border-color:#000;
+    border-bottom:none;
+}
+
+.ruffle-popup .omise_new_card_form{
+    background: none;
+    padding: 0;
+    text-align: left;
+    position: relative;
+    z-index: 2;
+}
+
+.ruffle-popup #list-omise-card + #omise_new_card_form {
+    padding: 10px 25px;
+    margin-bottom: 20px;
+    border:solid 1px #000;
+    border-top:none;
+    margin-top: -10px;
+}
+
+.ruffle-popup #list-omise-card + #omise_new_card_form .omise_new_card_form{
+    margin-bottom: 0;
+}
+
+.ruffle-popup .list-omise-card li.new-card input[type="radio"] ~ label span:before{
+    display: none;
+}
+
+.ruffle-popup.ruffle-form-info .ruffle-popup-content{
+    top:50%;
+    left:50%;
+    transform: translate(-50% , -50%);
+    -webkit-transform: translate(-50% , -50%);
+    -moz-transform: translate(-50% , -50%);
+    margin: 0;
+}
+
+.ruffle-popup-form .term-content{
+    padding-left: 16px;
+}
+.ruffle-popup-form .term-content li{
+    list-style-type: decimal;
+    margin-bottom: 10px;
+}
+.ruffle-popup-form .term-note{
+    color: #ff0000;
+    padding: 15px;
+    text-align: center;
+    border: 2px solid #ff0000;
+    margin: 30px 0;
+}
+
+
+@media only screen and (max-width: 600px) {
+    
+    #my-apps-table.data-table td input[type="checkbox"]{position: absolute;}
+    #my-apps-table.data-table td {padding: 15px 5px;}
+    #my-apps-table.data-table .wrapper_logo_card {width: 50px;float: left;}
+    #my-apps-table.data-table .wrapper_logo_card img {width: 100%; position: relative;}
+    #my-apps-table.data-table .wrapper_card_number {width: 40%;float: left;word-wrap: break-word;}
+    #my-apps-table.data-table .wrapper_card_number .cart-number { font-size: 12px;}
+
+    .omise-gateway-card-list .my-account .page-title .new-card{
+        position: static;
+        margin: auto;
+        display: inline-block;
+    }
+
+    body.customer-account.omise-gateway-card-list .my-account .page-title h1{
+        margin: 0 0 5px;
+        border-bottom: none;
+    }
+
+    #omise_gateway_cc_type_cvv_div{
+        float: left;
+        clear: left;
+    }
+
+    .buttons-set.style1 .button:last-child{
+        margin-right: 0;
+    }
+
+    #my-apps-table.data-table td .Visa,
+    #my-apps-table.data-table td .MasterCard {
+        padding-top: 40px;
+        padding-left: 0;
+        background-position: top center;
+    }
+
+    #my-apps-table.data-table th{
+        vertical-align: middle;
+    }
+
+    #my-apps-table.data-table th div{
+        max-width: 100px;
+        white-space: normal;
+    }
+
+    #my-apps-table.data-table td .remove:before,
+    #my-apps-table.data-table td .remove:after{
+        margin-left: 0;
+    }
+
+    .popup-delete-card .close-popup{
+        top:-40px;
+        right: 0;
+    }
+
+    .sp-methods .form-list{
+        padding-left: 0;
+    }
+
+    .ruffle-popup .ruffle-popup-content {
+        width: 96%;
+        top:50%;
+        left:50%;
+        transform: translate(-50% , -50%);
+        -webkit-transform: translate(-50% , -50%);
+        -moz-transform: translate(-50% , -50%);
+        margin: 0;
+        max-height: 98%;
+        overflow-y: auto;
+    }
+
+    .ruffle-popup .popup-close {
+        background-color: #000;
+        border-radius: 100%;
+        right: 0px;
+        width: 26px;
+        height: 26px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #join-ruffle-button,
+    button#join-ruffle-login.button.ruffle-joined{
+        margin: 0;
+    }
+
+    .add_to_cart_ .ruffle-popup .button{
+        position: static;
+    }
+
+    .ruffle-popup .omise_new_card_form{
+        overflow: hidden;
+    }
+
+    .ruffle-popup .popup-title{
+        font-size: 14px;
+    }
+
+    .ruffle-popup .ruffle-popup-content{
+        padding-bottom: 15px;
+    }
+
+    .ruffle-form-info .radio_tag .row_radio{
+        width: auto;
+    }
+
+    .ruffle-form-info .radio_tag .row_radio:last-child{
+        float: right;
+    }
+
+}
+@media only screen and (max-width: 479px) {
+    .p2c2p-card-list .my-account .page-title .new-card{ top:-15px !important; }
+}
+
+@media only screen and (min-width: 601px) {
+.ruffle-popup.ruffle-form-info .ruffle-popup-content #personal-information,
+.ruffle-popup.ruffle-card-list .ruffle-popup-content .ruffle-popup-form{
+    max-height: 420px;
+    overflow-y: auto;
+}
+}
+
+
+/* 2c2p style */
+#p2c2p_gateway_cc_type_exp_div
+{
+    float: left;
+    width: auto!important;
+}
+#p2c2p_gateway_cc_type_exp_div .v-fix:first-child
+{
+    margin-right: 10px;
+}
+#p2c2p_gateway_cc_type_exp_div .v-fix
+{
+    width: 100px;
+}
+
+
+#p2c2p-exp-date
+{
+    float: right;
+    width: auto !important;
+}
+#p2c2p_gateway_cc_type_cvv_div
+{
+    float: right;
+    width: auto !important;
+}
+#p2c2p_gateway_cc_type_cvv_div .v-fix
+{
+    width: 100px;
+
+}
+
+#card_form_2c2p_gateway
+{
+    margin: 25px 0 30px 0;
+    overflow: hidden;
+    padding: 15px 12px 20px;
+    background: #fafafa;
+    width: 370px;
+    max-width: 100%;
+    display: block;
+}
+.p2c2p_new_card_form li
+{
+    overflow: hidden;
+    width: 100%;
+}
+
+#card_form_2c2p_gateway input[type=email],
+#card_form_2c2p_gateway input[type=search],
+#card_form_2c2p_gateway input[type=number],
+#card_form_2c2p_gateway input[type=password],
+#card_form_2c2p_gateway input[type=tel],
+#card_form_2c2p_gateway input[type=text] {
+    width: 100%;
+    max-width: 100%;
+}
+
+#card_form_2c2p_gateway input, #card_form_2c2p_gateway select {
+    font-family: Arial, sans-serif;
+    color: #000;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+    text-align-last: center;
+
+}
+#card_form_2c2p_gateway select {
+    width: 100%;
+    text-align: left;
+}
+#card_form_2c2p_gateway select#p2c2p_cc_type_card {
+    text-align-last: left;
+}
+#card_form_2c2p_gateway input#p2c2p_cc_number, #card_form_2c2p_gateway input#p2c2p_cc_name {
+    text-align: left;
+    text-align-last: left;
+}
+.p2c2p_new_card_form input[type="checkbox"]{
+    opacity: 0;
+}
+
+.p2c2p_new_card_form input[type="checkbox"] ~ label {
+    text-transform: uppercase;
+    float: none;
+    color: #898989;
+    font-size: 12px;
+    font-weight: normal;
+}
+.p2c2p_new_card_form input[type="checkbox"] ~ label:before {
+    background: url(../../images/check-box.png) no-repeat center top;
+    width: 17px;
+    height: 17px;
+    margin-left: -29px;
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    margin-top: -1px;
+}
+.p2c2p_new_card_form input[type="checkbox"]:checked ~ label:before
+{
+    background-position: center bottom;
+}
+p.raffle-save-card {
+
+    font-size: 11px;
+
+}
+
+/*2c2p list card */
+.list-2c2p-card li label span
+{
+    padding-left: 50px;
+    background-size: auto 15px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 0.15rem;
+    background-position: left center;
+}
+.list-2c2p-card li
+{
+    display: block;
+    position: relative;
+    width: 370px;
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+.list-2c2p-card li input[type="radio"]
+{
+
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    left:0;
+}
+.list-2c2p-card li input[type="radio"]  ~ label
+{
+    display: block;
+    padding: 10px 20px;
+    border:solid 1px #ececec;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 18px;
+    max-width: 100%;
+    width: 100%;
+    color:#000;
+}
+.list-2c2p-card li input[type="radio"]  ~ label:before
+{
+    background: url(../../images/check-box.png) no-repeat center top;
+    width: 17px;
+    height: 17px;
+    content: "";
+    position: absolute;
+    top:1px;
+    right:1px;
+}
+
+.list-2c2p-card li input[type="radio"]:checked ~ label{
+    border-color:#000;
+}
+
+.list-2c2p-card li input[type="radio"]:checked ~ label:before{
+    background-position: center bottom;
+}
+
+.list-2c2p-card li.new-card input[type="radio"] ~ label{
+    font-size: 13px;
+}
+
+.list-2c2p-card li.new-card input[type="radio"] ~ label span:before{
+    content: "+";
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 3px;
+}
+
+.list-2c2p-card li.new-card input[type="radio"] ~ label:before{
+    display: none;
+}
+
+/* 2c2p account page */
+
+.p2c2p-card-list .my-account .page-title .new-card{
+    border: solid 1px #1CBBB4;
+    color: #1CBBB4;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    font-weight: bold;
+    font-size: 12px;
+    top: 11px;
+    right: 0;
+    cursor: pointer;
+}
+.p2c2p-card-list .my-account .page-title
+{
+    position: relative;
+    padding: 15px 0;
+    border-bottom: solid 1px #ebebeb;
+    margin-bottom: 10px;
+}
+#p2c2p-form
+{
+    padding: 15px 12px 20px;
+    background: #fafafa;
+    margin-bottom: 20px;
+}
+
+
+
+.ruffle-popup.card-alert .ruffle-popup-content p
+{
+    margin: 10px 0;
+    color: #898989;
+    font-size: 12px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+@media only screen and (max-width: 437px) {
+    html:lang(en) .ruffle-popup .step-bar ul li span{height: 45px;}
+    html:lang(en) .ruffle-popup .step-bar ul li:nth-child(2):before { bottom: 7px;}
+    html:lang(en) .ruffle-popup .step-bar ul li:nth-child(2).active span:after{bottom: 3px;}
+
+    .ruffle-popup-form .list-omise-card li input[type="radio"] ~ label,
+    body.mastercheckout-index-index .list-2c2p-card li input[type="radio"] ~ label{padding: 10px; font-size: 14px;}
+
+    #p2c2p_gateway_cc_type_exp_div { width: 62% !important;}
+    #p2c2p_gateway_cc_type_exp_div .input-box, #p2c2p_gateway_cc_type_exp_div .input-box .v-fix select { width: 100%;}
+    #p2c2p_gateway_cc_type_exp_div .input-box .v-fix { width: 46%; float: left;}
+    #p2c2p_gateway_cc_type_exp_div .v-fix:first-child{margin-right: 4%;}
+    #p2c2p_gateway_cc_type_cvv_div {width: 38% !important;}
+    #p2c2p_gateway_cc_type_cvv_div .input-box input {border-radius: 4px;margin-top: -2px;}
+
+    body.mastercheckout-index-index .sp-methods input.cvv {width: 100% !important;}
+
+}
+
+/* end */
+
+
+/* customer address ruffle */
+#ruffle-form-info #shipping-addresses
+{
+    max-width: 100%;
+    position: relative;
+    float: left;
+    width: 100%;
+    margin-bottom: 25px;
+}
+#ruffle-form-info #shipping-address-input
+{
+    width: 100%;
+    min-height: 64px;
+    position: relative;
+    padding: 14px 35px 14px 14px;
+    border: 1px solid #e1e1e1;
+    float: left;
+    font-family: tahoma;
+    color: #000;
+    font-size: 14px;
+    text-transform: none;
+}
+#ruffle-form-info #show-list-shipping-address
+{
+    width: 34px;
+    height: calc(100% - 2px);
+    border: 0 none;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    text-indent: -999em;
+    background: #f2f2f2;
+    border-left: solid 1px #ebebeb;
+    outline: none;
+}
+#option-new-address
+{
+    display: block;
+    font-weight: bold;
+    background: #ffffff;
+    padding: 10px;
+    border-top: solid 1px #ebebeb;
+}
+#ruffle-form-info #show-list-shipping-address:before
+{
+    content: "";
+    width: 12px;
+    height: 12px;
+    border-bottom: solid 1px #a8a8a8;
+    border-right: solid 1px #a8a8a8;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -9px;
+    margin-left: -6px;
+    transform: rotate(45deg);
+}
+#ruffle-form-info #shipping-address-select-option
+{
+    width: 100%;
+    max-height: 215px;
+    position: absolute;
+    left: 0px;
+    top: 63px;
+    background: rgb(255, 255, 255);
+    box-shadow: rgb(235, 235, 235) 0px 1px 3px;
+    border: 1px solid rgb(235, 235, 235);
+    z-index: 999;
+     display: none;
+    overflow-y: auto;
+}
+#ruffle-form-info .customer-list-address-checkout li
+{
+    display: block;
+    font-weight: bold;
+    background: #ffffff;
+    padding: 10px;
+    border-top: solid 1px #ebebeb;
+}
+#ruffle-form-info .customer-list-address-checkout li label
+{
+    font-family: Tahoma;
+    color: #898989;
+    text-transform: none;
+    font-size: 14px;
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    clear: both;
+    overflow: hidden;
+}
+#ruffle-form-info .show-list-address.active
+{
+    background: #000;
+}
+#ruffle-form-info ul
+{
+    padding: 0px;
+}
+/* end */

@@ -1,0 +1,19 @@
+<?php
+/**
+ * MageWorx
+ * Search Suite
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuiteAutocomplete
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+?>
+<script type="text/javascript">
+//<![CDATA[    
+$$('#search').first().stopObserving();
+jQuery('#search').searchSuiteAutocomplete({
+    url:'<?php echo Mage::getUrl('autocomplete/ajax')?>', 
+    delay:<?php echo Mage::helper('mageworx_searchsuiteautocomplete')->getDelay()?>,
+    animation:'<?php echo Mage::helper('mageworx_searchsuiteautocomplete')->getAnimation()?>'});
+//]]>
+</script>

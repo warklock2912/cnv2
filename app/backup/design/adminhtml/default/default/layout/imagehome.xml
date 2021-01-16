@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magebuzz/gridstack.css</stylesheet>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/magebuzz/style.css</stylesheet>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/magebuzz/jquery-ui.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/magebuzz/lodash.min.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/magebuzz/knockout-min.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/magebuzz/gridstack.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/magebuzz/gridstack.jQueryUI.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/magebuzz/form.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/magebuzz/cropbox.js</name>
+            </action>
+        </reference>
+    </default>
+    <imagehome_adminhtml_imagehome_index>
+        <reference name="content">
+            <block type="imagehome/adminhtml_imagehome" name="imagehome" />
+        </reference>
+    </imagehome_adminhtml_imagehome_index>
+    <imagehome_adminhtml_imagehome_edit>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magebuzz/drapdrop.css</stylesheet>
+            </action>
+            
+        </reference>
+    </imagehome_adminhtml_imagehome_edit>
+</layout>

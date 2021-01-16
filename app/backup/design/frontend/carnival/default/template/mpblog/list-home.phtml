@@ -1,0 +1,69 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Magpleasure_Blog
+ */
+?>
+<div class="home-blog-left">
+    <h3 class="title"><span><?php echo $this->__('Blogs') ?></span></h3>
+    <div class="blog-header">
+        <a id="mobile-blog-search" class="mobile skip-search list-home" href="#/" title="Search" onclick="showMobileBlogSearch()">
+          <img src="<?php echo $this->getSkinUrl('images/search-magnifier-interface-symbol.png')?>">
+        </a>
+        <div class="block mpblog-search" id="mobile_search" style="display: none;">
+          <div class="block-title">
+            <strong><span><?php echo $this->__("Search the blog") ?></span></strong>
+          </div>
+          <div class="block-content">
+            <form id="mp_blog_search_mobile" action="<?php echo Mage::getBlockSingleton('mpblog/sidebar_search')->getSearchUrl(); ?>" method="get">
+              <div class="input-box">
+                <input type="text" placeholder="<?php echo Mage::getBlockSingleton('mpblog/sidebar_search')->getBlockHeader(); ?>" class="input-text required-entry placeholder" title="<?php echo Mage::getBlockSingleton('mpblog/sidebar_search')->getBlockHeader(); ?>" id="search-blog" name="query" value="<?php echo Mage::getBlockSingleton('mpblog/sidebar_search')->getQuery(); ?>" maxlength="100" />
+              </div>
+              <button class="button" title="<?php echo $this->__("Search"); ?>" type="submit"><span><span><?php echo $this->__("Search"); ?></span></span></button>
+            </form>
+            <script type="text/javascript">
+              //<![CDATA[
+              new VarienForm('mp_blog_search_mobile');
+              //]]>
+            </script>
+          </div>
+        </div>
+        <ul class="blog-tab tab-title">
+            <li class="latest-stories active"><a title="<?php echo $this->__('Latest stories') ?>" href="#latest-stories-blog"><span><?php echo $this->__('Latest stories') ?></span></a></li>
+            <li class="popular-stories"><a title="<?php echo $this->__('Popular stories') ?>" href="#popular-stories-blog"><span><?php echo $this->__('Popular stories') ?></span></a></li>
+        </ul>
+        <a id="menu-category-blog" class="icon-menu icon-menu-blog" href="javascript:void(0)"><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span></a>
+        <?php echo $this->getLayout()->createBlock('mpblog/sidebar_category')->setTemplate('mpblog/sidebar/categories.phtml')->toHtml(); ?>
+    </div>
+    <div class="mpblog-list list">
+        <?php echo $this->getLayout()->createBlock('mpblog/content_list')->setTemplate('mpblog/list-latest2.phtml')->toHtml(); ?>
+        <?php echo $this->getLayout()->createBlock('mpblog/content_listpopular')->setTemplate('mpblog/list-popular2.phtml')->toHtml(); ?>
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery('.icon-menu-blog').on('click', function () {
+        if (jQuery(this).hasClass('active')) {
+            jQuery('.block.mpblog-categories').slideToggle(300);
+            jQuery('.icon-menu-blog').removeClass('active');
+        }
+        else {
+            jQuery('.icon-menu-blog').removeClass('active');
+            jQuery(this).addClass('active');
+            jQuery('.block.mpblog-categories').slideToggle(300);
+        }
+    });
+    function showMobileBlogSearch(){
+        var formId = jQuery("#mobile_search");
+        if(formId.hasClass('active')){
+            formId.removeClass('active');
+            formId.hide();
+        }
+        else{
+            formId.addClass('active');
+            formId.show();
+        }
+    }
+</script>
+
+

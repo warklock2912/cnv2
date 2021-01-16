@@ -1,0 +1,439 @@
+body.checkout-onepage-index .page-title {
+	overflow: visible !important;
+}
+
+.add-to-cart-wrapper .cr-product-timer {
+	margin-bottom: 20px;
+}
+
+.reserved-cart {
+	font-weight: bold;
+	margin-right: 20px;
+	margin-top:12px;
+	float: none;
+	clear: left;
+}
+
+.minicart-wrapper .reserved-cart {
+	font-weight: bold;
+	margin: 0 auto 10px auto;
+	clear: left;
+	border-bottom: 1px solid #dddddd;
+	padding: 5px;
+	float: none;
+	text-align: center;
+}
+
+.minicart-wrapper .checkout-types {
+	float: none;
+}
+
+.minicart-wrapper .item-options dt .reserved-item {
+	font-size: 12px;
+}
+
+.minicart-wrapper .truncated .truncated_full_value .item-options {
+	left: -70px;
+}
+
+.minicart-wrapper .truncated .truncated_full_value .item-options:after {
+	left: 85px;
+}
+
+body.checkout-onepage-index .reserved-cart{
+	margin-right: 10px;
+    margin-top:6px;
+    z-index: 2;
+    position: relative;
+}
+
+.item-options dt .reserved-item {
+	font-style: normal;
+	font-weight: 400;
+}
+
+#cartreservation_popup {
+	position: fixed;
+	z-index: 5000;
+	left: 0;
+	top:0;
+	width: 100%;
+	height: auto;
+	min-height: 100%;
+	background: rgb(152, 152, 152);
+	background: rgba(0, 0, 0, 0.4);
+}
+
+#cartreservation_popup.overflow {
+	height: 100%;
+	overflow-y: scroll;
+}
+
+#cartreservation_popup .holder {
+	width: 680px;
+	margin: 5% auto 20px auto;
+	position: absolute;
+	margin-left: -340px;
+	left: 50%;
+	background-color: white;
+	text-align: left;
+	padding: 50px;
+	-webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+	-ms-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+}
+
+#cartreservation_popup button a {
+	color: white;
+	text-decoration: none;
+}
+
+#cartreservation_popup .r {text-align: right;}
+#cartreservation_popup .r:after { clear: both; }
+#cartreservation_popup .r a.cartreservation_popup_close {float: left; margin-top: 7px;}
+
+
+#cartreservation_popup .data-table {border: 0; width: 100%;}
+#cartreservation_popup .data-table thead th {background: #F0F0F0; border-right: none; }
+#cartreservation_popup .data-table tbody td {border-right: 0; border-bottom: 1px solid #CACACA; vertical-align: middle;}
+
+#cartreservation_popup .data-table tbody td .item-options {
+	margin-left: 0;
+	padding: 0;
+	line-height: 14px;
+	font-size: 13px;
+}
+
+#cartreservation_popup .data-table tr {
+	border-bottom: none;
+}
+
+#cartreservation_popup .data-table tr.expire-soon-row td {
+	background: #FFEFEF;
+}
+
+#cartreservation_popup .data-table .odd, 
+#cartreservation_popup .data-table .even {background: none;}
+#cartreservation_popup .data-table tr.last td {border-bottom: 1px solid #B6B6B6!important;}
+#cartreservation_popup .cart {position: relative;}
+#cartreservation_popup .cart .cart-collaterals {padding-top: 6px; border-bottom: 1px solid #B6B6B6!important; clear: both;}
+#cartreservation_popup .cart .totals {background: none; border: 0; width: 268px;}
+#cartreservation_popup .reserved-cart  {padding: 0px; margin: 0px; text-align: right; }
+#cartreservation_popup .subtotal-td  {padding-right:15px; text-align: right; }
+
+
+#cartreservation_popup #cartreservation_popup_close {
+	background: url(../popup/images/close_label.gif) no-repeat left top;
+	position: absolute;
+	right: -45px;
+	top: 0px;
+	width: 31px;
+	height: 30px;
+	z-index: 4100;
+	cursor: pointer;
+}
+
+#cartreservation_popup .timer {
+	position: absolute;
+	z-index: 10;
+	right: 0px;
+	top: -35px;
+	text-align: right;
+}
+
+.expire-soon-row td {background: #FFEFEF;}
+
+/*magento rwd styles*/
+/*.header-minicart .minicart-wrapper {padding-top: 50px;}
+.header-minicart .minicart-wrapper .reserved-cart {
+	display: block;
+	text-align: center;
+	float: none;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	font-size: 12px;
+	width: 100%;
+}
+
+.header-minicart .minicart-wrapper p.empty {}
+
+.header-minicart .minicart-actions {position: static!important;}
+*/
+
+.cart.display-single-price .reserved-cart {margin-top:5px }
+
+
+/* Magento RWD 1.9 */
+#cartreservation_popup.magento-rwd .holder {padding: 20px; font-size: 12px; margin-bottom: 20px; }
+#cartreservation_popup.magento-rwd .reserved-cart {font-size: 12px;}
+
+#cartreservation_popup.magento-rwd .cart-totals-wrapper {
+	width: 100%; 
+	padding: 0;
+}
+
+#cartreservation_popup.magento-rwd .cart-totals-wrapper tfoot td {
+	padding: 2px 0px 2px 5px;
+}
+
+#cartreservation_popup.magento-rwd .data-table {margin: 8px 0;}
+#cartreservation_popup.magento-rwd .cart-table .product-cart-sku {display: none;}
+#cartreservation_popup.magento-rwd .cart-table thead th { padding: 4px 0 2px 0; font-size: 13px; text-align: center; }
+
+#cartreservation_popup .cart-totals {
+	background-color: white;
+	padding: 0;
+	margin: 0;
+	border: none;
+}
+
+#cartreservation_popup #shopping-cart-totals-table tfoot {
+	border: none;
+	border-bottom: 1px solid #cacaca;
+}
+
+
+
+#cartreservation_popup #shopping-cart-totals-table tbody tr:last-child td {
+	padding-bottom: 0;
+}
+
+	#cartreservation_popup .data-table .product-cart-image {
+		text-align: center;
+	}
+
+	#cartreservation_popup .data-table .product-cart-image .product-image {
+		display: inline-block;
+	}
+
+	#cartreservation_popup .data-table .product-cart-image .product-image img {
+		height: 100%;
+		width: auto;
+		max-width: none;
+		margin: 0 auto;
+	}
+
+	#cartreservation_popup .r .button {
+		float: right;
+	}
+
+	#cartreservation_popup .r .cartreservation_div {
+		float: left;
+	}
+
+/*Animation*/
+.animated{
+	-webkit-animation-fill-mode:both;
+	-moz-animation-fill-mode:both;
+	-ms-animation-fill-mode:both;
+	-o-animation-fill-mode:both;
+	animation-fill-mode:both;
+	-webkit-animation-duration:1s;
+	-moz-animation-duration:1s;
+	-ms-animation-duration:1s;
+	-o-animation-duration:1s;
+	animation-duration:1s;
+}
+
+
+@-webkit-keyframes fadeInDownBig {
+	0% 		{ opacity: 0; -webkit-transform: translateY(-2000px);}
+	100% 	{ opacity: 1; -webkit-transform: translateY(0);}
+}
+
+@-moz-keyframes fadeInDownBig {
+	0% 		{ opacity: 0; -moz-transform: translateY(-2000px);}
+	100% 	{ opacity: 1; -moz-transform: translateY(0);}
+}
+
+@-o-keyframes fadeInDownBig {
+	0% 		{ opacity: 0; -o-transform: translateY(-2000px);}
+	100% 	{ opacity: 1; -o-transform: translateY(0);}
+}
+
+@keyframes fadeInDownBig {
+	0% 		{ opacity: 0; transform: translateY(-2000px);}
+	100% 	{ opacity: 1; transform: translateY(0);}
+}
+
+.fadeInDownBig {
+	-webkit-animation-name: fadeInDownBig;
+	-moz-animation-name: fadeInDownBig;
+	-o-animation-name: fadeInDownBig;
+	animation-name: fadeInDownBig;
+}
+
+
+@-webkit-keyframes expire-soon {
+	0% 		{ opacity: 0;}
+	50% 	{ opacity: 1;}
+	100% 	{ opacity: 0;}
+}
+
+@-moz-keyframes expire-soon {
+	0% 		{ opacity: 0;}
+	50% 	{ opacity: 1;}
+	100% 	{ opacity: 0;}
+}
+
+@-o-keyframes expire-soon {
+	0% 		{ opacity: 0;}
+	50% 	{ opacity: 1;}
+	100% 	{ opacity: 0;}
+}
+
+@keyframes expire-soon {
+	0% 		{ opacity: 0;}
+	50% 	{ opacity: 1;}
+	100% 	{ opacity: 0;}
+}
+
+.expire-soon {
+	-webkit-animation: expire-soon 1.5s infinite;
+	-moz-animation: expire-soon 1.5s infinite;
+	-o-animation: expire-soon 1.5s infinite;
+	animation: expire-soon 1.5s infinite;
+}
+
+
+/* Fix for Magento CE 1.9 */
+.data-table tbody td .item-options dt.cr-item:after {
+    content: "";
+}
+
+.minicart-wrapper .item-options dt.cr-item:after {
+	content: "";
+}
+
+
+/*mediaquires*/
+
+@media only screen and (max-width: 670px) {
+	#cartreservation_popup.magento-rwd .holder {
+		width: 90%;
+		margin-left: -45%;
+		padding: 20px;
+
+	}
+
+	#cartreservation_popup .cart.display-single-price .reserved-cart {
+		margin: 0;
+		text-align: left;
+		font-size: 12px;
+	}
+
+	#cartreservation_popup .r a.cartreservation_popup_close {
+		float: none;
+	}
+
+	#cartreservation_popup .r .button {
+		margin-bottom: 10px;
+	}
+
+	#cartreservation_popup .r .cartreservation_div {
+		float: none;
+		text-align: center;
+		width: 100%;
+		clear: both;
+	}
+}
+
+@media only screen and (max-width: 640px) {
+	
+
+}
+
+@media only screen and (max-width: 599px) {
+
+	#cartreservation_popup .holder {
+		position: relative;
+	}
+
+	#cartreservation_popup .timer {
+		right: inherit;
+		left: 0px;
+		left: 0;
+		text-align: right;
+	}
+
+
+	/* === data table === */
+	#cartreservation_popup .data-table tbody tr.last td, 
+	#cartreservation_popup .data-table tbody td {
+		border: none !important;
+		margin-bottom: 0;
+		padding: 5px 0 0px 0;
+		vertical-align: middle;
+	}
+
+	#cartreservation_popup .data-table tbody tr {
+		border-bottom: 1px solid #CACACA;
+		padding: 0;
+		margin-bottom: 0;
+	}
+
+
+
+	#cartreservation_popup .data-table tbody tr.expire-soon-row {
+		background: #FFEFEF;
+	}
+
+	#cartreservation_popup .data-table tbody tr td:first-child {
+		width: 30px;
+		float: left;
+		padding: 20px 5px 0 5px;
+	}
+
+	#cartreservation_popup .data-table tbody tr td:first-child img {
+		width: 100%;
+		margin-top: 5px;
+		padding-top: 5px;
+	}
+
+	#cartreservation_popup .data-table .product-cart-image {
+		width: 30%;
+		float: left;
+	}
+
+	#cartreservation_popup .data-table .product-cart-info,
+	#cartreservation_popup .data-table .product-cart-price,
+	#cartreservation_popup .data-table .product-cart-actions {
+		padding: 0;
+		margin: 0;
+		width: 55%;
+	}
+
+	#cartreservation_popup .data-table .product-cart-info {
+		padding-bottom: 3px !important;
+		padding-top: 5px;
+	} 
+
+	#cartreservation_popup .data-table h2 {
+		font-size: 11px;
+		line-height: 1.5;
+	}
+	
+	#cartreservation_popup .data-table .price {
+		font-size: 12px;
+	}	
+
+	/* === end data table === */
+
+	#cartreservation_popup .cart-totals table {
+		border: none;
+		margin: 0;
+	}
+
+
+	#cartreservation_popup .cart-totals table tbody tr:last-child td {
+		padding-bottom: 0;
+	}
+
+
+
+}
+
+
+

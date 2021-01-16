@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+
+<mastercheckout_index_index>
+<!--    <reference name="head">
+        <action method="addJs"><name>vendor/jquery.js</name></action>
+        <action method="addJs"><name>vendor/jquery-ui-1.8.12.custom.min.js</name></action>
+        <action method="addCss"><name>vendor/jquery-ui-1.8.12.custom.css</name></action>
+        <action method="addCss"><name>vendor/main.css</name></action>
+    </reference>-->
+    <label>One Page Checkout</label>
+        <!-- Mage_Checkout -->
+    <remove name="left"/>
+
+    <reference name="root">
+      <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        <!-- <action method="setTemplate"><template>page/1column.phtml</template></action> -->
+    </reference>
+    <reference name="breadcrumbs">
+      <action method="addCrumb"><crumbName>Home</crumbName><crumbInfo><label>Home</label><title>Home</title><link>/</link></crumbInfo></action>
+      <action method="addCrumb"><crumbName>Checkout</crumbName><crumbInfo><label>Checkout</label><title>Checkout</title></crumbInfo></action>
+    </reference>
+
+    <reference name="head">
+        <!-- <action method="addJs"><name>jquery/jquery.js</name></action> -->
+        <action method="addJs"><name>mastercheckout/popup.js</name></action>
+        <action method="addCss"><name>mastercheckout/mastercheckout.css</name></action>
+        <action method="addItem"><type>skin_js</type><name>js/jquery.custom-radio-checkbox.js</name></action>
+        <action method="addItem"><type>skin_css</type><name>css/custom-radio-checkbox.css</name><params/></action>
+      <action method="addJs" ifconfig="customaddress/general/enable_module"><script>magebuzz/customaddress.js</script></action>
+    </reference>
+    <reference name="top_main">
+        <block type="mastercheckout/multistep" name="mastercheckout.onepage.step" template="mastercheckout/steptitle.phtml"/>
+    </reference>
+    <reference name="right">
+        <remove name="sale.reorder.sidebar"/>
+        <action method="unsetChildren"></action>
+        <block type="page/html_wrapper" name="checkout.progress.wrapper" translate="label">
+            <label>Checkout Progress Wrapper</label>
+            <action method="setElementId"><value>checkout-progress-wrapper</value></action>
+            <block type="checkout/onepage_progress" name="checkout.progress" before="-" template="checkout/onepage/progress.phtml">
+                <block type="checkout/onepage_progress" name="billing.shipping.progress" template="checkout/onepage/progress/billing-shipping.phtml">
+                </block>
+                <block type="checkout/onepage_progress" name="shippingmethod.payment.progress" template="checkout/onepage/progress/shipping_method_payment.phtml"></block>
+                
+                <!-- <block type="checkout/onepage_progress" name="shippingmethod.progress" template="checkout/onepage/progress/shipping_method.phtml"></block>
+                <block type="checkout/onepage_progress" name="payment.progress" template="checkout/onepage/progress/payment.phtml"></block> -->
+            </block>
+        </block>
+		</reference>
+    
+
+    <reference name="content">
+        
+<!--        <block type="checkout/onepage" name="checkout.onepage" template="mastercheckout/multistep.phtml">-->
+        <block type="mastercheckout/multistep" name="mastercheckout.onepage" template="mastercheckout/multistep.phtml">
+            <!--<block type="checkout/onepage_login" name="mastercheckout.onepage.login" as="login" template="mastercheckout/loginlink.phtml">-->
+                <!--<block type="page/html_wrapper" name="mastercheckout.onepage.login.before" as="login_before" translate="label">-->
+                    <!--<label>Login/Registration Before</label>-->
+                    <!--<action method="setMayBeInvisible"><value>1</value></action>-->
+                <!--</block>-->
+            <!--</block>-->
+            <block type="kpayment/credit_credit" name="mastercheckout.kpayment.credit" as="kpaymentcredit" template="kpayment/credit.phtml"/>
+            <block type="checkout/onepage_login" name="mastercheckout.onepage.login" as="login" template="mastercheckout/login.phtml">
+                <block type="customer/form_login" name="onepage_login" as="onepage.login" template="customer/form/login-onepage.phtml">
+                    <block type="amajaxlogin/customer_account_dashboard_social" name="amajaxlogin_social" as="amajaxlogin_social" template="amasty/amajaxlogin/customer/account/dashboard/social-header.phtml"/>
+                </block>
+            </block>
+
+            <block type="checkout/onepage_billing" name="mastercheckout.onepage.billing" as="billing" template="mastercheckout/billing.phtml"/>
+            <block type="checkout/onepage_shipping" name="mastercheckout.onepage.shipping" as="shipping" template="mastercheckout/shipping.phtml"/>
+            <block type="core/template" name="mastercheckout.onepage.step1footer" as="step1footer" template="mastercheckout/step1footer.phtml"/>
+
+            <block type="checkout/onepage_shipping_method" name="mastercheckout.onepage.shipping_method" as="shipping_method" template="mastercheckout/shipping_method.phtml">
+                <block type="checkout/onepage_shipping_method_available" name="mastercheckout.onepage.shipping_method.available" as="available" template="checkout/onepage/shipping_method/available.phtml"/>
+                <block type="checkout/onepage_shipping_method_additional" name="mastercheckout.onepage.shipping_method.additional" as="additional" template="checkout/onepage/shipping_method/additional.phtml"/>
+            </block>
+            <block type="checkout/onepage_payment" name="mastercheckout.onepage.payment" as="payment" template="mastercheckout/payment.phtml">
+                <block type="checkout/onepage_payment_methods" name="mastercheckout.payment.methods" as="methods" template="mastercheckout/payment_methods.phtml">
+                    <action method="setMethodFormTemplate"><method>purchaseorder</method><template>payment/form/purchaseorder.phtml</template></action>
+                </block>
+            </block>
+            <block type="core/template" name="mastercheckout.onepage.step2footer" as="step2footer" template="mastercheckout/step2footer.phtml">
+                <block type="core/template" name="mastercheckout.onepage.agreements_omise" as="agreements_omise" template="mastercheckout/agreements_omise.phtml"/>
+            </block>
+
+            <block type="checkout/onepage_review" name="mastercheckout.onepage.review" as="review" template="checkout/onepage/review.phtml"/>
+            
+            
+<!--            <reference name="checkout.onepage.review">
+                <action method="setTemplate"><template>mastercheckout/info.phtml</template></action>
+                <block type="checkout/onepage_review_info" name="root" output="toHtml"/>
+            </reference>-->
+
+<!--            <reference type="checkout/onepage_review_info" name="root" output="toHtml">
+                <action method="setTemplate"><template>mastercheckout/info.phtml</template></action>
+            </reference>-->
+<!--            <block type="checkout/onepage_review" name="mastercheckout.onepage.review" as="review" template="mastercheckout/review.phtml"/>-->
+
+        </block>
+
+    </reference>
+
+</mastercheckout_index_index>
+
+<checkout_onepage_progress_billing>
+    <!-- Mage_Checkout -->
+    <remove name="right"/>
+    <remove name="left"/>
+
+    <block type="checkout/onepage_progress" name="root" output="toHtml" template="checkout/onepage/progress/billing-shipping.phtml">
+        <action method="setInfoTemplate"><method></method><template></template></action>
+    </block>
+</checkout_onepage_progress_billing>
+<checkout_onepage_progress_shipping_method>
+    <!-- Mage_Checkout -->
+    <remove name="right"/>
+    <remove name="left"/>
+
+    <block type="checkout/onepage_progress" name="root" output="toHtml" template="checkout/onepage/progress/shipping_method_payment.phtml">
+        <action method="setInfoTemplate"><method></method><template></template></action>
+        <block type="checkout/onepage_payment_info" name="payment_info">
+            <action method="setInfoTemplate"><method></method><template></template></action>
+        </block>
+    </block>
+</checkout_onepage_progress_shipping_method>
+
+
+
+<checkout_onepage_review>
+    <reference name="root">
+        <action method="setTemplate">
+                <template>mastercheckout/info.phtml</template>
+        </action>
+        <block type="checkout/agreements" name="mastercheckout.onepage.agreements" as="agreements" template="mastercheckout/agreements.phtml"/>
+    </reference>
+<!--    <reference name="content">-->
+        
+<!--    </reference>-->
+</checkout_onepage_review>
+
+<mastercheckout_account_forgotpassword>
+    <reference name="content">
+        <block type="customer/account_forgotpassword" name="forgotPassword" template="mastercheckout/forgotpassword.phtml"/>
+    </reference>
+
+</mastercheckout_account_forgotpassword>
+
+<!--<customer_account_forgotpassword>
+    <reference name="content">
+        <action method="setTemplate">
+                <template>mastercheckout/forgotpassword.phtml</template>
+        </action>
+    </reference>
+</customer_account_forgotpassword>-->
+
+</layout>

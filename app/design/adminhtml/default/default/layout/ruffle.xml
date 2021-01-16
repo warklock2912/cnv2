@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+    <default>
+        <reference name="content">
+        <block type="ruffle/adminhtml_ruffle" name="unassignwinner" as="unassignwinner" template="ruffle/confirmpopup.phtml"></block>
+    </reference>
+    </default>
+
+    <adminhtml_ruffle_index>
+        <reference name="content">
+            <block type="ruffle/adminhtml_ruffle" name="ruffle" />
+        </reference>
+    </adminhtml_ruffle_index>
+    <adminhtml_ruffle_edit>
+    	<update handle="editor"/>
+    </adminhtml_ruffle_edit>
+	<adminhtml_ruffle_product>
+		<block type="core/text_list" name="root" output="toHtml">
+            <block type="ruffle/adminhtml_ruffle_edit_tab_products" name="ruffle.edit.tab.items" />
+            <block type="adminhtml/widget_grid_serializer" name="ruffle_grid_serializer">
+                <action method="initSerializerBlock">
+                    <grid_block_name>ruffle.edit.tab.items</grid_block_name>
+                    <data_callback>getSelectedRuffleItems</data_callback>
+                    <hidden_input_name>product_ids</hidden_input_name>
+                    <reload_param_name>ruffle_items</reload_param_name>
+                </action>
+                <action method="addColumnInputName">
+                    <input_name>vip_qty</input_name>
+                </action>
+                <action method="addColumnInputName">
+                    <input_name>general_qty</input_name>
+                </action>
+            </block>
+        </block>
+	</adminhtml_ruffle_product>
+
+	<adminhtml_ruffle_productgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="ruffle/adminhtml_ruffle_edit_tab_products" name="ruffle.edit.tab.items"/>
+        </block>
+    </adminhtml_ruffle_productgrid>
+
+    <adminhtml_ruffle_member>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="ruffle/adminhtml_ruffle_edit_tab_member" name="ruffle.edit.tab.member" />
+            <block type="adminhtml/widget_grid_serializer" name="ruffle_grid_serializer">
+                <action method="initSerializerBlock">
+                    <grid_block_name>ruffle.edit.tab.member</grid_block_name>
+                    <data_callback>getSelectedRuffleMember</data_callback>
+                    <hidden_input_name>general_ids</hidden_input_name>
+                    <reload_param_name>general_joiner</reload_param_name>
+                </action>
+            </block>
+        </block>
+    </adminhtml_ruffle_member>
+
+    <adminhtml_ruffle_membergrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="ruffle/adminhtml_ruffle_edit_tab_member" name="ruffle.edit.tab.member"/>
+        </block>
+    </adminhtml_ruffle_membergrid>
+
+    <adminhtml_ruffle_vip>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="ruffle/adminhtml_ruffle_edit_tab_vip" name="ruffle.edit.tab.vip" />
+            <block type="adminhtml/widget_grid_serializer" name="ruffle_grid_serializer">
+                <action method="initSerializerBlock">
+                    <grid_block_name>ruffle.edit.tab.vip</grid_block_name>
+                    <data_callback>getSelectedRuffleMember</data_callback>
+                    <hidden_input_name>vip_ids</hidden_input_name>
+                    <reload_param_name>ruffle_member</reload_param_name>
+                </action>
+            </block>
+        </block>
+    </adminhtml_ruffle_vip>
+
+    <adminhtml_ruffle_vipgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="ruffle/adminhtml_ruffle_edit_tab_vip" name="ruffle.edit.tab.vip"/>
+        </block>
+    </adminhtml_ruffle_vipgrid>
+
+    
+    <adminhtml_ruffle_allmember>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="ruffle/adminhtml_ruffle_edit_tab_allmember" name="ruffle.edit.tab.allmember" />
+            <block type="adminhtml/widget_grid_serializer" name="ruffle_grid_serializer">
+                <action method="initSerializerBlock">
+                    <grid_block_name>ruffle.edit.tab.allmember</grid_block_name>
+                    <data_callback>getSelectedRuffleMember</data_callback>
+                    <hidden_input_name>allmember_ids</hidden_input_name>
+                    <reload_param_name>ruffle_member</reload_param_name>
+                </action>
+            </block>
+        </block>
+    </adminhtml_ruffle_allmember>
+
+    <adminhtml_ruffle_allmembergrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="ruffle/adminhtml_ruffle_edit_tab_allmember" name="ruffle.edit.tab.allmember"/>
+        </block>
+    </adminhtml_ruffle_allmembergrid>
+
+    <adminhtml_ruffle_winner>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="ruffle/adminhtml_ruffle_edit_tab_winner" name="ruffle.edit.tab.winner" />
+            <block type="adminhtml/widget_grid_serializer" name="ruffle_grid_serializer">
+                <action method="initSerializerBlock">
+                    <grid_block_name>ruffle.edit.tab.winner</grid_block_name>
+                    <data_callback>getSelectedRuffleMember</data_callback>
+                    <hidden_input_name>winner_ids</hidden_input_name>
+                    <reload_param_name>ruffle_member</reload_param_name>
+                </action>
+            </block>
+        </block>
+    </adminhtml_ruffle_winner>
+
+    <adminhtml_ruffle_winnergrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="ruffle/adminhtml_ruffle_edit_tab_winner" name="ruffle.edit.tab.winner"/>
+        </block>
+    </adminhtml_ruffle_winnergrid>
+</layout>

@@ -1,0 +1,16 @@
+<div class="ruffle-thankyou">
+  <?php
+    $ruffle_data = Mage::getSingleton('customer/session')->getRuffleJoined();
+    $pdf_path = $ruffle_data->getData('pdf_path');
+    $url_pdf = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'pdf_ruffle/'.$pdf_path;
+  ?>
+    <div class="page-title">
+        <h1><?php echo $this->__('Thank You')?></h1>
+    </div>
+    <h2><?php echo $this->__('Your number is %s', '<a href="#">'.$ruffle_data->getData('ruffle_number').'</a>')?></h2>
+    <p><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('ruffle-thankyou')->toHtml(); ?> </p>
+    <div class="actions">
+        <button type="button" onclick="window.open('<?php echo $url_pdf?>')"  class="button"><span><span><?php echo Mage::helper('core')->quoteEscape($this->__('Download Pdf')); ?></span></span></button>
+        <button type="button" onclick="window.open('<?php echo $url_pdf?>').print();" class="button"><span><span><?php echo Mage::helper('core')->quoteEscape($this->__('Print')); ?></span></span></button>
+    </div>
+</div>

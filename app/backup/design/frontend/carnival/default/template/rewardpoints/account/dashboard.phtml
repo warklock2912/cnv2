@@ -1,0 +1,54 @@
+<?php 
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/**
+ * Rewardpoints Account Dashboard
+ * 
+ * @see Magestore_RewardPoints_Block_Account_Dashboard
+ */
+?>
+
+<div class="page-title">
+    <h1><?php echo $this->__('Rewards Points') ?></h1>
+</div>
+
+<div class="box-account box-info box-rewardpoints-summary">
+    <div class="info-summary">
+        <div class="info-points">
+            <?php echo $this->__('You have %s',
+               '<span class="rewardpoints-money">'.Mage::helper('rewardpoints/customer')->getBalanceFormatedHtml().'</span>'
+              ) ?>
+        <br/>
+    <?php if ($_holdingBalance = $this->getHoldingBalance()): ?>
+        <span>
+            <?php echo $this->__('You have %s that are pending for approval.',
+                '<span class="rewardpoints-money">' . $_holdingBalance . '</span>'
+            ) ?>
+        </span>
+    <?php endif ?>
+        </div>
+        <?php echo $this->getChildHtml('dashboard_earn') ?>
+        <?php echo $this->getChildHtml('dashboard_spend') ?>
+        <?php echo $this->getChildHtml('dashboard_policy') ?>
+    </div>
+</div>
+
+<?php echo $this->getChildHtml('other') ?>

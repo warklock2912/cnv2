@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MageWorx
+ * Search Suite
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuite
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+-->
+<config>
+    <menu>
+        <catalog>
+            <children>
+                <mageworx_searchsuite translate="title" module="mageworx_searchsuite">
+                    <title>Search Suite</title>
+                    <sort_order>10</sort_order>
+                    <children>
+                        <mageworx_searchsuite_attributes translate="title" module="mageworx_searchsuite">
+                            <title>Manage Attributes</title>
+                            <action>adminhtml/mageworx_searchsuite_attributes</action>
+                            <sort_order>10</sort_order>
+                        </mageworx_searchsuite_attributes>
+                        <mageworx_searchsuite_synonyms translate="title" module="mageworx_searchsuite">
+                            <title>Manage Synonyms</title>
+                            <action>adminhtml/mageworx_searchsuite_synonyms</action>
+                            <sort_order>20</sort_order>
+                        </mageworx_searchsuite_synonyms>
+                        <mageworx_searchsuite_stopwords translate="title" module="mageworx_searchsuite">
+                            <title>Manage Stopwords</title>
+                            <action>adminhtml/mageworx_searchsuite_stopwords</action>
+                            <sort_order>30</sort_order>
+                        </mageworx_searchsuite_stopwords>
+                    </children>
+                </mageworx_searchsuite>
+            </children>
+        </catalog>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <mageworx_searchsuite translate="title" module="mageworx_searchsuite">
+                                        <title>MageWorx &gt; Search Suite</title>
+                                        <sort_order>600</sort_order>
+                                        <children>
+                                            <main translate="title" module="mageworx_searchsuite">
+                                                <title>Main Settings</title>
+                                                <sort_order>1</sort_order>
+                                            </main>
+                                            <indexes translate="title" module="mageworx_searchsuite">
+                                                <title>Search Indexes</title>
+                                                <sort_order>2</sort_order>
+                                            </indexes>
+                                        </children>
+                                    </mageworx_searchsuite>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <catalog>
+                        <children>
+                            <mageworx_searchsuite translate="title" module="mageworx_searchsuite">
+                                <title>Search Suite</title>
+                                <children>
+                                    <mageworx_searchsuite_attributes translate="title" module="mageworx_searchsuite">
+                                        <title>Manage Attributes</title>
+                                        <sort_order>10</sort_order>
+                                    </mageworx_searchsuite_attributes>
+                                    <mageworx_searchsuite_synonyms translate="title" module="mageworx_searchsuite">
+                                        <title>Manage Synonyms</title>
+                                        <sort_order>20</sort_order>
+                                    </mageworx_searchsuite_synonyms>
+                                    <mageworx_searchsuite_stopwords translate="title" module="mageworx_searchsuite">
+                                        <title>Manage Stopwords</title>
+                                        <sort_order>30</sort_order>
+                                    </mageworx_searchsuite_stopwords>
+                                </children>
+                            </mageworx_searchsuite>
+                        </children>
+                    </catalog> 
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

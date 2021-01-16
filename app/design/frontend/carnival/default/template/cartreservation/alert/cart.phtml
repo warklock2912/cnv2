@@ -1,0 +1,75 @@
+<?php
+
+/*
+
+Plumrocket Inc.
+
+NOTICE OF LICENSE
+
+This source file is subject to the End-user License Agreement
+that is available through the world-wide-web at this URL:
+http://wiki.plumrocket.net/wiki/EULA
+If you are unable to obtain it through the world-wide-web, please
+send an email to support@plumrocket.com so we can send you a copy immediately.
+
+@package    Plumrocket_Cart_Reservation-v1.5.x
+@copyright  Copyright (c) 2013 Plumrocket Inc. (http://www.plumrocket.com)
+@license    http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ 
+*/
+?>
+<div class="timer">
+    <?php echo $this->getChildHtml('timer'); ?>
+</div>
+<div class="cart">
+    <table id="shopping-cart-table" class="data-table cart-table">
+        <col width="1" />
+        <col width="1" />
+        <col />
+    <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+        <col width="1" />
+    <?php endif; ?>
+    <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+        <col width="1" />
+    <?php endif; ?>
+        <col width="1" />
+    <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+        <col width="1" />
+    <?php endif; ?>
+    <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+        <col width="1" />
+    <?php endif; ?>
+
+    <?php $mergedCells = ($this->helper('tax')->displayCartBothPrices() ? 2 : 1); ?>
+        <thead>
+            <tr>
+                <th rowspan="<?php echo $mergedCells; ?>">&nbsp;</th>
+                <th rowspan="<?php echo $mergedCells; ?>" class="a-center">&nbsp;</th>
+                <th rowspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $this->__('Product Name') ?></span></th>
+                <th class="a-center" colspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $this->__('Unit Price') ?></span></th>
+                <th rowspan="<?php echo $mergedCells; ?>" class="a-center"><?php echo $this->__('Qty') ?></th>
+                <th class="a-center subtotal-td" colspan="<?php echo $mergedCells; ?>"><?php echo $this->__('Subtotal') ?></th>
+            </tr>
+            <?php if ($this->helper('tax')->displayCartBothPrices()): ?>
+            <tr>
+                <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+            </tr>
+            <?php endif; ?>
+        </thead>
+        <tbody>
+        <?php foreach($this->getItems() as $_item): ?>
+            <?php echo $this->getItemHtml($_item) ?>
+        <?php endforeach ?>
+        </tbody>
+    </table>
+    <script type="text/javascript">decorateTable('shopping-cart-table')</script>
+
+    <div class="cart-collaterals">
+        <div class="totals">
+            <?php echo $this->getChildHtml('totals'); ?>
+        </div>
+    </div>
+</div>

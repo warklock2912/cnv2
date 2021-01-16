@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Followup
+ */
+-->
+<config>
+    <modules>
+        <Amasty_Followup>
+            <version>1.6.4</version>
+        </Amasty_Followup>
+    </modules>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Amasty_Followup after="Amasty_Followup">Amasty_Followup_Adminhtml</Amasty_Followup>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <frontend>
+        <routers>
+            <amfollowupfront>
+                <use>standard</use>
+                <args>
+                    <module>Amasty_Followup</module>
+                    <frontName>amfollowupfront</frontName>
+                </args>
+            </amfollowupfront>
+        </routers>
+        <translate>
+            <modules>
+                <Amasty_Followup>
+                    <files>
+                        <default>Amasty_Followup.csv</default>
+                    </files>
+                </Amasty_Followup>
+            </modules>
+        </translate>
+    </frontend>    
+    <adminhtml>
+        <translate>
+            <modules>
+                <Amasty_Followup>
+                    <files>
+                        <default>Amasty_Followup.csv</default>
+                    </files>
+                </Amasty_Followup>
+            </modules>
+        </translate>
+        <menu>
+            <promo>
+                <children>
+                    <amfollowup translate="title" module="amfollowup">
+                        <title>Follow Up Email</title>
+                        <sort_order>1000</sort_order>
+                        <children>
+                            <amfollowup_rule translate="title" module="amfollowup">
+                                <title>Rules</title>
+                                <sort_order>900</sort_order>
+                                <action>adminhtml/amfollowup_rule</action>
+                            </amfollowup_rule>
+                        
+                            <amfollowup_queue translate="title" module="amfollowup">
+                                <title>Emails Queue</title>
+                                <sort_order>1000</sort_order>
+                                <action>adminhtml/amfollowup_queue</action>
+                            </amfollowup_queue>
+                        
+                            <amfollowup_history translate="title" module="amfollowup">
+                                <title>History</title>
+                                <sort_order>1100</sort_order>
+                                <action>adminhtml/amfollowup_history</action>
+                            </amfollowup_history>
+                            
+                            <amfollowup_blacklist translate="title" module="amfollowup">
+                                <title>Black List</title>
+                                <sort_order>1200</sort_order>
+                                <action>adminhtml/amfollowup_blist</action>
+                            </amfollowup_blacklist>
+                        </children>
+                    </amfollowup>
+                </children>
+            </promo>
+        </menu> 
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <promo>
+                            <children>
+                                
+                                <amfollowup translate="title" module="amfollowup">
+                                    <title>Amasty Follow Up Email</title>
+                                    <children>
+                                        <amfollowup_rule translate="title">
+                                            <title>Rules</title>
+                                        </amfollowup_rule>
+                                        <amfollowup_queue translate="title">
+                                            <title>Queue</title>
+                                        </amfollowup_queue>
+                                        <amfollowup_history translate="title">
+                                            <title>History</title>
+                                        </amfollowup_history>
+                                    </children>
+                                </amfollowup>
+                              
+                            </children>
+                        </promo>
+                     </children>
+                </admin> 
+            </resources>
+        </acl>
+        
+        <layout>
+            <updates>
+                <amfollowup>
+                    <file>amfollowup.xml</file>
+                </amfollowup>
+            </updates>
+        </layout>
+    </adminhtml>
+    
+    <global>
+        <models>
+            <amfollowup>
+                <class>Amasty_Followup_Model</class>
+                <resourceModel>amfollowup_mysql4</resourceModel>
+            </amfollowup>
+            <amfollowup_mysql4>
+                <class>Amasty_Followup_Model_Mysql4</class>
+                <entities>
+                    <rule>
+                        <table>amasty_amfollowup_rule</table>
+                    </rule>
+                    <schedule>
+                        <table>amasty_amfollowup_schedule</table>
+                    </schedule>
+                    <history>
+                        <table>amasty_amfollowup_history</table>
+                    </history>
+                    <blacklist>
+                        <table>amasty_amfollowup_blacklist</table>
+                    </blacklist>
+                    <attribute>
+                        <table>amasty_amfollowup_attribute</table>
+                    </attribute>
+                    <link>
+                        <table>amasty_amfollowup_link</table>
+                    </link>
+                </entities>
+            </amfollowup_mysql4>
+        </models>
+        <resources>
+             <amfollowup_setup>
+                <setup>
+                    <module>Amasty_Followup</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </amfollowup_setup>
+            <amfollowup_write>
+                <connection><use>core_write</use></connection>
+            </amfollowup_write>
+            <amfollowup_read>
+                <connection><use>core_read</use></connection>
+            </amfollowup_read>
+        </resources>
+        <template>
+            <email>
+                <amfollowup_order_new translate="label" module="amfollowup">
+                    <label>Amasty Follow Up Email: Order Created</label>
+                    <file>amasty/amfollowup/order/new.html</file>
+                    <type>html</type>
+                </amfollowup_order_new>
+                <amfollowup_order_ship translate="label" module="amfollowup">
+                    <label>Amasty Follow Up Email: Order Shipped</label>
+                    <file>amasty/amfollowup/order/ship.html</file>
+                    <type>html</type>
+                </amfollowup_order_ship>
+                <amfollowup_order_invoice translate="label" module="amfollowup">
+                    <label>Amasty Follow Up Email: Order Invoiced</label>
+                    <file>amasty/amfollowup/order/invoice.html</file>
+                    <type>html</type>
+                </amfollowup_order_invoice>
+                <amfollowup_order_complete translate="label" module="amfollowup">
+                    <label>Amasty Follow Up Email: Order Completed</label>
+                    <file>amasty/amfollowup/order/complete.html</file>
+                    <type>html</type>
+                </amfollowup_order_complete>
+                <amfollowup_order_cancel translate="label" module="amfollowup">
+                    <label>Amasty Follow Up Email: Order Cancelled</label>
+                    <file>amasty/amfollowup/order/cancel.html</file>
+                    <type>html</type>
+                </amfollowup_order_cancel>
+                <amfollowup_customer_group translate="label" module="amfollowup">
+                    <label>Amasty Follow Up Email: Customer Changed Group</label>
+                    <file>amasty/amfollowup/customer/group.html</file>
+                    <type>html</type>
+                </amfollowup_customer_group>
+                <amfollowup_customer_birthday translate="label" module="amfollowup">
+                    <label>Amasty Follow Up Email: Customer Birthday</label>
+                    <file>amasty/amfollowup/customer/birthday.html</file>
+                    <type>html</type>
+                </amfollowup_customer_birthday>
+                <amfollowup_customer_new translate="label" module="amfollowup">
+                    <label>Amasty Follow Up Email: Customer Registration</label>
+                    <file>amasty/amfollowup/customer/new.html</file>
+                    <type>html</type>
+                </amfollowup_customer_new>
+                <amfollowup_customer_subscription translate="label" module="amfollowup">
+                    <label>Amasty Follow Up Email: Customer Subscribed to Newsletter</label>
+                    <file>amasty/amfollowup/customer/subscription.html</file>
+                    <type>html</type>
+                </amfollowup_customer_subscription>
+                <amfollowup_customer_activity translate="label" module="amfollowup">
+                    <label>Amasty Follow Up Email: Customer No Activity</label>
+                    <file>amasty/amfollowup/customer/activity.html</file>
+                    <type>html</type>
+                </amfollowup_customer_activity>
+                <amfollowup_customer_wishlist translate="label" module="amfollowup">
+                    <label>Amasty Follow Up Email: Customer Wish List Product Added</label>
+                    <file>amasty/amfollowup/customer/wishlist.html</file>
+                    <type>html</type>
+                </amfollowup_customer_wishlist>
+                <amfollowup_customer_wishlist_shared translate="label" module="amfollowup">
+                    <label>Amasty Follow Up Email: Customer Wish List Shared</label>
+                    <file>amasty/amfollowup/customer/wishlist_shared.html</file>
+                    <type>html</type>
+                </amfollowup_customer_wishlist_shared>
+            <amfollowup_customer_date translate="label" module="amfollowup">
+                    <label>Amasty Follow Up Email: Customer Date</label>
+                    <file>amasty/amfollowup/customer/date.html</file>
+                    <type>html</type>
+                </amfollowup_customer_date>
+            </email>
+        </template>
+        <blocks>
+            <amfollowup>
+                <class>Amasty_Followup_Block</class>
+            </amfollowup>
+            <adminhtml>
+                <rewrite>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+        <helpers>
+            <amfollowup>
+                <class>Amasty_Followup_Helper</class>
+            </amfollowup>
+        </helpers>
+        <events>
+            
+<customer_save_after>
+                <observers>
+                    <amfollowup>
+                        <class>amfollowup/observer</class>
+                        <method>onCustomerSaveAfter</method>
+                    </amfollowup>
+                </observers>
+            </customer_save_after>
+            <newsletter_subscriber_save_after>
+                <observers>
+                    <amfollowup>
+                        <class>amfollowup/observer</class>
+                        <method>onNewsletterSubscriberSaveAfter</method>
+                    </amfollowup>
+                </observers>
+            </newsletter_subscriber_save_after>
+        <wishlist_share>
+                <observers>
+                    <amfollowup>
+                        <class>amfollowup/observer</class>
+                        <method>onWishlistShare</method>
+                    </amfollowup>
+                </observers>
+            </wishlist_share>
+        <salesrule_validator_process>
+                <observers>
+                    <amfollowup>
+                        <class>amfollowup/observer</class>
+                        <method>onSalesruleValidatorProcess</method>
+                    </amfollowup>
+                </observers>
+            </salesrule_validator_process>
+        </events>
+        
+    </global>
+    <frontend>
+        <layout>
+              <updates>
+                  <amfollowup>
+                      <file>amasty/amfollowup/main.xml</file>
+                  </amfollowup>
+              </updates>
+        </layout>
+    </frontend>
+    <default>
+        <amfollowup>
+            <general>
+                <winback_period>7</winback_period>
+                <customer_coupon>0</customer_coupon>
+                <clean_up_period>180</clean_up_period>
+            </general>            
+            <statuses>
+                <new>pending</new>
+                <ship>processing</ship>
+                <invoice>processing</invoice>
+                <complete>complete</complete>
+                <cancel>canceled</cancel>
+            </statuses>           
+            <template>
+                <name>Owner</name>
+                <email>owner@example.com</email>
+            </template>
+        <test>
+                <safe_mode>0</safe_mode>
+                <recipient></recipient>
+            </test>
+        </amfollowup>
+    </default>
+    <crontab>
+        <jobs>
+            <amfollowup_coupon>
+                <schedule>
+                    <cron_expr>0 0 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>amfollowup/observer::clearCoupons</model>
+                </run>
+            </amfollowup_coupon>
+            <amfollowup_clean>
+                <schedule>
+                    <cron_expr>0 0 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>amfollowup/observer::clearHistory</model>
+                </run>
+            </amfollowup_clean>
+            <amfollowup_history>
+                <schedule>
+                    <cron_expr>*/5 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>amfollowup/observer::refreshHistory</model>
+                </run>
+            </amfollowup_history>
+        </jobs>
+    </crontab>
+</config>

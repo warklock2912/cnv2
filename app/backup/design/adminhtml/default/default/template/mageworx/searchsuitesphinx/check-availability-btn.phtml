@@ -1,0 +1,49 @@
+<button onclick="checkSphinx(this);return false;" style="background-image: none;"><?php echo Mage::helper('mageworx_searchsuitesphinx')->__('Check Availability') ?></button>
+<div id="sphinx_availability_result" class="sphinx-availability-result"></div>
+<style>
+    .sphinx-availability-result {
+        display: none;
+        margin-top: 5px;
+        padding: 7px;
+        border: 1px solid #FB8A00;
+        background-color: #FBF2E7;
+    }
+    .sphinx-availability-result span {
+        font-weight: 700;
+    }
+    .sphinx-availability-result ul {
+        margin-left: 20px;
+    }
+    .sphinx-availability-result li {
+        margin: 0px !important;
+        font-weight: 100;
+        font-style: italic;
+        list-style: disc;
+    }
+</style>
+<script type="text/javascript">
+    function checkSphinx(btn){
+        new Ajax.Request('<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/mageworx_searchsuitesphinx_check/index') ?>', {
+            method: 'get',
+            onSuccess:
+                function(response){
+                    var r = response.responseText.evalJSON();
+                    console.log(r);
+                    if(r.status){
+                        console.log(btn);
+                        btn.setStyle({"background-color": "#0f0"});
+                    } else {
+                        $("sphinx_availability_result").update(
+                            "<span>Please follow the steps below to solve the problem:<span>" +
+                                "<ul>" +
+                                "<li>make sure Sphinx is correctly installed on your server;</li>" +
+                                "<li>check the 'Sphinx Host' settings. If the server address is 127.0.0.1, try to change it to 'localhost'. </li>" +
+                                "<li>check if 'Sphinx Port' corresponds to the one set in sphinx.conf (the 'searchd' section - the first 'listen' line)</li>" +
+                                "</ul>"
+                        ).setStyle({"display": "block"});
+                        btn.setStyle({"background-color": "#f00"});
+                    }
+                }
+        });
+    };
+</script>

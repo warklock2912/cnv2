@@ -1,0 +1,86 @@
+<dl class="sp-methods" id="checkout-payment-method-load">
+    <?php
+    $methods = $this->getMethods();
+    $oneMethod = count($methods) <= 1;
+    ?>
+    <?php
+    foreach ($methods as $_method):
+        $_code = $_method->getCode();
+        ?>
+        <div class="payment-method-item">
+            <dt>
+                <?php if (!$oneMethod): ?>
+                    <input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio"
+                           name="payment[method]"
+                           onclick="payment.switchMethod('<?php echo $_code ?>')"<?php if ($this->getSelectedMethodCode() == $_code): ?> checked="checked"<?php endif; ?>
+                           class="radio"/>
+                <?php else: ?>
+                    <span class="no-display"><input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>"
+                                                    type="radio" name="payment[method]" checked="checked"
+                                                    class="radio"/></span>
+                    <?php $oneMethod = $_code; ?>
+                <?php endif; ?>
+                <label for="p_method_<?php echo $_code ?>"><?php echo $this->getMethodTitle($_method) ?><?php echo $this->getMethodLabelAfterHtml($_method) ?></label>
+            </dt>
+        </div>
+        <?php if ($html = $this->getPaymentMethodFormHtml($_method)): ?>
+        <dd>
+            <?php echo $html; ?>
+        </dd>
+    <?php endif; ?>
+        <?php if ($_code == 'omise_gateway'): ?>
+        <div class="tool-tip" id="payment-tool-tip" style="display:none;">
+            <div class="btn-close"><a href="#" id="payment-tool-tip-close"
+                                      title="<?php echo $this->__('Close') ?>"><?php echo $this->__('Close') ?></a>
+            </div>
+            <div class="tool-tip-content"><img src="<?php echo $this->getSkinUrl('images/cvv.gif') ?>"
+                                               alt="<?php echo $this->__('Card Verification Number Visual Reference') ?>"
+                                               title="<?php echo $this->__('Card Verification Number Visual Reference') ?>"/>
+            </div>
+        </div>
+    <?php endif ?>
+    <?php endforeach; ?>
+</dl>
+<?php echo $this->getChildChildHtml('additional'); ?>
+<script type="text/javascript">
+    // jQuery('#checkout-payment-method-load').customRadioCheckbox();
+    //<![CDATA[
+    <?php echo $this->getChildChildHtml('scripts'); ?>
+    payment.init();
+    <?php if (is_string($oneMethod)): ?>
+    payment.switchMethod('<?php echo $oneMethod ?>');
+    <?php endif; ?>
+    //]]>
+</script>
+
+<script type="text/javascript">
+    //<![CDATA[
+    jQuery(document).ready(function () {
+        jQuery("#p_method_<?php echo Mage::getStoreConfig('mastercheckout/maingroup/paymentmethod'); ?>").attr("checked", "checked");
+    });
+
+    var savePaymentMethod = function () {
+        if (checkout.loadWaiting != false) return;
+        var validator = new Validation(this.form);
+        if (this.validate() && validator.validate()) {
+            checkout.setLoadWaiting('payment');
+            var request = new Ajax.Request(
+                this.saveUrl,
+                {
+                    method: 'post',
+                    onComplete: function () {
+                        checkout.setLoadWaiting(false);
+                        document.getElementById('next-step-3').disabled = false;
+                    },
+                    onSuccess: this.onSave,
+                    onFailure: checkout.ajaxFailure.bind(checkout),
+                    parameters: Form.serialize(this.form)
+                }
+            );
+        } else {
+            document.getElementById('next-step-3').disabled = false;
+        }
+    };
+    payment.save = savePaymentMethod;
+    //]]>
+</script>

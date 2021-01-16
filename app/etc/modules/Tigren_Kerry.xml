@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Tigren_Kerry>
+			<active>true</active>
+			<codePool>local</codePool>
+		</Tigren_Kerry>
+	</modules>
+</config> 

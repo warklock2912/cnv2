@@ -1,0 +1,192 @@
+.imageBox
+{
+    position: relative;
+
+    border:1px solid #aaa;
+    background: #fff;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    cursor:move;
+}
+
+.imageBox .thumbBox
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    box-sizing: border-box;
+    border: 1px solid rgb(102, 102, 102);
+    box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5);
+    background: none repeat scroll 0% 0% transparent;
+}
+
+.imageBox .spinner
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    line-height: 400px;
+    background: rgba(0,0,0,0.7);
+}
+
+.image-home-product-item{
+    position: relative;
+    width: 16.5%;
+    padding: 0 15px;
+    margin-bottom: 30px;
+    float: left;
+}
+
+
+.image-home-product-item .label{
+    position: absolute;
+    left: 20px;
+    top: 5px;
+    display: block;
+}
+
+.image-home-product-item a.img{
+    width: 100%;
+    height: auto;
+    border: 1px solid #c0c0c0;
+    padding: 5px;
+}
+
+.image-home-product-item a.product-detail{
+    width: 100%;
+    margin-top: 5px;
+}
+
+.image-home-product-item a.product-detail h4{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    max-height: 48px;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    height: 20px;
+    max-width: 70%;
+    margin: 0 auto;
+}
+
+.image-home-product-item .price-box p{
+    margin-bottom: 0;
+}
+
+.image-home-products{
+    padding-top: 30px;
+}
+.image-home-products .block-title
+{
+    margin-left: 15px;
+    text-align: left !important;
+    margin-bottom: 20px;
+}
+.image-home-products .title
+{
+    display: inline-block;
+    margin: 0;
+    color: #000;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    line-height: 1.2;
+    text-rendering: optimizeLegibility;
+    padding: 0px;
+    margin-right: 10px;
+
+}
+.image-home-products .view-all
+{
+    display: inline-block;
+    text-decoration: underline;
+}
+/* banner home */
+.image-home-banner .block-title
+{
+    margin-left: 10px;
+    text-align: left !important;
+    margin-bottom: 20px;
+}
+.image-home-banner .block-title .title
+{
+    display: inline-block;
+    margin: 0;
+    color: #000;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    line-height: 1.2;
+    text-rendering: optimizeLegibility;
+    padding: 0px;
+    margin-right: 50px;
+}
+.image-home-banner .custom-banner-homepage
+{
+    border: none
+}
+.image-home-banner  .custom-banner-homepage li
+{
+    display: inline-block; max-width: 24%;border: none !important;margin:0 0 10px 10px;
+}
+.image-home-banner  .custom-banner-homepage li .image-description
+{
+    margin-top: 15px;    color: #636363;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.4;
+    text-rendering: optimizeSpeed;
+    text-transform: uppercase;
+}
+@media screen and (max-width: 1025px) and (min-width: 769px) {
+    .image-home-banner  .custom-banner-homepage li
+    {
+         max-width: 23%;margin:0 0 10px 15px;
+    }
+}
+
+@media screen and (max-width: 769px) and (min-width: 601px) {
+    .image-home-banner  .custom-banner-homepage li
+    {
+        display: inline-block; max-width: 45%;border: none !important;margin:0 0 10px 10px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .image-home-banner  .custom-banner-homepage li
+    {
+        display: inline-block; max-width: 95%;border: none !important;margin:0 0 10px 10px;
+    }
+}
+
+
+
+.grid-stack-item:nth-child(9){
+    z-index: 10 !important;
+}
+@media screen and (max-width: 961px) and (min-width: 770px){
+    .image-home-product-item:nth-child(6n+2)
+    {
+       clear: left;
+    }
+}
+
+@media screen and (max-width: 769px) and (min-width: 601px){
+    .image-home-product-item {
+        width: 33.33333%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .image-home-product-item {
+        width: 50%;
+    }
+
+    .image-home-product-item a.product-detail h4 {
+        max-width: 100%;
+    }
+}

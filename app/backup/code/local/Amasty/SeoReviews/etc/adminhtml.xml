@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoReviews
+ */
+-->
+<!--
+    Copyright (c) 2013 Amasty (http://www.amasty.com)
+-->
+<config>
+    <menu>
+        <cms>
+            <children>
+                <amseotoolkit>
+                    <children>
+                        <amseoreviews translate="title" module="amseoreviews">
+                            <title>Reviews</title>
+                            <action>adminhtml/system_config/edit/section/amseoreviews</action>
+                            <sort_order>18</sort_order>
+                        </amseoreviews>
+                    </children>
+                </amseotoolkit>
+            </children>
+        </cms>
+    </menu>
+
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <cms>
+                        <children>
+                            <amseotoolkit>
+                                <children>
+                                    <amseoreviews translate="title" module="amseoreviews">
+                                        <title>Reviews</title>
+                                        <sort_order>18</sort_order>
+                                    </amseoreviews>
+                                </children>
+                            </amseotoolkit>
+                        </children>
+                    </cms>
+
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <amseoreviews translate="title" module="amseoreviews">
+                                        <title>Reviews</title>
+                                    </amseoreviews>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config> 

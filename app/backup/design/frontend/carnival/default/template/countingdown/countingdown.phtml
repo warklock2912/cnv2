@@ -1,0 +1,156 @@
+<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('carnival-upcoming-banner')->toHtml() ?>
+
+<?php
+$check = 0;
+$i = 0;
+$helper = Mage::helper('countingdown');
+$categorys = $helper->getCategorys();
+foreach ($categorys as $category) {
+
+  $_startTimeStamp = Mage::getModel('core/date')->timestamp($helper->getStartTime($category));
+  $products = Mage::getModel('catalog/category')->load($category->getEntityId())
+          ->getProductCollection();
+
+  if ($_startTimeStamp && $products->getSize()) {
+    $i++;
+    $_currentTimestamp = $helper->getCurrentTimestamp();
+    ;
+    $countingup_ = $_startTimeStamp - $_currentTimestamp;
+    ?>
+    <?php if ($countingup_ > 0) { ?>
+
+      <div class="cate-upcoming slider-mobile cate-size<?php echo $products->getSize() ?>" >
+        <div class="upcoming-title">
+          <div>
+            <div class="title">
+              <h3>
+                <?php echo $this->__('Upcoming') ?>
+                <span class="<?php echo $countingup_ . 'days' ?>" ></span>
+                <?php
+                if ($products->getSize() > 1) {
+                  $textItem = ' items';
+                } else {
+                  $textItem = ' item';
+                }
+                ?>
+                <label class="box-mobile2"><?php echo '( ' . $products->getSize() . $textItem . ' )' ?></label>
+              </h3>
+              <p>
+                <?php $_descriptionStripped = $category->getDescription(); ?>
+                <?php
+                if (iconv_strlen($_descriptionStripped, 'UTF-8') > 40) {
+                  $_descriptionStripped = iconv_substr($_descriptionStripped, 0, 40, 'UTF-8');
+                  $_descriptionStripped .= '...';
+                }
+                ?>
+                <?php echo $_descriptionStripped ?>
+              </p>
+            </div>
+            <div class="<?php echo $countingup_ . '_' . $i ?>"></div>
+          </div>
+        </div>
+
+        <ul class="products-grid products-grid--max-5-col first last odd" id="products-grid-<?php echo $countingup_ ?>">
+          <?php
+          foreach ($products as $product) {
+            $productdetail = Mage::getModel('catalog/product')->load($product->getEntityId());
+            $productList = Mage::getBlockSingleton('catalog/product_list');
+
+            $visibility = $productdetail->getVisibility();
+            if ($visibility == 2 || $visibility == 3 || $visibility == 4) {
+              $check = 1;
+              $productMediaConfig = Mage::getModel('catalog/product_media_config');
+              $SmallImageUrl = $productdetail->getSmallImageUrl();
+              $Nameproduct = $productdetail->getName();
+              $Price = $productdetail->getPrice();
+              ?>
+              <li class="item last">
+                <a class="product-image" title="<?php echo $Nameproduct; ?>" href="<?php echo $productdetail->getProductUrl() ?>">
+                  <?php echo Mage::helper('amlabel')->getLabels($productdetail, 'category'); ?>
+                  <img id="product-collection-image-913" src="<?php echo $this->helper('catalog/image')->init($productdetail, 'small_image')->resize(300); ?>" >
+                </a>
+                <div class="product-info">
+                  <div class="info-left">
+                    <?php
+                    if ($productdetail->getData('brands')):
+                      $brandName = $productdetail->getResource()->getAttribute('brands')->getFrontend()->getValue($productdetail);
+                      ?>
+                      <div class="product-brand"><?php echo $brandName; ?></div>
+                    <?php endif; ?>
+
+                    <h2 class="product-name">
+                      <a href="<?php echo $productdetail->getProductUrl() ?>" title="<?php echo $Nameproduct; ?>">
+                        <?php $_productNameStripped = $Nameproduct; ?>
+                        <?php
+                        if (iconv_strlen($_productNameStripped, 'UTF-8') > 20) {
+                          $_productNameStripped = iconv_substr($_productNameStripped, 0, 20, 'UTF-8');
+                          $_productNameStripped .= '...';
+                        }
+                        ?>
+                        <?php echo $_productNameStripped ?>
+                      </a>
+                    </h2>
+
+                  </div>
+                  <div class="info-right">
+                    <?php echo $productList->getPriceHtml($productdetail, true) ?>
+                  </div>
+                </div>
+              </li>
+            <?php } ?>
+            <?php
+          }
+          ?>
+        </ul>
+      </div>
+    <?php } ?>
+    <script type="text/javascript">
+      var clock;
+      var time = <?php echo $countingup_; ?>;
+      var clock;
+      var check = <?php echo $check ?>;
+      if (time > 0 && check == 1) {
+        if (Math.floor(time / 86400) > 1) {
+          var textDay = ' days';
+        } else {
+          var textDay = ' day';
+        }
+        $j(".<?php echo $countingup_ . 'days' ?>").html(Math.floor(time / 86400) + textDay);
+        clock = $j('.<?php echo $countingup_ . '_' . $i ?>').FlipClock({
+          clockFace: 'DailyCounter',
+          autoStart: false,
+          callbacks: {
+            stop: function () {
+              location.reload();
+            }
+          }
+        });
+        clock.setTime(time);
+        clock.setCountdown(true);
+        clock.start();
+      }
+    <?php if ($products->getSize() > 1): ?>
+        if (jQuery(window).width() < 700) {
+          jQuery('#products-grid-<?php echo $countingup_ ?>').bxSlider({
+            pager: false,
+            infiniteLoop: false,
+            hideControlOnEnd: true,
+            controls: true,
+            slideMargin: 10,
+            slideWidth: 200,
+            maxSlides: 2,
+            minSlides: 2
+          });
+        }
+    <?php endif; ?>
+    </script>
+    <?php
+  }
+}
+?>
+<div class="bottom-main">
+  <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('carnival-upcoming-description')->toHtml() ?>
+</div>
+
+
+

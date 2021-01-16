@@ -1,0 +1,11 @@
+.side-col{
+    display: none;
+}
+
+.imagehome-adminhtml-imagehome-edit div.main-col  {
+   margin-left:0px;
+  text-align: center;
+}
+.imagehome-adminhtml-imagehome-edit .columns {
+  background-image:none;
+}

@@ -1,0 +1,29 @@
+<!--@subject Confirm Payment Email@-->
+{{template config_path="design/email/header"}}
+{{inlinecss file="email-inline.css"}}
+<h1>Payment Information</h1>
+{{depend data.order_no}}
+- Order No : {{var data.order_no }} <br><br>
+{{/depend}}
+{{depend data.name}}
+- Name : {{var data.name }} <br><br>
+{{/depend}}
+{{depend data.email}}
+- Email : {{var data.email }}<br><br>
+{{/depend}}
+{{depend data.tel}}
+- Telephone : {{var data.tel }}<br><br>
+{{/depend}}
+{{depend data.amount}}
+- Baht Amount: {{var data.amount }}<br><br>
+{{/depend}}
+{{depend data.bank}}
+- Transferred To Bank: {{var data.bank }}<br><br>
+{{/depend}}
+{{depend data.date}}
+- Date : {{var data.date }}<br><br>
+{{/depend}}
+{{depend data.message}}
+- Message : {{var data.message }}<br><br>
+{{/depend}}
+{{template config_path="design/email/footer"}}

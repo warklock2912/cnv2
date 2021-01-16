@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <mastercheckout translate="label" module="mastercheckout">
+            <label>MagentoMasters</label>
+            <sort_order>301</sort_order>
+        </mastercheckout>
+    </tabs>
+    <sections>
+<!--        <mastercheckout translate="label" module="checkout">
+            <label>Checkout</label>
+            <tab>mastercheckout</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>305</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <options translate="label">
+                    <label>Checkout Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <guest_checkout translate="label">
+                            <label>Allow Guest Checkout</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </guest_checkout>
+                    </fields>
+                </options>
+            </groups>
+        </mastercheckout>-->
+        <mastercheckout translate="label" module="mastercheckout">
+            <label>MasterCheckout</label>
+            <tab>mastercheckout</tab>
+            <sort_order>140</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <maingroup translate="label comment">
+                    <comment><![CDATA[<br />
+                            <div class="box">
+                                    <p>For Documentation, Support, Custom templates contact us at <a href="http://www.magentomasters.com.com">MagentoMasters.com</a></p>
+                            </div>
+                            ]]>
+                    </comment>
+                    <label>General Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+<!--                        <guestcheckout translate="label comment">
+                            <label>Allow guest checkout</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <comment></comment>
+                        </guestcheckout>-->
+
+                        <frontendtitle translate="label comment">
+                            <label>Front-end / Url title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </frontendtitle>
+
+                        <shippingmethod translate="label comment">
+                            <label>Default Shipping method</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_shipping_allmethods</source_model>
+                            <comment></comment>
+                        </shippingmethod>
+
+                        <paymentmethod translate="label comment">
+                            <label>Default Payment Method</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>16</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_payment_allmethods</source_model>
+                            <comment></comment>
+                        </paymentmethod>
+
+                        <country translate="label comment">
+                            <label>Default Country</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <comment></comment>
+                        </country>
+
+                        
+
+<!--                        <commentfield translate="label comment">
+                            <label>Show Comment Field</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>32</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment></comment>
+                        </commentfield>-->
+
+<!--                        <terms translate="label comment">
+                            <label>Enable Terms and Conditions</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>36</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment></comment>
+                        </terms>-->
+
+                    </fields>
+                </maingroup>
+
+                <adressoptions translate="label">
+                    <label>Field options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <shipping_address_form translate="label comment">
+                            <label>Show Shipping Address Form</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment></comment>
+                        </shipping_address_form>
+
+                        <subscribenewsletter translate="label comment">
+                            <label>Show Subscribe To Newsletter Checkbox</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment></comment>
+                        </subscribenewsletter>
+                        <company translate="label">
+                            <label>Show Company Field</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </company>
+                        <region translate="label">
+                            <label>Show Region Field</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </region>
+                        <fax translate="label">
+                            <label>Show Fax Field</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>18</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </fax>
+                    </fields>
+                </adressoptions>
+
+                <shippingbilling translate="label">
+                    <label>Shipping and Billing text</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <billingimg translate="label">
+                            <label>Standard Billing Image</label>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">mastercheckout</upload_dir>
+                            <base_url type="media" scope_info="1">mastercheckout</base_url>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </billingimg>
+
+                        <billingmsg translate="label">
+                            <label>Standard Billing Message</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </billingmsg>
+
+                        <shippingimg translate="label">
+                            <label>Standard Billing Image</label>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">mastercheckout</upload_dir>
+							<base_url type="media" scope_info="1">mastercheckout</base_url>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </shippingimg>
+
+                        <shippingmsg translate="label">
+                            <label>Standard Shipping Message</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </shippingmsg>
+                    </fields>
+                </shippingbilling>
+                <layoutoptions translate="label">
+                    <label>Layout options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <skin translate="label">
+                            <label>Skin (Stylesheet)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mastercheckout/source_style</source_model>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </skin>
+                    </fields>
+                </layoutoptions>
+                <steptitles translate="label">
+                    <label>Step titles</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <step1 translate="label comment">
+                            <label>Step 1 title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </step1>
+                        <step2 translate="label comment">
+                            <label>Step 2 title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </step2>
+                        <step3 translate="label comment">
+                            <label>Step 1 title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>16</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </step3>
+                    </fields>
+                </steptitles>
+            </groups>
+        </mastercheckout>
+    </sections>
+</config>

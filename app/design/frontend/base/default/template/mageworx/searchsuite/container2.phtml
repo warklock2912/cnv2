@@ -1,0 +1,21 @@
+<?php
+/**
+ * MageWorx
+ * Search Suite
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuite
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+$helper = Mage::helper('mageworx_searchsuite');
+?>
+<?php if ($helper->isCmspageSearchEnabled()): ?>
+    <div class="result-container">
+        <?php echo $this->getChildHtml('search_cmspage'); ?>
+    </div>
+<?php endif; ?>
+<?php if ($helper->isCategorySearchEnabled()): ?>
+    <div class="result-container">
+        <?php echo $this->getChildHtml('search_category'); ?>
+    </div>
+<?php endif; ?>

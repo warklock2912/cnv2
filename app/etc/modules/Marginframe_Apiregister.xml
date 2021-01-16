@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Marginframe_Apiregister>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Marginframe_Apiregister>
+    </modules>
+</config>

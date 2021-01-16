@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Crystal_AppUpdate>
+            <version>1.0.0</version>
+        </Crystal_AppUpdate>
+    </modules>
+    <global>
+        <models>
+            <appupdate>
+                <class>Crystal_AppUpdate_Model</class>
+            </appupdate>
+        </models>
+        <helpers>
+            <appupdate>
+                <class>Crystal_AppUpdate_Helper</class>
+            </appupdate>
+        </helpers>
+    </global>
+    <default>
+        <appupdate_options>
+            <Android>
+                <status>0</status>
+            </Android>
+            <Ios>
+                <isactive>0</isactive>
+            </Ios>
+        </appupdate_options>
+    </default>
+</config>

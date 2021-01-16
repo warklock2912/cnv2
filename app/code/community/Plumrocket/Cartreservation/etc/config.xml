@@ -1,0 +1,347 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Plumrocket_Cartreservation>
+			<version>1.8.2</version>
+			<wiki>http://wiki.plumrocket.com/wiki/Magento_Cart_Reservation_Extension_v1.x</wiki>
+		</Plumrocket_Cartreservation>
+	</modules>
+	
+	<frontend>
+		<layout>
+			<updates>
+				<cartreservation>
+					<file>cartreservation.xml</file>
+				</cartreservation>
+			</updates>
+		</layout>
+		<translate>
+            <modules>
+                <Plumrocket_Cartreservation>
+                    <files>
+                        <default>Plumrocket_Cartreservation.csv</default>
+                    </files>
+                </Plumrocket_Cartreservation>
+            </modules>
+        </translate>
+        
+        <routers>
+			<cartreservation>
+				<use>standard</use>
+				<args>
+					<module>Plumrocket_Cartreservation</module>
+					<frontName>cartreservation</frontName>
+				</args>
+			</cartreservation>
+		</routers>
+	</frontend>
+	
+	<global>
+		<helpers>
+			<cartreservation>
+				<class>Plumrocket_Cartreservation_Helper</class>
+			</cartreservation>
+		</helpers>
+		<blocks>
+			<cartreservation>
+				<class>Plumrocket_Cartreservation_Block</class>
+			</cartreservation>
+			<checkout>
+				<rewrite>
+					<cart_item_renderer>Plumrocket_Cartreservation_Block_Checkout_Cart_Item_Renderer</cart_item_renderer>
+					<cart_item_renderer_configurable>Plumrocket_Cartreservation_Block_Checkout_Cart_Item_Renderer_Configurable</cart_item_renderer_configurable>
+					<cart>Plumrocket_Cartreservation_Block_Cart</cart>
+				</rewrite>
+			</checkout>
+			
+			<downloadable>
+				<rewrite>
+					<checkout_cart_item_renderer>Plumrocket_Cartreservation_Block_Checkout_Cart_Item_Renderer_Downloadable</checkout_cart_item_renderer>
+				</rewrite>
+			</downloadable>
+
+			<adminhtml>
+				<rewrite>
+					<sales_order_create_search_grid_renderer_product>Plumrocket_Cartreservation_Block_Adminhtml_Sales_Order_Create_Search_Grid_Renderer_Product</sales_order_create_search_grid_renderer_product>
+				</rewrite>
+			</adminhtml>
+		</blocks>
+		<models>
+			<cartreservation>
+				<class>Plumrocket_Cartreservation_Model</class>
+				<resourceModel>cartreservation_mysql4</resourceModel>
+			</cartreservation>
+			<cartreservation_mysql4>
+				<class>Plumrocket_Cartreservation_Model_Mysql4</class>
+				<entities>
+					<item>
+						<table>cartreservation_item</table>
+					</item>
+					<alias>
+						<table>sales_flat_quote_item</table>
+					</alias>
+					<log>
+						<table>cartreservation_log</table>
+					</log>
+				</entities>
+			</cartreservation_mysql4>
+			<cataloginventory>
+				<rewrite>
+					<stock_item>Plumrocket_Cartreservation_Model_Override_CatalogInventory_Stock_Item</stock_item>
+					<api_stock_item>Plumrocket_Cartreservation_Model_Override_CatalogInventory_Api_Stock_Item</api_stock_item>
+				</rewrite>
+			</cataloginventory>
+			<checkout>
+				<rewrite>
+					<session>Plumrocket_Cartreservation_Model_Override_Checkout_Session</session>
+				</rewrite>
+			</checkout>
+		</models>
+		
+		<resources>
+			<cartreservation_setup>
+				<setup>
+					<module>Plumrocket_Cartreservation</module>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</cartreservation_setup>
+			<cartreservation_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</cartreservation_write>
+			<cartreservation_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</cartreservation_read>
+		</resources>	 
+		
+		<events>
+			<!-- When the Cart has been saved, all operations -->
+			<checkout_cart_save_after>
+				<observers>
+					<plumrocket_cartreservation>
+						<class>cartreservation/observer</class>
+						<method>mergeCart</method>
+					</plumrocket_cartreservation>
+				</observers>
+			</checkout_cart_save_after>
+
+
+			<sales_quote_item_delete_before>
+				<observers>
+					<plumrocket_cartreservation>
+						<class>cartreservation/observer</class>
+						<method>cleanCache</method>
+					</plumrocket_cartreservation>
+				</observers>
+			</sales_quote_item_delete_before>
+
+			<sales_quote_item_save_before>
+				<observers>
+					<plumrocket_cartreservation>
+						<class>cartreservation/observer</class>
+						<method>cleanCache</method>
+					</plumrocket_cartreservation>
+				</observers>
+			</sales_quote_item_save_before>
+
+			<sales_quote_remove_item>
+				<observers>
+					<plumrocket_cartreservation>
+						<class>cartreservation/observer</class>
+						<method>cleanCache</method>
+					</plumrocket_cartreservation>
+				</observers>
+			</sales_quote_remove_item>
+			
+			<!-- Order create -->
+			<!--
+			<checkout_submit_all_after>
+				<observers>
+					<plumrocket_cartreservation>
+						<class>cartreservation/observer</class>
+						<method>orderSave</method>
+					</plumrocket_cartreservation>
+				</observers>
+			</checkout_submit_all_after>
+			-->
+
+			<checkout_type_onepage_save_order>
+				<observers>
+					<plumrocket_cartreservation>
+						<class>cartreservation/observer</class>
+						<method>beforeOrderSave</method>
+					</plumrocket_cartreservation>
+				</observers>
+			</checkout_type_onepage_save_order>
+			
+			<sales_model_service_quote_submit_after>
+				<observers>
+					<plumrocket_cartreservation>
+						<class>cartreservation/observer</class>
+						<method>orderSave</method>
+					</plumrocket_cartreservation>
+				</observers>
+			</sales_model_service_quote_submit_after>
+			
+			<!-- Remove items for customer each request -->
+			<controller_action_predispatch>
+				<observers>
+					<plumrocket_cartreservation>
+						<class>cartreservation/observer</class>
+						<method>removeLostReserveItemsForCustomer</method>
+					</plumrocket_cartreservation>
+				</observers>
+			</controller_action_predispatch>
+			
+			<!-- Check salable -->
+			<catalog_product_collection_load_after>
+				<observers>
+					<plumrocket_cartreservation>
+						<class>cartreservation/observer</class>
+						<method>productsAreSalable</method>
+					</plumrocket_cartreservation>
+				</observers>
+			</catalog_product_collection_load_after>
+			
+			<catalog_product_load_after>
+				<observers>
+					<plumrocket_cartreservation>
+						<class>cartreservation/observer</class>
+						<method>productIsSalable</method>
+					</plumrocket_cartreservation>
+				</observers>
+			</catalog_product_load_after>
+			<!-- Adminhtml observers -->
+
+			<create_order_session_quote_initialized>
+				<observers>
+					<plumrocket_cartreservation>
+						<class>cartreservation/observer</class>
+						<method>initAdminSession</method>
+					</plumrocket_cartreservation>
+				</observers>
+			</create_order_session_quote_initialized>
+
+			<adminhtml_sales_order_create_process_data>
+				<observers>
+					<plumrocket_cartreservation>
+						<class>cartreservation/observer</class>
+						<method>mergeCartSales</method>
+					</plumrocket_cartreservation>
+				</observers>
+			</adminhtml_sales_order_create_process_data>
+
+			<controller_action_postdispatch_adminhtml_customer_cart>
+				<observers>
+					<plumrocket_cartreservation>
+						<class>cartreservation/observer</class>
+						<method>deleteCartItemFromAdmin</method>
+					</plumrocket_cartreservation>
+				</observers>
+			</controller_action_postdispatch_adminhtml_customer_cart>
+
+			<!-- Enterprise adminhtml observers -->
+			<controller_action_postdispatch_adminhtml>
+				<observers>
+					<plumrocket_cartreservation>
+						<class>cartreservation/observer</class>
+						<method>mergeEnterpriseCustomerCart</method>
+					</plumrocket_cartreservation>
+				</observers>
+			</controller_action_postdispatch_adminhtml>
+		</events>
+
+		<template>
+            <email>
+                <cartreservation_reminders_email_template translate="label" module="cartreservation">
+                    <label>Cartreservation Expiration Email</label>
+                    <file>cartreservation_expiration_email.html</file>
+                    <type>html</type>
+                </cartreservation_reminders_email_template>
+            </email>
+        </template>
+	</global> 
+
+	<adminhtml>
+        <translate>
+            <modules>
+                <Plumrocket_Cartreservation>
+                    <files>
+                        <default>Plumrocket_Cartreservation.csv</default>
+                    </files>
+                </Plumrocket_Cartreservation>
+            </modules>
+        </translate>
+
+        <layout>
+			<updates>
+				<cartreservation>
+					<file>cartreservation.xml</file>
+				</cartreservation>
+			</updates>
+		</layout>
+    </adminhtml>
+	
+	<crontab>
+		<jobs>            
+			<plumrocket_cartreservation>
+				<schedule><cron_expr>*/15 * * * *</cron_expr></schedule>
+				<run><model>cartreservation/cron::removeLostReserveItems</model></run>
+			</plumrocket_cartreservation>
+
+			<plumrocket_cartreservation_email>
+				<schedule><cron_expr>*/3 * * * *</cron_expr></schedule>
+				<run><model>cartreservation/cron::sendEmails</model></run>
+			</plumrocket_cartreservation_email>
+		</jobs>
+	</crontab>
+	
+	<default>
+		<cartreservation>
+			<general>
+				<enable>0</enable>
+				<visibility>0</visibility>
+				<type>2</type>
+			</general>
+			<cart>
+				<type>1</type>
+				<after_end>1</after_end>
+				<time>0,0,10,0</time>
+			</cart>
+			<checkout>
+				<time>0,0,15,0</time>
+				<timer_behavior>1</timer_behavior>
+				<timer_display>1</timer_display>
+			</checkout>
+			<reminders_alert>
+				<show>0</show>
+				<time>0,0,2,0</time>
+				<template><![CDATA[<p><strong style="font-size: 18px; font-weight: 400;">Your Shopping Cart Items Will Expire Soon</strong><br /> <br />Your shopping cart reservation will expire soon and your product(s) will become available to other store members immediately</p>
+<p>Please complete your order ASAP before it's too late!<br /> <br /> Your shopping cart contents: <br /> {{var product_list}}</p>]]>
+				</template>
+				<template_default><![CDATA[<p><strong style="font-size: 18px; font-weight: 400;">Your Shopping Cart Items Will Expire Soon</strong><br /> <br />Your shopping cart reservation will expire soon and your product(s) will become available to other store members immediately</p>
+<p>Please complete your order ASAP before it's too late!<br /> <br /> Your shopping cart contents: <br /> {{var product_list}}</p>]]>
+				</template_default>
+			</reminders_alert>
+			<reminders_email>
+                <send>0</send>
+				<template>cartreservation_reminders_email_template</template>
+                <sender_identity>custom1</sender_identity>
+                <time>0,0,5,0</time>
+			</reminders_email>
+			<format>
+				<format>Time Remaining: {hnn} {hl} {mnn}:{snn} {ml}</format>
+				<product_timer_show>1</product_timer_show>
+				<product_timer_format>Product will become available in: {hnn} {hl} {mnn}:{snn} {ml}</product_timer_format>
+			</format>
+			<log>
+				<enable>0</enable>
+			</log>
+		</cartreservation>
+	</default>
+</config> 

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+	<config>
+		<acl>
+			<resources>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<reservation_after_checkout translate="title" module="reservationaftercheckout">
+											<title>Reservation after Checkout Section</title>
+											<sort_order>1760</sort_order>
+										</reservation_after_checkout>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+	</config>

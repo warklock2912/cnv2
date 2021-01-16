@@ -1,0 +1,35 @@
+<?php
+
+/*
+
+Plumrocket Inc.
+
+NOTICE OF LICENSE
+
+This source file is subject to the End-user License Agreement
+that is available through the world-wide-web at this URL:
+http://wiki.plumrocket.net/wiki/EULA
+If you are unable to obtain it through the world-wide-web, please
+send an email to support@plumrocket.com so we can send you a copy immediately.
+
+@package    Plumrocket_Cart_Reservation-v1.5.x
+@copyright  Copyright (c) 2013 Plumrocket Inc. (http://www.plumrocket.com)
+@license    http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ 
+*/
+?>
+<div style="display: none;" class="animated" id="cartreservation_popup">
+	<div class="holder animated fadeInDownBig">
+		<div id="cartreservation_popup_close" class="cartreservation_popup_close"></div>
+		<?php echo $this->getHtml(); ?>
+		<br />
+		<div class="r">
+			<button type="button" title="Proceed to Checkout" class="button btn-cart btn-checkout" onclick="window.location='<?php echo $this->getUrl('checkout/cart'); ?>';">
+				<span>
+					<span><?php echo $this->__('Proceed to Checkout') ?></span>
+				</span>
+			</button>
+			<a href="javascript:void(0)" class="cartreservation_popup_close">&larr; <?php echo $this->__('Continue Shopping') ?></a>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Plumrocket_Reservationaftercheckout>
+			<version>1.0.1</version>
+		</Plumrocket_Reservationaftercheckout>
+	</modules>
+	<global>
+		<helpers>
+			<reservationaftercheckout>
+				<class>Plumrocket_Reservationaftercheckout_Helper</class>
+			</reservationaftercheckout>
+		</helpers>
+
+		<models>
+			<reservationaftercheckout>
+				<class>Plumrocket_Reservationaftercheckout_Model</class>
+				<resourceModel>reservationaftercheckout_mysql4</resourceModel>
+			</reservationaftercheckout>
+		</models>
+
+		<resources>
+			<reservationaftercheckout_setup>
+				<setup>
+					<module>Plumrocket_Reservationaftercheckout</module>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</reservationaftercheckout_setup>
+			<reservationaftercheckout_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</reservationaftercheckout_write>
+			<reservationaftercheckout_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</reservationaftercheckout_read>
+		</resources>
+
+		<events>
+			<sales_order_save_after>
+				<observers>
+					<plumrocket_reservationaftercheckout>
+						<class>reservationaftercheckout/observer</class>
+						<method>saveOrder</method>
+					</plumrocket_reservationaftercheckout>
+				</observers>
+			</sales_order_save_after>
+
+			<sales_order_invoice_register>
+				<observers>
+					<plumrocket_reservationaftercheckout>
+						<class>reservationaftercheckout/observer</class>
+						<method>createInvoice</method>
+					</plumrocket_reservationaftercheckout>
+				</observers>
+			</sales_order_invoice_register>
+		</events>
+	</global>    
+	<crontab>
+		<jobs>            
+			<reservationaftercheckout_checkorders>
+				<schedule><cron_expr>*/5 * * * *</cron_expr></schedule>
+				<run><model>reservationaftercheckout/cron::checkOrders</model></run>
+			</reservationaftercheckout_checkorders>
+		</jobs>
+	</crontab>
+
+	<default>
+		<reservation_after_checkout>
+			<general>
+				<enable>0</enable>
+				<time>3,0,0,0</time>
+			</general>
+		</reservation_after_checkout>
+	</default>
+</config> 

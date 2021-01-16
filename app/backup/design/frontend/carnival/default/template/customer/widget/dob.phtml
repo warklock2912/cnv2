@@ -1,0 +1,158 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+USAGE:
+
+Simple:
+
+<?php echo $this->getLayout()->createBlock('customer/widget_dob')
+->setDate($this->getCustomer()->getDob())
+->toHtml() ?>
+
+For checkout/onepage/billing.phtml:
+
+<?php echo $this->getLayout()->createBlock('customer/widget_dob')
+->setDate($this->getCustomer()->getDob())
+->setFieldIdFormat('billing:%s')
+->setFieldNameFormat('billing[%s]')
+->toHtml() ?>
+
+NOTE: Regarding styles - if we leave it this way, we'll move it to boxes.css
+Alternatively we could calculate widths automatically using block input parameters.
+ */
+
+/**
+ * @see Mage_Customer_Block_Widget_Dob
+ */
+?>
+<label for="<?php echo $this->getFieldId('month')?>"<?php if ($this->isRequired()) echo ' class="required"' ?>><?php if ($this->isRequired()) echo '<em>*</em>' ?><?php echo Mage::helper('catalog')->__('Birthday'); ?></label>
+<div class="input-box customer-dob">
+  <div class="dob-select">
+    <div class="box-select styled-select"  style="width:70px;">
+      <select name="nday" id="nday" onchange="getElementById('<?php echo $this->getFieldId('day');?>').value=this.value">
+        <option  value=""><label><?php echo $this->__('DD') ?></label></option>
+        <?php
+        for($i=1;$i<=31;$i++)
+        {
+          if($i == $this->getDay()){
+            echo "<option value='".$i."' selected='selected'>".$i."</option>";
+          }
+          else{
+            echo "<option value='".$i."'>".$i."</option>";
+          }
+        }
+        ?>
+      </select>
+    </div>
+    <div class="box-select styled-select"  style="width:128px;">
+      <select name="nmon" id="nmon" onchange="getElementById('<?php echo $this->getFieldId('month');?>').value=this.value">
+        <option value=''><?php echo $this->__('MM') ?></option>
+        <?php
+        for($m=1;$m<=12;$m++){
+          if($m == 1){ $mshow = Mage::helper('catalog')->__("January");}
+          if($m == 2){ $mshow = Mage::helper('catalog')->__("February");}
+          if($m == 3){ $mshow = Mage::helper('catalog')->__("March");}
+          if($m == 4){ $mshow = Mage::helper('catalog')->__("April");}
+          if($m == 5){ $mshow = Mage::helper('catalog')->__("May");}
+          if($m == 6){ $mshow = Mage::helper('catalog')->__("June");}
+          if($m == 7){ $mshow = Mage::helper('catalog')->__("July");}
+          if($m == 8){ $mshow = Mage::helper('catalog')->__("August");}
+          if($m == 9){ $mshow = Mage::helper('catalog')->__("September");}
+          if($m == 10){ $mshow = Mage::helper('catalog')->__("October");}
+          if($m == 11){ $mshow = Mage::helper('catalog')->__("November");}
+          if($m == 12){ $mshow = Mage::helper('catalog')->__("December");}
+          if($m == $this->getMonth()){ echo "<option value='".$m."' selected='selected'>".$mshow."</option>";
+          }
+          else{
+            echo "<option value='".$m."'>".$mshow."</option>";
+          }
+        }
+        ?>
+      </select>
+    </div>
+    <div class="box-select styled-select"  style="width:105px;">
+      <select name="nyear" id="nyear" onchange="getElementById('<?php echo $this->getFieldId('year');?>').value=this.value">
+        <option value=""><?php echo $this->__('YYYY') ?></option>
+        <?php
+        $year = date('Y');
+        $isTH = false;
+        if(Mage::app()->getLocale()->getLocaleCode() == 'th_TH'){
+          $isTH = true;
+        }
+        for($j=$year;$j>= $year-100;$j--) {
+          $txt = $j;
+          if($isTH){
+            $txt = $j + 543;
+          }
+          if($j == $this->getYear()){
+            echo "<option value='".$j."' selected='selected'>".$txt."</option>";
+          }
+          else{
+            echo "<option value='".$j."'>".$txt."</option>";
+          }
+        }
+        ?>
+      </select>
+    </div>
+    <div>
+
+      <?php
+      $this->setDateInput('d',
+        '<div class="dob-day dob">
+                     <input type="hidden" id="' . $this->getFieldId('day') . '" name="' . $this->getFieldName('day') . '" value="' . $this->getDay() . '" title="' . $this->__('Day') . '" class="input-text validate-custom" ' . $this->getFieldParams() . '  />
+                 </div>'
+      );
+
+      $this->setDateInput('m',
+        '<div class="dob-month dob">
+                     <input type="hidden" id="' . $this->getFieldId('month') . '" name="' . $this->getFieldName('month') . '" value="' . $this->getMonth()  . '" title="' . $this->__('Month')  . '" class="input-text validate-custom" ' . $this->getFieldParams()  . '/>
+                 </div>'
+      );
+
+      $this->setDateInput('y',
+        '<div class="dob-year dob">
+                     <input type="hidden" id="' . $this->getFieldId('year') . '" name="' . $this->getFieldName('year') . '" value="' . $this->getYear()  . '" title="' . $this->__('Year')  . '" class="input-text validate-custom" ' . $this->getFieldParams()  . ' />
+                 </div>'
+      );
+
+      ?>
+
+      <?php echo $this->getSortedDateInputs() ?>
+      <div class="dob-full" style="display:none;">
+        <input type="hidden" id="<?php echo $this->getFieldId('dob')?>" name="<?php echo $this->getFieldName('dob')?>" />
+      </div>
+
+      <div class="validation-advice" style="display:none;"></div>
+    </div>
+    <div style="clear:both"></div>
+  </div>
+  <script type="text/javascript">
+    //<![CDATA[
+    var customer_dob = new Varien.DOB('.customer-dob', <?php echo $this->isRequired() ? 'true' : 'false' ?>, '<?php echo $this->getDateFormat() ?>');
+    //]]>
+  </script>
+</div>

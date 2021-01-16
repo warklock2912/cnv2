@@ -1,0 +1,73 @@
+<?php
+$data = $this->getValuesData();
+?>
+<style type="text/css">
+  .cp_submit_form td{
+    padding-right:50px;
+    padding-top: 11px;
+  }
+  .column-title {
+    font-size: 20px;
+  }
+  .cp_submit_form {
+    margin-top: 20px;
+  }
+  .select-status {
+    padding-left: 20px;
+    margin-left: 80px;
+  }
+</style>
+<div class="cp-wrap">
+  <div class="content-header">
+    <table cellspacing="0" >
+      <tr>
+        <td style="width:50%;"><h3 class="icon-head head-products"><?php echo Mage::helper('catalog')->__('Submited Data') ?></h3></td>
+        <td class="a-right">
+          <?php echo $this->getButtonsHtml() ?>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <table class="cp_submit_form">
+    <tr>
+      <th class="column-title "><?php echo $this->__('Field') ?></th>
+      <th class="column-title "><?php echo $this->__('Value') ?></th>
+    </tr>
+    <?php $pathMedia = Mage::getBaseUrl('media') . 'confirmpayment/'; ?>
+    <?php $_extensImage = array('jpg', 'png', 'gif'); ?>
+    <?php foreach ($data as $key => $value) {
+      ?>
+      <tr>
+        <?php if ($value && $key != 'status') : ?>
+          <td><?php echo strtoupper($key) ?></td>
+          <?php if ($key == 'attachment') : ?>
+            <td>
+              <?php $extensions = explode('.', $value); ?>
+              <?php if (in_array($extensions[count($extensions) - 1], $_extensImage)): ?>
+                <a download="<?php echo $value ?>" href="<?php echo $pathMedia . $value ?>"><img src="<?php echo $pathMedia . $value ?>" width="100px" ></a>
+              <?php else : ?>
+                <a href="<?php echo $pathMedia . $value ?>" target="_blank"><?php echo $value ?></a>
+              <?php endif; ?>
+            </td>
+          <?php else : ?>
+            <td><?php echo $value ?></td>
+          <?php endif; ?>
+        <?php endif; ?>
+      </tr>
+    <?php } ?>
+  </table>
+
+  <?php $status = $data['status'] ?>
+  <form id="editForm" action="<?php echo $this->getUrl('*/confirmpayment/changeStatus', array('id' => $this->getRequest()->getParam('id')))
+  ?> "  method="post" >
+    <div class="cp-status" >
+      <label ><?php echo $this->__('STATUS') ?></label>
+      <select class="select-status" name="cp-stt">
+        <option value="1" <?php echo ($status == 1) ? 'selected' : '' ?>><?php echo $this->__('New') ?></option>
+        <option value="2" <?php echo ($status == 2) ? 'selected' : '' ?>><?php echo $this->__('Complete') ?></option>
+      </select>
+    </div>
+    <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+    <!--<button type="submit"><?php // echo $this->__('Change Status')  ?></button>-->
+  </form>
+</div>

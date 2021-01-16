@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Payrestriction
+ */
+--> 
+<!--
+    Copyright (c) 2009-2012 Amasty (http://www.amasty.com) 
+-->
+<config>
+        <menu>
+            <sales>
+                <children>
+                    <ampayrestriction translate="title" module="ampayrestriction">
+                        <title>Payment Restrictions</title>
+                        <sort_order>800</sort_order>
+                        <action>adminhtml/ampayrestriction_rule/index</action>
+                    </ampayrestriction>
+                </children>
+            </sales>
+        </menu> 
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <sales>
+                            <children>
+                                <ampayrestriction>
+                                    <title>Payment Restrictions</title>
+                                </ampayrestriction>
+                            </children>
+                        </sales> 
+                    </children>
+                </admin> 
+            </resources>
+        </acl>
+        <translate>
+            <modules>
+                <Amasty_Payrestriction>
+                    <files>
+                        <default>Amasty_Payrestriction.csv</default>
+                    </files>
+                </Amasty_Payrestriction>
+            </modules>
+        </translate> 	
+</config> 

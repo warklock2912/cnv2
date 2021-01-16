@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<mastercheckout_index_index>
+        <reference name='head'>
+            <block type='core/template' template="omise/js.phtml" />
+        </reference>
+        
+		<reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/omise/jquery.creditCardValidator.js</name></action>
+            <action method="addCss">
+                <stylesheet>css/omise/ccomise.css</stylesheet>
+            </action>
+        </reference>
+        
+	</mastercheckout_index_index>
+</layout>

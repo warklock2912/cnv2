@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Mage_P2c2p>
+      <active>true</active>
+      <codePool>local</codePool>       
+      <depends>
+        <Mage_Payment />
+      </depends>
+    </Mage_P2c2p>
+    <Mage_P2c2predirect>
+      <active>true</active>
+      <codePool>local</codePool>
+      <depends>
+        <Mage_Payment />
+      </depends>
+    </Mage_P2c2predirect>
+  </modules>
+</config>

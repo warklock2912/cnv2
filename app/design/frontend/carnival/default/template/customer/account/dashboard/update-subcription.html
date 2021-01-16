@@ -1,0 +1,11 @@
+<?php if ($this->getIsSubscribed()): ?>
+  <div class="control">
+    <input onclick="savesubscribe(this)" type="checkbox" name="is_subscribed" id="subscription" value="0" title="General Subscription" checked="checked" class="checkbox" />
+    <label id="label-subscribed" for="subscription"><?php echo $this->__("You are currently subscribed to 'General Subscription'.") ?></label>
+  </div>
+<?php else: ?>
+    <div class="control">
+    <input onclick="savesubscribe(this)" type="checkbox" name="is_subscribed" id="subscription" value="1" title="General Subscription" class="checkbox" />
+    <label id="label-unubscribed"  for="subscription"><?php echo $this->__("You are currently not subscribed to any newsletter.") ?></label>
+  </div>
+<?php endif; ?>

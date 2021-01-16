@@ -1,0 +1,86 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div class="block block-subscribe">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Sign up to our newsletter') ?></span></strong>
+        <label><?php echo $this->__('For all our latest promotions') ?></label>
+    </div>
+    <form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail">
+        <div class="block-content">
+            <div class="input-box">
+                <input  autocapitalize="off" autocorrect="off"  spellcheck="false" name="email" id="subscriber_email" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Sign up for our newsletter')) ?>" placeholder="<?php echo $this->__('Enter your email') ?>" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?php echo $this->__('Enter your email') ?>'" class="input-text" />
+            </div>
+            <button id="newsletter-subscribe-btn"  type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Subscribe')) ?>" class="button"><span><span><?php echo $this->__('Subscribe') ?></span></span></button>
+        </div>
+    </form>
+    <div id="message-save-newsletter">
+    </div>
+    <script type="text/javascript">
+        //<![CDATA[
+
+
+        document.getElementById("subscriber_email")
+                .addEventListener("keypress", function (event) {
+                    if (event.keyCode == 13) {
+                        document.getElementById("newsletter-subscribe-btn").click();
+                     event.preventDefault();
+                    }
+                }, false);
+
+        $('newsletter-subscribe-btn').observe('click', function () {
+            var url = '<?php echo Mage::getUrl('myaccount/index/newsLetterSubmit'); ?>'
+            var email = $j('#subscriber_email').val();
+            new Ajax.Request(url, {
+                parameters: {
+                    email: email
+                },
+                onCreate: function () {
+                    AmAjaxLoginObj.showAnimation();
+                },
+                onComplete: function (transport) {
+
+                    var response = transport.responseText.evalJSON();
+                    if (response.success == 'success') {
+                        $j('#message-save-newsletter').html(response.message);
+                        $j('#subscriber_email').val('');
+                    } else {
+                        $j('#message-save-newsletter').html(response.message);
+                    }
+                    $j('advice-required-entry-newsletter').hide();
+                    AmAjaxLoginObj.hideAnimation();
+                    $j("ul.messages").click(function () {
+                        $j(this).fadeOut("normal", function () {
+                            $j(this).remove();
+                        });
+                    });
+                }
+            });
+        });
+
+        //]]>
+    </script>
+</div>

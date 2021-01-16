@@ -1,0 +1,146 @@
+<?php
+
+/*
+
+Plumrocket Inc.
+
+NOTICE OF LICENSE
+
+This source file is subject to the End-user License Agreement
+that is available through the world-wide-web at this URL:
+http://wiki.plumrocket.net/wiki/EULA
+If you are unable to obtain it through the world-wide-web, please
+send an email to support@plumrocket.com so we can send you a copy immediately.
+
+@package    Plumrocket_Cart_Reservation-v1.5.x
+@copyright  Copyright (c) 2013 Plumrocket Inc. (http://www.plumrocket.com)
+@license    http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ 
+*/
+?>
+<?php
+$_item = $this->getItem();
+$isVisibleProduct = $_item->getProduct()->isVisibleInSiteVisibility();
+$canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage_Catalog_Model_Product_Attribute_Source_Msrp_Type::TYPE_BEFORE_ORDER_CONFIRM);
+?>
+<tr<?php if ($_item->getExpireReminderTime()) { ?> class="expire-soon-row"<?php } ?>>
+    <td align="center" valign="middle" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC; <?php if ($_item->getExpireReminderTime()) { ?> background-color:#FFEDED; <?php } ?>">
+        <?php if ($_item->getExpireReminderTime()) { ?>
+            <img src="<?php echo $this->getSkinUrl('images/plumrocket/cartreservation/clockt-expire-soon.png');?>" alt="clock" class="expire-soon">
+        <?php } else { ?>
+            &nbsp;&nbsp;
+        <?php } ?>
+    </td>
+    
+    <td align="left" valign="middle" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC; <?php if ($_item->getExpireReminderTime()) { ?> background-color:#FFEDED; <?php } ?>">
+    	<?php if ($this->hasProductUrl()):?>
+    		<a href="<?php echo $this->getProductUrl() ?>" title="<?php echo $this->htmlEscape($this->getProductName()) ?>" class="product-image">
+    	<?php endif;?>
+    	<img src="<?php echo $this->getProductThumbnail()->resize(75); ?>" width="75" height="75" alt="<?php echo $this->htmlEscape($this->getProductName()) ?>" />
+    	<?php if ($this->hasProductUrl()):?>
+    		</a>
+    	<?php endif;?>
+    </td>
+
+    <td align="left" valign="middle" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC; <?php if ($_item->getExpireReminderTime()) { ?> background-color:#FFEDED; <?php } ?>">
+        <strong style="font-size:11px;"><?php echo $this->htmlEscape($_item->getName()) ?></strong>
+
+        <?php if ($_options = $this->getOptionList()):?>
+        <dl style="margin:0; padding:0;">
+            <?php foreach ($_options as $option): 
+            if (strpos($option['label'], '||reserved::') !== false) {
+				continue;
+			}
+            ?>
+            <dt><strong><em><?php echo $option['label'] ?></em></strong></dt>
+            <dd style="margin:0; padding:0 0 0 9px;">
+                <?php echo (isset($option['print_value']) ? $option['print_value'] : nl2br($this->escapeHtml($option['value']))) ?>
+            </dd>
+            <?php endforeach; ?>
+        </dl>
+        <?php endif; ?>
+        <?php if ($addtInfoBlock = $this->getProductAdditionalInformationBlock()):?>
+            <?php echo $addtInfoBlock->setItem($_item)->toHtml() ?>
+        <?php endif;?>
+    </td>
+
+    <td align="left" valign="middle" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC; <?php if ($_item->getExpireReminderTime()) { ?> background-color:#FFEDED; <?php } ?>"><?php echo $this->htmlEscape($_item->getSku()) ?></td>
+
+    <td align="center" valign="middle" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC; <?php if ($_item->getExpireReminderTime()) { ?> background-color:#FFEDED; <?php } ?>"><?php echo $_item->getQty()*1 ?></td>
+
+	<td align="right" valign="middle" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC; <?php if ($_item->getExpireReminderTime()) { ?> background-color:#FFEDED; <?php } ?>">
+		<?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+			<?php if ($this->helper('tax')->displayCartBothPrices()): ?>
+				<span class="label"><?php echo Mage::helper('tax')->__('Excl. Tax'); ?>:</span>
+			<?php endif; ?>
+			<?php if (Mage::helper('weee')->typeOfDisplay($_item, array(0, 1, 4), 'email')): ?>
+				<?php echo $this->helper('checkout')->formatPrice($_item->getRowTotal()+$_item->getWeeeTaxAppliedRowAmount()+$_item->getWeeeTaxRowDisposition()); ?>
+			<?php else: ?>
+				<?php echo $this->helper('checkout')->formatPrice($_item->getRowTotal()) ?>
+			<?php endif; ?>
+
+
+			<?php if (Mage::helper('weee')->getApplied($_item)): ?>
+				<br />
+				<?php if (Mage::helper('weee')->typeOfDisplay($_item, 1, 'email')): ?>
+					<small>
+					<?php foreach (Mage::helper('weee')->getApplied($_item) as $tax): ?>
+						<span class="nobr"><?php echo $tax['title']; ?>: <?php echo Mage::helper('checkout')->formatPrice($tax['row_amount'],true,true); ?></span><br />
+					<?php endforeach; ?>
+					</small>
+				<?php elseif (Mage::helper('weee')->typeOfDisplay($_item, 2, 'email')): ?>
+					<?php foreach (Mage::helper('weee')->getApplied($_item) as $tax): ?>
+						<span class="nobr"><small><?php echo $tax['title']; ?>: <?php echo Mage::helper('checkout')->formatPrice($tax['row_amount_incl_tax'],true,true); ?></small></span><br />
+					<?php endforeach; ?>
+				<?php elseif (Mage::helper('weee')->typeOfDisplay($_item, 4, 'email')): ?>
+					<small>
+					<?php foreach (Mage::helper('weee')->getApplied($_item) as $tax): ?>
+						<span class="nobr"><?php echo $tax['title']; ?>: <?php echo Mage::helper('checkout')->formatPrice($tax['row_amount_incl_tax'],true,true); ?></span><br />
+					<?php endforeach; ?>
+					</small>
+				<?php endif; ?>
+
+				<?php if (Mage::helper('weee')->typeOfDisplay($_item, 2, 'email')): ?>
+					<br />
+					<span class="nobr"><?php echo Mage::helper('weee')->__('Total'); ?>:<br /> <?php echo $this->helper('checkout')->formatPrice($_item->getCalculationPrice()+$_item->getWeeeTaxAppliedRowAmount()+$_item->getWeeeTaxRowDisposition()); ?></span>
+				<?php endif; ?>
+			<?php endif; ?>
+		<?php endif; ?>
+
+		<?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+			<?php if ($this->helper('tax')->displayCartBothPrices()): ?>
+				<br /><span class="label"><?php echo Mage::helper('tax')->__('Incl. Tax'); ?>:</span>
+			<?php endif; ?>
+			<?php $_incl = $this->helper('checkout')->getSubtotalInclTax($_item); ?>
+			<?php if (Mage::helper('weee')->typeOfDisplay($_item, array(0, 1, 4), 'email')): ?>
+				<?php echo $this->helper('checkout')->formatPrice($_incl+$_item->getWeeeTaxAppliedRowAmount()); ?>
+			<?php else: ?>
+				<?php echo $this->helper('checkout')->formatPrice($_incl-$_item->getWeeeTaxRowDisposition()) ?>
+			<?php endif; ?>
+			<?php if (Mage::helper('weee')->getApplied($_item)): ?>
+				<br />
+				<?php if (Mage::helper('weee')->typeOfDisplay($_item, 1, 'email')): ?>
+					<small>
+					<?php foreach (Mage::helper('weee')->getApplied($_item) as $tax): ?>
+						<span class="nobr"><?php echo $tax['title']; ?>: <?php echo Mage::helper('checkout')->formatPrice($tax['row_amount'],true,true); ?></span><br />
+					<?php endforeach; ?>
+					</small>
+				<?php elseif (Mage::helper('weee')->typeOfDisplay($_item, 2, 'email')): ?>
+					<?php foreach (Mage::helper('weee')->getApplied($_item) as $tax): ?>
+						<span class="nobr"><small><?php echo $tax['title']; ?>: <?php echo Mage::helper('checkout')->formatPrice($tax['row_amount_incl_tax'],true,true); ?></small></span><br />
+					<?php endforeach; ?>
+				<?php elseif (Mage::helper('weee')->typeOfDisplay($_item, 4, 'email')): ?>
+					<small>
+					<?php foreach (Mage::helper('weee')->getApplied($_item) as $tax): ?>
+						<span class="nobr"><?php echo $tax['title']; ?>: <?php echo Mage::helper('checkout')->formatPrice($tax['row_amount_incl_tax'],true,true); ?></span><br />
+					<?php endforeach; ?>
+					</small>
+				<?php endif; ?>
+
+				<?php if (Mage::helper('weee')->typeOfDisplay($_item, 2, 'email')): ?>
+					<span class="nobr"><?php echo Mage::helper('weee')->__('Total incl. tax'); ?>:<br /> <?php echo $this->helper('checkout')->formatPrice($_incl+$_item->getWeeeTaxAppliedRowAmount()); ?></span>
+				<?php endif; ?>
+			<?php endif; ?>
+		<?php endif; ?>
+	</td>
+</tr>

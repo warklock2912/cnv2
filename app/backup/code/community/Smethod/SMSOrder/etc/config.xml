@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Smethod_SMSOrder>
+            <version>0.1.0</version>
+        </Smethod_SMSOrder>
+    </modules>
+
+    <crontab>
+    	<jobs>
+    		<sms_send_order>
+                <schedule><cron_expr>*/10 * * * *</cron_expr></schedule>
+                <run><model>SMSOrder/cron_send::Run</model></run>
+            </sms_send_order>
+    	</jobs>
+    </crontab>
+
+    <global>
+
+    	<models>
+    		<SMSOrder>
+    			<class>Smethod_SMSOrder_Model</class>
+    		</SMSOrder>
+    	</models>
+
+        <resources>
+            <smsorder_setup>
+                <setup>
+                    <module>Smethod_SMSOrder</module>
+                </setup>
+                <connection>
+                    <use>directory_setup</use>
+                </connection>
+            </smsorder_setup>
+            <smsorder_write>
+                <connection>
+                    <use>local_write</use>
+                </connection>
+            </smsorder_write>
+            <smsorder_read>
+                <connection>
+                    <use>local_read</use>
+                </connection>
+            </smsorder_read>
+        </resources>
+
+    	<helpers>
+            <SMSOrder>
+                <class>Smethod_SMSOrder_Helper</class>
+            </SMSOrder>
+        </helpers>
+
+        <events>
+            <sales_order_shipment_track_save_after>
+                <observers>
+                  <prepare_sendsms>
+                    <type>model</type>
+                    <class>SMSOrder/observer</class>
+                    <method>shipments</method>
+                  </prepare_sendsms>
+                </observers>
+              </sales_order_shipment_track_save_after>
+
+             <sales_order_save_after>
+                 <observers>
+        			<sms_send_order_save_after>
+        				<type>singleton</type>
+        				<class>SMSOrder/observer</class>
+        				<method>order_save_after</method>
+        			</sms_send_order_save_after>
+        		</observers>
+             </sales_order_save_after>
+        </events>
+    </global>
+
+    <frontend>
+        <routers>
+            <SMSOrder>
+                <use>standard</use>
+                <args>
+                    <module>Smethod_SMSOrder</module>
+                    <frontName>SMSOrder</frontName>
+                </args>
+            </SMSOrder>
+        </routers>
+    </frontend>
+</config>

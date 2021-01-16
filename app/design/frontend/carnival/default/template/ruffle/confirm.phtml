@@ -1,0 +1,131 @@
+<?php $_customer = Mage::getSingleton('customer/session')->getCustomer() ?>
+<?php $ruffleData = Mage::getSingleton('customer/session')->getRuffleData() ?>
+<?php $_product = Mage::getModel('catalog/product')->load($ruffleData['product_id']); ?>
+<?php $productType = $_product->getTypeId(); ?>
+<?php $omiseHelper = Mage::helper('ruffle/omise') ?>
+<?php $customerApiId = $_customer->getCustomerApiId(); ?>
+<?php $useCard = $ruffleData['use_creditcard']; ?>
+<?php $saveCard = $ruffleData['is_savecard']; ?>
+
+<?php
+$attributes = null;
+if(isset($ruffleData['firstname']) && isset($ruffleData['lastname'])){
+    $_customer->setJoinerName($ruffleData['firstname'] . ' - ' . $ruffleData['lastname']);
+}
+if ($productType == 'configurable' && isset($ruffleData['super_attribute'])) {
+    $superAttribute = $ruffleData['super_attribute'];
+    $attributes = $_product->getTypeInstance(true)->getConfigurableAttributesAsArray($_product);
+}
+?>
+<?php ?>
+<div class="ruffle-confirm">
+    <h2><?php echo $this->__("Please confirm your detail below"); ?></h2>
+    <div class="ruffle-info">
+        <div class="ruffle-contact-info">
+            <h3><?php echo $this->__("Contact Information"); ?></h3>
+            <ul class="form-list">
+                <li>
+                    <label><?php echo $this->__("Name"); ?></label>
+                    <?php echo $_customer->getJoinerName() ? $_customer->getJoinerName() : $_customer->getCustomName(); ?>
+                </li>
+                <li>
+                    <label><?php echo $this->__("E-mail"); ?></label>
+                    <?php echo $_customer->getEmail(); ?>
+                </li>
+                <?php if ($ruffleData['tel']): ?>
+                    <li>
+                        <label><?php echo $this->__("Tel. "); ?></label>
+                        <?php echo $ruffleData['tel']; ?>
+                    </li>
+                <?php endif ?>
+                <?php if ($ruffleData['msg']): ?>
+                    <li>
+                        <label><?php echo $this->__("Shipping"); ?></label>
+                        <?php echo $ruffleData['msg']; ?>
+                    </li>
+                <?php endif ?>
+                <?php if($useCard):?>
+                <?php
+
+                    $p2c2pToken=$ruffleData['customer_card_token'];
+                       $p2c2pTokenModel = Mage::getModel('p2c2p/token');
+
+               if(!$p2c2pTokenModel) {
+                   die("2C2P Expected Model not available.");
+               }
+
+               $card=null;
+               $customer_id=$_customer->getId();
+               $customer_data = $p2c2pTokenModel->getCollection()->addFieldToFilter('user_id',$customer_id);
+                    foreach ($customer_data as $key => $value) {
+                        if(strcasecmp($value->getData('stored_card_unique_id'),$p2c2pToken) == 0){
+                            $card=$value;
+                            break;
+                        }
+                    }
+                ///only use for omise
+//                    if($saveCard){
+//                    $defaultIdCard = $omiseHelper->getDefaultIdCardCustomerOmise($customerApiId);
+//                    $cardTokenId = !empty($ruffleData['customer_card_token']) ? $ruffleData['customer_card_token'] : $defaultIdCard;
+//                    $card = $omiseHelper->getDefaultCardCustomerOmise($customerApiId, $cardTokenId);
+//                    }else{
+//                        $omiseTokenId = $ruffleData['customer_card_token'];
+//                        $token = OmiseToken::retrieve($omiseTokenId);
+//                        $card = $token['card'];
+//                    }
+                ?>
+
+                <?php if($card!= null): ?>
+                <li class="<?php echo $card->getData('payment_scheme') ?>">
+                    <label><?php echo $this->__("Payment"); ?></label>
+                    <span><?php echo   $card->getData('masked_pan') ?></span>
+                </li>
+                <?php endif; ?>
+                <?php endif;?>
+            </ul>
+        </div>
+        <div class="ruffle-product-info">
+            <img class="img-smallimage"
+                 src="<?php echo Mage::helper('catalog/image')->init($_product, 'small_image')->resize(125); ?>"
+                 alt="<?php echo $_product->getName() ?>"/>
+            <div class="product-info">
+                <div class="product-name">
+                     <?php echo Mage::helper('catalog/output')->productAttribute($_product, $_product->getName(), 'name') ?>
+                </div>
+                <?php if ($_product->getData('carnival_brand')): ?>
+                    <?php $brandName = $_product->getResource()->getAttribute('carnival_brand')->getFrontend()->getValue($_product); ?>
+                    <div class="product-brand"><?php echo $brandName; ?></div>
+                <?php endif; ?>
+                <div class="options">
+                    <?php if ($attributes): ?>
+                        <?php foreach ($attributes as $attribute): ?>
+                            <label><?php echo $attribute['frontend_label'] ?> : </label>
+                            <?php foreach ($attribute['values'] as $value) {
+                                if ($value['value_index'] == $superAttribute[$attribute['attribute_id']]) {
+                                    echo $value['label'];
+                                }
+                            }
+                            ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+
+                </div>
+                <div class="price">
+                    <label><?php echo $this->__('Price:') ?> </label>
+                    <?php echo Mage::helper('core')->formatPrice($_product->getFinalPrice(), true, false); ?>
+                </div>
+                <div class="qty">
+                    <label><?php echo $this->__('Qty:') ?> </label>
+                    <?php echo $this->__('1') ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="confirm-button">
+        <button class="button" onclick="setLocation('<?php echo $this->getUrl('ruffle/index/join') ?>')">
+            <span><span><?php echo $this->__('Confirm Join Raffle') ?></span></span></button>
+    </div>
+    <p class="back-link"><a href="javascript:history.back()" class="back-link"><?php echo $this->__('< Back') ?></a></p>
+</div>
+

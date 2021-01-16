@@ -1,0 +1,19 @@
+<?php /** @var Tigren_Kerry_Block_Adminhtml_Sales_Shipment_Js $this **/ ?>
+<script type="text/javascript">
+    'use strict';
+
+    var printBtns = $$('.print-awb');
+    if(printBtns.length){
+        printBtns.forEach(function (printBtn) {
+            var consignmentNo = printBtn.previous('.consignment-no');
+            consignmentNo = consignmentNo.innerHTML.trim();
+            if(consignmentNo === '&nbsp;') {
+                printBtn.setStyle({
+                    'pointer-events': 'none',
+                    'background': '#ddd'
+                });
+            }
+        });
+    }
+
+</script>

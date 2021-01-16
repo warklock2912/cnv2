@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MageWorx
+ * Search Suite
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuiteSphinx
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+-->
+<config>
+    <modules>
+        <MageWorx_SearchSuiteSphinx>
+            <version>1.2.0</version>
+        </MageWorx_SearchSuiteSphinx>
+    </modules>
+    <global>
+        <helpers>
+            <mageworx_searchsuitesphinx>
+                <class>
+                    MageWorx_SearchSuiteSphinx_Helper
+                </class>
+            </mageworx_searchsuitesphinx>
+        </helpers>
+
+        <blocks>
+            <mageworx_searchsuitesphinx>
+                <class>MageWorx_SearchSuiteSphinx_Block</class>
+            </mageworx_searchsuitesphinx>
+        </blocks>
+
+        <models>
+            <mageworx_searchsuitesphinx>
+                <class>MageWorx_SearchSuiteSphinx_Model</class>
+                <resourceModel>mageworx_searchsuitesphinx_resource</resourceModel>
+            </mageworx_searchsuitesphinx>
+            <mageworx_searchsuitesphinx_resource>
+                <class>MageWorx_SearchSuiteSphinx_Model_Resource</class>
+            </mageworx_searchsuitesphinx_resource>
+            <mageworx_searchsuite_resource>
+                <entities>
+                    <update_index>
+                        <table>mageworx_searchsuite_update_index</table>
+                    </update_index>
+                </entities>
+            </mageworx_searchsuite_resource>
+        </models>
+        <resources>
+            <mageworx_searchsuitesphinx_setup>
+                <setup>
+                    <module>MageWorx_SearchSuiteSphinx</module>
+                    <class>MageWorx_SearchSuiteSphinx_Model_Resource_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </mageworx_searchsuitesphinx_setup>
+        </resources>
+
+    </global>
+
+    <adminhtml>
+        <events>
+            <controller_action_predispatch_adminhtml_system_config_edit>
+                <observers>
+                    <searchsuite>
+                        <class>mageworx_searchsuitesphinx/observer</class>
+                        <method>controllerActionPredispatchAdminhtmlSystemConfigEdit</method>
+                    </searchsuite>
+                </observers>
+            </controller_action_predispatch_adminhtml_system_config_edit>
+        </events>
+        <translate>
+            <modules>
+                <MageWorx_SearchSuiteSphinx>
+                    <files>
+                        <default>MageWorx_SearchSuiteSphinx.csv</default>
+                    </files>
+                </MageWorx_SearchSuiteSphinx>
+            </modules>
+        </translate>
+    </adminhtml>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <MageWorx_SearchSuiteSphinx after="Mage_Adminhtml">MageWorx_SearchSuiteSphinx_Adminhtml</MageWorx_SearchSuiteSphinx>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <default>
+        <mageworx_searchsuite>
+            <sphinx>
+                <host>127.0.0.1</host>
+                <port>9312</port>
+                <timeout>30</timeout>
+                <ranker>0</ranker>
+                <matchingmode>4</matchingmode>
+                <sql_port>3306</sql_port>
+                <index_name>catalogsearch_index</index_name>
+                <index_path>/var/lib/sphinx/index/</index_path>
+                <deltaindex_path>/var/lib/sphinx/deltaindex/</deltaindex_path>
+                <pid_file_path>/etc/sphinx/</pid_file_path>
+                <log_files_path>/var/log/sphinx/</log_files_path>
+                <binlog_files_path>/var/lib/sphinx/</binlog_files_path>
+            </sphinx>
+        </mageworx_searchsuite>
+    </default>
+</config>

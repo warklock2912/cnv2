@@ -1,0 +1,249 @@
+
+/*style for member page*/
+/*.member-page a:focus{
+    color: #fff !important;
+}*/
+/*menu*/
+.footer-member .footer-links {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 0;
+}
+.footer-member .footer-links .box-links{
+    width: 28%;
+}
+.logo{
+    float: inherit !important;
+    display: inline-block !important;
+}
+.page-header-container{
+    overflow: hidden;
+    text-align: center;
+}
+.footer-member .footer{
+    width: 703px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.footer-member .box-links{
+    padding: 0;
+    margin-left: 30px;
+}
+.footer-member .footer-links .box-links a {
+    font-size: 11px;
+}
+.member-page {
+    width: 703px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.member-page .content {
+    width: 361px;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 899px;
+    position: relative;
+}
+.member-page .content .menu, #search-member, .change-vip-form{
+    position: absolute;
+    width: 100%;
+    top: 35%;
+}
+.member-page .menu .action{
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    background: #000;
+    color: #fff;
+    text-align: center;
+    line-height: 60px;
+    margin-bottom: 20px;
+}
+/*search member*/
+#search-member .input-box{
+    margin-bottom: 20px;
+}
+.member-page .input-text{
+    height: 50px;
+    float: left;
+    color: #636363;
+    padding: 0 16px;
+}
+#search-member .action-search{
+    float: left;
+    height: 50px;
+}
+.action-search {
+    float: left;
+    height: 50px;
+    background: url("../images/member-search-icon.png") center center #000 no-repeat;
+    border: 0;
+    text-indent: -999rem;
+    width: 48px;
+}
+/*signup member*/
+.member-page .buttons-set{
+    border: 0;
+}
+.action-signup, .action-summit, .btn-summit {
+    width: 100%;
+    line-height: 60px;
+    border: 0;
+    background: #000;
+    color: #fff;
+    font-size: 18px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.member-page .field{
+    margin: 0 0 18px !important;
+}
+.member-page .signup-form {
+    position: absolute;
+    top: 20%;
+    width: 100%;
+}
+.member-page .box-title h3 {
+    text-align: center;
+    color: #000;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+.member-page .back-action{
+    font-size: 14px;
+}
+.member-page .back-action span{
+    margin-top: 5px;
+    display: block;
+    float: left;
+}
+.member-page .back-action:before{
+    content: '';
+    width: 30px;
+    height: 30px;
+    display: block;
+    background: url("../images/back-icon.png") center no-repeat;
+    float: left;
+    margin-right: 10px;
+}
+/*member info*/
+.member-info .field{
+    margin: 0 0 10px !important;
+}
+.member-info .label{
+    display: inline-block;
+    width: 40%;
+    padding-right: 10px;
+    text-align: right;
+    text-transform: capitalize;
+}
+.member-info .info-value{
+    display: inline-block;
+    width: 55%;
+    padding-left: 10px;
+    text-align: left;
+    color: #999999;
+}
+.member-info{
+    margin-bottom: 50px;
+}
+.mem-info-wrapper {
+    position: absolute;
+    width: 100%;
+    top: 30%;
+}
+a.action-summit span {
+    line-height: 60px;
+    display: block;
+    text-align: center;
+}
+
+/*change to vip*/
+#member_id{
+    background: #ebebeb;
+}
+.change-vip-form .buttons-set{
+    margin-top: 30px;
+}
+
+/*responsive*/
+@media only screen and (max-width: 770px){
+    .footer-member .footer-links .box-links-content {
+        display: block;
+    }
+    .footer-member .footer-links .box-links {
+        width: 25%;
+        padding: 0;
+    }
+}
+.mf-login-container {
+    width: 350px;
+    height: 350px;
+    background-color: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    margin-top: -175px;
+    margin-left: -175px;
+    border-radius: 18%;
+}
+
+.mf-login-container .login-form {
+    padding: 0 40px;
+    background: none;
+    text-align: center;
+}
+
+.mf-login-container .login-form h2 a{
+    display: block;
+    text-indent: -9999px;
+    width: 140px;
+    height: 50px;
+    background: url('../images/logo.jpg') 0 0 no-repeat;
+    margin: 33px auto 30px;
+}
+
+.mf-login-container .login-form label{color: #999;}
+.mf-login-container .login-form .input-box{
+    margin-bottom: 12px;
+}
+.mf-login-container .login-form .input-box input.input-text, .mf-login-container textarea, .mf-login-container select {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ccc;
+    background:#fff;
+    font: 16px helvetica, arial, sans-serif;
+    line-height: 34px;
+    width: 350px;
+    padding: 4px 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+/* Login Button */
+.mf-login-container .login-form .form-buttons .form-button{
+    background: #3b3b3b;
+    width: 100%;
+    line-height: 50px;
+    border: none;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-weight: normal;
+    border-radius: 5px;
+    margin-top: 40px;
+}
+.mf-login-container .login-form .form-buttons{
+    margin: 8px 0 12px;
+}
+.mf-login-container .login-form .form-buttons .form-button:hover{
+    background: #a8a8a8;
+    color: #fff;
+}
+.mf-login-container .login-form .form-buttons .form-button a.left{font-size: 11px;}
+.mf-login-container .login-box .bottom{width: 0; background: none; height: 10px;}
+.mf-login-container .input-text{ margin-top: 25px;}
+

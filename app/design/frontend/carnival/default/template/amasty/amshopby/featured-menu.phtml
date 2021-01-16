@@ -1,0 +1,33 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
+?>
+<div class="brands-featured">
+  <?php
+    $countItem = count($this->getItems());
+    $columnCount = 1;
+    if($countItem%3==0){
+      $columnCount = ($countItem/3);
+    }
+    if($countItem%3!=0){
+      $columnCount = ($countItem/3) + 1;
+    }
+  ?>
+  
+  <?php $i=0; foreach ($this->getItems() as $item):?>
+    <?php if ($i++%$columnCount==0): ?>
+    <ul>
+    <?php endif; ?>
+      <li> 
+        <a href="<?php echo $item->getUrl()?>">
+          <?php echo $this->htmlEscape($item->getCurrentTitle())?>
+        </a>
+      </li>
+    <?php if ($i%$columnCount==0 || $i==$countItem): ?>
+    </ul>
+    <?php endif; ?>  
+  <?php endforeach ?>
+</div>

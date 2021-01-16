@@ -1,0 +1,102 @@
+  .confirm-payment{
+    margin: 0 auto;
+    width: 425px;
+    max-width: 100%;
+  }
+  #confirm-payment-form{
+    margin: 0 auto;
+    padding: 10px;
+  }
+  #confirm-payment-form .cp-form-list {
+    margin-top: 30px;
+  }
+  #confirm-payment-form .cp-form-list li {
+    margin-bottom: 25px;
+  }
+  #confirm-payment-form .cp-form-title {
+    border-bottom: 1px solid;
+    margin-top: 30px;
+  }
+  #confirm-payment-form .cp-form-title h1 {
+    font-size: 22px;
+    padding-left: 25px;
+    padding-bottom: 5px;
+  }
+  #confirm-payment-form .cp-form-list li .input-box .input-text {
+    width: 425px;
+    height : 35px ;
+  }
+  #confirm-payment-form .cp-form-list li .inputfile-box .input-text {
+    width: 425px;
+    height : 35px ;
+  }
+  #confirm-payment-form .cp-form-list li .inputdate-box .input-text {
+    width: 425px;
+    height : 35px ;
+    font-size : 15px;
+
+  }
+  #confirm-payment-form .cp-form-list li .inputdate-box{
+    position: relative;
+    padding-right: 35px;
+  }
+  #confirm-payment-form .cp-form-list li .inputdate-box img {
+    position: absolute;
+    top : 0px;
+    right: 0px;
+    width: 35px;
+  }
+  #confirm-payment-form .cp-form-list li .input-box .input-bank {
+    width: 407px;
+    height : 35px ;
+  }
+  #confirm-payment-form .cp-form-list li .input-box .attach {
+    width: 407px;
+    height : 35px ;
+  }
+  .cp-button-submit button{
+    width: 407px;
+    height:50px ;
+    background: #000;
+    color : #fff;
+    max-width: 100%;
+  }
+  .inputfile-box {
+    position: relative;
+
+  }
+
+  .inputfile {
+    display: none;
+  }
+
+  .file-box {
+    display: inline-block;
+    width: 270px;
+    height : 35px ;
+    border: 1px solid;
+    padding: 5px 0px 5px 5px;
+    box-sizing: border-box;
+  }
+
+  .file-button {
+    text-align: center;
+    color : #fff;
+    background: #232323;
+    width: 120px;
+    height : 35px;
+    padding: 5px;
+    position: absolute;
+    border: 1px solid;
+    top: 0px;
+    right: 0px;
+  }
+
+  @media only screen and (max-width: 770px) {
+    #confirm-payment-form .cp-form-title h1{
+      padding-left: 0px;
+    }
+    #confirm-payment-form select{
+      max-width: 100%;
+    }
+  }

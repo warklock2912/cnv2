@@ -1,0 +1,18 @@
+AuthType Basic
+AuthName "Password Protected Area"
+AuthUserFile /home/runcloud/webapps/carnivalbkk/var/.htpwd
+Require valid-user
+order allow,deny
+allow from 180.183.245.182
+Satisfy Any
+<IfModule mod_deflate.c>
+
+    RemoveOutputFilter DEFLATE
+    RemoveOutputFilter GZIP
+
+</IfModule>
+
+<Files ~ "\.(cfg|ini|xml)$">
+    order allow,deny
+    deny from all
+</Files> 

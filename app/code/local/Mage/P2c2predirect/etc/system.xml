@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <sections>
+        <payment>
+            <groups>
+                <p2c2predirect translate="label" module="p2c2predirect">
+                    <label>2C2P Module Redirect</label>
+                    <sort_order>1000</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <validate>P2c2predirect-enable-plugin</validate>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>2</sort_order>
+                        </active>
+                        <title translate="label">
+                            <validate>P2c2predirect-required-entry</validate>
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>3</sort_order>
+                        </title>
+                        <gatewayurl translate="label">
+                            <label>Mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>P2c2predirect/Paymentmodetype</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>4</sort_order>
+                        </gatewayurl>
+                        <merchantid translate="label">
+                            <validate>P2c2predirect-required-entry</validate>
+                            <label>Merchant Id</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>8</sort_order>
+                        </merchantid>
+                        <apisecretekeytest translate="label">
+                            <validate>P2c2predirect-required-entry</validate>
+                            <label>Secret Key</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>9</sort_order>
+                        </apisecretekeytest>
+                        <stored_card translate="label">
+                            <label>Enable Stored Card</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_Yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>10</sort_order>
+                        </stored_card>
+                        <payment_expiry_123 translate="label">
+                            <validate>P2c2predirect-required-entry P2c2predirect-validate-digits P2c2predirect-expiry
+                                digits-range-8-720
+                            </validate>
+                            <label>123 Payment Expiry (hours)</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>11</sort_order>
+                        </payment_expiry_123>
+                        <toc2p_language translate="label">
+                            <label>Select Language</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>P2c2predirect/Paymentlangtype</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>12</sort_order>
+                        </toc2p_language>
+                        <toc2p_url_success translate="label">
+                            <label>URL for Success</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>13</sort_order>
+                        </toc2p_url_success>
+                        <toc2p_url_fail translate="label">
+                            <label>URL for Fail</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>14</sort_order>
+                        </toc2p_url_fail>
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </sort_order>
+                    </fields>
+                </p2c2predirect>
+            </groups>
+        </payment>
+    </sections>
+</config>

@@ -1,0 +1,81 @@
+<?php $_customer = Mage::getSingleton('customer/session')->getCustomer();
+if (!$_customer->getId()) {
+    return;
+}
+?>
+<?php $omiseHelper = Mage::helper('ruffle/omise') ?>
+<?php $customerApiId = $_customer->getCustomerApiId(); ?>
+<?php $_code = 'omise_gateway'; ?>
+<?php
+$check = $this->getCheck();
+$termContent = Mage::getStoreConfig('ruffle/term_condition/term_content');
+$termNote = Mage::getStoreConfig('ruffle/term_condition/term_note');
+
+?>
+<div class="ruffle-popup ruffle-card-list" id="ruffle_term_list" style="display: block">
+    <div class="ruffle-popup-content">
+        <span class="popup-close">x</span>
+        <div class="step-bar">
+            <ul>
+                <li class="active">
+                    <span><?php echo $this->__('Term & Condition') ?></span>
+                </li>
+                <li class="">
+                    <span><?php echo $this->__('Payment') ?></span>
+                </li>
+                <li>
+                    <span><?php echo $this->__('Information join') ?></span>
+                </li>
+            </ul>
+        </div>
+
+        <h2 class="popup-title"><?php echo $this->__('Term & Condition') ?></h2>
+        <div class="ruffle-popup-form">
+            <div class="fieldset">
+                <div id="omise_new_card_form">
+                    <ul class="term-content">
+                        <?php echo $termContent; ?>
+                    </ul>
+                    <ul class="term-note">
+                        <?php echo $termNote; ?>
+                    </ul>
+                    <ul class="form-list omise_new_card_form" id="card_form_omise_gateway">
+                        <li>
+                            <div class="control">
+                                <input type="checkbox" value="1" name="payment[accept_term]" id="accept_term"
+                                       class="required-entry checkbox"/>
+                                <label for="accept_term"><?php echo $this->__('I accepted the terms and conditions and allowed the company to automatically request your payment when you have the right to buy the product') ?></label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="button-set">
+                    <button type="button" id="submit-information-personal"
+                            class="button" onclick="ruffleAcceptTerm(this)">
+                        <span><span><?php echo $this->__('CONFIRM'); ?></span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    jQuery('.popup-close').on('click', function () {
+        if ($('ruffle-form-info')) {
+            $('ruffle-form-info').hide();
+        }
+        // if($('ruffle-card-info') $('ruffle-card-info').hide();
+        if ($('ruffle-card-list')) {
+            $('ruffle-card-list').hide();
+        }
+        if ($('ruffle_term_list')) {
+            $('ruffle_term_list').hide();
+        }
+    });
+</script>
+
+<script type="text/javascript">
+
+</script>

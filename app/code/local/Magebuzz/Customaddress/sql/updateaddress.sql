@@ -1,0 +1,4 @@
+INSERT INTO `directory_region_city_name` (`locale`, `city_id`, `name`) (SELECT 'en_US', `city_id`, `code` FROM `directory_region_city`);
+INSERT INTO `directory_region_city_name` (`locale`, `city_id`, `name`) (SELECT 'th_TH', `city_id`, `default_name` FROM `directory_region_city`);
+INSERT INTO `directory_city_subdistrict_name` (`locale`, `subdistrict_id`, `name`) (SELECT 'en_US', `subdistrict_id`, `code` FROM `directory_city_subdistrict`);
+INSERT INTO `directory_city_subdistrict_name` (`locale`, `subdistrict_id`, `name`) (SELECT 'th_TH', `subdistrict_id`, `default_name` FROM `directory_city_subdistrict`);

@@ -1,0 +1,1 @@
+var $jbuzz = jQuery.noConflict();

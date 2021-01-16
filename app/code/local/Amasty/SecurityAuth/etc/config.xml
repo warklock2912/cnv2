@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_SecurityAuth
+ */
+-->
+<config>
+    <modules>
+        <Amasty_SecurityAuth>
+            <version>1.0.6</version>
+        </Amasty_SecurityAuth>
+    </modules>
+    <global>
+        <models>
+            <amsecurityauth>
+                <class>Amasty_SecurityAuth_Model</class>
+                <resourceModel>amsecurityauth_mysql4</resourceModel>
+            </amsecurityauth>
+            <amsecurityauth_mysql4>
+                <class>Amasty_SecurityAuth_Model_Mysql4</class>
+                <entities>
+                    <user_auth>
+                        <table>amasty_securityauth_admin_user</table>
+                    </user_auth>
+                </entities>
+            </amsecurityauth_mysql4>
+        </models>
+        <helpers>
+            <amsecurityauth>
+                <class>Amasty_SecurityAuth_Helper</class>
+            </amsecurityauth>
+        </helpers>
+        <blocks>
+            <amsecurityauth>
+                <class>Amasty_SecurityAuth_Block</class>
+            </amsecurityauth>
+        </blocks>
+        <resources>
+            <amsecurityauth_setup>
+                <setup>
+                    <module>Amasty_SecurityAuth</module>
+                </setup>
+            </amsecurityauth_setup>
+
+            <amsecurityauth_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </amsecurityauth_write>
+
+            <amsecurityauth_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </amsecurityauth_read>
+        </resources>
+    </global>
+    <adminhtml>
+        <events>
+            <controller_action_postdispatch_adminhtml_permissions_user_save>
+                <observers>
+                    <amsecurityauth>
+                        <type>singleton</type>
+                        <class>amsecurityauth/observer</class>
+                        <method>saveUserAuthSettings</method>
+                    </amsecurityauth>
+                </observers>
+            </controller_action_postdispatch_adminhtml_permissions_user_save>
+            <admin_session_user_login_success>
+                <observers>
+                    <amsecurityauth>
+                        <type>singleton</type>
+                        <class>amsecurityauth/observer</class>
+                        <method>adminUserAuthenticateAfter</method>
+                    </amsecurityauth>
+                </observers>
+            </admin_session_user_login_success>
+            <core_block_abstract_to_html_before>
+                <observers>
+                    <amsecurityauth>
+                        <type>singleton</type>
+                        <class>amsecurityauth/observer</class>
+                        <method>onCoreBlockAbstractToHtmlBefore</method>
+                    </amsecurityauth>
+                </observers>
+            </core_block_abstract_to_html_before>
+            <controller_action_predispatch_adminhtml_system_config_edit>
+                <observers>
+                    <amsecurityauth>
+                        <class>amsecurityauth/observer</class>
+                        <method>checkMagentoVersion</method>
+                    </amsecurityauth>
+                </observers>
+            </controller_action_predispatch_adminhtml_system_config_edit>
+        </events>
+        <layout>
+            <updates>
+                <amsecurityauth>
+                    <file>amasty/amsecurityauth/amsecurityauth.xml</file>
+                </amsecurityauth>
+            </updates>
+        </layout>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <amsecurityauth after="Mage_Adminhtml">Amasty_SecurityAuth_Adminhtml</amsecurityauth>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <default>
+        <amsecurityauth>
+            <general>
+                <active>0</active>
+                <discrepancy>1</discrepancy>
+                <ip_white_list></ip_white_list>
+            </general>
+        </amsecurityauth>
+    </default>
+</config>

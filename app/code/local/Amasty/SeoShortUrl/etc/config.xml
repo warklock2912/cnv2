@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoShortUrl
+ */
+-->
+<config>
+    <modules>
+        <Amasty_SeoShortUrl>
+            <version>1.0.0</version>
+        </Amasty_SeoShortUrl>
+    </modules>
+    <global>
+        <cache>
+            <types>
+                <amseoshorturl translate="label,description" module="amseoshorturl">
+                    <label>Amasty Seo Url</label>
+                    <description>Indexed data for filters and their options</description>
+                    <tags>amseoshorturl</tags>
+                </amseoshorturl>
+            </types>
+        </cache>
+
+        <models>
+            <amseoshorturl>
+                <class>Amasty_SeoShortUrl_Model</class>
+                <resourceModel>amseoshorturl_mysql4</resourceModel>
+            </amseoshorturl>
+            <amseoshorturl_mysql4>
+                <class>Amasty_SeoShortUrl_Model_Mysql4</class>
+            </amseoshorturl_mysql4>
+
+            <catalog>
+                <rewrite>
+                    <layer_filter_item>Amasty_SeoShortUrl_Model_Catalog_Layer_Filter_Item</layer_filter_item>
+                </rewrite>
+            </catalog>
+        </models>
+
+        <resources>
+            <amseoshorturl_setup>
+                <setup>
+                    <module>Amasty_SeoShortUrl</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </amseoshorturl_setup>
+
+            <amseoshorturl_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </amseoshorturl_write>
+
+            <amseoshorturl_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </amseoshorturl_read>
+        </resources>
+
+        <blocks>
+            <amseoshorturl>
+                <class>Amasty_SeoShortUrl_Block</class>
+            </amseoshorturl>
+        </blocks>
+
+        <helpers>
+            <amseoshorturl>
+                <class>Amasty_SeoShortUrl_Helper</class>
+            </amseoshorturl>
+        </helpers>
+
+        <events>
+            <controller_front_init_routers>
+                <observers>
+                    <amseoshorturl>
+                        <type>singleton</type>
+                        <class>Amasty_SeoShortUrl_Model_Observer</class>
+                        <method>handleControllerFrontInitRouters</method>
+                    </amseoshorturl>
+                </observers>
+            </controller_front_init_routers>
+        </events>
+    </global>
+
+    <adminhtml>
+        <events>
+            <admin_system_config_changed_section_amseoshorturl>
+                <observers>
+                    <amseoshorturl>
+                        <type>singleton</type>
+                        <class>amseoshorturl/observer</class>
+                        <method>settingsChanged</method>
+                    </amseoshorturl>
+                </observers>
+            </admin_system_config_changed_section_amseoshorturl>
+
+            <controller_action_postdispatch_adminhtml_catalog_product_attribute_save>
+                <observers><amseoshorturl><type>singleton</type><class>amseoshorturl/observer</class><method>attributeChanged</method></amseoshorturl></observers>
+            </controller_action_postdispatch_adminhtml_catalog_product_attribute_save>
+            <controller_action_postdispatch_adminhtml_catalog_product_attribute_delete>
+                <observers><amseoshorturl><type>singleton</type><class>amseoshorturl/observer</class><method>attributeChanged</method></amseoshorturl></observers>
+            </controller_action_postdispatch_adminhtml_catalog_product_attribute_delete>
+        </events>
+    </adminhtml>
+
+    <default>
+        <amseoshorturl>
+            <general>
+                <active>1</active>
+            </general>
+            <seo>
+                <query_param></query_param>
+                <special_char>_</special_char>
+                <option_char>-</option_char>
+            </seo>
+        </amseoshorturl>
+    </default>
+</config>

@@ -1,0 +1,99 @@
+<div class="page-title">
+  <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('ruffle_title')->toHtml();?>
+</div>
+<?php 
+    $locale = substr(Mage::app()->getLocale()->getLocaleCode(), 0, 2);
+    if ($locale == 'th'): ?>
+        <style>
+        .ruffle-index-index .main-container {
+            background: #111 url("/skin/frontend/carnival/default/css/ruffle/images/ruffle_bg_th.png") top center no-repeat;
+            max-width: 100%;
+            background-size: contain;
+        }
+        </style>
+    <?php else: ?>
+        <style>
+        .ruffle-index-index .main-container {
+            background: #111 url("/skin/frontend/carnival/default/css/ruffle/images/ruffle_bg.png") top center no-repeat;
+            max-width: 100%;
+            background-size: contain;
+        }
+        </style>
+    <?php endif; ?>
+<div class="ruffle-list">
+    <?php $_productCollection = $this->getCollection() ?>
+    <?php if (count($_productCollection)): ?>
+        <?php $_columnCount = 5; ?>
+        <ul class="products-grid products-grid--max-<?php echo $_columnCount; ?>-col">
+            <?php $i = 0;
+            foreach ($_productCollection as $_product): ?>
+                <?php /*if ($i++%$_columnCount==0): ?>
+            <?php endif*/ ?>
+                <li class="item<?php if (($i - 1) % $_columnCount == 0): ?> first<?php elseif ($i % $_columnCount == 0): ?> last<?php endif; ?>">
+                    <a href="<?php echo $_product->getProductUrl() ?>"
+                       title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"
+                       class="product-image">
+                        <?php echo Mage::helper('amlabel')->getLabels($_product, 'category'); ?>
+                        <?php $_imgSize = 210; ?>
+                        <img class="img-baseimage" id="product-collection-image-<?php echo $_product->getId(); ?>"
+                             src="<?php echo Mage::helper('bannerads')->getBaseImage($_product)->resize($_imgSize); ?>"
+                             alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"/>
+
+                        <img class="img-smallimage"
+                             id="product-collection-image-small-<?php echo $_product->getId(); ?>"
+                             src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($_imgSize); ?>"
+                             alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"/>
+
+                        <?php if (!$_product->getStockItem() || !$_product->getStockItem()->getIsInStock()): ?>
+                            <p class="sold-out"><span><?php echo $this->__('sold out') ?></span></p>
+                        <?php endif; ?>
+                    </a>
+
+                    <div class="product-info">
+                        <?php if ($_product->getData('carnival_brand')): ?>
+                            <?php $brandName = $_product->getResource()->getAttribute('carnival_brand')->getFrontend()->getValue($_product); ?>
+                            <div class="product-brand"><?php echo $brandName; ?></div>
+                        <?php endif; ?>
+                        <div class="name-price">
+                            <h2 class="product-name">
+                                <a href="<?php echo $_product->getProductUrl() ?>"
+                                   title="<?php echo $this->stripTags($_product->getName(), null, true) ?>">
+                                    <?php $_productNameStripped = Mage::helper('catalog/output')->productAttribute($_product, $_product->getName(), 'name') ?>
+                                    <?php
+                                    if (iconv_strlen($_productNameStripped, 'UTF-8') > 15) {
+                                        $_productNameStripped = iconv_substr($_productNameStripped, 0, 15, 'UTF-8');
+                                        $_productNameStripped .= '...';
+                                    }
+                                    ?>
+                                    <?php echo $_productNameStripped ?>
+                                </a>
+                            </h2>
+                            <?php
+                            // Provides extra blocks on which to hang some features for products in the list
+                            // Features providing UI elements targeting this block will display directly below the product name
+                            if ($this->getChild('name.after')) {
+                                $_nameAfterChildren = $this->getChild('name.after')->getSortedChildren();
+                                foreach ($_nameAfterChildren as $_nameAfterChildName) {
+                                    $_nameAfterChild = $this->getChild('name.after')->getChild($_nameAfterChildName);
+                                    $_nameAfterChild->setProduct($_product);
+                                    echo $_nameAfterChild->toHtml();
+                                }
+                            }
+                            ?>
+<!--                            <div class="price-box">-->
+<!--                                <span class="regular-price" id="product-price-35301">-->
+<!--                                    <span class="price"><span class="p_bath" style="margin-left :2px">$ </span>1,950</span>-->
+<!--                                </span>-->
+<!--                            </div>-->
+                            <?php echo Mage::getBlockSingleton('catalog/product_list')->getPriceHtml($_product, true) ?>
+                        </div>
+                    </div>
+                </li>
+                <?php /*if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
+            <?php endif*/ ?>
+            <?php endforeach ?>
+        </ul>
+    <?php else: ?>
+        <p class="note-msg category-no-item"><?php echo $this->__('There are no ruffle products.') ?></p>
+    <?php endif; ?>
+</div>

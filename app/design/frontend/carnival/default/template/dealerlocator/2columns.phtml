@@ -1,0 +1,351 @@
+<?php
+/*
+* @copyright Copyright (c) 2016 www.magebuzz.com
+*/
+?>
+
+<?php
+// Mobile Detect Script
+define('__ROOT__', dirname(dirname(__FILE__)));
+require_once(__ROOT__.'/detectingdevices/Mobile_Detect.php');
+$detect = new Mobile_Detect;
+
+?>
+
+<?php $dealers = $this->getChild('pager')->getCollection();
+$dealers->clear(); ?>
+
+<div class="page-title title-location">
+  <h1><?php echo $this->__('Store Location'); ?></h1>
+</div>
+
+<?php if ((!$dealers->getSize()) && (!Mage::getSingleton('core/session')->getData('dealer_query'))) : ?>
+  <p class='note-msg'><?php echo $this->__('No dealers are available.') ?></p>
+<?php else : ?>
+
+  <p class='note-msg' id="message" style="display:none"></p>
+
+  <div class="dealerlocator">
+    <div class="dealer-body-2columns" id="gmap-container">
+      <div class="gmap">
+        <div class="gmap-content">
+          <div id="map_canvas" style="float:right;width:100%; height:370px"></div>
+        </div>
+      </div>
+      <div class="list-all-dealer">
+        <h2 class="legend"><?php echo $this->__('All stores') ?></h2>
+        <?php if ($dealers->getSize()): ?>
+          <?php //echo $this->getPagerHtml(); ?>
+          <div id="dealer-list">
+            <?php foreach ($dealers->getItems() as $dealer): ?>
+              <dl onclick="showLocationOnMap('<?php echo $dealer->getId() ?>', '<?php if( $detect->isMobile() && !$detect->isTablet() ) { echo $dealer->getDealerIconMobile();}else{ echo $dealer->getDealerIconImage();} ?>'); window.location='#map_canvas'">
+                <dt class="title-toggle"><?php echo $dealer->getTitle(); ?></dt>
+                <dd class="content-toggle">
+                  <?php if($dealer->getStoreImage()): ?>
+                    <?php $_storeImageUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'dealers/store/' .$dealer->getStoreImage();?>
+                    <div class="store-images">
+                      <img alt="<?php echo $dealer->getTitle(); ?>" src="<?php echo $_storeImageUrl?>"/>
+                    </div>
+                  <?php endif; ?>
+                  <div class="store-address"><?php echo $dealer->getAddress(); ?></div>
+                  <?php if($dealer->getPhone()): ?>
+                    <div class="store-phone"><?php echo $this->__('Tel. ') ?><strong><?php echo $dealer->getPhone(); ?></strong></div>
+                  <?php endif; ?>
+                  <?php if ($this->showEmailAndWebsite()): ?>
+                    <?php if($dealer->getEmail()): ?>
+                      <div class="store-email"><?php echo $this->__('Email: ') ?><?php echo $dealer->getEmail(); ?></div>
+                    <?php endif; ?>
+                    <?php if($dealer->getEmail()): ?>
+                      <div class="store-website"><?php echo $this->__('Website: ') ?> <?php echo $dealer->getWebsite(); ?></div>
+                    <?php endif; ?>
+                  <?php endif ?>
+                  <?php if (Mage::getSingleton('core/session')->getData('dealer_query')) : ?>
+                    <div class="store-distance">
+                      <?php
+                      if (!Mage::helper('dealerlocator')->getRadiusUnit()) {
+                        echo sprintf('%.2f', $dealer->getDistance());
+                      } else {
+                        echo sprintf('%.2f', $dealer->getDistance() * 1.609344);
+                      }
+                      ?>
+                    </div>
+                  <?php endif; ?>
+                  <div class="store-note"><?php echo $dealer->getNote(); ?></div>
+                </dd>
+              </dl>
+              <input type="hidden" name="dealer-longitude" id="dealer_latitude_<?php echo $dealer->getId() ?>"
+                     value="<?php echo $dealer->getLatitude() ?>"/>
+              <input type="hidden" name="dealer-longitude" id="dealer_longitude_<?php echo $dealer->getId() ?>"
+                     value="<?php echo $dealer->getLongitude() ?>"/>
+              <input type="hidden" name="dealer-title" id="dealer_title_<?php echo $dealer->getId() ?>"
+                     value="<?php echo $dealer->getTitle() ?>"/>
+              <input type="hidden" name="dealer-address" id="dealer_address_<?php echo $dealer->getId() ?>"
+                     value="<?php echo $dealer->getAddress() ?>"/>
+              <div class="dealer-info" style="display:none;" id="dealer_highlight_<?php echo $dealer->getId() ?>">
+                <p><strong><?php echo $dealer->getTitle() ?></strong></p>
+
+                <p><?php echo $this->__('Address') ?>: <?php echo $dealer->getAddress() ?></p>
+                <?php if ($dealer->getPostalCode()): ?>
+                  <p><?php echo $this->__('Postcode') ?>: <?php echo $dealer->getPostalCode() ?></p>
+                <?php endif; ?>
+                <?php if ($dealer->getPhone()): ?>
+                  <p><?php echo $this->__('Phone') ?>: <?php echo $dealer->getPhone() ?></p>
+                <?php endif; ?>
+                <?php if ($dealer->getWebsite()): ?>
+                  <p><?php echo $this->__('Website') ?>: <?php echo $dealer->getWebsite() ?></p>
+                <?php endif; ?>
+                <p><b><?php echo $this->__('Get Directions') ?>:</b> <a
+                    href="javascript:fromhere(<?php echo $dealer->getId() ?>)"> <?php echo $this->__('To Here') ?></a> -
+                  <a href="javascript:fromhere(<?php echo $dealer->getId() ?>)"><?php echo $this->__('From Here') ?></a>
+                </p>
+              </div>
+            <?php endforeach; ?>
+          </div>
+          <script type="text/javascript">decorateTable('dealer-list')</script>
+        <?php else: ?>
+          <p class="note-msg"><?php echo $this->__('There are no dealers matching your selection.'); ?></p>
+        <?php endif; ?>
+      </div>
+
+    </div>
+  </div>
+  <?php
+  $defaultlatlong = $this->getDefaultLatLong();
+  ?>
+  <script type="text/javascript">
+  var map;
+  var infoWindow;
+  var directionsDisplay;
+  var directionsService = new google.maps.DirectionsService();
+
+  var reasons = [];
+  // reasons[OK] = "Success";
+  // reasons[NOT_FOUND] = "One of the locations specified in the requests could not be geocoded";
+  // reasons['ZERO_RESULTS'] = "No route could be found between the origin and destination";
+  // reasons[MAX_WAYPOINTS_EXCEEDED] = "Too many waypoints";
+  // reasons[INVALID_REQUEST] = "Invalid Request";
+  // reasons[OVER_QUERY_LIMIT]   = "Too Many Queries: The daily geocoding quota for this site has been exceeded.";
+  // reasons[REQUEST_DENIED]   = "A directions request could not be successfully parsed.";
+  // reasons[UNKNOWN_ERROR]   = "The DirectionsService could not compute directions between the points.";
+
+  function getCurrentClientPosition() {
+    //get current position of client
+    if (navigator.geolocation) {
+      // if browser support to get geo position
+      navigator.geolocation.getCurrentPosition(function (position) {
+        if (position) {
+          $("current_latitude").value = position.coords.latitude;
+          $("current_longitude").value = position.coords.longitude;
+        } else {
+          $("message").innerHTML = <?php echo $this->__("'Your current location is temporarily unavailable'")?>;
+          $("message").show();
+        }
+      });
+    } else {
+      // if not
+      // $('message').innerHTML =
+      <?php echo $this->__("'Your browser DOES NOT support Finding the Nearest Dealer'")?>;
+      $('find_nearest_form').hide();
+    }
+  }
+
+  function initialize() {
+    var myOptions = {
+      zoom: 10,
+      <?php if (isset($defaultlatlong['lat']) && isset($defaultlatlong['long'])):?>
+      center: new google.maps.LatLng(<?php echo $defaultlatlong['lat'] ?>, <?php echo $defaultlatlong['long'] ?>),
+      <?php endif;?>
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    infoWindow = new google.maps.InfoWindow;
+    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+    directionsDisplay = new google.maps.DirectionsRenderer();
+    directionsDisplay.setMap(map);
+
+    var onMarkerClick = function () {
+      var marker = this;
+      var latLng = marker.getPosition();
+      infoWindow.setContent(marker.title);
+      infoWindow.open(map, marker);
+    };
+    google.maps.event.addListener(map, 'click', function () {
+      infoWindow.close();
+    });
+
+    var marker = this;
+    google.maps.event.addListener(marker, 'click', onMarkerClick);
+
+    // auto display dealer markers in the map
+    <?php if ($dealers->getSize()):?>
+    <?php foreach ($dealers as $dealer):?>;
+    var dealer_icon = '<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'dealers/icons/'?>' + '<?php if( $detect->isMobile() && !$detect->isTablet() ) { echo $dealer->getDealerIconMobile();}else{ echo $dealer->getDealerIconImage();}?>';
+    var id = '<?php echo $dealer->getId()?>';
+    var marker_<?php echo $dealer->getId() ?> = new google.maps.Marker({
+      position: new google.maps.LatLng($('dealer_latitude_' + id).value, $('dealer_longitude_' + id).value),
+      map: map,
+      icon: dealer_icon,
+      title: $('dealer_title_' + id).value
+    });
+    google.maps.event.addListener(marker_<?php echo $dealer->getId(); ?>, "click", function () {
+      infoWindow.setContent($('dealer_highlight_' +<?php echo $dealer->getId()?>).innerHTML);
+      infoWindow.open(map, marker_<?php echo $dealer->getId(); ?>);
+    });
+    <?php endforeach;?>
+    <?php endif?>
+  }
+
+  function showLocationOnMap(id, icon_image) {
+    window.location.hash = "gmap-container";
+    var highlight = $('dealer_highlight_' + id);
+    var infoContent = $('dealer_highlight_' + id).innerHTML;
+
+    var dealer_icon = '<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'dealers/icons/'?>' + icon_image;
+
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng($('dealer_latitude_' + id).value, $('dealer_longitude_' + id).value),
+      map: map,
+      icon: dealer_icon,
+      title: $('dealer_title_' + id).value
+    });
+    if (icon_image != '') {
+      marker.setIcon(dealer_icon);
+    }
+    infoWindow.setContent(infoContent);
+    infoWindow.open(map, marker);
+
+    google.maps.event.addListener(marker, 'click', function () {
+      infoWindow.setContent(infoContent);
+      infoWindow.open(map, marker);
+    });
+  }
+
+  function calcRoute() {
+    var start = document.getElementById("saddr").value;
+    var end = document.getElementById("daddr").value;
+    var request = {
+      origin: start,
+      destination: end,
+      travelMode: google.maps.TravelMode.DRIVING
+    };
+    directionsService.route(request, function (result, status) {
+      if (status == google.maps.DirectionsStatus.OK) {
+        directionsDisplay.setDirections(result);
+      }
+      else {
+        // var message = '';
+        // if (reasons[status])
+        // message = reasons[status];
+        alert("Failed to obtain directions");
+      }
+    });
+  }
+
+  //show direction form
+  function fromhere(id) {
+    var html = '<p>Directions: <a href="javascript:tohere(' + id + ')">To here<\/a> - <b>From here<\/b></p>' +
+      '<br>End address:<form action="javascript:calcRoute()">' +
+      '<input type="text" SIZE=40 MAXLENGTH=40 name="daddr" id="daddr" value="" /><br>' +
+      '<INPUT value="Get Directions" TYPE="SUBMIT"><br>' +
+      //  'Walk <input type="checkbox" name="walk" id="walk" /> &nbsp; Avoid Highways <input type="checkbox" name="highways" id="highways" />' +
+      '<input type="hidden" id="saddr" value="' + $('dealer_address_' + id).value +
+      '"/>';
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng($('dealer_latitude_' + id).value, $('dealer_longitude_' + id).value),
+      map: map,
+      icon: $('dealer_icon_' + id).value,
+      title: $('dealer_title_' + id).value
+    });
+    infoWindow.setContent(html);
+    infoWindow.open(map, marker);
+  }
+
+  function tohere(id) {
+    var html = '<p>Directions: <b>To here<\/b> - <a href="javascript:fromhere(' + id + ')">From here<\/a></p>' +
+      '<br>Start address:<form action="javascript:calcRoute()">' +
+      '<input type="text" SIZE=40 MAXLENGTH=40 name="saddr" id="saddr" value="" /><br>' +
+      '<INPUT value="Get Directions" TYPE="SUBMIT"><br>' +
+      //  'Walk <input type="checkbox" name="walk" id="walk" /> &nbsp; Avoid Highways <input type="checkbox" name="highways" id="highways" />' +
+      '<input type="hidden" id="daddr" value="' + $('dealer_address_' + id).value +
+      '"/>';
+
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng($('dealer_latitude_' + id).value, $('dealer_longitude_' + id).value),
+      map: map,
+      icon: $('dealer_icon_' + id).value,
+      title: $('dealer_title_' + id).value
+    });
+    infoWindow.setContent(html);
+    infoWindow.open(map, marker);
+  }
+
+  function tagUrl(tag) {
+    var url = "<?php echo Mage::getUrl('*/*/*', array('_current' => TRUE));?>";
+    var replaceUrl = removeParam('tag', url);
+    <?php $param = $this->getRequest()->getParams();?>
+    <?php if(count($param)>0) :?>
+    replaceUrl = replaceUrl + "&tag=" + tag;
+    <?php else:?>
+    replaceUrl = replaceUrl + "?tag=" + tag;
+    <?php endif;?>
+    window.location.href = replaceUrl;
+  }
+
+  function queryUrl(query) {
+    var url = "<?php echo Mage::getUrl('*/*/*', array('_current' => TRUE));?>";
+    var replaceUrl = removeParam('q', url);
+    replaceUrl = removeParam('tag', replaceUrl);
+    <?php $param = $this->getRequest()->getParams();?>
+    <?php if(count($param)>0) :?>
+    replaceUrl = replaceUrl + "&q=" + query;
+    <?php else:?>
+    replaceUrl = replaceUrl + "?q=" + query;
+    <?php endif;?>
+    window.location.href = replaceUrl;
+  }
+
+  function removeParam(key, sourceURL) {
+    var rtn = sourceURL.split("?")[0],
+      param,
+      params_arr = [],
+      queryString = (sourceURL.indexOf("?") !== -1) ? sourceURL.split("?")[1] : "";
+    if (queryString !== "") {
+      params_arr = queryString.split("&");
+      for (var i = params_arr.length - 1; i >= 0; i -= 1) {
+        param = params_arr[i].split("=")[0];
+        if (param === key) {
+          params_arr.splice(i, 1);
+        }
+      }
+      rtn = rtn + "?" + params_arr.join("&");
+    }
+    return rtn;
+  }
+  </script>
+
+  <?php if (Mage::helper('dealerlocator')->enableSearchSuggestion()): ?>
+    <script type="text/javascript">
+      dealer_completer = new Ajax.Autocompleter(
+        'dealer-search-text',
+        'dealer-search-autocomplete',
+        '<?php echo $this->getUrl("dealerlocator/index/getSuggestions/")?>' + '?d=' + $('searchin').getValue(),
+        {
+          paramName: "query",
+          minChars: 2,
+          indicator: "loader-image",
+          updateElement: getSelectionId,
+        }
+      );
+
+      function getSelectionId(li) {
+        location.href = li.getAttribute('url');
+      }
+    </script>
+  <?php endif; ?>
+
+  <script type="text/javascript">
+    window.onload = getCurrentClientPosition();
+    window.onload = initialize();
+  </script>
+
+<?php endif; ?> 

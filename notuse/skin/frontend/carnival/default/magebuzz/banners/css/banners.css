@@ -1,0 +1,61 @@
+/********Css For bannerads************/
+.wrap-bannerads {
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  margin: 0px;
+}
+
+/*
+.wrap-bannerads .div-banner{background:#FFF; border:2px solid #F0F0F0; padding:5px; overflow:hidden}
+*/
+.wrap-bannerads img {
+  max-width: 100%;
+}
+
+/* Display type: Show all */
+/*.wrap-bannerads .div-banner ul li{float:left; display:inline; margin:0 0 5px;}*/
+/* Display type: Random */
+.wrap-bannerads div.banner {
+  margin: 0 auto;
+}
+
+.wrap-bannerads div.banner .bx-viewport {
+  /* background: #FFF; */
+}
+.wrap-bannerads .bx-viewport .banner-desc{position:absolute; right:0; bottom:15px; max-width:440px; max-height:280px; padding:48px; background:url(images/banner-desc-bg.png) top left repeat; text-align:left;}
+.wrap-bannerads .bx-viewport .banner-desc.top-left{top:0; left:0;}
+.wrap-bannerads .bx-viewport .banner-desc.top-center{top:0; left:50%; margin-left:-220px;}
+.wrap-bannerads .bx-viewport .banner-desc.top-right{top:0; right:0;}
+.wrap-bannerads .bx-viewport .banner-desc.middle-left{top:50%; left:0; margin-top:-140px}
+.wrap-bannerads .bx-viewport .banner-desc.middle-center{top:50%; left:50%; margin-top:-140px; margin-left:-220px;}
+.wrap-bannerads .bx-viewport .banner-desc.middle-right{top:50%; right:0; margin-top:-140px}
+.wrap-bannerads .bx-viewport .banner-desc.bottom-left{bottom:0; left:0;}
+.wrap-bannerads .bx-viewport .banner-desc.bottom-center{bottom:0; left:50%; margin-left:-220px;}
+.wrap-bannerads .bx-viewport .banner-desc.bottom-right{bottom:0; right:0;}
+.wrap-bannerads .bx-viewport .banner-desc::before{
+	background: url(images/i-plus-orange.png) top left no-repeat;
+	content: "";
+	height: 43px;
+	width: 43px;
+	position: absolute;
+	top: -13px;
+	left: -13px;
+}
+.wrap-bannerads .bx-viewport .banner-desc h1{font-family: 'DBYordXBd'; font-size:50px; color:#000; margin:0 0 15px; line-height:40px;}
+.wrap-bannerads .bx-viewport .banner-desc p{font-family: 'Tahoma'; font-size:14px; color:#000; margin:0 0 10px;}
+.wrap-bannerads .bx-viewport .banner-desc .banner-actions a{padding:10px 20px; float:left; font-weight:bold; display:inline-block; margin-right:10px; border:2px solid #000; color:#000000; text-decoration:none; text-transform:uppercase;}
+.wrap-bannerads .bx-viewport .banner-desc .banner-actions a:hover{background:#000000; color:#FFFFFF;}
+.showall-banner {
+}
+
+.banner {
+}
+
+.allbanner {
+  width: 70%;
+  margin: 0 auto;
+}
+ @media (max-width: 767px) {
+  .wrap-bannerads .bx-viewport .banner-desc{display:none;}
+}

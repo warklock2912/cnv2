@@ -1,0 +1,102 @@
+<style type="text/css">
+.agreement_omise{
+	font-size: 12px;
+}
+.agreement_omise label{
+	color: blue;
+}
+#backgroundPopup{
+    display:none;
+    position:fixed;
+    _position:absolute; /* hack for internet explorer 6*/
+    height:100%;
+    width:100%;
+    top:0;
+    left:0;
+    background:#000000;
+    border:1px solid #cecece;
+    z-index:1;
+  }
+  #agreement-content{
+    display:none;
+    position:fixed;
+    _position:absolute; /* hack for internet explorer 6*/
+    height:384px;
+    width:408px;
+    background:#FFFFFF;
+    border:2px solid #cecece;
+    z-index:9999;
+    padding:12px;
+    font-size:13px;
+  }
+  #agreement-content h1{
+    text-align:left;
+    color:#6FA5FD;
+    font-size:22px;
+    font-weight:700;
+    border-bottom:1px dotted #D3D3D3;
+    padding-bottom:2px;
+    margin-bottom:20px;
+  }
+  #agreement-contentClose{
+    font-size:14px;
+    line-height:14px;
+    right:6px;
+    top:4px;
+    position:absolute;
+    color:#6fa5fd;
+    font-weight:700;
+    display:block;
+  }
+</style>
+
+<span class='agreement_omise'><?php echo $this->__('โดยการคลิก "ดำเนินการต่อ" แสดงว่าคุณได้ยอมรับ <label class="mastercheckout-terms-click">ข้อกำหนด เงื่อนไข และนโยบายการคืนสินค้า</label>'); ?></span>
+<div id="agreement-content" class="agreement-content">
+  <a id="agreement-contentClose">x</a>
+  <?php echo $this->__('การคืนและเปลี่ยนสินค้า กรณีสินค้าไม่มีตำหนิ
+สามารถทำได้ภายใน 10 วัน นับตั้งแต่วันที่ซื้อ <br>
+โดยสินค้าจะต้องอยู่ในสภาพเดิม <br>
+และอยู่ในสภาพที่นำไปขายใหม่ได้ 100% <br>
+สภาพกล่อง ป้าย และ กระดาษห่อสินค้า ต้องอยู่ครบ <br>
+และต้องมีใบเสร็จในการสั่งซื้อแนบมาด้วย <br>
+เพื่อยืนยันการสั่งซื้อ ลูกค้าจะต้องเป็นผู้ออกค่าใช้จ่ายในการส่งสินค้ากลับ และสินค้าใหม่ในกรณีต้องการเปลี่ยนของ <br>
+โปรดติดต่อแผนก Online Sales <br>
+โทร 099-216-4445 หรือ sales@carnivalbkk.com <br>
+ก่อนทำการส่งสินค้ากลับมาคืน <br>
+ที่อยู่ในการจัดส่งสินค้ากลับ <br>
+บริษัท คาร์นิวาล ซัพพลาย จำกัด <br>
+218/5-6 สยาม สแควร์ ซอย 1 , ถ. พระราม 1. <br>
+แขวง ปทุมวัน เขต ปทุมวัน กทม 10330 <br>
+Carnival สงวนสิทธิ์ในการพิจารณารับคืนสินค้า ตามความเหมาะสมของสภาพสินค้า'); ?>
+</div>
+
+<div id="backgroundPopup"></div>
+<script type="text/javascript">
+//<![CDATA[
+
+  jQuery(document).ready(function () {
+    jQuery(".mastercheckout-terms-click").click(function () {
+      //centering with css
+      centerPopup("agreement-content");
+      //load popup
+      loadPopup("agreement-content");
+    });
+
+    //CLOSING POPUP
+    //Click the x event!
+    jQuery("#agreement-contentClose").click(function () {
+      disablePopup("agreement-content");
+    });
+    //Click out event!
+    jQuery("#backgroundPopup").click(function () {
+      disablePopup("agreement-content");
+    });
+    //Press Escape event!
+    jQuery(document).keypress(function (e) {
+      if (e.keyCode == 27 && popupStatus == 1) {
+        disablePopup("agreement-content");
+      }
+    });
+  });
+//]]>
+</script>

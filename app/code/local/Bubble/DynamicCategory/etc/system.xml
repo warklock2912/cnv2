@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <bubble translate="label">
+            <label>Bubble Extensions</label>
+            <sort_order>1100</sort_order>
+        </bubble>
+    </tabs>
+    <sections>
+        <dynamic_category translate="label" module="dynamic_category">
+            <label>Dynamic Category</label>
+            <tab>bubble</tab>
+            <sort_order>45</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>0</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <general translate="label comment">
+                    <label>Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <enable_reindex translate="label comment" module="dynamic_category">
+                            <label>Automatically Reindex Matching Products</label>
+                            <comment>If enabled, matching products will be refreshed automatically by a scheduled task.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_reindex>
+                        <reindex_delay translate="label comment" module="dynamic_category">
+                            <label>Reindex Matching Products Every</label>
+                            <comment>Specify time in hours.</comment>
+                            <frontend_type>text</frontend_type>
+                            <frontend_class>required-entry validate-digits validate-not-negative-number</frontend_class>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <enable_reindex>1</enable_reindex>
+                            </depends>
+                        </reindex_delay>
+                        <enable_reindex_log translate="label comment" module="dynamic_category">
+                            <label>Enable Category Reindexation Logging</label>
+                            <comment>If enabled, category reindexation will be logged and will display products matching conditions.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_reindex_log>
+                    </fields>
+                </general>
+            </groups>
+        </dynamic_category>
+    </sections>
+</config>

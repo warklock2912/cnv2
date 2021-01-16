@@ -1,0 +1,59 @@
+
+
+
+#imagehome_tabs_form_section_content {
+    padding:20px;
+}
+.imageBox
+{
+    position: relative;
+
+    border:1px solid #aaa;
+    background: #fff;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    cursor:move;
+}
+
+.imageBox .thumbBox
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    box-sizing: border-box;
+    border: 1px solid rgb(102, 102, 102);
+    box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5);
+    background: none repeat scroll 0% 0% transparent;
+}
+
+.imageBox .spinner
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    line-height: 400px;
+    background: rgba(0,0,0,0.7);
+}
+
+.grid-stack .grid-stack-item-content button {
+    background: #000!important;
+    padding: 0px;
+    border-radius: 100%;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+.grid-stack .grid-stack-item-content button img {
+    float:left;
+}
+.grid-stack .grid-stack-item-content textarea   {
+    max-width:calc(100% - 20px);
+    margin-left:10px;
+    margin-top:5px;
+}
+.grid-stack .grid-stack-item-content input {
+  margin:5px 10px;
+}

@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Appmerce - Applications for Ecommerce
+* http://www.appmerce.com
+*
+* @extension   Auto-Cancel Orders
+* @type        Order management
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+*
+* @category	Magento Commerce
+* @package     Appmerce_AutoCancel
+* @copyright   Copyright (c) 2011-2013 Appmerce (http://www.appmerce.com)
+* @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/
+-->
+<config>
+    <tabs>
+        <appmerce translate="label" module="core">
+            <label>Appmerce</label>
+            <sort_order>100</sort_order>
+        </appmerce>
+    </tabs>
+    <sections>
+        <autocancel translate="label" module="autocancel">
+            <label>Auto-Cancel Orders</label>
+            <tab>appmerce</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>90</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <settings translate="label comment">
+                    <label>Settings</label>
+                    <comment>
+                        <![CDATA[Extension by <a href="http://www.appmerce.com/" title="Applications for Ecommerce" style="color: #EA7601">Appmerce</a> | <a href="http://www.appmerce.com/get-support" title="Get support for this extension" style="color: #EA7601">Get Support</a>]]>
+                    </comment>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <cancel_status translate="label">
+                            <label>Cancel Payment Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>autocancel/source_cancelpayment</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cancel_status>
+                        <timestamp translate="label comment">
+                            <label>Time Reference</label>
+                            <comment>
+                                <![CDATA[Timestamp after which to reference the auto-cancel periods (see mappings below).]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>autocancel/source_timestamp</source_model>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </timestamp>
+                        <mapping translate="label comment">
+                            <label>Map Payment Methods</label>
+                            <comment>
+                                <![CDATA[Map the payment methods and their order statuses with auto-cancel periods.]]>
+                            </comment>
+                            <frontend_model>autocancel/mapping</frontend_model>
+                            <backend_model>autocancel/source_mapping</backend_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </mapping>
+                    </fields>
+                </settings>
+            </groups>
+        </autocancel>
+    </sections>
+</config>

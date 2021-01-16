@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <tigren translate="label">
+          <label>Tigren Add-ons</label>
+          <sort_order>400</sort_order>
+        </tigren>
+    </tabs>
+    <sections>
+        <ruffle translate="label" module="ruffle">
+            <label>Ruffle</label>
+            <tab>tigren</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <email_settings>
+                    <label>Notification</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <sender_email translate="label">
+                            <label>Email Sender</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sender_email>
+                        <notification_after_joining_email_template translate="label">
+                            <label>Email Template for Notification After Join</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </notification_after_joining_email_template>
+                        <notification_winner_email_template translate="label">
+                            <label>Email Template for Notification to Winner</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </notification_winner_email_template>
+                        <notification_looser_email_template translate="label">
+                            <label>Email Template for Notification to Looser</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </notification_looser_email_template>
+                    </fields>
+                </email_settings>
+            </groups>
+        </ruffle>
+    </sections>
+</config>

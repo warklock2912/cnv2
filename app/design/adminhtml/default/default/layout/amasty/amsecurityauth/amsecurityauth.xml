@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_SecurityAuth
+ */
+-->
+<layout>
+
+    <adminhtml_index_login>
+        <reference name="form.additional.info">
+            <block type='core/template' name="security_code" template="amasty/amsecurityauth/securitycode_field.phtml"/>
+        </reference>
+    </adminhtml_index_login>
+
+    <adminhtml_permissions_user_edit>
+        <reference name="head">
+            <action method="addJs" ifconfig="amsecurityauth/general/active">
+                <script>amasty/amsecurityauth/functions.js</script>
+            </action>
+        </reference>
+    </adminhtml_permissions_user_edit>
+
+</layout>

@@ -1,0 +1,400 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoHtmlSitemap
+ */
+-->
+<config>
+    <sections>
+        <amseohtmlsitemap translate="label" module="amseohtmlsitemap">
+            <label>SEO HTML Sitemap</label>
+            <tab>amasty</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>190508</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General</label>
+                    <expanded>1</expanded>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <meta_description translate="label">
+                            <label>Meta Description</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </meta_description>
+                        <layout translate="label">
+                            <label>Layout</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>page/source_layout</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </layout>
+                        <show_search_field translate="label">
+                            <label>Show Search Field</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_search_field>
+                    </fields>
+                </general>
+
+                <categories translate="label">
+                    <label>Categories</label>
+                    <expanded>1</expanded>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <categories_title translate="label">
+                            <label>Sub Header</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </categories_title>
+                        <show_categories translate="label">
+                            <label>Include Categories</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_categories>
+                        <redirect translate="label">
+                            <label>301 redirect from the default category sitemap</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <show_categories>1</show_categories>
+                            </depends>
+                        </redirect>
+                        <show_as translate="label">
+                            <label>Show As</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>amseohtmlsitemap/source_gridtype</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_as>
+                        <column_number translate="label">
+                            <label>Number of Columns</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>amseohtmlsitemap/source_numberrange</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </column_number>
+                    </fields>
+                </categories>
+
+                <products translate="label">
+                    <label>Products</label>
+                    <expanded>1</expanded>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <products_title translate="label">
+                            <label>Sub Header</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </products_title>
+                        <show_products translate="label">
+                            <label>Include Products</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_products>
+                        <redirect translate="label">
+                            <label>301 redirect from the default products sitemap</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <show_products>1</show_products>
+                            </depends>
+                        </redirect>
+                        <column_number translate="label">
+                            <label>Number of Columns</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>amseohtmlsitemap/source_numberrange</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </column_number>
+                        <split_by_letter translate="label">
+                            <label>Split By First Letter</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </split_by_letter>
+                        <hide_out_of_stock translate="label">
+                            <label>Hide Out Of Stock Products</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </hide_out_of_stock>
+                    </fields>
+                </products>
+
+                <cms translate="label">
+                    <label>CMS Pages</label>
+                    <expanded>1</expanded>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>4.</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <cms_title translate="label">
+                            <label>Sub Header</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cms_title>
+                        <column_number translate="label">
+                            <label>Number of Columns</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>amseohtmlsitemap/source_numberrange</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </column_number>
+                        <show_cms_pages translate="label">
+                            <label>Include CMS Pages</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_cms_pages>
+                        <exclude_cms_pages translate="label">
+                            <label>Exclude CMS Pages</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </exclude_cms_pages>
+                        <exclude_cms_pages_values translate="label">
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>adminhtml/system_config_source_cms_page</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <exclude_cms_pages>1</exclude_cms_pages>
+                            </depends>
+                        </exclude_cms_pages_values>
+                    </fields>
+                </cms>
+
+                <landing translate="label">
+                    <label>Landing Pages</label>
+                    <expanded>1</expanded>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <landing_title translate="label">
+                            <label>Sub Header</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </landing_title>
+                        <column_number translate="label">
+                            <label>Number of Columns</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>amseohtmlsitemap/source_numberrange</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </column_number>
+                        <show_landing_pages translate="label">
+                            <label>Show Landing Pages</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[See <a href="http://amasty.com/landing-pages.html" target="_blank">Landing Pages</a> module.]]></comment>
+                        </show_landing_pages>
+                    </fields>
+                </landing>
+
+                <gallery>
+                    <label>Photo Gallery</label>
+                    <expanded>1</expanded>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>60</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <gallery_title translate="label">
+                            <label>Sub Header</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </gallery_title>
+                        <show_gallery translate="label">
+                            <label>Include Photo Gallery</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[See <a href="https://amasty.com/magento-photo-gallery-pro.html" target="_blank">Photo Gallery Pro</a> module.]]></comment>
+                        </show_gallery>
+                        <column_number translate="label">
+                            <label>Number of Columns</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>amseohtmlsitemap/source_numberrange</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </column_number>
+                    </fields>
+                </gallery>
+
+                <!--<brand translate="label">-->
+                    <!--<label>Improved Navigation: Brand Pages</label>-->
+                    <!--<expanded>1</expanded>-->
+                    <!--<frontend_type>text</frontend_type>-->
+                    <!--<sort_order>6</sort_order>-->
+                    <!--<show_in_default>1</show_in_default>-->
+                    <!--<show_in_website>1</show_in_website>-->
+                    <!--<show_in_store>1</show_in_store>-->
+                    <!--<fields>-->
+                        <!--<show_brand_pages translate="label">-->
+                            <!--<label>Include Brand Pages</label>-->
+                            <!--<frontend_type>select</frontend_type>-->
+                            <!--<source_model>adminhtml/system_config_source_yesno</source_model>-->
+                            <!--<sort_order>1</sort_order>-->
+                            <!--<show_in_default>1</show_in_default>-->
+                            <!--<show_in_website>1</show_in_website>-->
+                            <!--<show_in_store>1</show_in_store>-->
+                            <!--<comment><![CDATA[See <a href="http://amasty.com/improved-layered-navigation.html">Improved Layered Navigation</a> module.]]></comment>-->
+                        <!--</show_brand_pages>-->
+                        <!--<column_number translate="label">-->
+                            <!--<label>Number of Columns</label>-->
+                            <!--<frontend_type>select</frontend_type>-->
+                            <!--<source_model>amseohtmlsitemap/source_numberrange</source_model>-->
+                            <!--<sort_order>3</sort_order>-->
+                            <!--<show_in_default>1</show_in_default>-->
+                            <!--<show_in_website>1</show_in_website>-->
+                            <!--<show_in_store>1</show_in_store>-->
+                        <!--</column_number>-->
+                    <!--</fields>-->
+                <!--</brand>-->
+
+                <additional>
+                    <label>Additional Links</label>
+                    <expanded>1</expanded>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>70</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <links_title translate="label">
+                            <label>Sub Header</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </links_title>
+                        <column_number translate="label">
+                            <label>Number of Columns</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>amseohtmlsitemap/source_numberrange</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </column_number>
+                        <additional_links translate="label">
+                            <label>Additional Links</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Example: <br />Link text, link URL <br /> Link text, link URL <br /> ...]]></comment>
+                        </additional_links>
+                    </fields>
+                </additional>
+            </groups>
+        </amseohtmlsitemap>
+    </sections>
+</config>

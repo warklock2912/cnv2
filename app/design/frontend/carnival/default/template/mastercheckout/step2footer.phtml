@@ -1,0 +1,170 @@
+<div class="buttons-set" id="payment-buttons-container">
+    <button id="next-step-3" type="button" class="button" onclick="checkMethod()">
+        <span><span><?php echo $this->__('Next') ?></span></span></button>
+    <button type="button" class="button btn-white" onclick="activate_step('login', 'payment'); return false;">
+        <span><span><?php echo $this->__('Back') ?></span></span></button>
+    <span class="please-wait" id="payment-please-wait" style="display:none;">
+    <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>"
+         alt="<?php echo $this->__('Loading next step...') ?>" title="<?php echo $this->__('Loading next step...') ?>"
+         class="v-middle"/> <?php echo $this->__('Loading next step...') ?>
+  </span>
+    <?php echo $this->getChildHtml('agreements_omise') ?>
+</div>
+
+
+<script type="text/javascript">
+    //<![CDATA[
+    function checkMethod() {
+        var paymentMethod = jQuery("#co-payment-form").find("input[name='payment[method]']:checked").val();
+        if (paymentMethod == 'cybersourcesop') {
+            var saveServiceUrl = '<?php echo $this->getUrl('mastercheckout/onepage/savePaymentMethod', array('_secure' => true)) ?>';
+            var params = Form.serialize('co-payment-form');
+            var request = new Ajax.Request(
+                saveServiceUrl,
+                {
+                    method: 'post',
+                    parameters: params,
+
+                    onCreate: function () {
+                    }.bind(this),
+
+                    onComplete: function () {
+                    },
+                }
+            );
+        }
+
+        if (paymentMethod == 'omise_gateway') {
+            document.getElementById('next-step-3').disabled = true;
+            var omiseValidation = new Validation('co-payment-form');
+            if (omiseValidation.validate()) {
+                jQuery.ajaxSetup({async: false});
+                jQuery.getScript("https://cdn.omise.co/omise.min.js.gz", function () {
+                    <?php
+                    $config = Mage::getModel('omise_gateway/config')->load(1);
+                    $data = array(
+                        'public_key' => $config->public_key,
+                        'secret_key' => $config->secret_key,
+                    );
+
+                    if ($config->test_mode) {
+                        $data['public_key'] = $config->public_key_test;
+                        $data['secret_key'] = $config->secret_key_test;
+                    }
+                    ?>
+                    if ($j('input[type=radio][name="payment[omise_card_id]"]:checked').val() != 'new_omise_card') {
+                        // if ($('omise_use_my_card') && $('omise_use_my_card').value == 1) {
+                        // form.find("[data-omise=omise_token]").val(response.id);
+                        if (shippingMethod.save() != false) {
+                            payment.save();
+                        }
+                    } else {
+                        // Set Omise key
+                        Omise.setPublicKey("<?php echo $data['public_key']; ?>");
+                        var form = jQuery("#payment_form_omise_gateway"),
+                            formValidation = form.find('.omise-validation-advice'),
+                            formValidationMsg = formValidation.find('.validation-advice');
+
+                        // jQuery("#payment-buttons-container").find("button").prop("disabled", true);
+
+                        // Serialize the form fields into a valid card object.
+                        var card = {
+                            "name": form.find("[data-omise=holder_name]").val(),
+                            "number": form.find("[data-omise=number]").val(),
+                            "expiration_month": form.find("[data-omise=expiration_month]").val(),
+                            "expiration_year": form.find("[data-omise=expiration_year]").val(),
+                            "security_code": form.find("[data-omise=security_code]").val()
+                        };
+                        // console.log(card);
+                        formValidation.css({'opacity': 0, 'display': 'none'});
+
+                        // // Send a request to create a token
+                        // // then trigger the callback function once a response is received from Omise.
+                        // // * Note that the response could be an error and this needs to be handled
+                        // // * within the callback.
+                        Omise.createToken("card", card, function (statusCode, response) {
+                            // console.log(response);
+                            // If has an error (can not create a card's token).
+                            if (response.object == "error") {
+                                // Display an error message - "Omise Response: "+response.message.
+                                formValidation.css({'opacity': 1, 'display': 'block'});
+                                // formValidationMsg.html("Omise Response: "+response.message);
+                                alert(response.message);
+                                document.getElementById('next-step-3').disabled = false;
+                                return false;
+                                // jQuery("#payment-buttons-container").find("button").prop("disabled", false);
+                            } else if (typeof response.card != 'undefined' && !response.card.security_code_check) {
+                                // Display an error message - "Omise Response: Card authorization failure.".
+                                formValidation.css({'opacity': 1, 'display': 'block'});
+                                // formValidationMsg.html("Omise Response: Card authorization failure.");
+                                alert("Omise Response: Card authorization failure.");
+                                document.getElementById('next-step-3').disabled = false;
+                                return false;
+
+                                // jQuery("#payment-buttons-container").find("button").prop("disabled", false);
+                            } else {
+                                form.find("[data-omise=holder_name]").prop("disabled", true);
+                                form.find("[data-omise=number]").prop("disabled", true);
+                                form.find("[data-omise=expiration_month]").prop("disabled", true);
+                                form.find("[data-omise=expiration_year]").prop("disabled", true);
+                                form.find("[data-omise=security_code]").prop("disabled", true);
+
+                                form.find("[data-omise=omise_token]").val(response.id);
+                                if (shippingMethod.save() != false) {
+                                    payment.save();
+                                }
+                            }
+                            ;
+                        });
+                    }
+
+                });
+
+            } else {
+                document.getElementById('next-step-3').disabled = false;
+            }
+        } else if (paymentMethod == 'p2c2p') {
+            document.getElementById('next-step-3').disabled = true;
+            var p2c2pValidation = new Validation('co-payment-form');
+            if (p2c2pValidation.validate()) {
+                if (jQuery("#new_2c2p_card").length !== 0) {
+                    if ($j('input[type=radio][name="payment[custom_field_one]"]:checked').val() != 'new_2c2p_card' && $j('input[type=radio][name="payment[custom_field_one]"]:checked').val() != undefined) {
+                        if (shippingMethod.save() != false) {
+                            payment.save();
+                        }
+                    }
+
+                    if ($j('input[type=radio][name="payment[custom_field_one]"]:checked').val() == 'new_2c2p_card') {
+                        if (shippingMethod.save() != false) {
+                            payment.save();
+                        }
+
+                    }
+
+
+                }
+
+
+            }
+            document.getElementById('next-step-3').disabled = false;
+
+        } else {
+            document.getElementById('next-step-3').disabled = true;
+            if (shippingMethod.save() != false) {
+                payment.save();
+            }
+        }
+    }
+
+    var to_step_3 = function () {
+        // get method
+        document.getElementById('next-step-3').disabled = true;
+        if (shippingMethod.save() != false) {
+            payment.save();
+        }
+    };
+
+    //]]>
+
+
+</script>

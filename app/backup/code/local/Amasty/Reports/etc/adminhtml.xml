@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Reports
+ */
+-->
+<config>
+    <menu>
+        <report>
+            <children>
+                <amreports translate="title" module="amreports">
+                    <title>Amasty Reports</title>
+                    <sort_order>10000</sort_order>
+                    <action>adminhtml/amreports_data</action>
+                </amreports>
+            </children>
+        </report>
+    </menu>
+    <translate>
+        <modules>
+            <Amasty_Reports>
+                <files>
+                    <default>Amasty_Reports.csv</default>
+                </files>
+            </Amasty_Reports>
+        </modules>
+    </translate>
+</config>

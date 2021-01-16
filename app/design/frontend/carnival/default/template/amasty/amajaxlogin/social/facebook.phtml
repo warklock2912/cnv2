@@ -1,0 +1,142 @@
+<?php 
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Ajaxlogin
+ */  
+?>
+
+
+<style>
+body {
+    margin:0;
+}
+.am-facebook-image{
+    color: #FFFFFF;
+    height: 40px;
+    padding: 10px 0;
+    text-align: center;
+    cursor: pointer;
+    display: none;
+    font: 12px/16px Arial,Helvetica,sans-serif;
+    text-transform: uppercase;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+.am-facebook-image >span{
+    padding-left:22px;
+    display: inline-block;
+    line-height: 20px;
+    background: url("<?php echo  Mage::getDesign()->getSkinUrl('images/amasty/amajaxlogin/facebook-icon.png',array('_area'=>'frontend'))?>") no-repeat 5px center;
+}
+
+.am-facebook-image:hover{
+    background-position: bottom;
+}
+</style>
+
+
+<div class="am-facebook-image" id="am-facebook-image" style="" onclick="fb_connect();"
+     data="<?php echo $this->getUrlParaml() ?>" data-facebook-login-url="<?php echo $this->getFacebookLoginUrl() ?>">
+    <?php echo  $this->__('Connect with Facebook'); ?>
+</div>
+<div class="am-facebook-image" id="am-facebook-login" style="display: block" onclick="fb_login();">
+    <span><?php echo  $this->__('Login with Facebook'); ?> </span>
+</div>
+
+<div id="am-facebook-login">
+    <div id="fb-root"></div>
+    <script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId   : '<?php echo Mage::helper('amajaxlogin/facebook')->getAppId()?>',
+            oauth   : true,
+            status  : true, // check login status
+            cookie  : true, // enable cookies to allow the server to access the session
+            xfbml   : true // parse XFBML
+        });
+        
+        FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+                var facebook = document.getElementById('am-facebook-login');
+                facebook.style.display = 'none'; //or
+
+                var myfacebook = document.getElementById('am-facebook-image');
+                myfacebook.style.display = 'block';
+                         
+                var uid = response.authResponse.userID;
+                var accessToken = response.authResponse.accessToken;
+                myfacebook.setAttribute('data-access-token', accessToken);
+            } else if (response.status === 'not_authorized') {
+                var facebook = document.getElementById('am-facebook-login');
+                facebook.style.display = 'block'; //or
+
+                var myfacebook = document.getElementById('am-facebook-image');
+                myfacebook.style.display = 'none';
+            } else {
+                var facebook = document.getElementById('am-facebook-login');
+                facebook.style.display = 'block'; //or
+
+                var myfacebook = document.getElementById('am-facebook-image');
+                myfacebook.style.display = 'none';
+            }
+            });
+        };
+
+    function fb_connect() {
+        FB.getLoginStatus(function (response) {
+            if (response.status === 'connected') {
+                var myfacebook = document.getElementById('am-facebook-image'),
+                    accessToken = response.authResponse.accessToken;
+                myfacebook.setAttribute('data-access-token', accessToken);
+                window.parent.AmAjaxLoginObj.loginS(document.getElementById('am-facebook-image'));
+            } else if (response.status === 'not_authorized') {
+                var facebook = document.getElementById('am-facebook-login');
+                facebook.style.display = 'block'; //or
+
+                var myfacebook = document.getElementById('am-facebook-image');
+                myfacebook.style.display = 'none';
+            } else {
+                var facebook = document.getElementById('am-facebook-login');
+                facebook.style.display = 'block'; //or
+
+                var myfacebook = document.getElementById('am-facebook-image');
+                myfacebook.style.display = 'none';
+            }
+        });
+    }
+ 
+    function fb_login(){
+        FB.login(function(response) {
+            if (response.authResponse) {
+                var facebook = document.getElementById('am-facebook-login');
+                facebook.style.display = 'none'; //or
+            
+                var myfacebook = document.getElementById('am-facebook-image');
+                 myfacebook.style.display = 'block';
+
+                var accessToken = response.authResponse.accessToken;
+                myfacebook.setAttribute('data-access-token', accessToken);
+
+                FB.api('/me', function(response) {
+                    window.parent.AmAjaxLoginObj.loginS(document.getElementById('am-facebook-image'));
+                    user_email = response.email; //get user email
+                });
+
+            } else {
+                console.log('User cancelled login or did not fully authorize.');
+            }
+        }, {
+            scope: 'email,public_profile'
+        });
+    }
+    
+    (function() {
+        var e = document.createElement('script');
+        e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+        e.async = true;
+        document.getElementById('fb-root').appendChild(e);
+    }());
+    </script>
+</div>
+ 

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Smethod_SMSOrder>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Smethod_SMSOrder>
+    </modules>
+</config>

@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoGoogleSitemap
+ */
+-->
+<config>
+    <modules>
+        <Amasty_SeoGoogleSitemap>
+            <version>1.1.0</version>
+        </Amasty_SeoGoogleSitemap>
+    </modules>
+    <frontend>
+        <layout>
+            <updates>
+                <amseohtmlsitemap>
+                    <file>amasty/amseogooglesitemap/layout.xml</file>
+                </amseohtmlsitemap>
+            </updates>
+        </layout>
+
+        <routers>
+            <amseogooglesitemap>
+                <use>standard</use>
+                <args>
+                    <module>Amasty_SeoGoogleSitemap</module>
+                    <frontName>amseogooglesitemap</frontName>
+                </args>
+            </amseogooglesitemap>
+        </routers>
+    </frontend>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Amasty_SeoGoogleSitemap after="Mage_Adminhtml">Amasty_SeoGoogleSitemap_Adminhtml</Amasty_SeoGoogleSitemap>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <crontab>
+        <jobs>
+            <amseogooglesitemap_generate>
+                <run>
+                    <model>amseogooglesitemap/observer::generate</model>
+                </run>
+            </amseogooglesitemap_generate>
+        </jobs>
+    </crontab>
+    <global>
+        <models>
+            <amseogooglesitemap>
+                <class>Amasty_SeoGoogleSitemap_Model</class>
+                <resourceModel>amseogooglesitemap_mysql4</resourceModel>
+            </amseogooglesitemap>
+            <amseogooglesitemap_mysql4>
+                <class>Amasty_SeoGoogleSitemap_Model_Mysql4</class>
+                <entities>
+                    <sitemap>
+                        <table>am_seo_sitemap</table>
+                    </sitemap>
+                </entities>
+            </amseogooglesitemap_mysql4>
+        </models>
+        <resources>
+            <amseogooglesitemap_setup>
+                <setup>
+                    <module>Amasty_SeoGoogleSitemap</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </amseogooglesitemap_setup>
+            <amseogooglesitemap_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </amseogooglesitemap_write>
+            <amseogooglesitemap_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </amseogooglesitemap_read>
+        </resources>
+        <blocks>
+            <amseogooglesitemap>
+                <class>Amasty_SeoGoogleSitemap_Block</class>
+            </amseogooglesitemap>
+        </blocks>
+        <helpers>
+            <amseogooglesitemap>
+                <class>Amasty_SeoGoogleSitemap_Helper</class>
+            </amseogooglesitemap>
+        </helpers>
+    </global>
+</config>

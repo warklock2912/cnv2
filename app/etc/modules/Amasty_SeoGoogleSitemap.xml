@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoGoogleSitemap
+ */
+-->
+<config>
+    <modules>
+        <Amasty_SeoGoogleSitemap>
+            <active>true</active>
+            <codePool>local</codePool>
+            <edition>community</edition>
+            <depends>
+                <Amasty_SeoToolKit />
+            </depends>
+        </Amasty_SeoGoogleSitemap>
+        <!--<Mage_Catalog>
+            <active>false</active>
+            <codePool>core</codePool>
+            <depends>
+                <Mage_Eav/>
+                <Mage_Dataflow/>
+                <Mage_Cms/>
+                <Mage_Index/>
+            </depends>
+        </Mage_Catalog>-->
+    </modules>
+</config>

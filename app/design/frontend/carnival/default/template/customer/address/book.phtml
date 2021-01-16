@@ -1,0 +1,304 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Temlate for Mage_Customer_Block_Address_Book block
+ * @var $test Mage_Customer_Block_Address_Book
+ */
+?>
+<?php
+$customer = Mage::getSingleton('customer/session')->getCustomer();
+$addreses = $customer->getAddresses();
+$billingAddressId = $customer->getDefaultBilling();
+$shippingAddressId = $customer->getDefaultShipping();
+?>
+<div class="page-title title-buttons">
+  <h1><?php echo $this->__('Address Book') ?></h1>
+</div>
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+<div class="addresses-list">
+  <div class="addresses-primary">
+    <ol>
+      <?php if ($_pAddsses = Mage::getSingleton('customer/session')->getCustomer()->getDefaultShipping()): ?>
+        <li class="item">
+          <h3><?php echo $this->__('Shipping') ?></h3>
+          <address id="default_shipping_address">
+            <?php echo $this->getAddressHtml(Mage::getSingleton('customer/session')->getCustomer()->getAddressById($_pAddsses)) ?>
+          </address>
+          <!--<p><a
+              href="<?php /*echo $this->getAddressEditUrl(Mage::getSingleton('customer/session')->getCustomer()->getAddressById($_pAddsses)) */?>"><?php /*echo $this->__('Change Shipping Address') */?></a>
+          </p>-->
+        </li>
+      <?php else: ?>
+        <li class="item empty">
+          <h3><?php echo $this->__('Shipping') ?></h3>
+
+          <p><?php echo $this->__('You have no default shipping address in your address book.') ?></p>
+        </li>
+      <?php endif ?>
+      <?php if ($_pAddsses = Mage::getSingleton('customer/session')->getCustomer()->getDefaultBilling()): ?>
+        <li class="item">
+          <h3><?php echo $this->__('Billing') ?></h3>
+          <address id="default_billing_address">
+            <?php echo $this->getAddressHtml(Mage::getSingleton('customer/session')->getCustomer()->getAddressById($_pAddsses)) ?>
+          </address>
+          <!--<p><a
+              href="<?php /*echo $this->getAddressEditUrl(Mage::getSingleton('customer/session')->getCustomer()->getAddressById($_pAddsses)) */?>"><?php /*echo $this->__('Change Billing Address') */?></a>
+          </p>-->
+        </li>
+      <?php else: ?>
+        <li class="item">
+          <h3><?php echo $this->__('Billing') ?></h3>
+          <?php echo $this->__('You have no default billing address in your address book.') ?>
+        </li>
+      <?php endif ?>
+    </ol>
+  </div>
+  <div class="addresses-additional">
+    <h2>
+      <?php echo $this->__('my addresses') ?>
+      <button id="button-new-address" type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Add New Address')) ?>"
+              class="button button-new box-desktop2">
+        <span><span><?php echo $this->__('New Address') ?></span></span></button>
+      <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Add New Address')) ?>" class="button button-new box-mobile2" onclick="window.location='<?php echo $this->getAddAddressUrl() ?>';"><span><span><?php echo $this->__('Add New Address') ?></span></span></button>
+    </h2>
+    <div class="form-address-new" id="form-address-new" style="display:none;">
+      <?php echo $this->getChildHtml('customer_address_form'); ?>
+    </div>
+    
+    <?php if ($addreses): ?>
+      <table class="data-table">
+        <col/>
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <thead>
+          <tr>
+            <th><?php echo $this->__('Addresses') ?></th>
+            <th><?php echo $this->__('Billing addresses') ?></th>
+            <th><?php echo $this->__('Shipping addresses') ?></th>
+            <th><?php echo $this->__('Delete') ?></th>
+          </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($addreses as $_address): ?>
+          <tr id="tr_<?php echo $_address->getId() ?>" <?php if ($_address->getId() != $billingAddressId && $_address->getId() != $shippingAddressId): ?>class="white"<?php endif; ?>>
+            <td class="a-left">
+              <address id="address_<?php echo $_address->getId() ?>">
+                <?php echo $this->getAddressHtml($_address) ?>
+              </address>
+              <p class="a-edit box-desktop2" id="link_edit_<?php echo $_address->getId() ?>" customer_address_id ="<?php echo $_address->getId() ?>"
+                 title="<?php echo $this->__('Edit Address') ?>"><?php echo $this->__('Edit') ?></p>
+              <p class="a-edit box-mobile2">
+                <a href="<?php echo $this->getUrl('customer/address/edit', array('id'=>$_address->getId())) ?>"><?php echo $this->__('Edit') ?></a>
+              </p>
+<!--              <p class="">-->
+                <a class="link-remove box-mobile2 address_delete_<?php echo $_address->getId() ?> "  href="#"
+                   <?php if ($_address->getId() == $billingAddressId || $_address->getId() == $shippingAddressId): ?>style="display:none"<?php endif; ?>
+                   onclick="return deleteAddress('<?php echo $_address->getId() ?>');"
+                   title="<?php echo $this->__('Delete Address') ?>"><?php echo $this->__('Delete') ?></a>
+<!--              </p>-->
+              <p class="ajaxload" id="ajaxload_<?php echo $_address->getId() ?>" style="display:none;">
+                  <span><?php echo $this->__('Loading...') ?></span>
+              <div class="address_content-edit" id="address_content_edit_<?php echo $_address->getId() ?>">
+              </div>
+            </td>
+            <td>
+                <div class="box-checkbox">
+                <input
+                  onclick="setDefaultAddress('billing','<?php echo $this->getUrl('myaccount/index/setdefault') ?>','<?php echo $_address->getId() ?>');"
+                  type="checkbox" class="checkbox"
+                  <?php if ($_address->getId() == $billingAddressId): ?>checked="checked"
+                  disabled="disabled" <?php endif; ?> id="default_billing_address_<?php echo $_address->getId() ?>"
+                  name="default_billing_address_<?php echo $_address->getId() ?>"/>
+                <label><?php echo $this->__('Default billing address') ?></label>
+                </div>
+            </td>
+            <td>
+              <div class="box-checkbox">
+                <input
+                  onclick="setDefaultAddress('shipping','<?php echo $this->getUrl('myaccount/index/setdefault') ?>','<?php echo $_address->getId() ?>');"
+                  type="checkbox"
+                  class="checkbox" <?php if ($_address->getId() == $shippingAddressId): ?> checked="checked" disabled="disabled" <?php endif; ?>
+                  id="default_shipping_address_<?php echo $_address->getId() ?>"
+                  name="default_shipping_address_<?php echo $_address->getId() ?>"/>
+                <label><?php echo $this->__('Default shipping address') ?></label>
+              </div>
+            </td>
+            <td>
+              <a class="btn-remove3 link-remove address_delete_<?php echo $_address->getId() ?>"  href="#"
+                   <?php if ($_address->getId() == $billingAddressId || $_address->getId() == $shippingAddressId): ?>style="display:none"<?php endif; ?>
+                   onclick="return deleteAddress('<?php echo $_address->getId() ?>');"
+                   title="<?php echo $this->__('Delete Address') ?>"><?php echo $this->__('Delete') ?></a></td>
+
+          </tr>
+
+        <?php endforeach; ?>
+        </tbody>
+      </table>
+    <?php else: ?>
+      <div class="item empty">
+          <p><?php echo $this->__('You have no additional address entries in your address book.') ?></p>
+      </div>
+    <?php endif ?>
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  //<![CDATA[
+  function deleteAddress(addressId) {
+    if (confirm('<?php echo Mage::helper('core')->jsQuoteEscape($this->__('Are you sure you want to delete this address?')) ?>')) {
+      window.location = '<?php echo $this->getDeleteUrl() ?>id/' + addressId;
+    }
+    return false;
+  }
+  function setDefaultAddress(action, url, addressId) {
+    var is_change_address;
+    var element = 'default_' + action + '_address_' + addressId;
+    if ($(element).checked == true) {
+      is_change_address = 1;
+    }
+    else {
+      is_change_address = 0;
+    }
+    if (is_change_address == 1) {
+      var addressDefault = $('address_' + addressId).innerHTML;
+      var linkEditDefault = $('link_edit_' + addressId).href;
+      new Ajax.Request(
+        url,
+        {
+          parameters: {
+            address_id: addressId,
+            action: action
+          },
+
+          method: 'GET',
+
+          onCreate: function () {
+            $('ajaxload_' + addressId).show();
+          },
+
+          onSuccess: function (transport) {
+            $('ajaxload_' + addressId).hide();
+            if (transport.responseJSON.success == 'error') {
+              $(element).checked = false;
+              $(element).next().removeClassName('checkbox-checked');
+            }
+            if (transport.responseJSON.success == 'saved') {
+              if (typeof(transport.responseJSON.old_id) != 'undefined') {
+                var oldId = transport.responseJSON.old_id;
+                var oldElement = 'default_' + action + '_address_' + oldId;
+                $(oldElement).checked = false;
+                $(oldElement).next().removeClassName('checkbox-checked');
+                $(oldElement).enable();
+//                $('.address_delete_' + addressId).hide();
+                $$('.address_delete_' + addressId).each(function(e){
+                  e.hide();
+                });
+                $('tr_' + addressId).removeClassName('white');
+                var currentElement = 'default_' + action + '_address_' + addressId;
+                $(currentElement).disable();
+                $('default_' + action + '_address').update($('address_' + addressId).innerHTML);
+//                $('link_edit_' + action + '').href = linkEditDefault;
+                if ($('default_billing_address_' + oldId).next().hasClassName('checkbox-checked') || $('default_shipping_address_' + oldId).next().hasClassName('checkbox-checked')) {
+                  return;
+                } else {
+//                  $('.address_delete_' + oldId).show();
+                  $$('.address_delete_' + oldId).each(function(e){
+                    e.show();
+                  });
+                  $('tr_' + oldId).addClassName('white');
+                  
+                }
+              }
+            }
+          }
+        }
+      )
+    }
+    else {
+      $(element).checked = true;
+      $(element).next().addClassName('checkbox-checked');
+    }
+  }
+
+  $$('.a-edit').each(function(e){
+    var customer_address_id = e.getAttribute('customer_address_id');
+    var address_content_edit = jQuery('#address_content_edit_' + customer_address_id);
+    e.observe('click',function(){
+      if(e.hasClassName('show')){
+        e.removeClassName('show');
+      }else{
+        e.addClassName('show');
+      }
+
+//      if content updated, no need call ajax again
+      if(address_content_edit.hasClass("content_updated")){
+        address_content_edit.toggle(200);
+        $('address_'+customer_address_id).hide();
+        $('link_edit_'+customer_address_id).hide();
+        return;
+      }
+      new Ajax.Request("<?php echo Mage::getUrl('myaccount/index/get_address_edit_html', array('_secure' => true))?>",{
+        parameters:{
+          address_id : customer_address_id
+        },
+        onCreate:function(){
+          $('ajaxload_' + customer_address_id).show();
+          $('address_'+customer_address_id).hide();
+          $('link_edit_'+customer_address_id).hide();
+        },
+        onSuccess: function(transport){
+          var response = transport.responseText.evalJSON();
+          if(response.html){
+            address_content_edit.addClass("content_updated");
+            address_content_edit.html(response.html);
+          }
+          if(response.error){
+            alert(response.error);
+          }
+          $('ajaxload_' + customer_address_id).hide();
+        }
+      });
+    });
+  });
+
+  function hideeditform(address_id){
+    jQuery('#address_content_edit_' + address_id).hide();
+    $('address_'+address_id).show();
+    $('link_edit_'+address_id).show();
+  }
+
+  //]]>
+  jQuery('table tr').customRadioCheckbox();
+  jQuery('#button-new-address').click(function() {
+    jQuery("#form-address-new").show();
+  })
+  
+</script>
+<div id="detail-message-review"></div>

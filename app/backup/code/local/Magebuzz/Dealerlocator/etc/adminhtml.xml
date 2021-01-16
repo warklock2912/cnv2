@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<config>
+  <menu>
+    <dealerlocator module="dealerlocator">
+      <title>Dealer Locator</title>
+      <sort_order>71</sort_order>
+      <children>
+        <item1 module="dealerlocator">
+          <title>Manage Dealers</title>
+          <sort_order>0</sort_order>
+          <action>adminhtml/dealerlocator</action>
+        </item1>
+        <item2 module="dealerlocator">
+          <title>Import Dealers</title>
+          <sort_order>1</sort_order>
+          <action>adminhtml/dealerlocator_import/index</action>
+        </item2>
+        <item3 module="dealerlocator">
+          <title>Configuration</title>
+          <sort_order>2</sort_order>
+          <action>adminhtml/system_config/edit/section/dealerlocator</action>
+        </item3>
+      </children>
+    </dealerlocator>
+  </menu>
+  <acl>
+    <resources>
+      <all>
+        <title>Allow Everything</title>
+      </all>
+      <admin>
+        <children>
+          <system>
+            <children>
+              <config>
+                <children>
+                  <dealerlocator>
+                    <title>Dealer Locator Permission Setting</title>
+                  </dealerlocator>
+                </children>
+              </config>
+            </children>
+          </system>
+          <dealerlocator module="dealerlocator">
+            <title>Dealer Locator</title>
+            <sort_order>71</sort_order>
+            <children>
+              <item1 module="dealerlocator">
+                <title>Manage Dealers</title>
+                <sort_order>0</sort_order>
+                <action>adminhtml/dealerlocator</action>
+              </item1>
+              <item2 module="dealerlocator">
+                <title>Import Dealers</title>
+                <sort_order>1</sort_order>
+                <action>adminhtml/dealerlocator_import/index</action>
+              </item2>
+              <item3 module="dealerlocator">
+                <title>Configuration</title>
+                <sort_order>2</sort_order>
+                <action>adminhtml/system_config/edit/section/dealerlocator</action>
+              </item3>
+            </children>
+          </dealerlocator>
+        </children>
+      </admin>
+    </resources>
+  </acl>
+</config>

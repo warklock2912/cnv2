@@ -1,0 +1,330 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php $_product = $this->getProduct(); 
+///////////////////////// Counting Down /////////////////////////
+  if(!$_product->getIsRaffle()):
+          $buttonTitle = Mage::helper('core')->quoteEscape($this->__('Add to Cart'));
+          $countingup_ = Mage::helper('countingdown')->getTimecommingup();
+          $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product->getId());
+                // Start Upcoming
+                    if ($countingup_ > 0) {
+                      if ($stock->getData('is_store_only') == 1):
+                        ?>
+                        <div class="add-to-box">
+                          <div class="add_to_cart_">
+                            <div class="add_to_cart_buttons">
+                              <button type="button"  class="button" disabled ><span><span><?php echo Mage::helper('core')->quoteEscape($this->__('IN STORE ONLY')); ?></span></span></button>
+                            </div>
+                          </div>
+                        </div>
+                        <?php return; ?>
+                      <?php 
+                      else : ?>
+                        <?php
+                        $countingup_ = Mage::helper('countingdown')->getTimecommingup();
+                        if(($countingup_) > 0):
+                          ?>
+                          <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('refresh_page')->toHtml(); ?>
+                        <?php endif; ?>
+                        <div class="add-to-box">
+                          <div class="add_to_cart_">
+                            <div class="add_to_cart_buttons">
+                              <button type="button"  class="button" disabled ><span><span><?php echo $buttonTitle ?></span></span></button>
+                            </div>
+                          </div>
+                        </div>
+                        <?php return; ?>
+                      <?php 
+                      endif; ?>
+                      <?php 
+                    } ?>
+              <!-- End Upcoming -->
+            <?php 
+              // Start Product timeout countingdown
+              if ($_product->isSaleable()): ?>
+                <?php
+                $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product->getId());
+                if ($stock->getData('is_store_only') == 1):
+                  ?>
+                  <div class="add-to-box">
+                    <div class="add_to_cart_">
+                      <div class="add_to_cart_buttons">
+                        <button type="button"  class="button" disabled ><span><span><?php echo Mage::helper('core')->quoteEscape($this->__('IN STORE ONLY')); ?></span></span></button>
+                      </div>
+                    </div>
+                  </div>
+                    <?php 
+                else: ?>
+                  <div class="add-to-cart">
+                    <?php if (!$_product->isGrouped()): ?>
+                      <div class="qty-wrapper">
+                        <div class="qtywrapper-update">  
+                          <input type="button" data-item-id="<?php echo $_product->getId(); ?>" onclick="decQtyMiniCart('cart-detail<?php echo $_product->getId() ?>')" value="<?php echo $this->__('-') ?>" class="update_qty btn_minus out" />
+                          <input id="qinput-cart-detail<?php echo $_product->getId(); ?>" type="text" pattern="\d*" name="qty" maxlength="12" value="<?php echo max($this->getProductDefaultQty() * 1, 1) ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Qty')) ?>" class="input-text qty" />       
+                          <input data-item-id="<?php echo $_product->getId(); ?>" type="button" onclick="incQtyMiniCart('cart-detail<?php echo $_product->getId() ?>')" value="<?php echo $this->__('+') ?>" class="update_qty btn_plus" />
+                        </div>
+                      </div>
+                    <?php endif; ?>
+                    <div class="add-to-cart-buttons">
+                      <?php echo $this->getChildHtml('', true, true) ?>
+                      <button type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button>
+                    </div>
+                  </div>
+                    <?php 
+                endif; 
+              endif;
+              // end Product timeout countingdown
+///////////////////////// End Counting /////////////////////////            
+  else:
+///////////////////////// Raffle /////////////////////////
+      $customer_id = Mage::getSingleton('customer/session')->getCustomerId();
+      $check = Mage::helper('ruffle')->checkUserCanJoin($_product);
+      $ruffle_id = $check['ruffle_id'];
+      $checkUserCanJoin = $check['is_allow'];
+      $announce_date = date("d-m-Y", strtotime($check['m_announce_date']));
+
+      $locale = substr(Mage::app()->getLocale()->getLocaleCode(), 0, 2); ?>
+            <script type="text/javascript">
+                jQuery('body').addClass('ruffle-product-view');
+            </script>
+            <?php 
+                $locale = substr(Mage::app()->getLocale()->getLocaleCode(), 0, 2);
+                if ($locale == 'th'): ?>
+                    <style>
+                    .ruffle-product-view .main-container {
+                        background: #111 url("/skin/frontend/carnival/default/css/ruffle/images/ruffle_bg_th.png") top center no-repeat;
+                        max-width: 100%;
+                        background-size: contain;            
+                    }
+                    </style>
+                <?php 
+                    $email_text = $check['email_join_th'];
+                else: ?>
+                    <style>
+                    .ruffle-product-view .main-container {
+                        background: #111 url("/skin/frontend/carnival/default/css/ruffle/images/ruffle_bg.png") top center no-repeat;
+                        max-width: 100%;
+                        background-size: contain;
+                    }
+                    </style>
+                <?php 
+                    $email_text = $check['email_join_en'];
+
+                endif;      
+///////////////////////// User Can join this raffle /////////////////////////
+
+if(!$customer_id): ?>
+           <div class="add-to-box">
+                  <div class="add_to_cart_">
+                    <div class="add_to_cart_buttons">
+                        <button type="button" id="join-ruffle-login" class="button ruffle-joined" onclick="return false"><span><span><?php echo $this->__('Please Login'); ?></span></span></button>
+                    </div>
+                  </div>
+                </div>
+            <script type="text/javascript">
+             Event.observe('join-ruffle-login', 'click', loadLoginWithAjax);
+            </script>
+   <?php 
+else:     
+    if($checkUserCanJoin > 0):
+            
+            $isWinnerRuffle = Mage::helper('ruffle')->checkWinnerRuffle($_product,$customer_id);
+            /////////////////////// WINNER /////////////////////////
+            if(!empty($isWinnerRuffle)): 
+                // start comment hide winner function ------------
+                $buttonTitle = Mage::helper('core')->quoteEscape($this->__('Add to Cart')); ?>
+                <!-- <div class="add-to-cart"> -->
+                  <?php 
+                  // if (!$_product->isGrouped()): ?>
+                           <!--  <div class="qty-wrapper">
+                              <div class="qtywrapper-update">
+                                <input id="qinput-cart-detail<?php echo $_product->getId(); ?>" readonly type="text" pattern="\d*" name="qty" maxlength="12" value="<?php echo max($this->getProductDefaultQty() * 1, 1) ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Qty')) ?>" class="input-text qty limit-qty" />
+                              </div>
+                            </div> -->
+                    <?php 
+                  // endif;
+                  // $isCustomerBought = Mage::helper('ruffle')->checkWinnerBoughtProduct($_product);
+                  // $availableDayCanBuy = Mage::helper('ruffle')->checkAvailableDayCanBuy($_product);
+
+                  // if($isCustomerBought == false && $availableDayCanBuy == true): ?>
+                      <!-- <div class="add-to-cart-buttons">
+                        <?php echo $this->getChildHtml('', true, true) ?>
+                        <button type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button>
+                      </div> -->
+                      <?php 
+                  // endif; ?>
+                <!-- </div> -->
+              <!-- end comment hide winner function-->
+              <?php 
+            elseif(empty($isWinnerRuffle)):
+            if($check['join_time'] == 'intime'):
+                $isJoiner = Mage::helper('ruffle')->checkJoinerRuffle($ruffle_id,$customer_id); ?>
+                <div class="add-to-box">
+                  <div class="add_to_cart_">
+                    <div class="add_to_cart_buttons">
+                    <?php 
+                   
+
+                    if($isJoiner == false): 
+                   // Not join
+               ?> 
+                          <button type="button" id="join-ruffle-button" class="button" onclick="ruffleForm.submit(this)"><span><span><?php echo $this->__('Join Raffle'); ?></span></span></button>
+                          <ul class="ruffle-form-info" id = "ruffle-form-info" style = "display: none">
+                            <li class="">
+                              <p class="poup-close">x</p>
+                              <h2><?php echo $this->__('Your Information') ?></h2>
+                                  <div id="personal-information">
+                                    <div class="fieldset">
+                                      <ul class="form-list">
+                                        <li class="fields">
+                                          <label style="float: left; width: 30%" for="personal_id" class="required"><em>*</em><?php echo $this->__('Personal ID ') ?></label>
+                                          <div class="input-box">
+                                            <input name="personal_id" id="personal_id" maxlength="13" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                          </div>
+                                        </li>
+                                        <li class="fields">
+                                          <label style="float: left; width: 30%" for="telephone" class="required"><em>*</em><?php echo $this->__('Tel. ') ?></label>
+                                          <div class="input-box">
+                                            <input name="telephone" id="telephone" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                          </div>
+                                        </li>
+                                        <li class="fields">
+                                          <div class="radio_tag clearfix">
+                                            <div class="row_radio clearfix">
+                                              <label class="checkcontainer">
+                                                <input type="radio"  checked="checked"  name="msg" value="<?php echo $this->__('Pick up at CARNIVAL at Siam Square Soi 7') ?>">
+                                                <span class="radiobtn"></span>
+                                              </label>
+                                              <label class="msg" for="msg" class="required"><?php echo $this->__('Pick up at CARNIVAL at Siam Square Soi 7') ?></label>
+                                            </div>
+                                            <input type="hidden" name="email_text" value="<?php echo  $email_text ?>">
+                                            <input type="hidden" name="announce_date" value="<?php echo  $announce_date ?>">
+                                            <input type="hidden" name="customer_id" value="<?php echo $customer_id ?>">
+                                            <div class="row_radio clearfix">
+                                              <label class="checkcontainer">
+                                                <input type="radio" name="msg" value="<?php echo $this->__('Delivery at home') ?>">
+                                                <span class="radiobtn"></span>
+                                              </label>
+                                              <label class="msg" for="msg" class="required"><?php echo $this->__('Delivery at home') ?></label>
+                                            </div> 
+                                          </div>
+                                        </li>
+                                      </ul>
+                                      <div class="add-to-box">
+                                        <button type="button" id="submit-information-personal" class="button" onclick="addmoreInformation(this)"><span><span><?php echo $this->__('Confirm Join Raffle'); ?></span></span></button>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </li>
+                          </ul>
+                          <script type="text/javascript">
+                              var noti_phone = '<?php echo $this->__("Telephone must be from 10 digits"); ?>';
+                          </script>
+                          <script>
+                            jQuery(document).ready(function($){
+                              $cf = $('#telephone');
+                              $cf.blur(function(e){
+                                  phone = $(this).val();
+                                  phone = phone.replace(/[^0-9]/g,'');
+                                  if (phone.length != 10)
+                                  {
+                                      alert(noti_phone);
+                                      $('#telephone').val('');
+                                  }
+                              });
+                          });
+                          </script>
+                    <?php 
+                    
+                    elseif($isJoiner == true):  ?>
+                            <button type="button" id="join-ruffle-button" class="button ruffle-joined" onclick="return false"><span><span><?php echo $this->__('You joined this product'); ?></span></span></button>
+                      <?php 
+                    endif; ?>
+                    </div>
+                  </div>
+                </div>
+                    <script type="text/javascript">
+                    //<![CDATA[
+                      var ruffleForm = new VarienForm('product_addtocart_form');
+                      ruffleForm.submit = function(e) {
+                        if (this.validator.validate()) {
+                         
+                            $('ruffle-form-info').show();
+                        }
+                      }.bind(ruffleForm);
+
+                      function joiner(){
+                        $('ruffle-messages').show();
+                      }
+                      jQuery('.poup-close').on('click', function() {
+                          $('ruffle-form-info').hide();
+                        });
+                      if($('#ruffle-messages') != null){
+                        $('ruffle-messages').on('click', function() {
+                          $(this).hide();
+                        });
+                      }
+
+                      function addmoreInformation(){
+                       $('product_addtocart_form').action = '<?php echo $this->getUrl("ruffle/index/confirm")?>';
+                        if($('personal_id').value && $('telephone').value){
+                          if($('personal_id').value.length != 13){
+                            alert('Personal Id must be 13 Digit');
+                          }else{
+                            $('product_addtocart_form').submit();
+                          }
+                        }else{
+                          alert('Please Fill Missing Data');
+                        }
+                      }
+                      //]]>
+                    </script>
+                  <?php 
+                ///////////////////////// End User Logedin /////////////////////////
+                ///////////////////////// Start User Not Logedin /////////////////////////
+               
+                ///////////////////////// End User Not Logedin /////////////////////////
+              endif;   // line 70
+            endif;   // line 63
+
+          ///////////////////////// END Raffle Running /////////////////////////
+    ///////////////////////// User Cant join this raffle /////////////////////////
+    else: ?>
+                <div class="add-to-box">
+                  <div class="add_to_cart_">
+                    <div class="add_to_cart_buttons">
+                        <button type="button" id="join-ruffle-button" class="button ruffle-joined" onclick="return false"><span><span><?php echo $this->__('You Can\'t join this product'); ?></span></span></button>
+                    </div>
+                  </div>
+                </div>
+    <?php
+    endif;
+
+
+
+  endif; 
+endif; ?>

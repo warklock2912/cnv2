@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<config>
+	<menu>
+		<customaddress module="customaddress">
+			<title>Thai Address</title>
+			<sort_order>60</sort_order>               
+			<children>
+				<region module="customaddress">
+					<title>Manage Regions</title>
+					<sort_order>10</sort_order>
+					<action>adminhtml/customaddress_region</action>
+				</region>
+				<city module="customaddress">
+					<title>Manage City</title>
+					<sort_order>20</sort_order>
+					<action>adminhtml/customaddress_city</action>
+				</city>
+				<subdistrict module="customaddress">
+					<title>Manage Subdistrict</title>
+					<sort_order>30</sort_order>
+					<action>adminhtml/customaddress_subdistrict</action>
+				</subdistrict>
+			</children>
+		</customaddress>
+	</menu>
+	<acl>
+		<resources>
+			<all>
+				<title>Allow Everything</title>
+			</all>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<config>
+								<children>
+									<customaddress>
+										<title>Custom Address</title>
+										<sort_order>250</sort_order>
+									</customaddress>
+								</children>
+							</config>
+						</children>
+					</system>
+					<customaddress module="customaddress">
+						<title>Thai Address</title>
+						<sort_order>60</sort_order>               
+						<children>
+							<region module="customaddress">
+								<title>Manage Regions</title>
+								<sort_order>10</sort_order>
+								<action>adminhtml/customaddress_region</action>
+							</region>
+							<city module="customaddress">
+								<title>Manage City</title>
+								<sort_order>20</sort_order>
+								<action>adminhtml/customaddress_city</action>
+							</city>
+							<subdistrict module="customaddress">
+								<title>Manage Subdistrict</title>
+								<sort_order>30</sort_order>
+								<action>adminhtml/customaddress_subdistrict</action>
+							</subdistrict>
+						</children>
+					</customaddress>
+				</children>				
+			</admin>
+		</resources>
+	</acl>
+</config>

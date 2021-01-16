@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Customform
+ */
+-->
+<config>
+    <menu>
+        <cms>
+            <children>
+                <amcustomform_customforms translate="title" module="amcustomform">
+                    <title>Custom Forms</title>
+                    <sort_order>50</sort_order>
+                    <children>
+                        <amcustomforms_fields>
+                            <action>adminhtml/field</action>
+                            <title>Fields</title>
+                            <sort_order>10</sort_order>
+                        </amcustomforms_fields>
+                        <amcustomforms_forms>
+                            <action>adminhtml/form</action>
+                            <title>Forms</title>
+                            <sort_order>20</sort_order>
+                        </amcustomforms_forms>
+                        <amcustomforms_submits>
+                            <action>adminhtml/submit</action>
+                            <title>Submitted Data</title>
+                            <sort_order>30</sort_order>
+                        </amcustomforms_submits>
+                    </children>
+                </amcustomform_customforms>
+            </children>
+        </cms>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <amcustomform translate="title" module="amcustomform">
+                                        <title>Amasty - Custom Forms</title>
+                                    </amcustomform>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <cms>
+                        <children>
+                            <amcustomform_customforms translate="title" module="amcustomform">
+                                <title>Custom Forms</title>
+                                <sort_order>60</sort_order>
+                                <children>
+                                    <amcustomforms_fields translate="title" module="amcustomform">
+                                        <title>Custom Forms Fields</title>
+                                    </amcustomforms_fields>
+                                    <amcustomforms_forms translate="title" module="amcustomform">
+                                        <title>Custom Forms</title>
+                                    </amcustomforms_forms>
+                                    <amcustomforms_submits translate="title" module="amcustomform">
+                                        <title>Custom Forms Submits</title>
+                                    </amcustomforms_submits>
+                                </children>
+                            </amcustomform_customforms>
+                        </children>
+                    </cms>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

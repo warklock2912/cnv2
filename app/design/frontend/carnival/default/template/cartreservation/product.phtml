@@ -1,0 +1,52 @@
+<?php
+
+/*
+
+Plumrocket Inc.
+
+NOTICE OF LICENSE
+
+This source file is subject to the End-user License Agreement
+that is available through the world-wide-web at this URL:
+http://wiki.plumrocket.net/wiki/EULA
+If you are unable to obtain it through the world-wide-web, please
+send an email to support@plumrocket.com so we can send you a copy immediately.
+
+@package    Plumrocket_Cart_Reservation-v1.5.x
+@copyright  Copyright (c) 2016 Plumrocket Inc. (http://www.plumrocket.com)
+@license    http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ 
+*/
+?>
+
+<div class="cart-reservation">
+    <div>
+        <div class="clock"></div>
+        <div class="title">
+            <p><?php echo $this->__('สามารถสั่งซื้อ') ?></p>
+            <p><?php echo $this->__('สินค้าได้ในอีก') ?></p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var clock;
+    var time = <?php echo $this->getTime(); ?>;
+    $j(document).ready(function () {
+        if (time > 0) {
+
+            var clock;
+            clock = $j('.clock').FlipClock({
+                clockFace: 'DailyCounter',
+                autoStart: false,
+                callbacks: {
+                    stop: function () {
+                        location.reload();
+                    }
+                }
+            });
+            clock.setTime(time);
+            clock.setCountdown(true);
+            clock.start();
+        }
+    });
+</script>

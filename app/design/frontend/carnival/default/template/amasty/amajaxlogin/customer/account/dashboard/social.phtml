@@ -1,0 +1,37 @@
+<?php 
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Ajaxlogin
+ */  
+
+if(Mage::helper('amajaxlogin/google')->isEnable() || Mage::helper('amajaxlogin/facebook')->isEnable() || Mage::helper('amajaxlogin/twitter')->isEnable()): ?>
+<div class="amajaxlogin-block dashboard">
+    <div class="box-account box-info">
+        <div class="box-head">
+            <h2>Social Connect</h2>
+        </div>
+        <div class="amajaxlogin-social-title box-title">
+            You can connect store account with you Social account so you could login easier in the future.
+        </div>
+        <div class="amajaxlogin-social-icon">
+           <?php if(Mage::helper('amajaxlogin/google')->isEnable()) {?>
+					<div id="am-ajax-google"><iframe width="115" height="32" scrolling="no" style="border: 0;" src="<?php echo Mage::helper('amajaxlogin/google')->getIframeUrl()?>"></iframe></div>
+			<?php } ?>
+			<?php if(Mage::helper('amajaxlogin/facebook')->isEnable()) {?>
+					<div id="am-ajax-facebook"><iframe width="115" height="32" scrolling="no" style="border: 0;" src="<?php echo Mage::helper('amajaxlogin/facebook')->getIframeUrl()?>"></iframe></div>
+			<?php } ?>
+			<?php if(Mage::helper('amajaxlogin/twitter')->isEnable()) {?>
+					<div id="am-ajax-twitter"><?php echo Mage::helper('amajaxlogin/twitter')->getTwitterHtml()?></div>
+			<?php } ?>
+            
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+</div>
+<?php
+     endif;
+
+
+
+

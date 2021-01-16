@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <adminhtml_confirmpayment_index>
+    <reference name="content">
+      <block type="confirmpayment/adminhtml_confirmpayment" name="cpform" />
+    </reference>
+  </adminhtml_confirmpayment_index>
+  <adminhtml_confirmpayment_view>
+        <reference name="content">
+            <block type="confirmpayment/adminhtml_confirmpayment_view" name="cpview" />
+        </reference>
+    </adminhtml_confirmpayment_view>
+</layout>

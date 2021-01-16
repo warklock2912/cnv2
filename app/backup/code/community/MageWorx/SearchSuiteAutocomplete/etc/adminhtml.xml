@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--/**
+ * MageWorx
+ * Search Suite
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuiteAutocomplete
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <mageworx_searchsuite>
+                                        <children>
+                                            <autocomplete translate="title" module="mageworx_searchsuiteautocomplete">
+                                                <title>Autocomplete</title>
+                                                <sort_order>600</sort_order>
+                                            </autocomplete>
+                                        </children>
+                                    </mageworx_searchsuite>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,102 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition End User License Agreement
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magento.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license http://www.magento.com/license/enterprise-edition
+ */
+?>
+
+<?php $_items = $this->getReviewsCollection()->getItems();?>
+<?php $count = $this->getReviewsCollection()->getSize();?>
+<?php 
+      $product = Mage::getModel('catalog/product');
+      $productInfo = $product->load($this->getRequest()->getParam('id'));
+    ?>
+<div class="collateral-box box-reviews" id="customer-reviews">
+  <h2>
+    <?php echo $this->__('Customer Reviews') ?>
+    <?php if($count >0): echo '(total '.$count.')'; endif;?>
+  </h2>
+  <?php if ($count):?>
+    <div class="list-review">
+      <?php $RatingOb=Mage::getModel('rating/rating')->getEntitySummary($productInfo->getId());
+      if(!$RatingOb->getCount()){
+        $ratings=$RatingOb->getSum()/1;
+      }else{
+       $ratings=$RatingOb->getSum()/$RatingOb->getCount();
+      }
+    ?>
+      <?php if($ratings): ?>
+          <div class="total-review">
+            <div class="total-review-content">
+              <div class="ratings">
+                  <div class="rating-box">
+                      <div class="rating" style="width:<?php echo $ratings; ?>%"></div>
+                  </div>
+              </div>
+              <strong>
+                <span><?php echo round($ratings/100*5,1) ?></span>
+                <?php echo $this->__(' out of 5'); ?>
+              </strong>
+            </div>
+          </div>
+      <?php endif; ?>
+    
+      
+        <?php foreach ($_items as $_review):?>
+          <?php $_votes = $_review->getRatingVotes(); ?>
+          <dl>
+            <dt>
+              <span class="nickname"><?php echo $this->escapeHtml($_review->getNickname()); ?></span>
+              <?php if($_review->getData('customer_id')): ?>
+                <span class="verified-buyer"><?php echo $this->__('Verified buyer') ?></span>
+              <?php endif; ?>
+              <span class="date">
+                <?php echo Mage::getModel('core/date')->date('d M,Y', strtotime($this->formatDate($_review->getCreatedAt())));?>
+              </span>
+              <?php if (count($_votes)): ?>
+                  <?php foreach ($_votes as $_vote): ?>
+                    <div class="box-star">
+                        <?php if(count($_votes) >1):?><label><?php echo $this->escapeHtml($_vote->getRatingCode()) ?></label><?php endif; ?>
+                        <div class="ratings"> 
+                          <div class="rating-box">
+                              <div class="rating" style="width:<?php echo $_vote->getPercent() ?>%;"></div>
+                          </div>
+                        </div>
+                    </div>
+                  <?php endforeach; ?>
+                <?php endif; ?>
+            </dt>
+            <dd>
+              <strong class="title"><?php echo $this->escapeHtml($_review->getTitle()) ?></strong>
+              <div class="detail"><?php echo nl2br($this->escapeHtml($_review->getDetail())) ?></div>  
+            </dd>
+          </dl>  
+        <?php endforeach; ?>
+      <?php echo $this->getPagerHtml(); ?>
+    </div>
+    <?php echo $this->getChildHtml('toolbar') ?>
+  <?php elseif($this->getParentBlock()): ?>
+    <?php echo $this->getParentBlock()->getReviewsSummaryHtml($this->getProduct(), 'short', true)?>
+  <?php endif;?>
+  <?php echo $this->getChildHtml('review_form') ?>
+</div>

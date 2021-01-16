@@ -1,0 +1,95 @@
+<?php
+$countingup_ = Mage::helper('countingdown')->getTimecommingup();
+$check = 0;
+$i = 0;
+$helper = Mage::helper('countingdown');
+$categorys = $helper->getCategorys();
+
+foreach ($categorys as $category) {
+
+    $_startTimeStamp = Mage::getModel('core/date')->timestamp($helper->getStartTime($category));
+    $products = Mage::getModel('catalog/category')->load($category->getEntityId())
+        ->getProductCollection();
+}
+if ($_startTimeStamp && $products->getSize()) {
+$i++;
+$_currentTimestamp = $helper->getCurrentTimestamp();
+$countingup = $_startTimeStamp - $_currentTimestamp;
+?>
+
+
+
+<?php
+if (($countingup_) > 0) { ?>
+    <div class="upcoming-title" style="width: calc(100% + 50px)">
+        <div>
+            <div class="clock-upcoming"></div>
+            <div class="title">
+                <h3>
+                    <?php echo $this->__('Upcoming') ?>
+                    <span class="<?php echo $countingup . 'days' ?>"></span>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var clock_upcoming;
+        var time = <?php echo $countingup_ ?>;
+        $j(document).ready(function () {
+            if (time > 0) {
+                var clock_upcoming;
+                clock_upcoming = $j('.clock-upcoming').FlipClock({
+                    clockFace: 'HourlyCounter',
+                    autoStart: false,
+                    callbacks: {
+                        stop: function () {
+                            location.reload();
+                        }
+                    }
+                });
+                clock_upcoming.setTime(time);
+                clock_upcoming.setCountdown(true);
+                clock_upcoming.start();
+            }
+        });
+
+        var clock;
+        var textDay;
+        if (time > 0) {
+            if (Math.floor(time / 86400) > 1) {
+                textDay = ' days';
+            } else {
+                textDay = ' day';
+            }
+            $j(".<?php echo $countingup . 'days' ?>").html(Math.floor(time / 86400) + textDay);
+            clock = $j('.<?php echo $countingup_ . '_' . $i ?>').FlipClock({
+                clockFace: 'DailyCounter',
+                autoStart: false,
+                callbacks: {
+                    stop: function () {
+                        location.reload();
+                    }
+                }
+            });
+            clock.setTime(time);
+            clock.setCountdown(true);
+            clock.start();
+        }
+        <?php if ($products->getSize() > 1): ?>
+        if (jQuery(window).width() < 700) {
+            jQuery('#products-grid-<?php echo $countingup_ ?>').bxSlider({
+                pager: false,
+                infiniteLoop: false,
+                hideControlOnEnd: true,
+                controls: true,
+                slideMargin: 10,
+                slideWidth: 200,
+                maxSlides: 2,
+                minSlides: 2
+            });
+        }
+        <?php endif; ?>
+    </script>
+<?php }
+
+} ?>

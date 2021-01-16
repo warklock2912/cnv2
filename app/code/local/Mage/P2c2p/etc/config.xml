@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+   <modules>
+      <Mage_P2c2p>
+         <version>7.0.5</version>
+      </Mage_P2c2p>
+   </modules>
+   <global>
+      <helpers>
+         <p2c2p>
+            <class>Mage_P2c2p_Helper</class>
+         </p2c2p>
+      </helpers>
+      <blocks>
+         <p2c2p>
+            <class>Mage_P2c2p_Block</class>
+         </p2c2p>
+      </blocks>
+      <models>
+         <p2c2p>
+            <class>Mage_P2c2p_Model</class>
+            <resourceModel>p2c2p_Mysql4</resourceModel>
+         </p2c2p>
+         <p2c2p_Mysql4>
+            <class>Mage_P2c2p_Model_Mysql4</class>
+            <entities>
+               <token>
+                  <table>p2c2p_token</table>
+               </token>
+               <meta>
+                  <table>p2c2p_meta</table>
+               </meta>
+            </entities>
+         </p2c2p_Mysql4>
+      </models>
+      <resources>
+         <p2c2p_setup>
+            <setup>
+               <module>Mage_P2c2p</module>
+               <class>Mage_Eav_Model_Entity_Setup</class>
+            </setup>
+            <connection>
+               <use>core_setup</use>
+            </connection>
+         </p2c2p_setup>
+         <p2c2p_write>
+            <connection>
+               <use>core_write</use>
+            </connection>
+         </p2c2p_write>
+         <p2c2p_read>
+            <connection>
+               <use>core_read</use>
+            </connection>
+         </p2c2p_read>
+      </resources>
+   </global>
+   <adminhtml>
+      <layout>
+         <updates>
+            <p2c2p>
+               <file>p2c2p.xml</file>
+            </p2c2p>
+         </updates>
+      </layout>
+   </adminhtml>
+   <default>
+      <payment>
+         <p2c2p>
+            <active>0</active>
+            <model>p2c2p/Paymentmethod</model>
+            <order_status>Pending_2C2P</order_status>
+            <title>Credit / Debit Card and Cash Payment (2C2P)</title>
+            <allowspecific>0</allowspecific>
+            <payment_action>sale</payment_action>
+         </p2c2p>
+
+         <p2c2p_onsite_internet_banking>
+            <active>0</active>
+            <order_status>Pending_2C2P</order_status>
+            <payment_action>sale</payment_action>
+            <model>p2c2p/payment_onsiteinternetbanking</model>
+            <title>Internet banking</title>
+            <channels>service_id,group_code,group_name,service_code,service_name,service_image</channels>
+         </p2c2p_onsite_internet_banking>
+
+
+      </payment>
+   </default>
+   <frontend>
+      <routers>
+         <p2c2p>
+            <use>standard</use>
+            <args>
+               <module>Mage_P2c2p</module>
+               <frontName>p2c2p</frontName>
+            </args>
+         </p2c2p>
+      </routers>
+   </frontend>
+
+
+   <crontab>
+      <jobs>
+         <twoctwopreib_recheck>
+            <schedule><cron_expr>*/5 * * * *</cron_expr></schedule>
+            <run><model>p2c2p/cron::recheckAction</model></run>
+         </twoctwopreib_recheck>
+      </jobs>
+   </crontab>
+</config>

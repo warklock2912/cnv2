@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoHtmlSitemap
+ */
+-->
+<config>
+    <modules>
+        <Amasty_SeoHtmlSitemap>
+            <version>1.0.8</version>
+        </Amasty_SeoHtmlSitemap>
+    </modules>
+
+    <frontend>
+        <layout>
+            <updates>
+                <amseohtmlsitemap>
+                    <file>amasty/amseohtmlsitemap/amseohtmlsitemap.xml</file>
+                </amseohtmlsitemap>
+            </updates>
+        </layout>
+
+        <translate>
+            <modules>
+                <Amasty_SeoHtmlSitemap>
+                    <files>
+                        <default>Amasty_SeoHtmlSitemap.csv</default>
+                    </files>
+                </Amasty_SeoHtmlSitemap>
+            </modules>
+        </translate>
+        <routers>
+            <catalog>
+                <args>
+                    <modules>
+                        <Amasty_SeoHtmlSitemap before="Mage_Catalog">Amasty_SeoHtmlSitemap</Amasty_SeoHtmlSitemap>
+                    </modules>
+                </args>
+            </catalog>
+        </routers>
+    </frontend>
+
+    <global>
+        <events>
+            <controller_front_init_routers>
+                <observers>
+                    <amasty_amseohtmlsitemap_controller_router>
+                        <type>singleton</type>
+                        <class>Amasty_SeoHtmlSitemap_Controller_Router</class>
+                        <method>initControllerRouters</method>
+                    </amasty_amseohtmlsitemap_controller_router>
+                </observers>
+            </controller_front_init_routers>
+
+            <adminhtml_init_system_config>
+                <observers>
+                    <amasty_amseohtmlsitemap_model_observer>
+                        <type>singleton</type>
+                        <class>Amasty_SeoHtmlSitemap_Model_Observer</class>
+                        <method>onAdminhtmlInitSystemConfig</method>
+                    </amasty_amseohtmlsitemap_model_observer>
+                </observers>
+            </adminhtml_init_system_config>
+        </events>
+
+        <blocks>
+            <amseohtmlsitemap>
+                <class>Amasty_SeoHtmlSitemap_Block</class>
+            </amseohtmlsitemap>
+        </blocks>
+
+        <helpers>
+            <amseohtmlsitemap>
+                <class>Amasty_SeoHtmlSitemap_Helper</class>
+            </amseohtmlsitemap>
+        </helpers>
+
+        <models>
+            <amseohtmlsitemap>
+                <class>Amasty_SeoHtmlSitemap_Model</class>
+            </amseohtmlsitemap>
+        </models>
+
+        <resources>
+            <amseohtmlsitemap_setup>
+                <setup>
+                    <module>Amasty_SeoHtmlSitemap</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </amseohtmlsitemap_setup>
+            <amseohtmlsitemap_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </amseohtmlsitemap_write>
+            <amseohtmlsitemap_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </amseohtmlsitemap_read>
+        </resources>
+    </global>
+
+    <default>
+        <amseohtmlsitemap>
+            <!-- Set the param instead of usual way of defining module router -->
+            <sitemap_fontend_url>sitemap</sitemap_fontend_url>
+            <general>
+                <layout>one_column</layout>
+            </general>
+            <categories>
+                <redirect>1</redirect>
+            </categories>
+            <products>
+                <redirect>1</redirect>
+            </products>
+        </amseohtmlsitemap>
+    </default>
+
+</config>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Crystal_BlockSlide>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Crystal_BlockSlide>
+    </modules>
+</config>

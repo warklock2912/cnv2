@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Mageplace_FastProductUpdate
+ */
+-->
+<config>
+	<modules>
+		<Mageplace_FastProductUpdate>
+			<version>1.2.0</version>
+		</Mageplace_FastProductUpdate>
+	</modules>
+
+	<admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<mpfastproductupdate before="Mage_Adminhtml">Mageplace_FastProductUpdate_Adminhtml</mpfastproductupdate>
+					</modules>
+				</args>
+			</adminhtml>
+		</routers>
+	</admin>
+
+	<global>
+		<resources>
+			<mpfastproductupdate_setup>
+				<setup>
+					<module>Mageplace_FastProductUpdate</module>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</mpfastproductupdate_setup>
+			<mpfastproductupdate_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</mpfastproductupdate_write>
+			<mpfastproductupdate_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</mpfastproductupdate_read>
+		</resources>
+
+		<helpers>
+			<mpfastproductupdate>
+				<class>Mageplace_FastProductUpdate_Helper</class>
+			</mpfastproductupdate>
+		</helpers>
+
+		<models>
+			<mpfastproductupdate>
+				<class>Mageplace_FastProductUpdate_Model</class>
+			</mpfastproductupdate>
+		</models>
+
+		<blocks>
+			<mpfastproductupdate>
+				<class>Mageplace_FastProductUpdate_Block</class>
+			</mpfastproductupdate>
+		</blocks>
+	</global>
+
+	<adminhtml>
+		<translate>
+			<modules>
+				<Mageplace_Backup>
+					<files>
+						<default>Mageplace_Backup.csv</default>
+					</files>
+				</Mageplace_Backup>
+			</modules>
+		</translate>
+
+		<events>
+			<core_block_abstract_prepare_layout_before>
+				<observers>
+					<mpfastproductupdate>
+						<class>mpfastproductupdate/observer</class>
+						<method>processAdminhtmlCoreBlockAbstractPrepareLayoutBefore</method>
+					</mpfastproductupdate>
+				</observers>
+			</core_block_abstract_prepare_layout_before>
+		</events>
+	</adminhtml>
+
+	<default>
+		<mpfastproductupdate>
+			<general>
+                <direct_db_import>0</direct_db_import>
+				<first_column>0</first_column>
+				<delimiter>,</delimiter>
+			</general>
+		</mpfastproductupdate>
+	</default>
+</config>

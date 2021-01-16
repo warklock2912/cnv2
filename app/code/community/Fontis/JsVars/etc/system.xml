@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!--
+  NOTICE OF LICENSE
+
+  This source file is subject to the Fontis Software License that is available in
+  the FONTIS-LICENSE.txt file included with this extension. This file is located
+  by default in the root directory of your Magento installation. If you are unable
+  to obtain the license from the file, please contact us via our website and you
+  will be sent a copy.
+
+  @category   Fontis
+  @copyright  Copyright (c) 2017 Fontis Pty. Ltd. (https://www.fontis.com.au)
+  @license    Fontis Software License
+  -->
+<config>
+    <tabs>
+        <fontis_extensions translate="label" module="fontis_jsvars">
+            <label>Fontis Extensions</label>
+            <sort_order>1000000</sort_order>
+        </fontis_extensions>
+    </tabs>
+    <sections>
+        <fontis_jsvars translate="label" module="fontis_jsvars">
+            <label>JS Vars</label>
+            <tab>fontis_extensions</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1212</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+
+            <groups>
+                <settings translate="label">
+                    <label>Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <expanded>1</expanded>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+
+                    <fields>
+                        <container_variable_prefix translate="label">
+                            <label>Container Variable Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-xml-identifier</validate>
+                        </container_variable_prefix>
+                    </fields>
+                </settings>
+            </groups>
+        </fontis_jsvars>
+    </sections>
+</config>

@@ -1,0 +1,289 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <payment>
+            <groups>
+                <kpayment translate="label" module="payment">
+                    <label>Kpayment</label>
+                    <sort_order>900</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <frontend_class>complex</frontend_class>
+                    <fields>
+                        <public_key translate="label">
+                            <label>Public Key</label>
+                            <frontend_type>password</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </public_key>
+                        <secret_key translate="label">
+                            <label>Secret Key</label>
+                            <frontend_type>password</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </secret_key>
+                        <kpayment_credit type="group">
+                            <label>Credit Card</label>
+                            <sort_order>690</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_model>kpayment/adminhtml_system_config_fieldset_payment</frontend_model>
+                            <comment>Powerful payment features that allow you to easily and securely accept credit/debit card payments on your store.</comment>
+                            <fields>
+                                <active translate="label">
+                                    <label>Enable Credit Card</label>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <sort_order>1</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </active>
+                                <title translate="label">
+                                    <label>Title</label>
+                                    <frontend_type>text</frontend_type>
+                                    <sort_order>2</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </title>
+                                <order_status translate="label">
+                                    <label>New Order Status</label>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_order_status</source_model>
+                                    <sort_order>3</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </order_status>
+                                <order_status_paid translate="label">
+                                    <label>Paid Order Status</label>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_order_status</source_model>
+                                    <sort_order>4</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </order_status_paid>
+                                <order_status_cancel translate="label">
+                                    <label>Cancel Order Status</label>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_order_status</source_model>
+                                    <sort_order>5</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </order_status_cancel>
+                                <create_auto_invoice translate="label">
+                                    <label>Create Auto Invoice</label>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <sort_order>6</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </create_auto_invoice>
+                                <merchant_id translate="label">
+                                    <label>Merchant ID</label>
+                                    <frontend_type>text</frontend_type>
+                                    <sort_order>7</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </merchant_id>
+                                <terminal_id translate="label">
+                                    <label>Terminal ID</label>
+                                    <frontend_type>text</frontend_type>
+                                    <sort_order>8</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </terminal_id>
+                                <api_base_url translate="label">
+                                    <label>API Base Url</label>
+                                    <frontend_type>text</frontend_type>
+                                    <sort_order>9</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </api_base_url>
+                                <inline_javascript_url translate="label">
+                                    <label>Inline Javascript Url</label>
+                                    <frontend_type>text</frontend_type>
+                                    <sort_order>10</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </inline_javascript_url>
+                                <is_private translate="label">
+                                    <label>Is Private</label>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <sort_order>11</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                    <comment>Use secret key or public key</comment>
+                                </is_private>
+                                <period_time translate="label">
+                                    <label>Period Time for Updating Order Status</label>
+                                    <frontend_type>text</frontend_type>
+                                    <sort_order>12</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                    <comment>Choose period time (in minutes) for updating order status.</comment>
+                                </period_time>
+                                <url_checkout_redirect translate="label">
+                                    <label>Checkout URL redirect</label>
+                                    <frontend_type>text</frontend_type>
+                                    <sort_order>13</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                    <comment>No "/" at the end. URL using to redirect to main page checkout</comment>
+                                </url_checkout_redirect>
+                                <sort_order translate="label">
+                                    <label>Sort Order</label>
+                                    <frontend_type>text</frontend_type>
+                                    <sort_order>14</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </sort_order>
+                            </fields>
+                        </kpayment_credit>
+                        <kpayment_qrcode type="group">
+                            <label>QRcode</label>
+                            <sort_order>700</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_model>kpayment/adminhtml_system_config_fieldset_payment</frontend_model>
+                            <comment>Powerful payment features that allow you to easily and securely accept qrcode payments on your store.</comment>
+                            <fields>
+                                <active translate="label">
+                                    <label>Enable QRcode</label>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <sort_order>1</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </active>
+                                <title translate="label">
+                                    <label>Title</label>
+                                    <frontend_type>text</frontend_type>
+                                    <sort_order>2</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </title>
+                                <order_status translate="label">
+                                    <label>New Order Status</label>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_order_status</source_model>
+                                    <sort_order>3</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </order_status>
+                                <order_status_paid translate="label">
+                                    <label>Paid Order Status</label>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_order_status</source_model>
+                                    <sort_order>4</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </order_status_paid>
+                                <order_status_cancel translate="label">
+                                    <label>Cancel Order Status</label>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_order_status</source_model>
+                                    <sort_order>5</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </order_status_cancel>
+                                <create_auto_invoice translate="label">
+                                    <label>Create Auto Invoice</label>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <sort_order>6</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </create_auto_invoice>
+                                <merchant_id translate="label">
+                                    <label>Merchant ID</label>
+                                    <frontend_type>text</frontend_type>
+                                    <sort_order>7</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </merchant_id>
+                                <terminal_id translate="label">
+                                    <label>Terminal ID</label>
+                                    <frontend_type>text</frontend_type>
+                                    <sort_order>8</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </terminal_id>
+                                <api_base_url translate="label">
+                                    <label>API Base Url</label>
+                                    <frontend_type>text</frontend_type>
+                                    <sort_order>9</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </api_base_url>
+                                <ui_javascript_url translate="label">
+                                    <label>UI Javascript Url</label>
+                                    <frontend_type>text</frontend_type>
+                                    <sort_order>10</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </ui_javascript_url>
+                                <is_private translate="label">
+                                    <label>Is Private</label>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <sort_order>11</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </is_private>
+                                <period_time translate="label">
+                                    <label>Period Time for Updating Order Status</label>
+                                    <frontend_type>text</frontend_type>
+                                    <sort_order>12</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                    <comment>Choose period time (in minutes) for updating order status.</comment>
+                                </period_time>
+                                <sort_order translate="label">
+                                    <label>Sort Order</label>
+                                    <frontend_type>text</frontend_type>
+                                    <sort_order>13</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </sort_order>
+                            </fields>
+                        </kpayment_qrcode>
+                    </fields>
+                </kpayment>
+            </groups>
+        </payment>
+    </sections>
+</config>

@@ -1,0 +1,251 @@
+<?php
+$_customer = Mage::getSingleton('customer/session')->getCustomer();
+if(!$_customer->getId()) return;
+
+$check = $this->getCheck();
+$omise_card_id = $this->getData('omise_card_id');
+$isSaveCard = $this->getData('isSavedCard');
+$omiseToken = $this->getData('omise_token');
+$email_text = $check['email_text'];
+$announce_date = $check['announce_date'];
+$customer_id = $_customer->getId();
+$p2c2pCardtoken= $this->getData('p2c2p_card_token');
+
+?>
+
+
+<div class="ruffle-popup ruffle-form-info" id="ruffle-form-info" style="display: block">
+    <div class="ruffle-popup-content">
+        <span class="popup-close">x</span>
+        <?php if($check['use_creditcard']): ?>
+            <div class="step-bar">
+                <ul>
+                    <li class="">
+                        <span><?php echo $this->__('Term & Condition') ?></span>
+                    </li>
+                    <li>
+                        <span><?php echo $this->__('Payment') ?></span>
+                    </li>
+                    <li class="active">
+                        <span><?php echo $this->__('Information join') ?></span>
+                    </li>
+                </ul>
+            </div>
+        <?php endif ?>
+
+        <h2 class="popup-title"><?php echo $this->__('Your Information') ?></h2>
+        <div id="personal-information">
+            <div class="fieldset">
+                <ul class="form-list">
+                    <input type="hidden" name="omise_card_id" value="<?php echo $omise_card_id; ?>">
+                    <input type="hidden" name="omise_token" value="<?php echo $omiseToken; ?>">
+                    <input type="hidden" name="isSaveCard" value="<?php echo $isSaveCard; ?>">
+                    <input type="hidden" name="p2c2p_card_token" value="<?php echo $p2c2pCardtoken; ?>">
+
+
+                    <li class="fields">
+                        <label for="personal_id"
+                               class="required"><em>*</em><?php echo $this->__('ID Card No.'); ?>
+                        </label>
+                        <div class="input-box">
+                            <input name="personal_id" type="text" id="personal_id" class="input-text required-entry"
+                                   maxlength="13"
+                                   onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                        </div>
+                    </li>
+                    <li class="fields">
+                        <label for="telephone"
+                               class="required"><em>*</em><?php echo $this->__('Telephone ') ?>
+                        </label>
+                        <div class="input-box">
+                            <input name="telephone" type="tel" id="telephone" class="input-text required-entry"
+                                   maxlength="10"
+                                   onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                        </div>
+                    </li>
+                    <li class="fields">
+                        <div class="radio_tag clearfix">
+                            <div class="row_radio clearfix">
+                                <label class="checkcontainer"
+                                       style="display: none;">
+                                    <input type="radio" name="msg"
+                                           value="<?php echo $this->__('Pick up at CARNIVAL at Siam Square Soi 7') ?>">
+                                    <span class="radiobtn"></span>
+                                </label>
+                                <label style="display: none;" class="msg"
+                                       for="msg"
+                                       class="required"><?php echo $this->__('Pick up at CARNIVAL at Siam Square Soi 7') ?></label>
+                            </div>
+                            <input type="hidden" name="email_text"
+                                   value="<?php echo $email_text ?>">
+                            <input type="hidden" name="announce_date"
+                                   value="<?php echo $announce_date ?>">
+                            <input type="hidden" name="customer_id"
+                                   value="<?php echo $customer_id ?>">
+                            <?php if ($check['is_pickup']): ?>
+                                <div class="row_radio pickup">
+                                    <input checked="checked" type="radio"
+                                           name="msg"
+                                           id="pickup"
+                                           value="<?php echo $this->__('Pick up') ?>">
+                                    <label class="msg" for="pickup"
+                                           class="required"><?php echo $this->__('Pick up') ?></label>
+                                </div>
+                            <?php endif; ?>
+                            <div class="row_radio clearfix">
+                                    <input type="radio"
+                                           id="msg"
+                                           name="msg"
+                                           value="<?php echo $this->__('Delivery at home') ?>" <?php if (!$check['is_pickup']):?> checked="checked"<?php endif;?> >
+                                <label class="msg" for="msg"
+                                       class="required"><?php echo $this->__('Delivery at home') ?></label>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <?php if ($check['is_pickup']): ?>
+                <ul class="form-list" id="form_pickup">
+                    <li class="field name-firstname">
+                        <label for="firstname_pickup" class="required"><em>*</em><?php echo $this->__('First Name') ?></label>
+                        <div class="input-box">
+                            <input type="text" id="firstname_pickup" name="firstname_pickup" placeholder="<?php echo $this->__('First Name') ?>" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?php echo $this->__('First Name') ?>'" value="<?php echo $this->escapeHtml($_customer->getFirstname()) ?>" title="<?php echo $this->__('First Name') ?>" maxlength="255" class="input-text required-entry" />
+                        </div>
+                    </li>
+
+                    <li class="field name-lastname">
+                        <label for="lastname_pickup" class="required"><em>*</em><?php echo $this->__('Last Name') ?></label>
+                        <div class="input-box">
+                            <input type="text" id="lastname_pickup" name="lastname_pickup" placeholder="<?php echo $this->__('Last Name') ?>" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?php echo $this->__('Last Name') ?>'" value="<?php echo $this->escapeHtml($_customer->getLastname()) ?>" title="<?php echo $this->__('Last Name') ?>" maxlength="255" class="input-text required-entry" />
+                        </div>
+                    </li>
+
+                    <li class="field store-pickup">
+                        <label for="lastname" class="required"><em>*</em><?php echo $this->__('Branch') ?></label>
+                        <div class="input-box">
+                            <select name="storepickup_id" id="storepickup_id" class="validate-select" title="<?php echo $this->__('Branch') ?>">
+                                <option value=""></option>
+                                <?php  $storeCollection = Mage::getModel('storepickup/store')->getCollection(); ?>
+                                <?php foreach ($storeCollection as $storepickup) :?>
+                                    <option value="<?php echo $storepickup->getId(); ?>"><?php echo $storepickup->getStoreName(); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </li>
+                </ul>
+                <?php endif;?>
+                <ul class="form-list" id="form-customer-address"  <?php if ($check['is_pickup']): ?> style="display:none" <?php endif;?> >
+                    <li class="field name-firstname">
+                        <label for="firstname" class="required"><em>*</em><?php echo $this->__('First Name') ?></label>
+                        <div class="input-box">
+                            <input type="text" id="firstname" name="firstname" placeholder="<?php echo $this->__('First Name') ?>" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?php echo $this->__('First Name') ?>'" value="<?php echo $this->escapeHtml($_customer->getFirstname()) ?>" title="<?php echo $this->__('First Name') ?>" maxlength="255" class="input-text required-entry" />
+                        </div>
+                    </li>
+
+                    <li class="field name-lastname">
+                        <label for="lastname" class="required"><em>*</em><?php echo $this->__('Last Name') ?></label>
+                        <div class="input-box">
+                            <input type="text" id="lastname" name="lastname" placeholder="<?php echo $this->__('Last Name') ?>" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?php echo $this->__('Last Name') ?>'" value="<?php echo $this->escapeHtml($_customer->getLastname()) ?>" title="<?php echo $this->__('Last Name') ?>" maxlength="255" class="input-text required-entry" />
+                        </div>
+                    </li>
+                    <?php $_streetValidationClass = $this->helper('customer/address')->getAttributeValidationClass('street'); ?>
+
+                    <li class="field">
+                        <label for="street_1" class="required"><em>*</em><?php echo $this->__('Street Address') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="customer_ruffle_address" value="" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Street Address')) ?>" id="street_1" class="input-text <?php echo $_streetValidationClass ?>" />
+                        </div>
+                    </li>
+
+                    <li class="field"style="display: none;">
+                        <label for="country" class="required"><em>*</em><?php echo $this->__('Country') ?></label>
+                        <div class="input-box">
+                            <select name="country_id" id="country" class="validate-select" title="Country">
+                                <option value=""> </option>
+                                <option value="TH" selected="selected"><?php echo $this->__('Thailand') ?></option>
+                            </select>
+                        </div>
+                    </li>
+
+                    <li class="field">
+                        <label for="region_id" class="required"><em>*</em><?php echo $this->__('State/Province') ?></label>
+                        <div class="input-box">
+                            <select id="region_id" name="region_id" title="<?php echo Mage::helper('core')->quoteEscape($this->__('State/Province')) ?>" class="validate-select" style="display:none;">
+                                <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                            </select>
+                            <input type="text" id="region" name="region" value=""  title="<?php echo Mage::helper('core')->quoteEscape($this->__('State/Province')) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('region') ?>" />
+                        </div>
+                    </li>
+                    <li class="field">
+                        <label for="city" class="required"><em>*</em><?php echo $this->__('City') ?></label>
+                        <div class="input-box">
+                            <select id="city_id" name="city_id" title="<?php echo $this->__('City') ?>" class="validate-select" style="display:none;">
+                                <option value=""><?php echo $this->__('Please select City') ?></option>
+                            </select>
+                            <input type="text" name="city" value=""  title="<?php echo Mage::helper('core')->quoteEscape($this->__('City')) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('city') ?>" id="city" />
+                        </div>
+                    </li>
+                    <li class="field">
+                        <label for="subdistrict" class="required"><em>*</em><?php echo $this->__('Subdistrict') ?></label>
+                        <div class="input-box">
+                            <select id="subdistrict_id" name="subdistrict_id" title="<?php echo $this->__('Subdistrict') ?>" class="validate-select" style="display:none;">
+                                <option value=""><?php echo $this->__('Please select Subdistrict') ?></option>
+                            </select>
+                            <input type="text" name="subdistrict" value="" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Subdistrict')) ?>" class="input-text" id="subdistrict" />
+                        </div>
+                    </li>
+                    <li class="fields">
+                        <div class="field">
+                            <label for="zip" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
+                            <div class="input-box">
+                                <input type="text" name="postcode" value="" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Zip/Postal Code')) ?>" id="zip" class="input-text validate-zip-international <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" />
+                            </div>
+                        </div>
+                    </li>
+                    <?php if(!empty($check['use_creditcard'])): ?>
+                        <input type="hidden" name="use_creditcard" value="1">
+                    <?php endif;?>
+                </ul>
+
+
+                <div class="button-set">
+                    <button type="button" id="submit-information-personal"
+                            class="button" onclick="addmoreInformation(this)">
+                        <span><span><?php echo $this->__('Confirm Join Raffle'); ?></span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <script>
+            var dataForm = new VarienForm('form-validate', true);
+            new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
+            new CityUpdater('country', 'region_id', 'city', 'city_id', <?php echo Mage::helper('customaddress')->getCityJson() ?>);
+            new SubdistrictUpdater('country', 'region_id', 'city_id', 'subdistrict', 'subdistrict_id', 'zip', <?php echo Mage::helper('customaddress')->getSubdistrictJson() ?>);
+        </script>
+        <script>
+            jQuery('input[name="msg"]').on('click', function (e) {
+                var formCustomerAddress = $("form-customer-address");
+                var formPickupAddress = $("form_pickup");
+                var checkBox = $("msg");
+                if (checkBox.checked == true) {
+                    formCustomerAddress.show();
+                    formPickupAddress.hide();
+                } else {
+                    formCustomerAddress.hide();
+                    formPickupAddress.show();
+                }
+            });
+            jQuery('.popup-close').on('click', function () {
+                if ($('ruffle-form-info')) {
+                    $('ruffle-form-info').hide();
+                }
+                // if($('ruffle-card-info') $('ruffle-card-info').hide();
+                if ($('ruffle-card-list')) {
+                    $('ruffle-card-list').hide();
+                }
+                if ($('ruffle_term_list')) {
+                    $('ruffle_term_list').hide();
+                }
+            });
+        </script>
+    </div>
+</div>

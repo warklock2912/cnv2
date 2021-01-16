@@ -1,0 +1,123 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoHtmlSitemap
+ */
+?>
+<?php
+$links = $this->getData('links');
+$linksTitle = $this->getData('linksTitle');
+$linksColumns = $this->getData('linksColumns');
+
+$showSearch = $this->getData('search');
+
+$pages = $this->getData('pages');
+$pagesTitle = $this->getData('pagesTitle');
+$pagesColumns = $this->getData('pagesColumns');
+
+$landingPages = $this->getData('landingPages');
+$landingTitle = $this->getData('landingTitle');
+$landingColumns = $this->getData('landingColumns');
+
+$gallery = $this->getData('gallery');
+$galleryTitle = $this->getData('galleryTitle');
+$galleryColumns = $this->getData('galleryColumns');
+
+$products = $this->getData('products');
+$productsTitle = $this->getData('productsTitle');
+$productsColumns = $this->getData('productsColumns');
+$productsLetterSplit = $this->getData('productsLetterSplit');
+
+$categories = $this->getData('categories');
+$categoriesGrid = $this->getData('categoriesGrid');
+$categoriesTitle = $this->getData('categoriesTitle');
+$categoriesColumns = $this->getData('categoriesColumns');
+
+/** @var Amasty_SeoHtmlSitemap_Helper_Renderer $renderHelper */
+$renderHelper = Mage::helper('amseohtmlsitemap/renderer');
+?>
+
+    <div class="sitemapSection">
+        <h1><?php echo $this->getData('title'); ?></h1>
+
+        <?php if ($showSearch) : ?>
+            <div class="input-box">
+                <div class="htmlsitemap-search-wrapper">
+                    <label for="htmlsitemap-search-input"><?php echo $this->__('Search'); ?></label>
+                    <input type="text" class="input-text htmlsitemap-search-input" id="htmlsitemap-search-input"
+                           value=""/>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+
+    <!-- Products -->
+<?php if (!empty($products)) : ?>
+    <div class="sitemapSection std">
+        <h2><?php echo $productsTitle ? $productsTitle : $this->__('Products'); ?></h2>
+        <?php
+        if ($productsLetterSplit) {
+            $type = 'product_split';
+        } else {
+            $type = 'product';
+        };
+
+        echo $renderHelper->renderArrayChunks($products, $type, $productsColumns);
+        ?>
+    </div>
+<?php endif; ?>
+
+    <!-- Categories -->
+<?php if (!empty($categories) && !(is_array($categories) ? empty($categories['children']) : false)) { ?>
+    <div class="sitemapSection std">
+        <h2><?php echo $categoriesTitle ? $categoriesTitle : $this->__('Categories'); ?></h2>
+        <?php
+        if (Amasty_SeoHtmlSitemap_Model_Source_Gridtype::TYPE_LIST == $categoriesGrid) {
+            echo $renderHelper->renderArrayChunks($categories, 'categories_list', $categoriesColumns);
+        } else {
+            echo $renderHelper->renderArrayChunks($categories['children'], 'categories_tree', $categoriesColumns, true);
+        }
+        ?>
+    </div>
+<?php } ?>
+
+    <!-- Pages -->
+<?php if (!empty($pages)) : ?>
+    <div class="sitemapSection std">
+        <h2><?php echo $pagesTitle ? $pagesTitle : $this->__('Pages'); ?></h2>
+        <?php
+        echo $renderHelper->renderArrayChunks($pages, 'pages', $pagesColumns);
+        ?>
+    </div>
+<?php endif; ?>
+
+    <!-- Landing Pages -->
+<?php if (!empty($landingPages)) : ?>
+    <div class="sitemapSection std">
+        <h2><?php echo $landingTitle ? $landingTitle : $this->__('Landing Pages'); ?></h2>
+        <?php
+        echo $renderHelper->renderArrayChunks($landingPages, 'landing_pages', $landingColumns);
+        ?>
+    </div>
+<?php endif; ?>
+
+    <!-- Categories -->
+<?php if (!empty($gallery)) { ?>
+    <div class="sitemapSection std">
+        <h2><?php echo $galleryTitle ? $galleryTitle : $this->__('Gallery'); ?></h2>
+        <?php
+            echo $renderHelper->renderArrayChunks($gallery, 'gallery_list', $galleryColumns);
+        ?>
+    </div>
+<?php } ?>
+
+    <!-- Links -->
+<?php if (!empty($links)) : ?>
+    <div class="sitemapSection std">
+        <h2><?php echo $linksTitle ? $linksTitle : $this->__('Links'); ?></h2>
+        <?php
+        echo $renderHelper->renderArrayChunks($links, 'links', $linksColumns);
+        ?>
+    </div>
+<?php endif; ?>

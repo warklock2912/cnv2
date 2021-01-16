@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoTags
+ */
+-->
+<!--
+    Copyright (c) 2013 Amasty (http://www.amasty.com)
+-->
+<config>
+    <menu>
+        <cms>
+            <children>
+                <amseotoolkit>
+                    <children>
+                        <amseotags translate="title" module="amseotags">
+                            <title>Tags</title>
+                            <action>adminhtml/system_config/edit/section/amseotags</action>
+                            <sort_order>18</sort_order>
+                        </amseotags>
+                    </children>
+                </amseotoolkit>
+            </children>
+        </cms>
+    </menu>
+
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <cms>
+                        <children>
+                            <amseotoolkit>
+                                <children>
+                                    <amseotags translate="title" module="amseotags">
+                                        <title>Tags</title>
+                                        <sort_order>18</sort_order>
+                                    </amseotags>
+                                </children>
+                            </amseotoolkit>
+                        </children>
+                    </cms>
+
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <amseotags translate="title" module="amseotags">
+                                        <title>Tags</title>
+                                    </amseotags>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config> 

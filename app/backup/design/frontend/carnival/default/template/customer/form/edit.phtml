@@ -1,0 +1,231 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div class="page-title">
+    <h1><?php echo $this->__('My Account Information') ?></h1>
+</div>
+<?php if($this->getCustomer()->getData('vip_member_status') == 0): ?>
+  <div class="vip-member">
+    <div class="vip-member-title" id="vip-member-title">
+      <span><?php echo $this->__('Are you a Carnival VIP member? ')?></span>
+      <span class="vip-member-info-title">
+        <?php echo $this->__('Fill your ')?> <a href="#" onclick="showformUpdate()" style="text-decoration: underline; color: #ffa500; font-weight: bold" ><?php echo $this->__('VIP MEMBER ID ')?></a>
+        <div class="vip-member-info">
+          <i>?</i>
+          <div>
+            <label><span><?php echo $this->__('vip') ?></span><?php echo $this->__('vip member id') ?></label>
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('carnival-vipmemer-info')->toHtml() ?>
+          </div>
+        </div>
+      </span>
+
+    </div>
+    <div class="vip-member-content "  id="vip-member-content" style="display: none">
+      <div class="vip-member-title vip-member-info-title">
+      <span><a href="#" ><?php echo $this->__('VIP MEMBER ID ')?></a> </span>
+        <div class="vip-member-info">
+           <i>?</i>
+           <div>
+             <label><span><?php echo $this->__('vip') ?></span><?php echo $this->__('vip member id') ?></label>
+             <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('carnival-vipmemer-info')->toHtml() ?>
+           </div>
+        </div>
+      </div>
+      <form action="<?php echo $this->getUrl('membergroup/index/updateMemberId')?>" method="post" id="form-update-vip-id" enctype="multipart/form-data">
+        <input type="text" id="vip_member_id" name="vip_member_id" class="input-text required-entry">
+        <button type="submit" title="<?php echo $this->__('save')?>" class="button"><span><span><?php echo $this->__('save')?></span></span></button>
+      </form>
+      <span><?php echo $this->__('Are you a Carnival VIP member?')?></span>
+      <br>
+      <span><?php echo $this->__('Please input your number from yuor member card.')?></span>
+      <br>
+      <span><?php echo $this->__('We will verify it shortly')?></span>
+    </div>
+  </div>
+  <script type="text/javascript">
+    var dataFormVipMember = new VarienForm('form-update-vip-id', true);
+    function showformUpdate(){
+      $('vip-member-content').show();
+      $('vip-member-title').hide();
+    }
+  </script>
+<?php endif;?>
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+<form action="<?php echo $this->getUrl('customer/account/editPost') ?>" method="post" autocomplete="off" id="form-validate" class="scaffold-form" enctype="multipart/form-data">
+    <div class="fieldset">
+        <?php echo $this->getBlockHtml('formkey')?>
+        <ul class="form-list">
+            <li class="fields show-label">
+                <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getCustomer())->toHtml() ?>
+            </li>
+            <li>
+                <label for="email" class="required"><em>*</em><?php echo $this->__('E-mail') ?></label>
+                <div class="input-box">
+                    <input type="email" autocapitalize="off" autocorrect="off" spellcheck="false" name="email" id="email" value="<?php echo $this->escapeHtml($this->getCustomer()->getEmail()) ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Email Address')) ?>" class="input-text required-entry validate-email" />
+                </div>
+            </li>
+            <li class="control change-password">
+                <input type="checkbox" name="change_password" id="change_password" value="1" onclick="setPasswordForm(this.checked)" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Change Password')) ?>"<?php if($this->getCustomer()->getChangePassword()==1): ?> checked="checked"<?php endif; ?> class="checkbox" /><label id="change_password_label" for="change_password"><?php echo $this->__('Change Password') ?></label>
+            </li>
+        </ul>
+    </div>
+    <div class="fieldset fieldset-changepassword" style="display:none;">
+        <!--<h2 class="legend"><?php /*echo $this->__('Change Password') */?></h2>-->
+        <ul class="form-list">
+            <li>
+                <!--<label for="current_password" class="required"><em>*</em><?php /*echo $this->__('Current Password') */?></label>-->
+                <div class="input-box">
+                    <!-- This is a dummy hidden field to trick firefox from auto filling the password -->
+                    <input type="text" class="input-text no-display" name="dummy" id="dummy" />
+                    <input type="password" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Current Password')) ?>" class="input-text" name="current_password" id="current_password" placeholder="<?php echo $this->__('Current Password') ?>" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?php echo $this->__('Current Password') ?>'" />
+                </div>
+            </li>
+            <li class="fields">
+                <div class="field">
+                    <!--<label for="password" class="required"><em>*</em><?php /*echo $this->__('New Password') */?></label>-->
+                    <div class="input-box">
+                        <input type="password" title="<?php echo Mage::helper('core')->quoteEscape($this->__('New Password')) ?>" class="input-text validate-password" name="password" id="password" placeholder="<?php echo $this->__('New Password') ?>" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?php echo $this->__('New Password') ?>'" />
+                    </div>
+                </div>
+                <div class="field">
+                    <!--<label for="confirmation" class="required"><em>*</em><?php /*echo $this->__('Confirm New Password') */?></label>-->
+                    <div class="input-box">
+                        <input type="password" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Confirm New Password')) ?>" class="input-text validate-cpassword" name="confirmation" id="confirmation" placeholder="<?php echo $this->__('Confirm') ?>" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?php echo $this->__('Confirm') ?>'" />
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="fieldset">
+        <h2 class="legend"><?php echo $this->__('personal details')?></h2>
+        <ul class="form-list">
+            <?php $_gender = $this->getLayout()->createBlock('customer/widget_gender') ?>
+            <?php if ($_gender->isEnabled()): ?>
+                <li class="li-gender"><?php echo $_gender->setGender($this->getCustomer()->getGender())->toHtml() ?></li>
+            <?php endif ?>
+            <li class="fields li-tel">
+                <label for="telephone"><?php echo $this->__('Tel.') ?></label>
+                <div class="input-box">
+                    <input type="text" name="amcustomerattr[telephone]" id="telephone"
+                           title="<?php echo $this->__('Phone Number') ?>"
+                           value="<?php echo $this->escapeHtml($this->getCustomer()->getTelephone()) ?>"
+                           class="input-text validate-number validate-length maximum-length-10 minimum-length-9" maxlength="10" />
+                </div>
+            </li>
+
+            <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob') ?>
+            <?php if ($_dob->isEnabled()): ?>
+                <li class="li-dob"><?php echo $_dob->setDate($this->getCustomer()->getDob())->toHtml() ?></li>
+            <?php endif ?>
+            <?php $_taxvat = $this->getLayout()->createBlock('customer/widget_taxvat') ?>
+            <?php if ($_taxvat->isEnabled()): ?>
+                <li><?php echo $_taxvat->setTaxvat($this->getCustomer()->getTaxvat())->toHtml() ?></li>
+            <?php endif ?>
+
+        </ul>
+    </div>
+    <div class="buttons-set style1">
+        <button type="submit" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Save')) ?>" class="button"><span><span><?php echo $this->__('Up date') ?></span></span></button>
+    </div>
+</form>
+<div class="box-newsletters">
+    <div class="box-title">
+        <h3><?php echo $this->__('Newsletters') ?></h3>
+    </div>
+    <div class="box-content" id="box-content">
+        <?php if (Mage::getBlockSingleton('customer/account_dashboard_info')->getIsSubscribed()): ?>
+
+            <div class="control">
+                <input onclick="savesubscribe(this)" type="checkbox" name="is_subscribed" id="subscription" value="0" title="<?php echo Mage::helper('core')->quoteEscape($this->__('General Subscription')) ?>" checked="checked" class="checkbox" />
+                <label for="subscription"><?php echo $this->__("You are currently subscribed to 'General Subscription'.") ?></label>
+            </div>
+        <?php else: ?>
+            <div class="control">
+                <input onclick="savesubscribe(this)" type="checkbox" name="is_subscribed" id="subscription" value="1" title="<?php echo Mage::helper('core')->quoteEscape($this->__('General Subscription')) ?>" class="checkbox" />
+                <label for="subscription"><?php echo $this->__("You are currently not subscribed to any newsletter.") ?></label>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery('div.control').customRadioCheckbox();
+//<![CDATA[
+    var dataForm = new VarienForm('form-validate', true);
+    function setPasswordForm(arg){
+        if(arg){
+            $('current_password').up(3).show();
+            $('current_password').addClassName('required-entry');
+            $('password').addClassName('required-entry');
+            $('confirmation').addClassName('required-entry');
+            $('change_password_label').addClassName('show');
+
+        }else{
+            $('current_password').up(3).hide();
+            $('current_password').removeClassName('required-entry');
+            $('password').removeClassName('required-entry');
+            $('confirmation').removeClassName('required-entry');
+            $('change_password_label').removeClassName('show');
+        }
+    }
+
+    <?php if($this->getCustomer()->getChangePassword()): ?>
+        setPasswordForm(true);
+    <?php endif; ?>
+
+    function savesubscribe(elm){
+      var value = elm.value;
+      var url = '<?php echo Mage::getUrl('myaccount/index/savesubcription');?>';
+      new Ajax.Request(url, {
+        parameters: {
+          is_subscribed: value
+        },
+        onCreate: function(){
+          AmAjaxLoginObj.showAnimation();
+        },
+        onSuccess: function(transport){
+
+          var response = transport.responseText.evalJSON();
+          if(response.success == 'success'){
+            $j('#message-save-subcription').html(response.message);
+            $j('#box-content').html(response.html);
+            jQuery('div.control').customRadioCheckbox();
+          }else{
+            $j('#message-save-subcription').html(response.message);
+          }
+          AmAjaxLoginObj.hideAnimation();
+          $j("ul.messages").click(function() {
+            $j(this).fadeOut("normal", function() {
+              $j(this).remove();
+            });
+          });
+        }
+      });
+    }
+//]]>
+</script>
+
+<div id="message-save-subcription">
+</div>

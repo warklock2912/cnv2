@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <member>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+            <block type="page/html_header" name="header" as="header" template="member/page/html/header2.phtml"/>
+            <!--<block type="page/html_footer" name="footer" as="footer" template="member/page/html/footer2.phtml"/>-->
+            <block type="page/html_footer" name="footer" as="footer" template="member/page/html/footer2.phtml">
+                <action method="setBlockId"><block_id>member-footer-links</block_id></action>
+                <action method="setCacheLifetime"><lifetime>null</lifetime></action>
+            </block>
+
+            <reference name="head">
+                <action method="addCss">
+                    <stylesheet>css/member-page.css</stylesheet>
+                </action>
+            </reference>
+
+        </reference>
+    </member>
+
+    <member_index_index>
+        <update handle="member"/>
+        <reference name="content">
+            <block type="member/member" name="member" template="member/menu.phtml" />
+        </reference>
+    </member_index_index>
+
+    <member_login_index>
+        <update handle="member"/>
+        <reference name="content">
+            <block type="member/member" name="member" template="member/login.phtml" />
+        </reference>
+    </member_login_index>
+
+    <member_search_form>
+        <update handle="member"/>
+        <reference name="content">
+            <block type="member/member" name="member" template="member/search-member.phtml" />
+        </reference>
+    </member_search_form>
+
+    <member_signup_form>
+        <update handle="member"/>
+        <reference name="content">
+            <block type="member/member" name="member" template="member/signup-member.phtml" />
+        </reference>
+    </member_signup_form>
+
+
+    <member_info_show>
+        <update handle="member"/>
+        <reference name="content">
+            <block type="member/member" name="member" template="member/info-member.phtml" />
+        </reference>
+    </member_info_show>
+
+    <member_vip_change>
+        <update handle="member"/>
+        <reference name="content">
+            <block type="member/member" name="member" template="member/change-to-vip.phtml" />
+        </reference>
+    </member_vip_change>
+
+</layout>

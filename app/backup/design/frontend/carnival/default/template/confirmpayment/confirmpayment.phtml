@@ -1,0 +1,139 @@
+<?php $banks = $this->getBanks(); ?>
+<div class="confirm-payment" >
+  <form action="<?php echo Mage::getUrl('*/*/sendMail') ?>" method="post" id="confirm-payment-form" enctype="multipart/form-data">
+    <div class="cp-form-title">
+      <h1><?php echo $this->__('PAYMENT CONFIRMATION FORM') ?></h1>
+    </div>
+    <ul class="cp-form-list">
+      <li>
+        <label for="order-no" class="required"><?php echo $this->__('ORDER NO') ?><em>*</em></label>
+        <div class="input-box">
+          <input class="input-text required-entry" type="text" id="order_no" name="order_no" value=""/>  
+        </div>
+      </li>
+      <li>
+        <label for="name" class="required"><?php echo $this->__('NAME') ?></label>
+        <div class="input-box">
+          <input class="input-text required-entry" type="text" id="name" name="name" value=""/> 
+        </div>
+      </li>
+      <li>
+        <label for="email" class="required"><?php echo $this->__('EMAIL') ?><em>*</em></label>
+        <div class="input-box">
+          <input class="input-text required-entry validate-email" type="text" id="email" name="email" value=""/> 
+        </div>
+      </li>
+      <li>
+        <label for="tel" class="required"><?php echo $this->__('TELEPHONE') ?></label>
+        <div class="input-box">
+          <input class="input-text required-entry" type="text" id="tel" name="tel" value=""/> 
+        </div>
+      </li>
+      <li>
+        <label for="amount" class="required"><?php echo $this->__('BAHT AMOUNT') ?></label>
+        <div class="input-box">
+          <input class="input-text required-entry" type="text" id="amount" name="amount" value=""/> 
+        </div>
+      </li>
+      <li>
+        <label for="bank" class="required"><?php echo $this->__('TRANSFERRED TO BANK') ?></label>
+        <div class="input-box">
+          <select class="input-bank validate-select" id="bank" name="bank" >
+            <option value="" >Please Select Bank To Transfer</option>
+            <?php if (count($banks)) : ?>
+              <?php foreach ($banks as $bank) : ?>
+                <option value="<?php echo $bank ?>"><?php echo $bank ?></option>
+              <?php endforeach; ?>
+            <?php endif; ?>
+          </select>
+        </div>
+      </li>
+      <li>
+        <?php /*echo $this->getChildHtml('html_calendar')*/ ?>
+        <label for="date" class="required"><?php echo $this->__('DATE TIME (DD-MM-YY / HH:MM)') ?></label>
+        <div class="inputdate-box">
+          <input class="input-text required-entry" type="text" name="date" id="date" value="" />
+          <img style="" title="Select Date" id="date_select_trig" alt="" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN) . 'frontend/carnival/default/images/calender.PNG' ?> "/>
+        </div>
+
+      </li>
+      <li>
+        <label for="cp-attachment" class="required"><?php echo $this->__('ATTACH SLIP') ?></label>
+        <div class="inputfile-box">
+          <input class="input-text required-entry" type="file"  id="cp-attachment" name="cp-attachment"  onchange='uploadFile(this)' style="display:none"/>
+          <label for="cp-attachment">
+            <input class="file-box required-entry" id="file-name" placeholder="<?php echo $this->__('No file chosen') ?>" disabled="disabled"/>
+            <span class="file-button">
+              <?php echo $this->__('Choose File') ?>
+            </span>
+          </label>
+        </div>
+      </li>
+      <li>
+        <label for="message"><?php echo $this->__('MESSAGE') ?></label>
+        <div class="input-box">
+          <textarea id="message" name="message" class="message" width='420px' height="55px"></textarea>
+        </div>
+      </li>
+    </ul>
+    <div class="cp-button-submit">
+      <button type="submit" value="Submit"><?php echo $this->__('SUBMIT') ?></button>
+    </div>
+  </form>
+</div>
+<script type="text/javascript">
+  //<![CDATA[
+  var confirmPaymentForm = new VarienForm('confirm-payment-form');
+  confirmPaymentForm.submit = function () {
+    if (this.validator.validate()) {
+      this.form.submit();
+    }
+  }
+  //]]>
+</script>
+<script type="text/javascript">
+// <![CDATA[
+//   Calendar.setup({
+//     inputField: "date",
+//     ifFormat: "%d-%m-%Y %H:%M:%S",
+//     showsTime: true,
+//     button: 'date_select_trig',
+//     singleClick: true,
+//     dateStatusFunc: disabledDate
+//   });
+//   function disabledDate(date) {
+//     var today = new Date();
+//     var time = today.getTime();
+//     return date.getTime() > time;
+//
+//   }
+//   ;
+    
+    //time
+    $timearr = [];
+    for(h=0; h <= 23; h++){
+      for(m=0; m <= 59; m++){
+        $timearr.push((h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m);
+      }
+    }
+
+    jQuery(function(){
+      jQuery('#date').datetimepicker({
+        format:'d-m-Y H:i',
+        mark : true,
+        maxDate : true,
+        minTime : false,
+        maxTime : false,
+        defaultTime: '00:00',
+        allowTimes: $timearr,
+        mask:'39-19-2099 29:59',
+      });
+      jQuery('#date_select_trig').click(function(){
+        jQuery('#date').datetimepicker('show');
+      });
+    });
+// ]]>
+  function uploadFile(target) {
+    document.getElementById("file-name").value = target.files[0].name;
+  }
+</script>

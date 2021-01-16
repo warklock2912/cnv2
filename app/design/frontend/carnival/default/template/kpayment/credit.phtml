@@ -1,0 +1,82 @@
+<?php /** @var Tigren_Kpayment_Block_Credit_Credit $this */ ?>
+<?php list($publicKey, $inlineJavascriptUrl, $currency, $amount) = $this->getKbankCreditInformation() ?>
+<div class="kpayment-popup" id="kpayment_popup" style="display:none;">
+    <div class="image">
+        <button type="button" class="button btn-white button-close"><span><?php echo $this->__('X') ?></span></button>
+        <div class="box-content">
+            <div class="title-popup">
+                <h2><?php echo $this->__('CREDIT CARD / DEBIT CARD') ?></h2>
+                <div class="img-title">
+                    <img src="<?php echo $this->getSkinUrl('images/logo-credit2x.png') ?>" width="126px" alt="">
+                </div>
+            </div>
+            <div class="popup-content">
+                <label class="label" style="margin-top: 0;"><?php echo $this->__('Name on Card') ?></label>
+                <div class="field">
+                    <div id="card-name"></div>
+                </div>
+                <label class="label"><?php echo $this->__('Card Number') ?></label>
+                <div class="field">
+                    <div id="card-number"></div>
+                </div>
+                <div class="expiry-cvv clearfix">
+                    <div class="expiry">
+                        <label class="label"><?php echo $this->__('Expiry Date') ?></label>
+                        <div class="field">
+                            <div id="card-expiry"></div>
+                        </div>
+                    </div>
+                    <div class="cvv">
+                        <label class="label"><?php echo $this->__('Card CVV') ?></label>
+                        <div class="field">
+                            <div id="card-cvv"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="action-button clearfix">
+                    <form method="POST" action="<?php echo $this->getUrl('kpayment/credit_process/result');?>" id="pay_form">
+                        <script src="<?php echo $inlineJavascriptUrl ?>"
+                                data-apikey="<?php echo $publicKey ?>"
+                                data-amount="<?php echo $amount ?>"
+                                data-currency="<?php echo $currency ?>">
+                        </script>
+                        <button id="pay-button"><?php echo $this->__('Pay now') ?></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var loading = '<img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Loading next step...') ?>" title="<?php echo $this->__('Loading next step...') ?>" class="v-middle" />' + '<?php echo $this->__('Processing...') ?>';
+    var paynowHtml = '<?php echo $this->__('Pay now') ?>';
+    var arr = [];
+
+    KInlineCheckout.onInputValidation(function(elementName, result) {
+        jQuery(".kpayment-popup #pay-button").click(function () {
+            if(result === 'invalid') {
+                if(!arr.includes(elementName)) {
+                    arr.push(elementName);
+                }
+            }
+            else {
+                arr = _.without(arr, elementName);
+            }
+
+            if (arr.length !== 0) {
+                jQuery(this).html(paynowHtml);
+                jQuery(this).css('background-color', 'black');
+            }
+            else {
+                jQuery(this).html('<span class="please-wait">'+ loading +'</span>');
+                jQuery(this).css('background-color', 'lightgrey');
+            }
+        });
+    });
+
+    jQuery(".kpayment-popup .button.button-close").click(function () {
+        jQuery('#kpayment_popup').hide();
+        activate_step('payment','review');
+    });
+</script>

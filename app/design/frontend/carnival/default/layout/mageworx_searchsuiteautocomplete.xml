@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--/**
+ * MageWorx
+ * Search Suite
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuiteAutocomplete
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */-->
+
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addCss" ifconfig="mageworx_searchsuite/autocomplete/show_popup"><stylesheet>css/mageworx/searchsuiteautocomplete/searchsuiteautocomplete.css</stylesheet></action>
+
+        </reference>
+        <reference name="before_body_end">
+            <block type="core/template" name="searchsuiteautocomplete_wrapper" template="mageworx/searchsuiteautocomplete/wrapper.phtml" ifconfig="mageworx_searchsuite/autocomplete/show_popup" />
+        </reference> 
+    </default>
+</layout>

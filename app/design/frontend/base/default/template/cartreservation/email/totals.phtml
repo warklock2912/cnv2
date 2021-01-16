@@ -1,0 +1,39 @@
+<?php
+
+/*
+
+Plumrocket Inc.
+
+NOTICE OF LICENSE
+
+This source file is subject to the End-user License Agreement
+that is available through the world-wide-web at this URL:
+http://wiki.plumrocket.net/wiki/EULA
+If you are unable to obtain it through the world-wide-web, please
+send an email to support@plumrocket.com so we can send you a copy immediately.
+
+@package	Plumrocket_Cart_Reservation-v1.5.x
+@copyright	Copyright (c) 2013 Plumrocket Inc. (http://www.plumrocket.com)
+@license	http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ 
+*/
+
+?>
+<?php foreach ($this->getTotals() as $_total): ?>
+    <tr>
+        <td colspan="5" align="right" style="padding:3px 9px">
+            <?php if ($_total->getCode() == 'grand_total'):?>
+            <strong><?php echo $_total->getTitle()?></strong>
+            <?php else:?>
+            <?php echo $_total->getTitle()?>
+            <?php endif?>
+        </td>
+        <td align="right" style="padding:3px 9px">
+            <?php if ($_total->getCode() == 'grand_total'):?>
+            <strong><?php echo $this->helper('checkout')->formatPrice($_total->getValue()); ?></strong>
+            <?php else:?>
+            <?php echo $this->helper('checkout')->formatPrice($_total->getValue()); ?>
+            <?php endif?>
+        </td>
+    </tr>
+<?php endforeach?>

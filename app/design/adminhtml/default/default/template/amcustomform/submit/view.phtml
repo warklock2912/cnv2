@@ -1,0 +1,50 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Customform
+ */
+?>
+<?php
+/** @var Amasty_Customform_Block_Adminhtml_Submit_View $block */
+$block = $this;
+$submit = $block->getSubmit();
+$form = $submit->getForm();
+$values = $submit->getValuesData();
+?>
+<style type="text/css">
+    .amasty_submit_form td{
+        padding-right:10px ;
+    }
+</style>
+<div class="content-header">
+    <table cellspacing="0" >
+        <tr>
+            <td style="width:50%;"><h3 class="icon-head head-products"><?php echo Mage::helper('catalog')->__('Submit') ?></h3></td>
+            <td class="a-right">
+                <?php echo $this->getButtonsHtml() ?>
+            </td>
+        </tr>
+    </table>
+</div>
+<p><?php echo $block->__('Form') ?>: <?php echo $form->getCode() ?></p>
+<p><?php echo $block->__('Submitted') ?>: <?php echo $submit->getSubmitted() ?></p>
+
+<p><?php if(!$submit->getCustomerId()) {echo $block->__('Ip').": "; echo $submit->getIp();} ?></p>
+<p><?php if(!$submit->getCustomerId()) {echo $block->__('Customer').": "; echo "Not provided";} ?></p>
+<p><?php if($submit->getCustomerId()) {echo $block->__('Customer').": "; echo $this->getCustomerLink();} ?></p>
+
+<table class="amasty_submit_form">
+    <tr>
+        <th><?php echo $this->__('Field') ?></th>
+        <th><?php echo $this->__('Value') ?></th>
+    </tr>
+<?php foreach ($values as $value) {
+/** @var Amasty_Customform_Model_Form_Submit_Value_Abstract $value */
+?>
+    <tr>
+        <td><?php echo $value['label'] ?></td>
+        <td><?php echo $value['value'] ?></td>
+    </tr>
+<?php } ?>
+</table>

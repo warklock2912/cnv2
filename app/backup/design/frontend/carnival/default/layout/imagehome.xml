@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magebuzz/gridstack.css</stylesheet>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/magebuzz/style.css</stylesheet>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/magebuzz/lodash.min.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/magebuzz/knockout-min.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/magebuzz/gridstack.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/magebuzz/gridstack.jQueryUI.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/magebuzz/form.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/magebuzz/cropbox.js</name>
+            </action>
+        </reference>
+    </default>
+    <imagehome_index_index>
+        <reference name="content">
+            <block type="imagehome/imagehome" name="imagehome" template="imagehome/imagehome.phtml" />
+        </reference>
+    </imagehome_index_index>
+    <imagehome_imagehomegrid_index>
+        <reference name="content">
+            <block type="imagehome/magehomegrid" name="imagehome" template="imagehome/magehomegrid.phtml" />
+        </reference>
+    </imagehome_imagehomegrid_index>
+</layout> 

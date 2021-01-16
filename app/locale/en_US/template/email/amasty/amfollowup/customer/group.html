@@ -1,0 +1,83 @@
+<!--@subject You've become a VIP customer! @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"var logo_url":"Email Logo Image Url",
+"var logo_alt":"Email Logo Image Alt",
+"var store.getFrontendName()":"Store Name",
+"var history.getCouponCode()":"Coupon Code",
+"var urlmanager.mageUrl('amfollowupfront/main/unsubscribe')":"Unsubscribe Url",
+"var customer.getName()":"Customer Name",
+"var customer_group.getCustomerGroupCode()":"Customer: Group",
+"var formatmanager.formatDate('customer', 'dob')":"Customer: Date Of Birth",
+"var formatmanager.formatDate('customer', 'created_at')":"Customer: Registration Date",
+"var customer_log.getInactiveDays()":"Customer: Inactive Days",
+"var formatmanager.formatDate('customer_log', 'login_at')":"Customer: Last Login"
+}
+@-->
+<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
+    <!-- change color styles for  backgr-color, bord_color and tr tag-->
+        <table class="main-table" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" style="font-family: 'Myriad Pro', 'Verdana', Geneva; font-size: 16pt;">
+            <tr class="top">
+                <td align="center" valign="top">
+                    <table class="top-table font_12" border="0" cellpadding="10" cellspacing="0" width="600" style="width:600px; max-width: 600px;font-size: 12pt;font-family: 'Myriad Pro', 'Verdana', Geneva;">
+                        <tr>
+                            <td align="left"><img src="{{var logo_url}}"/></td>
+                            <td align="right">Phone: +123 456 789</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            
+            <tr class="body">
+                <td align="center" valign="top">
+                    <table class="container bord_color" cellpadding="0" cellspacing="0" width="600" style="width:600px; max-width: 600px;overflow: hidden; border-radius:12px; border: 1px solid #FFA453">
+                        <tr class="email-head">
+                            <td align="center" valign="top">
+                                <table class="table-head" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                    <tr width="100%">
+                                        <td class="banner backgr-color" align="center" valign="top" style="background-color: #FFA453; max-height: 76px;"><div style="height: 76px;max-height: 76px;"><img src="{{skin url="images/amfollowup/banner.png" _area='frontend'}}" alt="" /></div></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td class="head" style="padding: 10px 20px 10px 20px;font-family: 'Myriad Pro', 'Verdana', Geneva;">
+                                           <span style="font-size: 18pt;">Hello {{var customer.getName()}},</span><br/><br/>
+
+We are glad to inform you, that your customer group has been recently changed to {{var customer_group.getCustomerGroupCode()}}.  Now you can purchase any {{var store.getFrontendName()}} items with a 5% discount!<br/><br/>
+Please log in to <a href="{{var urlmanager.mageUrl('checkout/cart/index')}}">{{var store.getFrontendName()}}</a> to find out more details.<br/><br/>
+Best Regards,<br/>
+{{var store.getFrontendName()}} Team
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr >
+                                        <td align="center" valign="top" class="head" style="padding: 10px 20px 10px 20px;">
+                                            <table class="contact font_12" width="100%" style="font-size: 12pt;font-family: 'Myriad Pro', 'Verdana', Geneva;">
+                                                <tr>
+                                                    <td align="left" ><img src="{{skin url="images/amfollowup/phone.png" _area='frontend'}}" style="top: 4px; position: relative;" alt="" /> +7(45) 123 45 67</td>
+                                                    <td align="center"><img src="{{skin url="images/amfollowup/mail.png" _area='frontend'}}" style="top: 4px; position: relative;" alt="" /> info@company_name.com</td>
+                                                    <td align="right"><img src="{{skin url="images/amfollowup/arrow.png" _area='frontend'}}" style="top: 4px; position: relative;" alt="" /> <a href="mailto:info@company_name.com">reply to this mail</a></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </td>
+            </tr>
+            
+            <tr class="footer">
+                 <td align="center" valign="top">
+                     <table border="0" cellpadding="20" cellspacing="0" width="600" style="width:600px; max-width: 600px;">
+                        <tr>
+                            <td align="center" valign="top" class="font_14" style="font-size: 14pt; font-family: 'Myriad Pro', 'Verdana', Geneva;">
+                                Delivered by  CompanyName, Street 123, City |Telephone | support@company.com <a href="{{var urlmanager.mageUrl('amfollowupfront/main/unsubscribe')}}" style="color:#FFA453;">Unsubscibe</a>
+                            </td>
+                        </tr>
+                    </table>        
+                 </td>
+            </tr>
+        </table>
+    </body>

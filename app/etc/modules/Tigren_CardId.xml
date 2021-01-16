@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Ajaxlogin
+ */
+-->
+<config>
+    <modules>
+        <Tigren_CardId>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Tigren_CardId>
+    </modules>
+</config>

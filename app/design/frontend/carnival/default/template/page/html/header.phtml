@@ -1,0 +1,83 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+?>
+
+<header id="header">
+  <div class="page-header">
+    <div class="page-header-container">
+        <a href="#menu-top" class="skip-link skip-menu box-mobile1">
+          <span></span><span></span><span></span>
+        </a>
+        <a class="logo" href="<?php echo $this->getUrl('') ?>">
+            <img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" class="large" />
+            <img src="<?php echo $this->getLogoSrcSmall() ?>" alt="<?php echo $this->getLogoAlt() ?>" class="small" />
+        </a>
+        <div class="menu-top skip-content skip-content-style1 box-desktop1" id="menu-top">
+          <div class="menu-top-content">
+            <a href="#menu-top" class="skip-link skip-menu-back box-mobile1"><span><?php echo $this->__('Close') ?></span></a>
+            <div class="myaccount-menu box-mobile1">
+              <?php echo $this->getChildHtml('header_my_account') ?>
+            </div>
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('carnival-top-menu1')->toHtml() ?>
+            <ul>
+              <li class="li-brands li-parent">
+                <a title="<?php echo $this->__('Brands') ?>" href="#"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('carnival-top-menu3')->toHtml() ?></a>
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('carnival-menu-brands')->toHtml() ?>
+              </li>
+              <li class="li-category li-parent">
+                <a title="Category" href="#">Category</a>
+                <?php echo $this->getChildHtml('topMenu') ?>
+              </li>
+            </ul>
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('carnival-top-menu2')->toHtml() ?>
+
+            <div class="language-menu box-mobile1">
+              <?php echo $this->getChildHtml('store_language_mobile') ?>
+            </div>
+          </div>
+        </div>
+        <a class="skip-link skip-search" href="#header-search" title="<?php echo $this->__('Search') ?>"><span><?php echo $this->__('Search') ?></span></a></li>
+        <div class="top-links">
+          <div class="box-desktop1">
+            <?php echo $this->getChildHtml('header_my_account') ?>
+          </div>
+          <?php echo $this->getChildHtml('minicart_head_custom') ?>
+          <div class="box-desktop1">
+            <?php echo $this->getChildHtml('store_language') ?>
+          </div>
+        </div>
+        <!-- Search -->
+
+        <div id="header-search" class="skip-content">
+            <?php echo $this->getChildHtml('topSearch') ?>
+        </div>
+    </div>
+  </div>  
+</header>
+<?php echo $this->getChildHtml('topContainer'); ?>

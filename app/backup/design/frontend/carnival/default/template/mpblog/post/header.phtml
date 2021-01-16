@@ -1,0 +1,45 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Magpleasure_Blog
+ */
+
+/** @var Magpleasure_Blog_Block_Content_List_Details $this */
+
+/** @var Magpleasure_Blog_Helper_Data $helper  */
+$helper = $this->_helper();
+
+/** @var Magpleasure_Blog_Model_Post $post  */
+$post = $this->getPost();
+
+/** @var Magpleasure_Blog_Block_Content_Post_Details $this */
+?>
+
+<?php if ($this->showAuthor() && $post->getPostedBy()): ?>
+  <span class="post-by">
+    <?php echo $this->__("By "); ?>
+    <?php if ($this->useGoogleProfile()): ?>
+        <a rel="author"
+           href="<?php echo $this->getGoogleProfileUrl(); ?>"
+           target="_blank"
+           title="<?php echo $this->escapeHtml($post->getPostedBy()); ?>">
+    <?php endif; ?>
+    <span><?php echo $this->escapeHtml($post->getPostedBy()); ?></span>
+    <?php if ($this->useGoogleProfile()): ?>
+        </a>
+    <?php endif; ?>
+  </span>
+<?php endif; ?>
+<?php if ($helper->getDisplayViews()): ?>
+    <span class="post-views">
+      <strong><?php echo $post->getViews()?></strong>
+        <?php echo $this->__("Views"); ?>
+    </span>
+<?php endif; ?>
+
+<?php if ($post->getCreatedAt()): ?>
+    <span class="post-time">
+        <?php echo $this->renderDate($post->getCreatedAt()); ?>
+    </span>
+<?php endif; ?>

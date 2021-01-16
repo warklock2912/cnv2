@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Customform
+ */
+-->
+<layout version="1.0.0">
+    <adminhtml_field_index>
+        <reference name="content">
+            <block type="amcustomform/adminhtml_field" name="amcustomform_field" />
+        </reference>
+    </adminhtml_field_index>
+
+    <adminhtml_form_index>
+        <reference name="content">
+            <block type="amcustomform/adminhtml_form" name="amcustomform_form" />
+        </reference>
+    </adminhtml_form_index>
+
+    <adminhtml_submit_index>
+        <reference name="content">
+            <block type="amcustomform/adminhtml_submit" name="amcustomform_submit" />
+        </reference>
+    </adminhtml_submit_index>
+
+
+    <adminhtml_form_edit>
+        <update handle="adminhtml_amcustomform_common_js_handle" />
+        <update handle="adminhtml_dinamic_children_handle" />
+        <reference name="head">
+            <action method="addJs"><stylesheet>amasty/customform/jquery.js</stylesheet></action>
+            <action method="addJs"><stylesheet>amasty/customform/form_edit.js</stylesheet></action>
+            <action method="addCss"><name>lib/prototype/windows/themes/magento.css</name></action>
+            <action method="addCss"><stylesheet>default/amasty/cform/form.css</stylesheet></action>
+            <action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name></action>
+        </reference>
+    </adminhtml_form_edit>
+
+    <adminhtml_field_edit>
+        <update handle="adminhtml_amcustomform_common_js_handle" />
+        <update handle="adminhtml_dinamic_children_handle" />
+        <reference name="head">
+            <action method="addJs"><stylesheet>amasty/customform/jquery.js</stylesheet></action>
+            <action method="addJs">
+                <stylesheet>amasty/customform/field_edit.js</stylesheet>
+            </action>
+
+        </reference>
+    </adminhtml_field_edit>
+
+    <adminhtml_submit_view>
+        <reference name="content">
+            <block type="amcustomform/adminhtml_submit_view" name="amcustomform_submit_view" />
+        </reference>
+    </adminhtml_submit_view>
+
+    <!-- Handles -->
+
+    <adminhtml_dinamic_children_handle>
+        <reference name="head">
+            <action method="addJs">
+                <stylesheet>amasty/customform/DynamicChildren.js</stylesheet>
+            </action>
+        </reference>
+    </adminhtml_dinamic_children_handle>
+
+    <adminhtml_amcustomform_common_js_handle>
+        <reference name="head">
+            <action method="addJs">
+                <stylesheet>amasty/customform/common.js</stylesheet>
+            </action>
+        </reference>
+    </adminhtml_amcustomform_common_js_handle>
+</layout>

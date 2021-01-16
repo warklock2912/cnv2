@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Meta
+ */
+-->
+<config>
+
+    <modules>
+        <Amasty_Meta>
+            <version>1.3.10</version>
+        </Amasty_Meta>
+    </modules>
+
+    <global>
+        <models>
+            <ammeta>
+                <class>Amasty_Meta_Model</class>
+                <resourceModel>ammeta_mysql4</resourceModel>
+            </ammeta>
+            <ammeta_mysql4>
+                <class>Amasty_Meta_Model_Mysql4</class>
+                <entities>
+                    <config>
+                        <table>am_meta_config</table>
+                    </config>
+                </entities>
+            </ammeta_mysql4>
+        </models>
+
+        <resources>
+            <ammeta_setup>
+                <setup>
+                    <module>Amasty_Meta</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </ammeta_setup>
+
+            <ammeta_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </ammeta_write>
+
+            <ammeta_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </ammeta_read>
+        </resources>
+
+        <blocks>
+            <ammeta>
+                <class>Amasty_Meta_Block</class>
+            </ammeta>
+            <page>
+                <rewrite>
+                    <html_head>Amasty_Meta_Block_Page_Html_Head</html_head>
+                </rewrite>
+            </page>
+        </blocks>
+
+        <helpers>
+            <ammeta>
+                <class>Amasty_Meta_Helper</class>
+            </ammeta>
+        </helpers>
+
+        <events>
+            <catalog_product_save_after>
+                <observers>
+                    <ammeta>
+                        <type>singleton</type>
+                        <class>ammeta/observer</class>
+                        <method>catalogProductSaveAfter</method>
+                    </ammeta>
+                </observers>
+            </catalog_product_save_after>
+            <catalog_product_save_before>
+                <observers>
+                    <ammeta>
+                        <type>singleton</type>
+                        <class>ammeta/observer</class>
+                        <method>catalogProductSaveBefore</method>
+                    </ammeta>
+                </observers>
+            </catalog_product_save_before>
+        </events>
+    </global>
+
+    <frontend>
+        <events>
+            <catalog_controller_category_init_after>
+                <observers>
+                    <ammeta>
+                        <type>singleton</type>
+                        <class>ammeta/observer</class>
+                        <method>setCategoryData</method>
+                    </ammeta>
+                </observers>
+            </catalog_controller_category_init_after>
+            <core_block_abstract_prepare_layout_before>
+                <observers>
+                    <ammeta>
+                        <type>singleton</type>
+                        <class>ammeta/observer</class>
+                        <method>pageBlockObserverBefore</method>
+                    </ammeta>
+                </observers>
+            </core_block_abstract_prepare_layout_before>
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <ammeta>
+                        <type>singleton</type>
+                        <class>ammeta/observer</class>
+                        <method>pageBlockObserverAfter</method>
+                    </ammeta>
+                </observers>
+            </core_block_abstract_to_html_after>
+            <catalog_product_collection_load_after>
+                <observers>
+                    <ammeta>
+                        <type>singleton</type>
+                        <class>ammeta/observer</class>
+                        <method>updateCategoryProducts</method>
+                    </ammeta>
+                </observers>
+            </catalog_product_collection_load_after>
+        </events>
+
+        <layout>
+            <updates>
+                <ammeta>
+                    <file>amasty/ammeta/page.xml</file>
+                </ammeta>
+            </updates>
+        </layout>
+    </frontend>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <ammeta>
+                    <file>amasty/ammeta/ammeta.xml</file>
+                </ammeta>
+            </updates>
+        </layout>
+        <menu>
+            <cms>
+                <children>
+                    <amseotoolkit>
+                        <children>
+                            <ammeta translate="title" module="ammeta">
+                                <title>Meta Tags Templates</title>
+                                <sort_order>888</sort_order>
+                                <children>
+                                    <meta_category translate="title" module="ammeta">
+                                        <title>Meta Tags by Category</title>
+                                        <action>adminhtml/ammeta_config</action>
+                                        <sort_order>10</sort_order>
+                                    </meta_category>
+                                    <meta_сustom translate="title" module="ammeta">
+                                        <title>Meta Tags by URL</title>
+                                        <action>adminhtml/ammeta_custom</action>
+                                        <sort_order>20</sort_order>
+                                    </meta_сustom>
+                                </children>
+                            </ammeta>
+                        </children>
+                    </amseotoolkit>
+                </children>
+            </cms>
+        </menu>
+
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <cms>
+                            <children>
+                                <amseotoolkit>
+                                    <children>
+                                        <ammeta>
+                                            <title>Meta Tags Templates</title>
+                                            <children>
+                                                <meta_category>
+                                                    <title>Meta Tags by Catagory</title>
+                                                </meta_category>
+                                                <meta_сustom>
+                                                    <title>Meta Tags by URL</title>
+                                                </meta_сustom>
+                                            </children>
+                                        </ammeta>
+                                    </children>
+                                </amseotoolkit>
+                            </children>
+                        </cms>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <ammeta translate="title" module="ammeta">
+                                            <title>Meta Tags Templates</title>
+                                        </ammeta>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+
+        <translate>
+            <modules>
+                <Amasty_Meta>
+                    <files>
+                        <default>Amasty_Meta.csv</default>
+                    </files>
+                </Amasty_Meta>
+            </modules>
+        </translate>
+    </adminhtml>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Amasty_Meta after="Mage_Adminhtml">Amasty_Meta_Adminhtml</Amasty_Meta>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <default>
+        <ammeta>
+            <general>
+                <max_meta_title>250</max_meta_title>
+                <max_meta_description>500</max_meta_description>
+            </general>
+            <product>
+                <enabled>1</enabled>
+                <force>0</force>
+                <no_breadcrumbs>0</no_breadcrumbs>
+                <url_template></url_template>
+            </product>
+            <cat>
+                <enabled>1</enabled>
+                <force>0</force>
+            </cat>
+        </ammeta>
+    </default>
+</config>

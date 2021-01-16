@@ -1,0 +1,86 @@
+<?php echo $this->getChildHtml('items_before'); ?>
+<div id="checkout-review-table-wrapper">
+<h3 class="mastercheckout-title"><?php echo $this->__('Confirm') ?></h3>
+<div class="innerblock">
+    <table class="data-table" id="my-orders-table">
+        <?php if ($this->helper('tax')->displayCartBothPrices()): $colspan = $rowspan = 2; else: $colspan = $rowspan = 1; endif; ?>
+        <col width="1" />
+        <col width="1" />
+        <col/>
+        <col width="1" />
+        <col width="1" />
+        <?php if ($this->helper('tax')->displayCartBothPrices()): ?>
+        <col width="1" />
+        <col width="1" />
+        <?php endif; ?>
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th><?php echo $this->__('Products') ?></th>
+                <th class="a-center"><?php echo $this->__('Qty') ?></th>
+                <th class="a-center"><?php echo $this->__('Subtotal') ?></th>
+            </tr>
+            <?php if ($this->helper('tax')->displayCartBothPrices()): ?>
+                <tr>
+                    <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                    <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                    <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                    <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                </tr>
+            <?php endif; ?>
+        </thead>
+        <tbody>
+        <?php $i=0; foreach($this->getItems() as $_item): ?>
+          <tr>
+            <td class="td-no"><?php $i++; echo $i ?></td>
+            <?php echo $this->getItemHtml($_item)?>
+          </tr>  
+        <?php endforeach ?>
+        </tbody>
+        <?php echo $this->getChildHtml('totals'); ?>
+    </table>
+</div>
+</div>
+<?php echo $this->getChildHtml('items_after'); ?>
+<script type="text/javascript">
+//<![CDATA[
+    decorateTable('checkout-review-table');
+    truncateOptions();
+//]]>
+
+	jQuery(document).ready(function() {
+	
+		function equalHeight(group) {
+
+		var tallest = 0;
+		group.each(function() {
+			var thisHeight = jQuery(this).height();
+			if(thisHeight > tallest) {
+				tallest = thisHeight;
+			}
+		});
+		group.children('div').height(tallest);
+		}
+		
+	equalHeight(jQuery(".mastercheckout-blocks"));
+
+	});
+
+</script>
+<div id="checkout-review-submit">
+    
+    <div class="buttons-set" id="review-buttons-container">
+      <span class="please-wait" id="review-please-wait" style="display:none;">
+          <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Submitting order information...') ?>" title="<?php echo $this->__('Submitting order information...') ?>" class="v-middle" /> <?php echo $this->__('Submitting order information...') ?>
+      </span>
+
+      <?php echo $this->getChildHtml('button') ?>
+      <button type="button" class="button btn-white" onclick="activate_step('payment','review'); return false;"><span><span><?php echo $this->__('Back') ?></span></span></button>
+    </div>
+    <script type="text/javascript">
+    //<![CDATA[
+        review = new Review('<?php echo $this->getUrl('checkout/onepage/saveOrder', array('form_key' => Mage::getSingleton('core/session')->getFormKey())) ?>', '<?php echo $this->getUrl('checkout/onepage/success') ?>', $('checkout-agreements'));
+    //]]>
+    </script>
+</div>

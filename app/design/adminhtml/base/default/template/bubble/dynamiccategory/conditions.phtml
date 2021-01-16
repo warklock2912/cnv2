@@ -1,0 +1,56 @@
+<?php
+/**
+ * @category    Bubble
+ * @package     Bubble_DynamicCategory
+ * @version     2.4.2
+ * @copyright   Copyright (c) 2015 BubbleShop (https://www.bubbleshop.net)
+ */
+/**
+ * @var $this Bubble_DynamicCategory_Block_Adminhtml_Category_Dynamic_Conditions
+ */
+?>
+<div class="entry-edit">
+    <?php echo $this->getFormHtml();?>
+</div>
+<?php echo $this->getChildHtml('form_after');?>
+
+<?php if ($this->getRequest()->isAjax() && $this->getCategory()->getId() && $this->getCategory()->getDynamicProductsRefresh()): ?>
+<div id="category_dynamic_products_grid">
+    <div id="category_dynamic_products_loading" class="box">
+        <img src="<?php echo $this->getSkinUrl('images/ajax-loader.gif') ?>" class="f-left">&nbsp;<?php echo $this->__('Please wait...') ?>
+    </div>
+    <script type="text/javascript">
+        //<![CDATA[
+        $('catalog_category_products').style.visibility = 'hidden';
+        var req = new Ajax.Updater(
+            {
+                success: 'category-edit-container',
+                failure: 'category_dynamic_products_loading'
+            },
+            '<?php echo $this->getGridUrl() ?>',
+            {
+                evalScripts: true,
+                loaderArea: false,
+                onSuccess: function(response) {
+                    $('catalog_category_products').style.visibility = 'visible';
+                    $('category_dynamic_products_grid').remove();
+                    new Ajax.Request('<?php echo $this->getProductCountUrl() ?>', {
+                        loaderArea: false,
+                        onSuccess: function(response) {
+                            var categoryId = '<?php echo (int) $this->getCategory()->getId() ?>';
+                            var count = parseInt(response.responseText, 10);
+                            $('category_products_count_' + categoryId).update('(' + count + ')');
+                        }
+                    });
+                }
+            }
+        );
+        Ajax.Responders.register({
+            onCreate: function() {
+                req.transport.abort();
+            }
+        });
+        //]]>
+    </script>
+</div>
+<?php endif ?>

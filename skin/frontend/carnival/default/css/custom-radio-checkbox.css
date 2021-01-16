@@ -1,0 +1,55 @@
+/* REQUIRED CSS */
+
+/* Custom radio-checkbox */
+i.radio,
+i.checkbox {
+	margin: 3px 5px 0 0;
+	float:left;
+  overflow:hidden;
+}
+
+
+/* radio */
+.radio.rc-hidden,
+#rewardpoints-slider-input .checkbox.rc-hidden{
+  width:16px;
+  height:16px;
+  margin:3px 0 0;
+  position:relative;
+  z-index: 1;
+  opacity:0;
+  float:left;
+  margin-right:6px;
+}
+i.radio,
+#rewardpoints-slider-input i.checkbox {width: 16px; height: 16px; border:solid 3px #f0f0f0; background:#fff; border-radius:100%; position:relative; margin-left:-22px;}
+i.radio-checked,
+#rewardpoints-slider-input i.checkbox-checked {
+  background:#ADCA37;
+  margin-top: 4px;
+}
+i.radio + label {position:relative;}
+
+.mastercheckout_main i.radio-checked {background:#1CBBB4;}
+
+/* checkbox */
+.checkbox.rc-hidden{
+  width:17px;
+  height:17px;
+  position:relative;
+  float:left;
+  margin-top: 3px;
+  z-index: 1;
+  opacity:0;
+  margin-right:6px;
+}
+input[type="checkbox"] i.checkbox-checked,
+i.checkbox { background:url(../images/check-box.png) no-repeat center top; width:17px; height:17px; margin-top: 3px; margin-left:-22px; }
+
+i.checkbox-checked{ background-position: center bottom; border:none; }
+
+#rewardpoints-slider-input .checkbox + label {
+  font-family: tahoma;
+  font-size:12px;
+  text-transform: uppercase;
+}

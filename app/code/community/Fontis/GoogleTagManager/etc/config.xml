@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Fontis Software License that is available in
+ * the FONTIS-LICENSE.txt file included with this extension. This file is located
+ * by default in the root directory of your Magento installation. If you are unable
+ * to obtain the license from the file, please contact us via our website and you
+ * will be sent a copy.
+ *
+ * @category   Fontis
+ * @copyright  Copyright (c) 2014 Fontis Pty. Ltd. (http://www.fontis.com.au)
+ * @license    Fontis Software License
+ */
+-->
+<config>
+    <modules>
+        <Fontis_GoogleTagManager>
+            <version>5.2.0</version>
+        </Fontis_GoogleTagManager>
+    </modules>
+    <global>
+        <blocks>
+            <googletagmanager>
+                <class>Fontis_GoogleTagManager_Block</class>
+            </googletagmanager>
+        </blocks>
+        <helpers>
+            <googletagmanager>
+                <class>Fontis_GoogleTagManager_Helper</class>
+            </googletagmanager>
+        </helpers>
+        <models>
+            <googletagmanager>
+                <class>Fontis_GoogleTagManager_Model</class>
+            </googletagmanager>
+        </models>
+        <resources>
+            <fontis_gtm_setup>
+                <setup>
+                    <module>Fontis_GoogleTagManager</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </fontis_gtm_setup>
+            <fontis_gtm_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </fontis_gtm_write>
+            <fontis_gtm_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </fontis_gtm_read>
+        </resources>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <googletagmanager>
+                    <file>fontis/googletagmanager.xml</file>
+                </googletagmanager>
+            </updates>
+        </layout>
+        <dataLayer>
+            <ecommerce>googletagmanager/provider_enhancedEcommerce</ecommerce>
+            <productAttributes>googletagmanager/provider_products</productAttributes>
+            <categoryAttributes>googletagmanager/provider_categories</categoryAttributes>
+            <google_tag_params>googletagmanager/provider_google</google_tag_params>
+        </dataLayer>
+        <enhancedecommerce>
+            <detail>googletagmanager/provider_enhancedEcommerce_productDetails</detail>
+        </enhancedecommerce>
+        <personaldataLayer>
+            <customerAttributes>
+                <helper>googletagmanager</helper>
+                <function>getCustomerAttributes</function>
+            </customerAttributes>
+        </personaldataLayer>
+    </frontend>
+    <default>
+        <fontis_gtm>
+            <settings>
+                <active>0</active>
+                <datalayerecommerce>0</datalayerecommerce>
+                <datalayervisitors>0</datalayervisitors>
+                <datalayerpage>0</datalayerpage>
+                <datalayergoogle>0</datalayergoogle>
+            </settings>
+            <enhanced_ecommerce_product_details>
+                <add_variant>0</add_variant>
+            </enhanced_ecommerce_product_details>
+        </fontis_gtm>
+    </default>
+</config>

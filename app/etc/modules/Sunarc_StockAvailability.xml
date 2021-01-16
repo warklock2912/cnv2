@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Sunarc_StockAvailability>
+      <active>true</active>
+      <codePool>local</codePool>
+      <version>1.2.0</version>
+    </Sunarc_StockAvailability>
+  </modules>
+</config>

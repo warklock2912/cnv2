@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoSingleUrl
+ */
+-->
+<config>
+    <modules>
+        <Amasty_SeoSingleUrl>
+            <version>1.1.0</version>
+        </Amasty_SeoSingleUrl>
+    </modules>
+
+    <global>
+        <blocks>
+            <amseourl>
+                <class>Amasty_SeoSingleUrl_Block</class>
+            </amseourl>
+
+            <catalog>
+                <rewrite>
+                    <product_list_related>Amasty_SeoSingleUrl_Block_Catalog_Product_List_Related</product_list_related>
+                </rewrite>
+            </catalog>
+        </blocks>
+
+        <helpers>
+            <amseourl>
+                <class>Amasty_SeoSingleUrl_Helper</class>
+            </amseourl>
+            <catalog>
+                <rewrite>
+                    <product_url_rewrite>Amasty_SeoSingleUrl_Helper_Product_Url_Rewrite</product_url_rewrite>
+                </rewrite>
+            </catalog>
+        </helpers>
+
+        <models>
+            <amseourl>
+                <class>Amasty_SeoSingleUrl_Model</class>
+                <resourceModel>amseourl_resource</resourceModel>
+            </amseourl>
+            <catalog_resource>
+                <rewrite>
+                    <product_collection>Amasty_SeoSingleUrl_Model_Resource_Product_Collection</product_collection>
+                    <product_link_product_collection>Amasty_SeoSingleUrl_Model_Resource_Product_Link_Product_Collection</product_link_product_collection>
+                </rewrite>
+            </catalog_resource>
+            <reports_resource>
+                <rewrite>
+                    <product_index_viewed_collection>Amasty_SeoSingleUrl_Model_Resource_Reports_Product_Index_Viewed_Collection</product_index_viewed_collection>
+                </rewrite>
+            </reports_resource>
+            <sitemap_resource>
+                <rewrite>
+                    <catalog_product>Amasty_SeoSingleUrl_Model_Resource_Sitemap_Catalog_Product</catalog_product>
+                </rewrite>
+            </sitemap_resource>
+            <catalogsearch_resource>
+                <rewrite>
+                    <fulltext_collection>Amasty_SeoSingleUrl_Model_Resource_CatalogSearch_Fulltext_Collection</fulltext_collection>
+                </rewrite>
+            </catalogsearch_resource>
+            <catalog>
+                <rewrite>
+                    <product_url>Amasty_SeoSingleUrl_Model_Product_Url</product_url>
+                </rewrite>
+            </catalog>
+        </models>
+
+        <events>
+            <core_block_abstract_prepare_layout_after>
+                <observers>
+                    <amasty_amseourl_model_observer>
+                        <type>singleton</type>
+                        <class>amseourl/observer</class>
+                        <method>addUrlRewriteToSitemap</method>
+                    </amasty_amseourl_model_observer>
+                </observers>
+            </core_block_abstract_prepare_layout_after>
+            <catalog_product_upsell>
+                <observers>
+                    <amasty_amseourl_model_observer>
+                        <type>singleton</type>
+                        <class>amseourl/observer</class>
+                        <method>addUrlRewriteToUpSell</method>
+                    </amasty_amseourl_model_observer>
+                </observers>
+            </catalog_product_upsell>
+            <catalog_block_product_list_collection>
+                <observers>
+                    <amasty_amseourl_model_observer>
+                        <type>singleton</type>
+                        <class>amseourl/observer</class>
+                        <method>addUrlRewriteToUpSell</method>
+                    </amasty_amseourl_model_observer>
+                </observers>
+            </catalog_block_product_list_collection>
+            <controller_action_predispatch_catalog_product_view>
+                <observers>
+                    <amasty_amseourl_model_observer>
+                        <type>singleton</type>
+                        <class>amseourl/observer</class>
+                        <method>preDispatch</method>
+                    </amasty_amseourl_model_observer>
+                </observers>
+            </controller_action_predispatch_catalog_product_view>
+        </events>
+        <catalog>
+            <product>
+                <url>
+                    <model>amseourl/product_url</model>
+                </url>
+            </product>
+        </catalog>
+    </global>
+
+    <frontend>
+        <events>
+            <catalog_controller_product_init>
+                <observers>
+                    <amseourl>
+                        <type>singleton</type>
+                        <class>amseourl/observer</class>
+                        <method>onControllerProductInit</method>
+                    </amseourl>
+                </observers>
+            </catalog_controller_product_init>
+        </events>
+    </frontend>
+
+    <default>
+        <amseourl>
+            <general>
+                <product_url_type>0</product_url_type>
+            </general>
+        </amseourl>
+    </default>
+</config>

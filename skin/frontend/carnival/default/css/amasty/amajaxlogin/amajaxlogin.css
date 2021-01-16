@@ -1,0 +1,427 @@
+.am-facebook-image{
+  box-sizing: content-box;
+}
+
+#am-google-image{
+  box-sizing: content-box;
+}
+
+#amprogress {
+  background: linear-gradient(rgba(11, 11, 11, 0.1), rgba(11, 11, 11, 0.6)) repeat-x scroll 0 0 rgba(11, 11, 11, 0.2);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100000;
+}
+
+#amimg_container {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  z-index: 9999;
+  text-align: center;
+  transform: translate(0 , -50%);
+  -webkit-transform: translate(0 , -50%);
+  -moz-transform: translate(0 , -50%);
+}
+
+#amimg_container img{
+  display: inline-block;
+}
+
+#am-ajaxlogin-container{
+  width:100%;
+  height:100%;
+  position:fixed;
+  top:0;
+  left:0;
+  background:url('ie.png');
+  background:rgba(0,0,0,0.7);
+  z-index: 99999;
+}
+
+#confirmOverlay div{
+  min-height: none;
+  min-width: none;
+  max-height: none;
+  max-width: none;
+}
+
+#am-ajaxlogin{
+  float: none;
+  width:96%;
+  top:50%!important;
+  left:50%;
+  transform:translate(-50%,-50%);
+  -webkit-transform:translate(-50%,-50%);
+  -moz-transform:translate(-50%,-50%);
+  max-width:546px;
+  position:relative;
+  text-align: center;
+  margin: 0;
+  border:none;
+  z-index: 100;
+  background-color:#fff;
+  font-size: 16px;
+  border-radius: 0px;
+}
+
+#am-ajaxlogin-close {
+  position: absolute;
+  right: -40px;
+  top: 0px;
+  cursor: pointer;
+  width: 31px;
+  height:30px;
+  background:url(close.png) no-repeat center center;
+  text-indent: -9999px;
+}
+#am-ajaxlogin-close:hover{
+  opacity:0.6;
+}
+#am-ajaxlogin .account-create > form {
+  width:360px;
+  margin:0 auto;
+  max-width:100%;
+}
+#am-ajaxlogin .account-create .buttons-set.style1 .button {
+  width:100%;
+}
+
+#am-ajaxlogin .account-create .fieldset > h2{
+  display:none;
+}
+
+#am-ajaxlogin-title{
+  font-size: 18px;
+  padding: 40px 0px 10px;
+  color: #000;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+
+#am-ajaxlogin-message{
+  height: 100%;
+  padding:0;
+  overflow:hidden;
+}
+.sub-title {
+  font-size: 12px;
+  color: #898989;
+  text-transform: uppercase;
+  line-height: 16px;
+  display:block;
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 10px
+}
+.sub-title a{
+  color:#448CCB;
+  margin-left:5px;
+}
+
+.am-form-block{
+  color: #9ba0a4;
+  width: 100%;
+  max-width: 360px;
+  display: inline-block;
+  text-align: left;
+  vertical-align: top;
+}
+
+.am-form-list input.input-text {
+  width: 100%;
+  border-color:#E1E1E1;
+}
+
+.am-form-list li,
+.am-form-list li.fields  .field{
+  margin: 0 0 8px;
+}
+
+.am-form-list label {
+  float: left;
+  font-weight: bold;
+  position: relative;
+}
+
+.am-form-list em {
+  color: #EB340A;
+  float: right;
+  font-style: normal;
+  position: absolute;
+  right: -8px;
+  top: 0;
+}
+
+.or_use_that{
+  position:absolute;
+  width:40px;
+  height:40px;
+  border-radius: 100%;
+  background:#fff;
+  color:#898989;
+  font-size:18px;
+  font-family: tahoma;
+  line-height:40px;
+  text-align: center;
+  left:50%;
+  margin-left:-20px;
+  top:-20px;
+}
+
+.am-form-block-line {
+  margin: 10px;
+  height:1px;
+}
+
+#amajaxlogin-login-form{
+/*  overflow:hidden;*/
+}
+
+.amform-block-account{
+  position:relative;
+  border:0;
+  background:#EBEBEB;
+  padding:35px 0;
+  margin-top:45px;
+}
+
+.amform-block-account:before,
+.amform-block-account:after{
+  content:"";
+  width:100%;
+  height:100%;
+  position:absolute;
+  background:#EBEBEB;
+  top:0px;
+}
+.amform-block-account:before{
+  right:100%;
+}
+.amform-block-account:after {
+  left:100%;
+}
+
+
+.amform-block-social{
+  clear: both;
+  position: relative;
+}
+
+.amform-block-social div{
+  cursor: pointer;
+  max-height: 40px;
+  margin:2px 0;
+}
+#am-ajax-facebook   {
+  background:#4870AA;
+  text-align: center;
+}
+
+#hideDiv{
+  width:100%;
+  height:100%;
+  z-index: 10;
+  position: absolute;
+  display: block;
+  float: none;
+}
+
+.am-password-login {
+  float:left;
+  font-size: 10px;
+  padding-top: 10px;
+  margin-bottom:5px;
+}
+
+.am-password-login a{
+  color: #000;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.am-password-login a:hover{
+  opacity:0.6;
+}
+
+ul.form-list label {
+  color: #9ba0a4;
+}
+
+.am-password-login a:hover{
+  text-decoration: none;
+  border-bottom: 0;
+}
+
+.button.am-login-button{
+  font-size:14px;
+  padding: 10px ;
+  text-decoration:none;
+  display:inline-block;
+  font-weight:bold;
+  cursor: pointer;
+  color: #FFFFFF;
+  min-width: 100px;
+  max-width: 100%;
+  text-align: center;
+  vertical-align: top;
+}
+
+.am-create-account{
+  width:100%;
+}
+
+.am-login{
+  position: relative;
+  width:100%;
+}
+
+.am-login:hover,
+.am-create-account:hover{
+   opacity:0.6;
+}
+
+#confirmBox p{
+  background:none;
+  font-size:16px;
+  line-height:1.4;
+  padding-top: 5px;
+}
+
+.am-ajax-iframe{
+  width: 31px;
+  height:32px;
+  border:0;
+}
+
+.am-ajax-error{
+  color: red;
+  font-size: 15px;
+  padding: 10px 10px 30px;
+}
+
+
+.am-ajax-error img {
+  margin-right: 10px;
+  width: 12px;
+  display:inline-block;
+}
+
+.am-ajax-success img {
+  margin-right: 10px;
+  width: 13px;
+  display:inline-block;
+}
+
+.am-ajax-success{
+  color: #94D23A;
+  font-size: 15px;
+  padding: 10px 10px 30px;
+}
+
+/* forgot password block start*/
+
+.am-login-forgotpassword{
+  margin: 0 0 30px;
+  text-align: center;
+}
+
+.am-login-forgotpassword div.am-login-button{
+  float:none !important;
+  margin: 0 auto;
+  width:100%;
+}
+
+.am-login-forgotpassword p.required {
+  text-align: center;
+}
+
+.am-login-forgotpassword-form-list {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 305px;
+}
+
+.am-login-forgotpassword .form-list label {
+  float:none !important;
+}
+/* forgot password block end*/
+
+
+/* account block start*/
+.amajaxlogin-block .box-info .box-head h2 {
+  background-image: url("../../../images/i_ma-info.gif");
+}
+
+.amajaxlogin-social-icon {
+  margin: 0 auto;
+  width: 160px;
+}
+.amajaxlogin-social-icon div{
+  margin: 5px 0;
+  max-height: 32px;
+}
+
+.amajaxlogin-social-icon img{
+  cursor: pointer;
+}
+
+#am-twitter-image{
+  color: #FFFFFF;
+  height: 22px;
+  padding: 10px 0 0 35px;
+  text-align: center;
+  width: 78px;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-image: url("../../../images/amasty/amajaxlogin/twitter.png");
+  font: 12px/15px Arial,Helvetica,sans-serif;
+  cursor: pointer;
+}
+
+#am-twitter-image:hover{
+  background-position: bottom;
+}
+
+@media screen and (max-width: 565px) {
+  /**/
+
+  #am-ajaxlogin{
+    max-width:96%;
+    max-height: 75%;
+    overflow-y: auto;
+  }
+  .am-form-block{
+    margin: 0px;
+    padding: 0 10px;
+  }
+
+  #am-ajaxlogin-title {
+    padding:10px 0;
+    font-size:15px;
+  }
+  #am-ajaxlogin .amform-block-account,
+  #am-ajaxlogin  .login-block-social{
+    padding: 25px 10px 10px;
+    margin: 26px 0 0;
+  }
+  #am-ajax-facebook iframe {
+    max-width:100%;
+  }
+  #am-ajaxlogin-close {
+    background-color: #000;
+    border-radius: 100%;
+    right:0px;
+    width: 26px;
+    height: 26px;
+  }
+  #am-ajaxlogin .account-create > form,
+  .am-login-forgotpassword{
+    padding:0 10px;
+  }
+
+}
+

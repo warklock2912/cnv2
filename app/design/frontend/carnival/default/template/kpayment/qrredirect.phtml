@@ -1,0 +1,25 @@
+<?php /** @var Tigren_Kpayment_Block_Qrcode_Redirect $this */ ?>
+<?php list($publicKey, $uiJavascriptUrl, $kbankOrderId, $currency, $amount) = $this->getKbankQrInformation() ?>
+<div>
+    <form method="POST" action="<?php echo $this->getUrl('kpayment/qrcode_callback/index');?>">
+        <script type="text/javascript"
+                src="<?php echo $uiJavascriptUrl ?>"
+                data-apikey="<?php echo $publicKey ?>"
+                data-amount="<?php echo $amount ?>"
+                data-currency="<?php echo $currency ?>"
+                data-payment-methods="qr"
+                data-order-id="<?php echo $kbankOrderId ?>"
+                data-show-button="false">
+        </script>
+    </form>
+</div>
+<p class="txt-small"><?php echo $this->__('Please click on'); ?> <a href="#" onclick="showKPayment(); return false;"><?php echo $this->__('this link'); ?></a> <?php echo $this->__('if QR code doesn\'t show.'); ?></p>
+<script type="text/javascript">
+    setTimeout(function () {
+        showKPayment();
+    }, 3000);
+
+    function showKPayment(){
+        KPayment.show();
+    }
+</script>

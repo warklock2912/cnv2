@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Ordermanagertoolkit
+ */
+-->
+<config>
+    <sections>
+        <amorderattach translate="label" module="amordermanagertoolkit">
+            <label>Order Manager: Notes and Files</label>
+            <sort_order>15131406</sort_order>
+        </amorderattach>
+        <amoaction translate="label" module="amordermanagertoolkit">
+            <label>Order Manager: Mass Actions</label>
+            <sort_order>15131301</sort_order>
+        </amoaction>
+        <amogrid translate="label" module="amordermanagertoolkit">
+            <label>Order Manager: Extended Grid</label>
+            <sort_order>15130507</sort_order>
+        </amogrid>
+    </sections>
+</config>

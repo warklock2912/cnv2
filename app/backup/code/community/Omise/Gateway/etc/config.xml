@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Module configuration
+ *
+ * @author Omise Co., Ltd.
+ */
+-->
+<config>
+    <!--
+    /**
+     * Module defination
+     */
+    -->
+    <modules>
+        <Omise_Gateway>
+            <version>2.0.0.0</version>
+        </Omise_Gateway>
+    </modules>
+
+    <!--
+    /**
+     * Global variables
+     */
+    -->
+    <global>
+        <models>
+            <omise_gateway>
+                <class>Omise_Gateway_Model</class>
+                <resourceModel>omise_gateway_resource</resourceModel>
+            </omise_gateway>
+            <omise_gateway_resource>
+                <class>Omise_Gateway_Model_Resource</class>
+                <entities>
+                    <omise>
+                        <table>omise_gateway</table>
+                    </omise>
+
+                    <token>
+                        <table>omise_token</table>
+                    </token>
+                </entities>
+            </omise_gateway_resource>
+        </models>
+
+        <resources>
+            <omise_gateway_setup>
+                <setup>
+                    <module>Omise_Gateway</module>
+                    <class>Mage_Core_Model_Resource_Setup</class>
+                </setup>
+                <connection>
+                    <use>directory_setup</use>
+                </connection>
+                <omise_gateway_write>
+                    <connection>
+                        <use>local_write</use>
+                    </connection>
+                </omise_gateway_write>
+                <omise_gateway_read>
+                    <connection>
+                        <use>local_read</use>
+                    </connection>
+                </omise_gateway_read>
+            </omise_gateway_setup>
+        </resources>
+
+        <blocks>
+            <omise_gateway_adminhtml>
+                <class>Omise_Gateway_Block_Adminhtml</class>
+            </omise_gateway_adminhtml>
+
+            <omise_gateway>
+                <class>Omise_Gateway_Block</class>
+            </omise_gateway>
+        </blocks>
+
+        <helpers>
+            <omise_gateway>
+                <class>Omise_Gateway_Helper</class>
+            </omise_gateway>
+        </helpers>
+    </global>
+
+    <!--
+    /**
+     * Admin configuration
+     */
+    -->
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Omise_Gateway before="Mage_Adminhtml">Omise_Gateway_Adminhtml</Omise_Gateway>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <frontend>
+        <routers>
+            <omise_gateway>
+                <use>standard</use>
+                <args>
+                    <module>Omise_Gateway</module>
+                    <frontName>omise</frontName>
+                </args>
+            </omise_gateway>
+        </routers>
+        <events>
+            <!-- <sales_order_place_after>
+                <observers>
+                    <omise_gateway>
+                        <class>omise_gateway/observer</class>
+                        <method>salesOrderPlaceAfter</method>
+                    </omise_gateway>
+                </observers>
+            </sales_order_place_after> -->
+        </events>
+
+        <layout>
+            <updates>
+                <omise_gateway>
+                    <file>omise_gateway.xml</file>
+                </omise_gateway>
+            </updates>
+        </layout>
+    </frontend>
+    <!--
+    /**
+     * Payment Method configuration for front-end
+     */
+    -->
+    <default>
+        <payment>
+            <omise_gateway>
+                <active>1</active>
+                <order_status>1</order_status>
+                <payment_action>authorize</payment_action>
+                <model>omise_gateway/paymentMethod</model>
+                <cctypes>VI,MC</cctypes>
+                <title>Credit Card (Powered by Omise)</title>
+                <usetoken>0</usetoken>
+            </omise_gateway>
+        </payment>
+    </default>
+</config>

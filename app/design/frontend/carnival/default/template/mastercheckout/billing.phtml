@@ -1,0 +1,296 @@
+<form id="co-billing-form" action="">
+  <ul class="form-list">
+    <?php if ($this->customerHasAddresses()): ?>
+      <li class="wide">
+        <label class="label-title" for="billing-address-select">
+          <?php echo $this->__('Billing') ?>
+          <a href="javascript:void(0)" class="a-edit" onclick="editBillingAddress();"><?php echo $this->__('Edit'); ?></a>
+        </label>
+        <div class="input-box">
+          <div id="billing-addresses" class="custom-select-style1">
+            <?php $billingAddressDefault = $this->getDefaultInputBillingaddress(); ?>
+            <?php $addresses = $this->getBillingaddresses(); ?>
+            <input type="hidden" id="billing-address-input-choosed" name="billing_address_id" value="<?php echo $billingAddressDefault['address_id']; ?>" class="">
+            <label id="billing-address-input" class="address-select"><?php echo $billingAddressDefault['address_html']; ?></label>
+
+            <button type="button" id="show-list-billing-address" class="show-list-address"><span><?php echo $this->__('List addresses')?></button>
+            <ul class="select-one-option" id="billing-address-select-option">
+              <li id="option-new-address">
+                <label address_id="new" onclick="changeBillingAddress(this);"><span><?php echo $this->__('New address'); ?></span></label>
+              </li>
+              <li>
+                <ul class="customer-list-address-checkout">
+                  <?php foreach ($addresses as $address): ?>
+                    <li>
+                      <label id="billing-lablel-<?php echo ($address->getId()); ?>" address_id="<?php echo ($address->getId()); ?>" onclick="changeBillingAddress(this);"><?php echo ($address->format('oneline')); ?></label>
+                      <input type="hidden" id="billing_address_hidden_<?php echo $address->getId(); ?>" address_id="<?php echo ($address->getId()); ?>"
+                             billing_firstname="<?php echo $address->getFirstname() ?>" billing_lastname="<?php echo $address->getLastname() ?>"
+                             billing_street="<?php echo $address->getStreet(1) ?>" billing_regionId="<?php echo $address->getRegionId() ?>"
+                             billing_cityId ="<?php echo $address->getCityId() ?>" billing_subdistrictId ="<?php echo $address->getSubdistrictId() ?>"
+                             billing_postcode="<?php echo $address->getPostcode() ?>" billing_telephone="<?php echo $address->getTelephone() ?>"
+                             country_id = "<?php echo $address->getCountryId()?>" billing_region="<?php echo $address->getRegion() ?>"
+                             billing_city ="<?php echo $address->getCity() ?>" billing_subdistrict ="<?php echo $address->getSubdistrict() ?>"
+                        >
+                    </li>
+                  <?php endforeach; ?>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <script type="text/javascript">
+            jQuery(document).ready(function(){
+              jQuery('#billing-addresses .show-list-address').click(function () {
+                if (!jQuery(this).hasClass('active')) {
+                  jQuery(this).next('ul').slideDown(300);
+                  jQuery(this).addClass('active');
+                  $j('#billing-address-select-option').mCustomScrollbar();
+                }
+                else if (jQuery(this).hasClass('active')) {
+                  jQuery(this).next('ul').slideUp(300);
+                  jQuery(this).removeClass('active');
+                }
+              });
+            });
+          </script>
+        </div>
+      </li>
+    <?php else: ?>
+      <ul class="form-list">
+        <li class="wide">
+          <label class="label-title" for="billing-address-select">
+            <?php echo $this->__('Billing') ?>
+          </label>
+        </li>
+      </ul>
+    <?php endif; ?>
+    <li id="billing-new-address-form"<?php if ($this->customerHasAddresses()): ?> style="display:none;"<?php endif; ?>>
+
+      <input type="hidden" name="billing[address_id]" value="<?php echo $this->getAddress()->getId() ?>" id="billing:address_id" />
+      <ul>
+        <li class="fields show-label"><?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getAddress()->getFirstname() ? $this->getAddress() : $this->getQuote()->getCustomer())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?></li>
+        <li class="fields">
+          <?php if (Mage::getStoreConfig('mastercheckout/adressoptions/company')) {?>
+            <div class="field">
+              <label for="billing:company"><?php echo $this->__('Company') ?></label>
+              <div class="input-box">
+                <input type="text" id="billing:company" name="billing[company]" value="<?php echo $this->htmlEscape($this->getAddress()->getCompany()) ?>" title="<?php echo $this->__('Company') ?>" class="input-text" />
+              </div>
+            </div>
+          <?php }?>
+        </li>
+
+        <li class="wide">
+          <label for="billing:street1" class="required"><em>*</em><?php echo $this->__('Address') ?></label>
+          <div class="input-box">
+            <input type="text" title="<?php echo $this->__('Street Address') ?>" name="billing[street][]" id="billing:street1" value="<?php echo $this->htmlEscape($this->getAddress()->getStreet(1)) ?>" class="input-text required-entry" />
+          </div>
+        </li>
+        <?php for ($_i=2, $_n=$this->helper('customer/address')->getStreetLines(); $_i<=$_n; $_i++): ?>
+          <li class="wide">
+            <div class="input-box">
+              <input type="text" title="<?php echo $this->__('Street Address %s', $_i) ?>" name="billing[street][]" id="billing:street<?php echo $_i?>" value="<?php echo $this->htmlEscape($this->getAddress()->getStreet($_i)) ?>" class="input-text" />
+            </div>
+          </li>
+        <?php endfor ?>
+        <li class="fields">
+          <div class="field">
+            <label for="billing:country_id" class="required"><em>*</em><?php echo $this->__('Country') ?></label>
+            <div class="input-box">
+              <?php echo $this->getCountryHtmlSelect('billing') ?>
+            </div>
+          </div>
+        </li>
+        <li class="fields">
+          <div id="mastercheckout_billing_region" class="field">
+            <label for="billing:region_id" class="required"><em>*</em><?php echo $this->__('State/Province') ?></label>
+            <div class="input-box">
+              <select id="billing:region_id" name="billing[region_id]" title="<?php echo $this->__('State/Province') ?>" class="validate-select" style="display:none;">
+                <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+              </select>
+              <script type="text/javascript">
+                //<![CDATA[
+                $('billing:region_id').setAttribute('defaultValue',  "<?php echo $this->getAddress()->getRegionId() ?>");
+                //]]>
+              </script>
+              <input type="text" id="billing:region" name="billing[region]" value="<?php echo $this->htmlEscape($this->getAddress()->getRegion()) ?>"  title="<?php echo $this->__('State/Province') ?>" class="input-text" style="display:none;" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="billing:city" class="required"><em>*</em><?php echo $this->__('City') ?></label>
+            <div class="input-box">
+              <select id="billing:city_id" name="billing[city_id]" title="<?php echo $this->__('City') ?>" class="validate-select" style="display:none;">
+                <option value=""><?php echo $this->__('Please select City') ?></option>
+              </select>
+              <script type="text/javascript">
+                //<![CDATA[
+                $('billing:city_id').setAttribute('defaultValue',  "<?php echo $this->getAddress()->getCityId() ?>");
+                //]]>
+              </script>
+              <input type="text" title="<?php echo Mage::helper('core')->quoteEscape($this->__('City')) ?>" name="billing[city]" value="<?php echo $this->escapeHtml($this->getAddress()->getCity()) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('city') ?>" id="billing:city" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="billing:subdistrict" class="required"><em>*</em><?php echo $this->__('Subdistrict') ?></label>
+            <div class="input-box">
+              <select id="billing:subdistrict_id" name="billing[subdistrict_id]" title="<?php echo $this->__('Subdistrict') ?>" class="validate-select" style="display:none;">
+                <option value=""><?php echo $this->__('Please select Subdistrict') ?></option>
+              </select>
+              <script type="text/javascript">
+                //<![CDATA[
+                $('billing:subdistrict_id').setAttribute('defaultValue',  "<?php echo $this->getAddress()->getSubdistrictId() ?>");
+                //]]>
+              </script>
+              <input type="text" name="billing[subdistrict]" value="" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Subdistrict')) ?>" class="input-text" id="billing:subdistrict" />
+            </div>
+          </div>
+        </li>
+        <li class="fields">
+          <div class="field">
+            <label for="billing:postcode" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
+            <div class="input-box">
+              <input type="text" title="<?php echo $this->__('Zip/Postal Code') ?>" name="billing[postcode]" id="billing:postcode" value="<?php echo $this->htmlEscape($this->getAddress()->getPostcode()) ?>" class="input-text validate-zip-international required-entry" />
+            </div>
+          </div>
+        </li>
+        <li class="fields">
+          <div class="field">
+            <label for="billing:telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
+            <div class="input-box">
+              <input type="text" name="billing[telephone]" value="<?php echo $this->htmlEscape($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry" id="billing:telephone" />
+            </div>
+          </div>
+        </li>
+        <li class="fields">
+          <?php if (Mage::getStoreConfig('mastercheckout/adressoptions/fax')) {?>
+            <div class="field">
+              <label for="billing:fax"><?php echo $this->__('Fax') ?></label>
+              <div class="input-box">
+                <input type="text" name="billing[fax]" value="<?php echo $this->htmlEscape($this->getAddress()->getFax()) ?>" title="<?php echo $this->__('Fax') ?>" class="input-text" id="billing:fax" />
+              </div>
+            </div>
+          <?php }?>
+        </li>
+
+        <?php if ($this->isCustomerLoggedIn() && $this->customerHasAddresses()):?>
+          <li class="control" style="display: none !important;">
+            <input type="checkbox" name="billing[save_in_address_book]" value="1" title="<?php echo $this->__('Save in address book'); ?>" id="billing:save_in_address_book" onchange="if(window.shipping) shipping.setSameAsBilling(false);"<?php if ($this->getAddress()->getSaveInAddressBook()):?> checked="checked"<?php endif;?> class="checkbox" /><label for="billing:save_in_address_book"><?php echo $this->__('Save in address book'); ?></label>
+          </li>
+        <?php else:?>
+          <li class="no-display"><input type="hidden" name="billing[save_in_address_book]" value="1" /></li>
+        <?php endif; ?>
+        <?php if ($this->isCustomerLoggedIn() && $this->customerHasAddresses()):?>
+          <div class="control">
+            <button type="button" title="<?php echo $this->__('Save'); ?>" class="button" onclick="saveToAddressBook('billing');">
+              <span><span><?php echo $this->__('Save'); ?></span></span>
+            </button>
+          </div>
+        <?php endif ?>
+      </ul>
+      <?php echo $this->getChildHtml('persistent.remember.me.tooltip'); ?>
+
+    </li>
+    <?php //Mage::log(Mage::getStoreConfig('mastercheckout/adressoptions/subscribenewsletter'));?>
+    <?php if ($this->canShip()): ?>
+      <div style="display:none">
+        <br/>
+        <li class="control">
+          <input type="radio" name="billing[use_for_shipping]" id="billing:use_for_shipping_yes" value="1" title="<?php echo  $this->__('Ship to this address') ?>" onclick="$('shipping:same_as_billing').checked = true; $('checkout_shipping').hide();" class="radio" /><label for="billing:use_for_shipping_yes"><?php echo  $this->__('Ship to this address') ?></label>
+        </li>
+        <br/>
+        <li class="control">
+          <input type="radio" name="billing[use_for_shipping]" id="billing:use_for_shipping_no" value="0" checked="checked" title="<?php echo $this->__('Ship to different address') ?>" onclick="$('shipping:same_as_billing').checked = false; $('checkout_shipping').show();" class="radio" /><label for="billing:use_for_shipping_no"><?php echo $this->__('Ship to different address') ?></label>
+        </li>
+      </div>
+    <?php endif; ?>
+  </ul>
+  <ul class="form-list">
+    <li class="control" id="same-as-shipping">
+      <input type="checkbox" name="billing[same_as_shipping]" id="billing:same_as_shipping" value="1" class="checkbox" checked="checked"/>
+      <label><?php echo $this->__('Billing to same Shipping address') ?></label>
+    </li>
+  </ul>
+  <?php if (!$this->canShip()): ?>
+    <input type="hidden" name="billing[use_for_shipping]" value="1" />
+  <?php endif; ?>
+  <div id="billing-buttons-container">
+    <!--       <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+        <button type="button" title="<?php echo $this->__('Continue B') ?>" class="button" onclick="billing.save()"><span><span><?php echo $this->__('Continue B') ?></span></span></button>
+        <span class="please-wait" id="billing-please-wait" style="display:none;">
+            <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Loading next step...') ?>" title="<?php echo $this->__('Loading next step...') ?>" class="v-middle" /> <?php echo $this->__('Loading next step...') ?>
+        </span>-->
+  </div>
+<?php echo $this->getBlockHtml("formkey") ?></form>
+
+<script type="text/javascript">
+  jQuery('#same-as-shipping').customRadioCheckbox();
+  //<![CDATA[
+  jQuery("#billing\\:country_id").val("<?php echo Mage::getStoreConfig('mastercheckout/maingroup/country'); ?>");
+  jQuery(document).ready(function(){
+    hideState();
+    jQuery("#billing\\:country_id").change(function(event){
+//            console.log(jQuery("#billing\\:region_id").css("display"));
+//            console.log("<?php echo Mage::getStoreConfig('mastercheckout/adressoptions/region')?>");
+      hideState();
+    });
+    function hideState(){
+      if (jQuery("#billing\\:region_id").css("display") == "none" && <?php echo Mage::getStoreConfig('mastercheckout/adressoptions/region')?> == "0") {
+        Element.hide('mastercheckout_billing_region');
+      } else {
+        Element.show('mastercheckout_billing_region');
+      }
+    }
+  });
+  var billingRegionUpdater = new RegionUpdater('billing:country_id', 'billing:region', 'billing:region_id', countryRegions, undefined, 'billing:postcode');
+
+  var billingCityUpdater = new CityUpdater('billing:country_id', 'billing:region_id', 'billing:city', 'billing:city_id', <?php echo Mage::helper('customaddress')->getCityJson() ?>);
+
+  var billingSubdistrictUpdater = new SubdistrictUpdater('billing:country_id', 'billing:region_id', 'billing:city_id', 'billing:subdistrict', 'billing:subdistrict_id', 'billing:postcode', <?php echo Mage::helper('customaddress')->getSubdistrictJson() ?>);
+
+
+  function changeBillingAddress(element){
+    if(element.getAttribute('address_id')){
+      var addressId = element.getAttribute('address_id');
+      if(addressId == 'new'){
+        $('billing-address-input').update(element.textContent);
+        $('billing-address-input-choosed').value = '';
+        $('billing-new-address-form').show();
+      }
+      else{
+        $('billing-address-input').update(element.textContent);
+        $('billing-address-input-choosed').value = addressId;
+        $('billing-new-address-form').hide();
+      }
+      $('billing-address-select-option').hide();
+      $('show-list-billing-address').removeClassName('active');
+    }
+  }
+
+  function editBillingAddress(){
+    $('billing-new-address-form').show();
+    var billingChoosedAddressId = $('billing-address-input-choosed').value;
+    $('billing-address-input-choosed').value = '';
+
+    //update form edit billing address
+    if(billingChoosedAddressId){
+      $('billing-address-input-choosed').value = $('billing_address_hidden_'+billingChoosedAddressId).getAttribute('address_id');
+      $('billing:firstname').value = $('billing_address_hidden_'+billingChoosedAddressId).getAttribute('billing_firstname');
+      $('billing:lastname').value = $('billing_address_hidden_'+billingChoosedAddressId).getAttribute('billing_lastname');
+      $('billing:street1').value = $('billing_address_hidden_'+billingChoosedAddressId).getAttribute('billing_street');
+      $('billing:country_id').value = $('billing_address_hidden_'+billingChoosedAddressId).getAttribute('country_id');
+      $('billing:region_id').value = $('billing_address_hidden_'+billingChoosedAddressId).getAttribute('billing_regionId');
+      $('billing:region').value = $('billing_address_hidden_'+billingChoosedAddressId).getAttribute('billing_region');
+
+      $('billing:city_id').value = $('billing_address_hidden_'+billingChoosedAddressId).getAttribute('billing_cityId');
+      $('billing:city').value = $('billing_address_hidden_'+billingChoosedAddressId).getAttribute('billing_city');
+      $('billing:subdistrict_id').value = $('billing_address_hidden_'+billingChoosedAddressId).getAttribute('billing_subdistrictId');
+      $('billing:subdistrict').value = $('billing_address_hidden_'+billingChoosedAddressId).getAttribute('billing_subdistrict');
+      $('billing:postcode').value = $('billing_address_hidden_'+billingChoosedAddressId).getAttribute('billing_postcode');
+      $('billing:telephone').value = $('billing_address_hidden_'+billingChoosedAddressId).getAttribute('billing_telephone');
+      billingRegionUpdater.update();
+      billingCityUpdater.update();
+      billingSubdistrictUpdater.update();
+    }
+  }
+
+  //]]>
+</script>

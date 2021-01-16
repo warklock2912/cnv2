@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Ordermanagertoolkit
+ */
+-->
+<config>
+    <modules>
+        <Amasty_Ordermanagertoolkit>
+            <version>1.3.8</version>
+        </Amasty_Ordermanagertoolkit>
+    </modules>
+
+    <global>
+        <helpers>
+            <amordermanagertoolkit>
+                <class>Amasty_Ordermanagertoolkit_Helper</class>
+            </amordermanagertoolkit>
+        </helpers>
+    </global>
+</config>

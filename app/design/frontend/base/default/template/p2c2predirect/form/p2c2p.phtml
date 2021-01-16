@@ -1,0 +1,92 @@
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+
+        jQuery("#custom_field_one").change(function(){
+
+            var token_value = jQuery("#custom_field_one").val();
+
+            if(token_value === "0"){
+                jQuery("#btn_2c2p_remove").hide();
+            }
+            else{
+                jQuery("#btn_2c2p_remove").show();
+            }
+        });
+
+        jQuery("#btn_2c2p_remove").click(function(){
+
+            var form_id = 'payment_form_' + "<?php echo $this->getMethodCode() ?>";
+            var token_key =  jQuery("#custom_field_one").val();
+
+            if(token_key == "0"){
+                alert("Please select stored card Id.");
+                return;
+            }
+
+            if(!confirm("Are you sure you want to delete?")) return;
+            var url = "<?php echo $this->getUrl('p2c2predirect/Payment/remove');?>";
+            jQuery.ajax({
+                url: url ,
+                type: "POST",
+                data: {token: token_key},
+                success: function(response){
+
+                    if(response == "0"){
+                        alert("Unable to remove your card. Please try again, and let us know if the problem persists.");
+                        return;
+                    }
+
+                    var isdeleted = jQuery("#custom_field_one option[value="+ token_key + "]").remove();
+                    if(jQuery("#custom_field_one").find("option").length <= 1){
+                        jQuery("#" + form_id).remove();
+                    }
+                    if(isdeleted.length === 0){
+                        alert("Unable to remove your card. Please try again, and let us know if the problem persists.")
+                    }
+                    else{
+                        jQuery("#btn_2c2p_remove").hide();
+                        alert("Your card has been removed successfully.");
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+<div class="form-list" id="payment_form_<?php echo $this->getMethodCode() ?>" style='display:none;'>
+
+    <?php
+    if(Mage::getSingleton('customer/session')->isLoggedIn()){
+    $stored_card  = Mage::getStoreConfig('payment/p2c2predirect/stored_card', Mage::app()->getStore());
+
+    if ($stored_card) {
+    $customer_id = Mage::getSingleton('customer/session')->getId();
+
+    $p2c2pTokenModel = Mage::getModel('p2c2p/token');
+
+    if(!$p2c2pTokenModel) {
+        die("2C2P Expected Model not available.");
+    }
+
+    $customer_data = $p2c2pTokenModel->getCollection()->addFieldToFilter('user_id',$customer_id);
+    $strHtml = '';
+    foreach ($customer_data as $key => $value) {
+        $strHtml .= '<option value='. $value->getData('p2c2p_id') .'>' . $value->getData('masked_pan') . '</option>';
+    }
+
+    if(count($customer_data) > 0){ ?>
+    <div>
+        <label><?php echo $this->__('Select my card') ?></label>
+        <span>
+        <select name="payment[custom_field_one]" id="custom_field_one">
+          <option value="0" selected>I'll use new card</option>
+          <?php echo $strHtml ?>
+        </select>
+      </span>
+        <span>
+        <input type="button" id="btn_2c2p_remove" name="btn_2c2p_remove" value="Remove card" class="button" style="display: none;">
+      </span>
+    </div>
+</div>
+<?php } } } ?>

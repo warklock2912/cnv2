@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoReviews
+ */
+-->
+<config>
+    <modules>
+        <Amasty_SeoReviews>
+            <version>1.0.3</version>
+        </Amasty_SeoReviews>
+    </modules>
+
+    <global>
+        <blocks>
+            <amseoreviews>
+                <class>Amasty_SeoReviews_Block</class>
+            </amseoreviews>
+
+            <review>
+                <rewrite>
+                    <product_view_list>Amasty_SeoReviews_Block_Review_Product_View_List</product_view_list>
+                    <view>Amasty_SeoReviews_Block_Review_View</view>
+                    <helper>Amasty_SeoReviews_Block_Review</helper>
+                </rewrite>
+            </review>
+        </blocks>
+
+        <helpers>
+            <amseoreviews>
+                <class>Amasty_SeoReviews_Helper</class>
+            </amseoreviews>
+        </helpers>
+
+        <models>
+            <amseoreviews>
+                <class>Amasty_SeoReviews_Model</class>
+            </amseoreviews>
+        </models>
+
+        <events>
+            <controller_front_init_routers>
+                <observers>
+                    <amseoreviews>
+                        <type>singleton</type>
+                        <class>amseoreviews/observer</class>
+                        <method>initControllerRouters</method>
+                    </amseoreviews>
+                </observers>
+            </controller_front_init_routers>
+        </events>
+    </global>
+
+  <frontend>
+    <layout>
+      <updates>
+        <amseoreviews>
+          <file>amasty/amseoreviews/amseoreviews.xml</file>
+        </amseoreviews>
+      </updates>
+    </layout>
+    <routers>
+      <review>
+        <args>
+          <modules>
+            <amasty_seoreviews before="Mage_Review">Amasty_SeoReviews</amasty_seoreviews>
+          </modules>
+        </args>
+      </review>
+    </routers>
+  </frontend>
+
+    <default>
+        <amseoreviews>
+            <general>
+                <enable>1</enable>
+                <redirect_to_product>1</redirect_to_product>
+            </general>
+            <additional>
+                <add_reviews_to_product>1</add_reviews_to_product>
+                <reviews_list_hash>customer-reviews</reviews_list_hash>
+                <review_form_hash>review-form</review_form_hash>
+            </additional>
+        </amseoreviews>
+        <web>
+            <routers>
+                <amseoreviews>
+                    <area>frontend</area>
+                    <class>Amasty_SeoReviews_Controller_Router</class>
+                </amseoreviews>
+            </routers>
+        </web>
+    </default>
+</config>

@@ -1,0 +1,86 @@
+
+<?php $_customer = Mage::getSingleton('customer/session')->getCustomer() ?>
+<?php $ruffleData = Mage::getSingleton('customer/session')->getRuffleData()?>
+<?php $_product = Mage::getModel('catalog/product')->load($ruffleData['product_id']); ?>
+<?php $productType = $_product->getTypeId(); ?>
+
+<?php
+  $attributes = null;
+	if($productType == 'configurable' && isset($ruffleData['super_attribute'])){
+		$superAttribute = $ruffleData['super_attribute'];
+		$attributes = $_product->getTypeInstance(true)->getConfigurableAttributesAsArray($_product); 
+	}
+?>
+<?php  ?>
+<div class="ruffle-confirm">
+	<h2><?php echo $this->__("Please confirm your detail below");?></h2>
+	<div class="ruffle-info">
+		<div class="ruffle-contact-info">
+			<h3><?php echo $this->__("Contact Information");?></h3>
+			<ul class="form-list">
+				<li>
+					<label><?php echo $this->__("Name");?></label>
+					<?php echo $_customer->getName(); ?>
+				</li>
+				<li>
+					<label><?php echo $this->__("E-mail");?></label>
+					<?php echo $_customer->getEmail(); ?>
+				</li>
+				<?php if($ruffleData['tel']):?>
+				<li>
+					<label><?php echo $this->__("Tel. ");?></label>
+					<?php echo $ruffleData['tel']; ?>
+				</li>
+				<?php endif ?>
+				<?php if($ruffleData['msg']):?>
+				<li>
+					<label><?php echo $this->__("Shipping : ");?><label>
+					<?php echo $ruffleData['msg']; ?>
+				</li>
+				<?php endif ?>
+			</ul>
+		</div>
+		<div class="ruffle-product-info">
+			<img class="img-smallimage" src="<?php echo Mage::helper('catalog/image')->init($_product, 'small_image')->resize(125); ?>" alt="<?php echo $_product->getName() ?>" />
+			<div class="product-info">
+				<h2 class="product-name">
+					<a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>">
+						<?php echo Mage::helper('catalog/output')->productAttribute($_product, $_product->getName(), 'name') ?>
+					</a>
+				</h2>
+				<?php if ($_product->getData('carnival_brand')): ?>
+					<?php $brandName = $_product->getResource()->getAttribute('carnival_brand')->getFrontend()->getValue($_product);?>
+                    <div class="product-brand"><?php echo $brandName; ?></div>
+                <?php endif; ?>
+        <div class="options">
+
+        <?php if($attributes): ?>
+        	<?php foreach ($attributes as $attribute): ?>
+        		<label><?php echo $attribute['frontend_label']?> : </label>
+        		<?php foreach ($attribute['values'] as $value){
+	        			if($value['value_index'] == $superAttribute[$attribute['attribute_id']]){
+	                  echo $value['label'];
+	                }
+	        			}
+        		?>
+        	<?php endforeach; ?>
+        <?php endif; ?>
+
+        </div>
+                <div class="price">
+	                <label><?php echo $this->__('Price:')?> </label>
+	                <?php echo Mage::helper('core')->formatPrice($_product->getFinalPrice(), true, false); ?>
+                </div>
+                <div class="qty">
+	                <label><?php echo $this->__('Qty:')?> </label>
+					<?php echo $this->__('1') ?>
+                </div>
+			</div>
+		</div>
+	</div>
+
+	<div class="confirm-button">
+		<button class="button" onclick="setLocation('<?php echo $this->getUrl('ruffle/index/join')?>')"><span><span><?php echo $this->__('Confirm Join Raffle') ?></span></span></button>
+	</div>
+	<p class="back-link"><a href="javascript:history.back()" class="back-link"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+</div>

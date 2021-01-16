@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Tigren_CustomerQueue>
+      <version>0.1.0</version>
+    </Tigren_CustomerQueue>
+  </modules>
+  <global>
+    <helpers>
+      <customerqueue>
+        <class>Tigren_CustomerQueue_Helper</class>
+      </customerqueue>
+    </helpers>
+  </global>
+  <frontend>
+    <events>
+      <controller_action_predispatch>
+        <observers>
+          <customerqueue>
+            <type>singleton</type>
+            <class>Tigren_CustomerQueue_Model_Observer</class>
+            <method>checkCustomerQueue</method>
+          </customerqueue>
+        </observers>
+      </controller_action_predispatch>
+    </events>
+  </frontend>
+  <global>
+    <models>
+      <queue>
+        <class>Tigren_CustomerQueue_Model</class>
+      </queue>
+    </models>
+  </global>
+  <crontab>
+    <jobs>
+      <queue_cron>
+        <schedule><cron_expr>* * * * *</cron_expr></schedule>
+        <run><model>queue/queueCron::queueCron</model></run>
+      </queue_cron>
+    </jobs>
+  </crontab>
+</config> 

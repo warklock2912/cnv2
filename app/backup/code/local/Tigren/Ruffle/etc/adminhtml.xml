@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config>
+	<menu>
+		<ruffle module="ruffle">
+			<title>Raffle</title>
+	      	<sort_order>69</sort_order>
+	      	<children>
+	      		<prize module="ruffle">
+	      			<title>Manage Prize</title>
+		         	<sort_order>0</sort_order>
+		          	<action>adminhtml/ruffle</action>
+	      		</prize>
+	      	</children>
+		</ruffle>
+	</menu>
+	<acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <ruffle translate="title" module="ruffle">
+                                        <title>raffle</title>
+                                        <sort_order>999</sort_order>
+                                    </ruffle>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

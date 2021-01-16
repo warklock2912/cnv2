@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<config>
+    <api2>
+        <resource_groups>
+            <kpayment translate="title" module="Tigren_Kpayment">
+                <title>Kpayment Rest API</title>
+                <sort_order>10</sort_order>
+            </kpayment>
+        </resource_groups>
+        <resources>
+            <kpayment translate="title" module="Tigren_Kpayment">
+                <group>kpayment</group>
+                <model>kpayment/api2_restapi</model>
+                <title>Charge Rest API</title>
+                <sort_order>10</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                    </admin>
+                    <!--<charge>-->
+                        <!--<create>1</create>-->
+                    <!--</charge>-->
+                    <guest>
+                        <retrieve>1</retrieve>
+                    </guest>
+                </privileges>
+                <attributes  translate="" module="Tigren_Kpayment">
+                    <firstname>First Name</firstname>
+                    <lastname>Last Name</lastname>
+                    <email>Email</email>
+                    <password>Password</password>
+                </attributes>
+                <!--<route>-->
+                    <!--<route>/kpayment</route>-->
+                    <!--<action_type>collection</action_type>-->
+                <!--</route>-->
+                <routes>
+                    <route_entity>
+                        <route>/charge/:id</route>
+                        <action_type>entity</action_type>
+                    </route_entity>
+                    <route_collection>
+                        <route>/charge</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+            </kpayment>
+        </resources>
+        <acl>
+            <resources>
+                <kpayment translate="title" module="Tigren_Kpayment">
+                    <title>Kpayment</title>
+                    <sort_order>3</sort_order>
+                    <create translate="title" module="Tigren_Kpayment">
+                        <title>Create</title>
+                    </create>
+                    <update translate="title" module="Tigren_Kpayment">
+                        <title>Update</title>
+                    </update>
+                    <delete translate="title" module="Tigren_Kpayment">
+                        <title>Delete</title>
+                    </delete>
+                    <info translate="title" module="Tigren_Kpayment">
+                        <title>Retrieve customer info</title>
+                    </info>
+                </kpayment>
+            </resources>
+        </acl>
+    </api2>
+</config>

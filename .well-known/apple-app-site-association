@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "S87244Q5AN.com.carnivalbkk.carnivalapp",
+        "paths": ["/catalog/*", "NOT /blog/*.html", "/blog/*", "/cms/*"]
+      }
+    ]
+  }
+}

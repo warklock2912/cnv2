@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+    <modules>
+        <Crystal_Pushnotification>
+            <version>0.3.3</version>
+        </Crystal_Pushnotification>
+    </modules>
+
+    <crontab>
+        <jobs>
+            <pushnotification_send>
+                <schedule>
+                    <!--<cron_expr>0 6,12,18,0 * * *</cron_expr>-->
+                    <cron_expr>* * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>pushnotification/observer::sendNotification</model>
+                </run>
+            </pushnotification_send>
+        </jobs>
+    </crontab>
+
+    <global>
+        <resources>
+            <pushnotification_setup>
+                <setup>
+                    <module>Crystal_Pushnotification</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </pushnotification_setup>
+            <pushnotification_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </pushnotification_write>
+            <pushnotification_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </pushnotification_read>
+        </resources>
+        <blocks>
+            <pushnotification>
+                <class>Crystal_Pushnotification_Block</class>
+            </pushnotification>
+        </blocks>
+        <helpers>
+            <pushnotification>
+                <class>Crystal_Pushnotification_Helper</class>
+            </pushnotification>
+        </helpers>
+        <models>
+            <pushnotification>
+                <class>Crystal_Pushnotification_Model</class>
+                <resourceModel>pushnotification_resource</resourceModel>
+            </pushnotification>
+            <pushnotification_resource>
+                <class>Crystal_Pushnotification_Model_Resource</class>
+                <entities>
+                    <notification>
+                        <table>crystal_notification</table>
+                    </notification>
+                    <device>
+                        <table>crystal_notification_device</table>
+                    </device>
+                    <notificationlist>
+                        <table>crystal_notification_list</table>
+                    </notificationlist>
+                </entities>
+            </pushnotification_resource>
+        </models>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <pushnotification before="Mage_Adminhtml">Crystal_Pushnotification_Adminhtml</pushnotification>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <pushnotification>
+                    <file>pushnotification.xml</file>
+                </pushnotification>
+            </updates>
+        </layout>
+    </adminhtml>
+    <frontend>
+        <routers>
+            <pushnotification>
+                <use>standard</use>
+                <args>
+                    <module>Crystal_Pushnotification</module>
+                    <frontName>pushnotification</frontName>
+                </args>
+            </pushnotification>
+        </routers>
+    </frontend>
+</config>

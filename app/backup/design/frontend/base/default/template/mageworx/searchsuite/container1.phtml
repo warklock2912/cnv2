@@ -1,0 +1,14 @@
+<?php
+/**
+ * MageWorx
+ * Search Suite
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuite
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+?>
+<div class="result-container">
+    <?php if(Mage::helper('mageworx_searchsuite')->isDidYouMean()) {echo $this->getChildHtml('search_synonym');} ?>
+    <?php if(Mage::helper('mageworx_searchsuite')->isRelatedSearches()) {echo $this->getChildHtml('search_related');} ?>
+</div>

@@ -1,0 +1,91 @@
+
+<div class="member-page">
+    <div class="back-link">
+        <a class="back-action" href="/member"><span><?php echo $this->__('Back')?></span></a>
+    </div>
+    <div class="content">
+        <form id="search-member" action='#'>
+            <!-- <div class="input-box search-phone">
+                <input type="text" placeholder="Search Phone" class="input-text">
+                <button class="btn action-search"><span><?php echo $this->__('Search')?></span></button>
+            </div> -->
+            <div class="input-box search-email">
+                <input type="text" placeholder="Search Email" class="input-text member-search-email">
+                <div class="btn action-search search_by_email" style="cursor: pointer"><span><?php echo $this->__('Search')?></span></div>
+                <span class="error-search-email" style="color:red;display: none"><?php echo $this->__('Not Found email')?></span>
+            </div>
+            <div class="input-box search-memberid">
+                <input type="text" placeholder="Search Member ID" class="input-text member-search-member-id">
+                <div class="btn action-search search_by_member_id" style="cursor: pointer"><span><?php echo $this->__('Search')?></span></div>
+                <span class="error-search-m-id" style="color:red;display: none"><?php echo $this->__('Not Found Member ID')?></span>
+            </div>
+            <div class="input-box search-moblie">
+                <input type="text" placeholder="Search Mobile" class="input-text member-search-moblie">
+                <div class="btn action-search search_by_mobile" style="cursor: pointer"><span><?php echo $this->__('Search')?></span></div>
+                <span class="error-search-mobile" style="color:red;display: none"><?php echo $this->__('Not Found Mobile')?></span>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery( ".search_by_email" ).click(function() {
+        AmAjaxLoginObj.showAnimation();
+        jQuery('.error-search-email').hide();
+        var email_search = jQuery('.member-search-email').val();
+        // alert(email_search);
+        jQuery.ajax({
+          'url' : '/member/search/check_email',
+          'dataType':'json',
+          'type':'post',
+          'data':{'email_search':email_search},
+          success:function(data){
+            if(data == 1){
+                window.location.href = '/member/info/show';
+            }else{
+                jQuery('.error-search-email').show().delay(5000).fadeOut();
+            }
+            AmAjaxLoginObj.hideAnimation();
+          }
+        });
+    });
+    jQuery( ".search_by_member_id" ).click(function() {
+        AmAjaxLoginObj.showAnimation();
+        jQuery('.error-search-m-id').hide();
+        var mid_search = jQuery('.member-search-member-id').val();
+        // alert(mid_search);
+        jQuery.ajax({
+          'url' : '/member/search/check_member_id',
+          'dataType':'json',
+          'type':'post',
+          'data':{'mid_search':mid_search},
+          success:function(data){
+            if(data == 1){
+                window.location.href = '/member/info/show';
+            }else{
+                jQuery('.error-search-m-id').show().delay(5000).fadeOut();
+            }
+            AmAjaxLoginObj.hideAnimation();
+          }
+        });
+    });
+    jQuery( ".search_by_mobile" ).click(function() {
+        AmAjaxLoginObj.showAnimation();
+        jQuery('.error-search-mobile').hide();
+        var mobile_s = jQuery('.member-search-moblie').val();
+        // alert(mid_search);
+        jQuery.ajax({
+          'url' : '/member/search/check_mobile',
+          'dataType':'json',
+          'type':'post',
+          'data':{'moblie_search':mobile_s},
+          success:function(data){
+            if(data == 1){
+                window.location.href = '/member/info/show';
+            }else{
+                jQuery('.error-search-mobile').show().delay(5000).fadeOut();
+            }
+            AmAjaxLoginObj.hideAnimation();
+          }
+        });
+    });
+</script>

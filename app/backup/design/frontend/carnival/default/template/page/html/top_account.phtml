@@ -1,0 +1,12 @@
+<?php if (!Mage::getSingleton('customer/session')->isLoggedIn()): ?>
+  <a class="a-account" href="<?php echo Mage::getUrl('customer/account/login'); ?>" title="<?php echo $this->__('log in') ?>"><?php echo $this->__('log in') ?></a>
+  <a href="<?php echo Mage::getUrl('customer/account/create'); ?>" title="<?php echo $this->__('sign up') ?>"><?php echo $this->__('sign up') ?></a>
+<?php else: ?>
+  <div class="customer-info">
+    <span class="customer-name"><?php echo $this->escapeHtml(Mage::getSingleton('customer/session')->getCustomer()->getName()) ?></span>
+    <ul class="box-myaccount-header">
+      <li><a title="<?php echo $this->__("My Account")?>" href="<?php echo Mage::getUrl('customer/account'); ?>"><?php echo $this->__("My Account")?></a></li>
+      <li><a title="Log-out" href="<?php echo Mage::getUrl('customer/account/logout'); ?>"><?php echo $this->__("Log out")?></a></li>
+    </ul>
+  </div>
+<?php endif; ?>

@@ -1,0 +1,27 @@
+<?php
+/**
+ * MageWorx
+ * Search Suite
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuite
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+?>
+
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td style="width:50%;"></td>
+            <td class="a-right"><?php echo $this->getButtonsHtml() ?></td>
+        </tr>
+    </table>   
+</div>
+<div>
+    <form action="" method="POST" id="searchAttributes_form">
+        <?php echo $this->getChildHtml('grid'); ?>
+        <div>
+            <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>"/>
+        </div>
+    </form>
+</div>

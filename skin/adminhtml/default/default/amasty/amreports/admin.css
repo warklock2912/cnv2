@@ -1,0 +1,110 @@
+.amreports-plusField {
+    background-image:url(../../images/Amasty/amreports/add.png);
+    display:block;
+    height:15px;
+    width:15px;
+    margin-top: 5px;
+    background-position: 0 -15px;
+}
+.amreports-plusField:hover {
+    background-position: 0 0;
+}
+
+.amreports-deleteField {
+    background-image:url(../../images/Amasty/amreports/delete.png);
+    display:inline-block;
+    vertical-align: text-bottom;
+    height:15px;
+    width:15px;
+    margin-top: 2px;
+    margin-left: 5px;
+    background-position: 0 -15px;
+}
+.amreports-deleteField:hover {
+    background-position: 0 0;
+}
+
+.amreports-formulaAction {
+    width: 50px !important;
+    text-indent: 5px;
+    margin-right: 5px;
+}
+
+.amreports-submitButton {
+    float: left;
+    margin-left: 415px;
+}
+
+.amreports-saveButton {
+    float: left;
+    margin-left: 395px;
+}
+
+.amreports-formulaSelect {
+    width: 225px !important;
+}
+
+.amreports-chartSelector {
+    display: block;
+    float: left;
+}
+
+.amreports-chart {
+    display: block;
+}
+
+.amreports-radio {
+    margin-left: 5px;
+    margin-top: -2px;
+    margin-right: 2px;
+}
+.amreports-label {
+    display: block;
+}
+
+#graph .hor-scroll{
+    overflow: hidden;
+}
+
+.report-img {
+    float: right;
+    padding-left: 2px;
+    padding-top: 2px;
+}
+.report-td {
+    border: 0 !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    padding-left: 5px !important;
+    background: 0 !important;
+}
+.dropdown-menu {
+    display: none;
+}
+#exportmenu {
+    background-color: white;
+    box-shadow: 2px 3px 2px -1px rgba(0, 0, 0, .1);
+    position: absolute;
+    width: 93px;
+    border: 2px solid  #afafaf;
+    padding: 5px 10px;
+
+}
+#exportmenu a {
+    color: black;
+    text-decoration: none;
+}
+
+#exportmenu li:hover {
+    background-color: #d1cfcf;
+    text-decoration: none;
+}
+#exportmenu li {
+    padding: 3px 0;
+}
+#exportmenu .divider {
+    padding: 1px 0;
+}
+#exportmenu img {
+    margin-right: 5px;
+}

@@ -1,0 +1,225 @@
+<?php $_customer = Mage::getSingleton('customer/session')->getCustomer();
+if (!$_customer->getId()) return;
+?>
+<?php $p2c2pHelper = Mage::helper('p2c2p') ?>
+<?php $customerId = $_customer->getId(); ?>
+<?php $_code = 'p2c2p'; ?>
+<?php $cardList = $p2c2pHelper->getListCardCustomer($customerId);
+$check = $this->getCheck();
+?>
+<?php $defaultIdCard = $p2c2pHelper->getDefaultCardCustomer($customerId)->getData('p2c2p_id') ?>
+<div class="ruffle-popup ruffle-card-list" id="ruffle-card-list" style="display: block">
+    <div class="ruffle-popup-content">
+        <span class="popup-close">x</span>
+        <?php if($check['use_creditcard']): ?>
+            <div class="step-bar">
+                <ul>
+                    <li class="">
+                        <span><?php echo $this->__('Term & Condition') ?></span>
+                    </li>
+                    <li class="active">
+                        <span><?php echo $this->__('Payment') ?></span>
+                    </li>
+                    <li>
+                        <span><?php echo $this->__('Information join') ?></span>
+                    </li>
+                </ul>
+            </div>
+        <?php endif; ?>
+        <?php if ($cardList->getSize()>0): ?>
+            <h2 class="popup-title"><?php echo $this->__('Choose Credit Card To Payment') ?></h2>
+            <p style="text-align: center;color: red"><?php echo $this->__('*The system will automatically deduct money if you are eligible to buy products.') ?></p>
+        <?php else: ?>
+            <h2 class="popup-title"><?php echo $this->__('Add new credit card') ?></h2>
+            <p style="text-align: center;color: red"><?php echo $this->__('*The system will automatically deduct money if you are eligible to buy products.') ?></p>
+        <?php endif; ?>
+        <div class="ruffle-popup-form">
+            <div class="fieldset">
+                <?php if ($cardList->getSize()>0): ?>
+                    <div id="list-p2c2p-card" class="list-p2c2p-card">
+                        <ul class="list-omise-card">
+                            <?php foreach ($cardList  as $key => $value): ?>
+                                <li class="<?php echo $value->getData('payment_scheme') ?>">
+                                    <input type="radio" name="payment[custom_field_one]" id="<?php echo $value->getData('p2c2p_id')?>"
+                                           value="<?php echo $value->getData('p2c2p_id') ?>"
+                                           <?php if ($value->getData('p2c2p_id') == $defaultIdCard): ?>checked="checked"<?php endif; ?>
+                                           <?php if ($value->getData('card_type') == 'debit_card'): ?>
+                                            
+                                        <?php endif; ?>
+                                           class="radio validate-one-required-by-name"/><label
+                                        for="<?php echo $value->getData('p2c2p_id') ?>">
+                                        <?php if($value->getData('payment_scheme')=='VI')
+                                            {
+                                                $cardlogo ='images/icon-payment/logo-visa.png';
+                                            }
+                                            elseif ($value->getData('payment_scheme')=='MA') {
+                                                 $cardlogo ='images/icon-payment/logo-master.png';
+                                             }
+                                            elseif ($value->getData('payment_scheme')=='JC') {
+                                                 $cardlogo ='images/icon-payment/logo-jcb.png';
+                                             }
+                                             else
+                                             {
+                                                $cardlogo ='images/icon-payment/logo-visa.png';
+                                             }  
+                                        ?>
+                                        <img class="logo-card-2" src="<?php echo $this->getSkinUrl($cardlogo) ?> ">
+                                        <span><?php echo $value->getData('masked_pan') ?></span>
+                                    </label>
+                                </li>
+                            <?php endforeach; ?>
+                            <li class="control new-card">
+                                <input type="radio" name="payment[custom_field_one]" id="p2c2p_new_card"
+                                       value="p2c2p_new_card"
+                                       class="radio validate-one-required-by-name"/><label
+                                    for="p2c2p_new_card">
+                                    <span><?php echo $this->__('Add new credit card') ?></span></label>
+
+                            </li>
+                        </ul>
+                    </div>
+                <?php endif; ?>
+                <div <?php if ($cardList->getSize()>0): ?>style="display: none" <?php endif; ?>
+                     id="p2c2p_new_card_form">
+                    <ul class="form-list p2c2p_new_card_form" id="card_form_2c2p_gateway">
+                        <li class="fields" style="display: none">
+                            <label for="<?php echo $_code ?>_cc_type_card"
+                                   class="required"><em>*</em><?php echo $this->__('Please select card type') ?></label>
+                            <div class="input-box">
+                                <input type="hidden" name="card_type" value="credit_card">
+                                <!-- // Arrang : Client need to allow Debit Card -->
+                                <select autocomplete="off"
+                                        id="<?php echo $_code ?>_cc_type_card" name="card_type_read_only" class="required-entry" >
+                                    <option value="credit_card" selected><?php echo $this->__('Credit Card') ?></option>
+                                    <option value="debit_card"><?php echo $this->__('Debit Card') ?></option>
+                                </select>
+                            </div>
+                        </li>
+                        <li class="fields">
+                            <label for="<?php echo $_code ?>_cc_number"
+                                   class="required"><em>*</em><?php echo $this->__('Card number') ?></label>
+                            <div class="input-box">
+                                <input type="text" maxlength="16" autocomplete="off" data-encrypt="cardnumber"
+                                       class="input-text required-entry validate-cc-number validate-cc-type required"
+                                       id="<?php echo $_code ?>_cc_number"
+                                       title="<?php echo $this->__('Card number') ?>" value=""/>
+                            </div>
+                        </li>
+
+                        <li class="fields">
+                            <label for="<?php echo $_code ?>_cc_owner"
+                                   class="required"><em>*</em><?php echo $this->__('Cardholder Name'); ?>
+                            </label>
+                            <div class="input-box">
+                                <input type="text" name="holder_name" data-2c2p="holder_name" id="<?php echo $_code ?>_cc_name"
+                                       class="input-text required-entry"
+                                       title="<?php echo $this->__('Cardholder Name') ?>"
+                                />
+                            </div>
+                        </li>
+                        <li class="2c2p-sub-info">
+                            <ul>
+                                <li id="p2c2p_gateway_cc_type_exp_div" class="2c2p-exp-date">
+                                    <label for="<?php echo $_code ?>_expiration"
+                                           class="required"><em>*</em><?php echo $this->__('Expiration Date') ?></label>
+                                    <div class="input-box">
+                                        <div class="v-fix">
+                                            <select class="input-text required-entry" data-encrypt="month" id="<?php echo $_code ?>_expiration">
+                                                <?php foreach ($this->getCcMonths() as $k => $v): ?>
+                                                    <option value="<?php echo $k ? $k : '' ?>"><?php echo $v ?></option>
+                                                <?php endforeach ?>
+                                            </select>
+                                        </div>
+                                        <div class="v-fix">
+                                            <select class="input-text required-entry"  data-encrypt="year" id="<?php echo $_code ?>_expiration_yr">
+                                                <?php foreach ($this->getCcYears() as $k => $v): ?>
+                                                    <option value="<?php echo $k ? $k : '' ?>"><?php echo $v ?></option>
+                                                <?php endforeach ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="fields" id="p2c2p_gateway_cc_type_cvv_div">
+                                    <label for="<?php echo $_code ?>_cc_cid"
+                                           class="required"><em>*</em><?php echo $this->__('CVV/CVV2') ?></label>
+                                    <div class="input-box">
+                                        <div class="input-box">
+                                            <div class="v-fix">
+                                                <input autocomplete="off" data-encrypt="cvv"
+                                                       type="text"
+                                                       title="<?php echo $this->__('CVV/CVV2') ?>"
+                                                       class="input-text cvv required-entry validate-cc-cvn"
+                                                       id="<?php echo $_code ?>_cc_cid"
+                                                       value=""/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <div class="control">
+                                <input type="checkbox" value="1" name="p2c2p_is_saved_card"
+                                       id="customer-card-detail"
+                                       class="checkbox"/>
+                                <label for="customer-card-detail"><?php echo $this->__('Save Card') ?><p class="raffle-save-card"><?php echo $this->__('Information is encrypted and securely stored') ?></label>
+                            </div>
+                            <div class="control">
+                                <input type="checkbox" value="1" name="payment[accept_term]" id="accept_term"
+                                       class="required-entry checkbox"/>
+                                <label for="accept_term"><?php echo $this->__('Accept Term & Condition') ?></label>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="button-set">
+                    <button type="button" id="submit-information-personal"
+                            class="button" onclick="save2c2pCardToken(this)">
+                        <span><span><?php echo $this->__('CONFIRM'); ?></span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $j('input[type=radio][name="payment[custom_field_one]"]').on('change', function (event) {
+        $j('input[type=radio][name="payment[custom_field_one]"]').each(function (k,ele) {
+            ele.removeAttribute('checked');
+        });
+        $('p2c2p_new_card_form').hide();
+        $j('input[type=radio][name="payment[custom_field_one]"]:checked').trigger('click');
+        var value = $j('input[type=radio][name="payment[custom_field_one]"]:checked').val();
+        event.currentTarget.setAttribute('checked','checked');
+
+        switch (value) {
+            case 'p2c2p_new_card':
+                $('p2c2p_new_card_form').show();
+                break;
+            case 'transfer':
+                break;
+        }
+    });
+    jQuery('.popup-close').on('click', function () {
+        if ($('ruffle-form-info')) {
+            $('ruffle-form-info').hide();
+        }
+        // if($('ruffle-card-info') $('ruffle-card-info').hide();
+        if ($('ruffle-card-list')) {
+            $('ruffle-card-list').hide();
+        }
+        if ($('ruffle_term_list')) {
+            $('ruffle_term_list').hide();
+        }
+    });
+</script>
+
+
+
+
+
+

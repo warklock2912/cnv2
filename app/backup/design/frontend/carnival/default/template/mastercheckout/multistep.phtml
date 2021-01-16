@@ -1,0 +1,215 @@
+<style></style>
+<script type="text/javascript" src="<?php echo $this->getJsUrl('varien/accordion.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/opcheckout.js') ?>"></script>
+<script type="text/javascript">countryRegions = <?php echo $this->helper('directory')->getRegionJson() ?></script>
+
+<?php
+$activeStep = $this->getActiveStep();
+$steps = $this->getSteps();
+?>
+
+<?php $fixedheight = Mage::getStoreConfig('mastercheckout/layoutoptions/height'); 
+
+if (empty($fixedheight)) { $fixedheight = "auto"; }
+
+?>
+
+<div class="mastercheckout_main <?php echo Mage::getStoreConfig('mastercheckout/layoutoptions/skin'); ?>" style="height: <?php echo $fixedheight; ?>px">
+<div id="checkout_steps">
+<?php $i=0;
+foreach($steps as $_stepId => $_stepInfo){ ?>
+<?php $i++; ?>
+    <div id="opc-<?php echo $_stepId ?>" class="section<?php echo !empty($_stepInfo['allow'])?' allow':'' ?><?php echo !empty($_stepInfo['complete'])?' saved':'' ?>">
+        <div class="step-title">
+        </div>
+        <div id="checkout-step-<?php echo $_stepId ?>" class="step a-item" <?php echo ($_stepId != 'login')?'style="display:none"':''; //echo ($activeStep != $_stepId)?'style="display:none;"':''; ?>>
+            <?php if(!empty($_stepInfo['child_htmls'])) {
+//                var_dump($_stepId); echo '<br/><br/>';
+                foreach($_stepInfo['child_htmls'] as $_html => $display) {?>
+                    <div id="checkout_<?php echo $_html; ?>" <?php echo !$display? ' style="display:none"':''; ?>>
+                    <?php echo $this->getChildHtml($_html) ?>
+                    </div>
+            <?php }}?>
+        </div>
+    </div>
+<?php } ?>
+</div>
+
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    var accordion = new Accordion('checkoutSteps', '.step-title', true);
+    <?php if($this->getActiveStep()): ?>
+    //accordion.openSection('opc-<?php //echo $this->getActiveStep() ?>');
+    <?php endif ?>
+    var checkout = new Checkout(accordion,{
+        progress: '<?php echo $this->getUrl('checkout/onepage/progress',array('_secure'=>true)) ?>',
+        review: '<?php echo $this->getUrl('checkout/onepage/review',array('_secure'=>true)) ?>',
+        saveMethod: '<?php echo $this->getUrl('checkout/onepage/saveMethod',array('_secure'=>true)) ?>',
+        failure: '<?php echo $this->getUrl('checkout/cart',array('_secure'=>true)) ?>'
+        }
+    );
+
+    var setShippingMethod = function() {
+        jQuery("#s_method_<?php echo Mage::getStoreConfig('mastercheckout/maingroup/shippingmethod'); ?>").attr("checked","checked");
+//        console.log(jQuery("#s_method_flatrate_flatrate").attr("checked"));
+    }
+
+    var setMethod = function(next_step){
+    	
+    	<?php if(!$this->isCustomerLoggedIn()): ?>
+        if ($('login:guest') && $('login:guest').checked) {
+//            alert('1');
+//            alert(this.saveMethodUrl);
+            this.method = 'guest';
+            var request = new Ajax.Request(
+                this.saveMethodUrl,
+                {method: 'post', onFailure: this.ajaxFailure.bind(this), parameters: {method:'guest'}}
+            );
+            Element.hide('register-customer-password');
+//            this.gotoSection(next_step);
+        }
+        else if($('login:register') && ($('login:register').checked || $('login:register').type == 'hidden')) {
+//            alert('2');
+            this.method = 'register';
+            var request = new Ajax.Request(
+                this.saveMethodUrl,
+                {method: 'post', onFailure: this.ajaxFailure.bind(this), parameters: {method:'register'}}
+            );
+            try {
+            Element.show('register-customer-password');
+            }
+            catch (err){};
+//            this.gotoSection(next_step);
+        }
+//        else if (jQuery("#checkout_login").css("display") == "none") {
+//
+//        }
+        else{
+//            alert('3');
+            alert(Translator.translate('Please choose to register or to checkout as a guest'));
+            return false;
+        }
+        <?php endif; ?>
+    };
+    checkout.setMethod = setMethod;
+
+	function setHeights() {
+		
+		var billingheight = jQuery('.mastercheckout_payment_information .inner').height();
+		var shippingheight = jQuery('.mastercheckout_shipping_method .inner').height();
+		var tallest = shippingheight;
+		if (billingheight > shippingheight ) {
+		tallest = billingheight;
+		}
+		jQuery('.mastercheckout_payment_information .inner').height(tallest);
+		jQuery('.mastercheckout_shipping_method .inner').height(tallest);
+			
+	}
+
+    var setStepResponse = function(response){
+        if (response.update_section) {
+            $('checkout-'+response.update_section.name+'-load').update(response.update_section.html);
+        }
+        if (response.allow_sections) {
+            response.allow_sections.each(function(e){
+                if (!$("billing:use_for_shipping_no").checked) {
+//                    if ($("billing:is_subscribed").checked) {
+//                        subscribe($("billing:email").value,"index/newsubscribtion");
+//                    }
+                    activate_step("payment", "login");
+                    setShippingMethod();
+					setHeights();
+                } else {
+                    //shipping.save();
+                }
+            });
+        }
+
+        if(response.duplicateBillingInfo)
+        {
+            shipping.setSameAsBilling(true);
+        }
+
+        if (response.goto_section) {
+            var prevStep = '';
+            checkout.currentStep = response.goto_section;
+            if(response.goto_section=='shipping_method'){
+               prevStep ='billing';
+                this.reloadProgressBlock('shipping');
+            }else if(response.goto_section == "review"){
+                prevStep='payment';
+                this.reloadProgressBlock('shipping_method');
+            }
+
+            this.reloadProgressBlock(prevStep);
+//            this.gotoSection(response.goto_section);
+            if (response.goto_section == "shipping_method") {
+                if ($("billing:is_subscribed") && $("billing:is_subscribed").checked) {
+                    subscribe($("billing:email").value,"index/newsubscribtion");
+                }
+                activate_step("payment", "login");
+                setShippingMethod();
+				setHeights();
+            } else if (response.goto_section == "shipping"){
+                shipping.save();
+//                activate_step("review","payment");
+            } else {
+                activate_step("review","payment");
+
+            }
+            return true;
+        }
+        if (response.redirect) {
+            location.href = response.redirect;
+            return true;
+
+        }
+        return false;
+    };
+    checkout.setStepResponse = setStepResponse;
+
+    var activate_step = function(next_step, prev_step) {
+        if (typeof prev_step == 'undefined' ) {
+            var prev_step1 = jQuery(".mastercheckout_step_active").attr("id").split("-");
+            prev_step = prev_step1[1];
+        }
+        jQuery("#mastercheckout-" + prev_step).addClass("mastercheckout_done");
+        jQuery("#checkout-step-" + prev_step).hide();
+        jQuery(".mastercheckout_step_active").addClass("mastercheckout_step_passive").removeClass("mastercheckout_step_active");
+        jQuery("#mastercheckout-" + next_step).addClass("mastercheckout_step_active").removeClass("mastercheckout_step_passive");
+        jQuery("#checkout-step-" + next_step).show();
+        jQuery("#mastercheckout-" + prev_step).addClass("mastercheckout_clickable");
+        jQuery("#mastercheckout-" + next_step).removeClass("mastercheckout_clickable");
+    };
+
+    var step_click = function(next_step){
+        if (jQuery("#mastercheckout-" + next_step).is(".mastercheckout_done")) {
+            activate_step(next_step);
+        }
+    }
+
+    //Element.hide('register-customer-password');
+    jQuery("#login\\:register").click(function(){
+        Element.show('register-customer-password');
+    })
+    jQuery("#login\\:guest").click(function(){
+        Element.hide('register-customer-password');
+    })
+
+    var subscribe = function(email,url){
+        var request = new Ajax.Request(
+            url,
+            {method: 'post', parameters: {email:email}}
+        );
+    }
+
+    jQuery(document).ready(function(){
+        if ($('login:guest') && $('login:guest').checked){
+            Element.hide('register-customer-password');
+        }
+    });
+//]]>
+
+</script>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Ordermanagertoolkit
+ */
+-->
+<config>
+    <modules>
+        <Amasty_Ordermanagertoolkit>
+            <active>true</active>
+            <codePool>local</codePool>
+            <edition>community</edition>
+        </Amasty_Ordermanagertoolkit>
+    </modules>
+</config>

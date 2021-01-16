@@ -1,0 +1,1392 @@
+<?xml version="1.0"?>
+<config>
+	<!-- <tabs>
+		<featurepage translate="label" module="featurepage">
+			<label>Mobile Configuration</label>
+			<sort_order>0</sort_order>
+		</featurepage>
+	</tabs> -->
+	<sections>
+		<mobile_configuration  translate="label" module="featurepage">
+			<label>Feature Page</label>
+			<tab>appconfig</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>0</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<block1 translate="label">
+					<label>Block 1</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>10</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+					<fields>
+						<banner_ads translate="label">
+							<label>Banner ads</label>
+							<frontend_type>select</frontend_type>
+							<source_model>featurepage/system_config_source_banner_option</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_ads>
+						<!--<link_1 translate="label">
+                            <label>Link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </link_1>
+                        <text_1_line1 translate="label">
+                            <label>Text</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </text_1_line1>
+                        <text_1_line2 translate="label">
+                            <label></label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </text_1_line2>-->
+						<enable translate="label">
+							<label>Is Active</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>90</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+
+						<position translate="label">
+							<label>Position</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</position>
+						<type>
+							<label>Block Type</label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>featurepage/adminhtml_system_config_type</frontend_model>
+							<source_model>featurepage/blocktype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</type>
+						<banner_type>
+							<label>Banner Type</label>
+							<frontend_type>select</frontend_type>
+							<source_model>featurepage/bannertype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_type>
+					</fields>
+				</block1>
+
+				<block2 translate="label">
+					<label>Block 2</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>20</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+					<fields>
+						<banner_ads translate="label">
+							<label>Banner ads</label>
+							<frontend_type>select</frontend_type>
+							<source_model>featurepage/system_config_source_banner_option</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_ads>
+						<!--<text_2 translate="label">
+                            <label>Text</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </text_2>
+                        <link_2 translate="label">
+                            <label>Link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </link_2>-->
+						<enable translate="label">
+							<label>Is Active</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>90</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+						<position translate="label">
+							<label>Position</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</position>
+						<type>
+							<label>Block Type</label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>featurepage/adminhtml_system_config_type</frontend_model>
+							<source_model>featurepage/blocktype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</type>
+						<banner_type>
+							<label>Banner Type</label>
+							<frontend_type>select</frontend_type>
+							<source_model>featurepage/bannertype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_type>
+					</fields>
+				</block2>
+
+				<block3 translate="label">
+					<label>Block 3</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>30</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+					<fields>
+						<banner_ads translate="label">
+							<label>Banner ads</label>
+							<frontend_type>select</frontend_type>
+							<source_model>featurepage/system_config_source_banner_option</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_ads>
+						<text translate="label">
+							<label>Text</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</text>
+						<!--<link_3 translate="label">
+                            <label>Link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </link_3>-->
+						<enable translate="label">
+							<label>Is Active</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>90</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+						<position translate="label">
+							<label>Position</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</position>
+						<type>
+							<label>Block Type</label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>featurepage/adminhtml_system_config_type</frontend_model>
+							<source_model>featurepage/blocktype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</type>
+						<banner_type>
+							<label>Banner Type</label>
+							<frontend_type>select</frontend_type>
+							<source_model>featurepage/bannertype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_type>
+					</fields>
+				</block3>
+
+				<block4 translate="label">
+					<label>Block 4</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>40</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+					<fields>
+						<banner_ads translate="label">
+							<label>Banner ads</label>
+							<frontend_type>select</frontend_type>
+							<source_model>featurepage/system_config_source_banner_option</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_ads>
+						<text translate="label">
+							<label>Text</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</text>
+						<!--<link_4 translate="label">
+                            <label>Link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </link_4>-->
+						<enable translate="label">
+							<label>Is Active</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>90</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+						<position translate="label">
+							<label>Position</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</position>
+						<type>
+							<label>Block Type</label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>featurepage/adminhtml_system_config_type</frontend_model>
+							<source_model>featurepage/blocktype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</type>
+						<banner_type>
+							<label>Banner Type</label>
+							<frontend_type>select</frontend_type>
+							<source_model>featurepage/bannertype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_type>
+					</fields>
+				</block4>
+
+				<block5 translate="label">
+					<label>Block 5</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>50</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+					<fields>
+						<banner_ads translate="label">
+							<label>Banner ads</label>
+							<frontend_type>select</frontend_type>
+							<source_model>featurepage/system_config_source_banner_option</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_ads>
+						<text translate="label">
+							<label>Text</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</text>
+						<enable translate="label">
+							<label>Is Active</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>90</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+						<position translate="label">
+							<label>Position</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</position>
+						<type>
+							<label>Block Type</label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>featurepage/adminhtml_system_config_type</frontend_model>
+							<source_model>featurepage/blocktype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</type>
+						<banner_type>
+							<label>Banner Type</label>
+							<frontend_type>select</frontend_type>
+							<source_model>featurepage/bannertype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_type>
+					</fields>
+				</block5>
+
+				<block6 translate="label">
+					<label>Block 6</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>60</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+					<fields>
+						<!--<banner_ads translate="label">
+                            <label>Banner ads</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>featurepage/system_config_source_banner_option</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </banner_ads>-->
+						<text translate="label">
+							<label>Text</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</text>
+						<category translate="label">
+							<label>Category Upcoming</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</category>
+						<!--<upcoming_from_6 translate="label">
+                            <label>Upcoming From</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>featurepage/adminhtml_system_config_date</frontend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </upcoming_from_6>
+                        <upcoming_to_6 translate="label">
+                            <label>Upcoming To</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>featurepage/adminhtml_system_config_date</frontend_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </upcoming_to_6>-->
+						<enable translate="label">
+							<label>Is Active</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>90</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+						<position translate="label">
+							<label>Position</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</position>
+						<type>
+							<label>Block Type</label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>featurepage/adminhtml_system_config_type</frontend_model>
+							<source_model>featurepage/blocktype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</type>
+					</fields>
+				</block6>
+
+				<block7 translate="label">
+					<label>Block 7</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>70</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+					<fields>
+						<!--<banner_ads translate="label">
+                            <label>Banner ads</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>featurepage/system_config_source_banner_option</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </banner_ads>-->
+						<text translate="label">
+							<label>Text</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</text>
+						<category translate="label">
+							<label>Category</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</category>
+						<enable translate="label">
+							<label>Is Active</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>90</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+						<position translate="label">
+							<label>Position</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</position>
+						<type>
+							<label>Block Type</label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>featurepage/adminhtml_system_config_type</frontend_model>
+							<source_model>featurepage/blocktype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</type>
+					</fields>
+				</block7>
+
+				<block8 translate="label">
+					<label>Block 8</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>80</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+					<fields>
+						<banner_ads translate="label">
+							<label>Banner ads</label>
+							<frontend_type>select</frontend_type>
+							<source_model>featurepage/system_config_source_banner_option</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_ads>
+						<!--<text_8 translate="label">
+                            <label>Text</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </text_8>
+                        <link_8 translate="label">
+                            <label>Link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </link_8>-->
+						<enable translate="label">
+							<label>Is Active</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>90</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+						<position translate="label">
+							<label>Position</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</position>
+						<type>
+							<label>Block Type</label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>featurepage/adminhtml_system_config_type</frontend_model>
+							<source_model>featurepage/blocktype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</type>
+						<banner_type>
+							<label>Banner Type</label>
+							<frontend_type>select</frontend_type>
+							<source_model>featurepage/bannertype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_type>
+					</fields>
+				</block8>
+
+				<block9 translate="label">
+					<label>Block 9</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>90</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+					<fields>
+						<!--<banner_ads translate="label">
+                            <label>Banner ads</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>featurepage/system_config_source_banner_option</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </banner_ads>-->
+						<text translate="label">
+							<label>Text</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</text>
+						<category translate="label">
+							<label>Category</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</category>
+						<enable translate="label">
+							<label>Is Active</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>90</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+						<position translate="label">
+							<label>Position</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</position>
+						<type>
+							<label>Block Type</label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>featurepage/adminhtml_system_config_type</frontend_model>
+							<source_model>featurepage/blocktype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</type>
+					</fields>
+				</block9>
+
+				<block10 translate="label">
+					<label>Block 10</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>100</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+					<fields>
+						<banner_ads translate="label">
+							<label>Banner ads</label>
+							<frontend_type>select</frontend_type>
+							<source_model>featurepage/system_config_source_banner_option</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_ads>
+						<text translate="label">
+							<label>Text</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</text>
+						<!--<link translate="label">
+                            <label>Link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </link>-->
+						<enable translate="label">
+							<label>Is Active</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>90</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+						<position translate="label">
+							<label>Position</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</position>
+						<type>
+							<label>Block Type</label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>featurepage/adminhtml_system_config_type</frontend_model>
+							<source_model>featurepage/blocktype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</type>
+						<banner_type>
+							<label>Banner Type</label>
+							<frontend_type>select</frontend_type>
+							<source_model>featurepage/bannertype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_type>
+					</fields>
+				</block10>
+
+				<block11 translate="label">
+					<label>Block 11</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>110</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+					<fields>
+						<banner_ads translate="label">
+							<label>Banner ads</label>
+							<frontend_type>select</frontend_type>
+							<source_model>featurepage/system_config_source_banner_option</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_ads>
+						<text translate="label">
+							<label>Text</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</text>
+						<!--<link translate="label">
+                            <label>Link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </link>-->
+						<enable translate="label">
+							<label>Is Active</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>90</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+						<position translate="label">
+							<label>Position</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</position>
+						<type>
+							<label>Block Type</label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>featurepage/adminhtml_system_config_type</frontend_model>
+							<source_model>featurepage/blocktype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</type>
+						<banner_type>
+							<label>Banner Type</label>
+							<frontend_type>select</frontend_type>
+							<source_model>featurepage/bannertype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_type>
+					</fields>
+				</block11>
+
+				<block12 translate="label">
+					<label>Block 12</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>120</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+					<fields>
+						<banner_ads translate="label">
+							<label>Banner ads</label>
+							<frontend_type>select</frontend_type>
+							<source_model>featurepage/system_config_source_banner_option</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_ads>
+						<text translate="label">
+							<label>Text</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</text>
+						<!--<link_12 translate="label">
+                            <label>Link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </link_12>-->
+						<enable translate="label">
+							<label>Is Active</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>90</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+						<position translate="label">
+							<label>Position</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</position>
+						<type>
+							<label>Block Type</label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>featurepage/adminhtml_system_config_type</frontend_model>
+							<source_model>featurepage/blocktype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</type>
+						<banner_type>
+							<label>Banner Type</label>
+							<frontend_type>select</frontend_type>
+							<source_model>featurepage/bannertype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_type>
+					</fields>
+				</block12>
+
+				<block13 translate="label">
+					<label>Block 13</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>130</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+					<fields>
+						<!--<banner_ads translate="label">
+                            <label>Banner ads</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>featurepage/system_config_source_banner_option</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </banner_ads>-->
+						<text translate="label">
+							<label>Text</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</text>
+						<brand translate="label">
+							<label>Brand Category ID</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</brand>
+						<enable translate="label">
+							<label>Is Active</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>90</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+						<position translate="label">
+							<label>Position</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</position>
+						<type>
+							<label>Block Type</label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>featurepage/adminhtml_system_config_type</frontend_model>
+							<source_model>featurepage/blocktype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</type>
+					</fields>
+				</block13>
+
+				<block14 translate="label">
+					<label>Block 14</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>140</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+					<fields>
+						<banner_ads translate="label">
+							<label>Banner ads</label>
+							<frontend_type>select</frontend_type>
+							<source_model>featurepage/system_config_source_banner_option</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_ads>
+						<!--<text_14 translate="label">
+                            <label>Text</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </text_14>
+                        <link_14 translate="label">
+                            <label>Link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </link_14>-->
+						<enable translate="label">
+							<label>Is Active</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>90</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+						<position translate="label">
+							<label>Position</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</position>
+						<type>
+							<label>Block Type</label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>featurepage/adminhtml_system_config_type</frontend_model>
+							<source_model>featurepage/blocktype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</type>
+						<banner_type>
+							<label>Banner Type</label>
+							<frontend_type>select</frontend_type>
+							<source_model>featurepage/bannertype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_type>
+					</fields>
+				</block14>
+
+				<block15 translate="label">
+					<label>Block 15</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>150</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+					<fields>
+						<!--<banner_ads translate="label">
+                            <label>Banner ads</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>featurepage/system_config_source_banner_option</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </banner_ads>-->
+						<text translate="label">
+							<label>Text</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</text>
+						<category translate="label">
+							<label>Category</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</category>
+						<enable translate="label">
+							<label>Is Active</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>90</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+						<position translate="label">
+							<label>Position</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</position>
+						<type>
+							<label>Block Type</label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>featurepage/adminhtml_system_config_type</frontend_model>
+							<source_model>featurepage/blocktype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</type>
+					</fields>
+				</block15>
+
+				<block16 translate="label">
+					<label>Block 16</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>160</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+					<fields>
+						<banner_ads translate="label">
+							<label>Banner ads</label>
+							<frontend_type>select</frontend_type>
+							<source_model>featurepage/system_config_source_banner_option</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_ads>
+						<!--<text_16 translate="label">
+                            <label>Text</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </text_16>
+                        <link_16 translate="label">
+                            <label>Link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </link_16>-->
+						<enable translate="label">
+							<label>Is Active</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>90</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+						<position translate="label">
+							<label>Position</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</position>
+						<type>
+							<label>Block Type</label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>featurepage/adminhtml_system_config_type</frontend_model>
+							<source_model>featurepage/blocktype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</type>
+						<banner_type>
+							<label>Banner Type</label>
+							<frontend_type>select</frontend_type>
+							<source_model>featurepage/bannertype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_type>
+					</fields>
+				</block16>
+
+				<block17 translate="label">
+					<label>Block 17</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>170</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+					<fields>
+						<!--<banner_ads translate="label">
+                            <label>Banner ads</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>featurepage/system_config_source_banner_option</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </banner_ads>-->
+						<text translate="label">
+							<label>Text</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</text>
+						<category translate="label">
+							<label>Category</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</category>
+						<enable translate="label">
+							<label>Is Active</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>90</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+						<position translate="label">
+							<label>Position</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</position>
+						<type>
+							<label>Block Type</label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>featurepage/adminhtml_system_config_type</frontend_model>
+							<source_model>featurepage/blocktype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</type>
+					</fields>
+				</block17>
+
+				<block18 translate="label">
+					<label>Block 18</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>180</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+					<fields>
+						<!--<banner_ads translate="label">
+                            <label>Banner ads</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>featurepage/system_config_source_banner_option</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </banner_ads>-->
+						<text translate="label">
+							<label>Text</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</text>
+						<category translate="label">
+							<label>Category Upcoming</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</category>
+						<!--<upcoming_from_6 translate="label">
+                            <label>Upcoming From</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>featurepage/adminhtml_system_config_date</frontend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </upcoming_from_6>
+                        <upcoming_to_6 translate="label">
+                            <label>Upcoming To</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>featurepage/adminhtml_system_config_date</frontend_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </upcoming_to_6>-->
+						<enable translate="label">
+							<label>Is Active</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>90</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+						<position translate="label">
+							<label>Position</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</position>
+						<type>
+							<label>Block Type</label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>featurepage/adminhtml_system_config_type</frontend_model>
+							<source_model>featurepage/blocktype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</type>
+					</fields>
+				</block18>
+
+				<block19 translate="label">
+					<label>Block 19</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>190</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+					<fields>
+						<!--<banner_ads translate="label">
+                            <label>Banner ads</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>featurepage/system_config_source_banner_option</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </banner_ads>-->
+						<text translate="label">
+							<label>Text</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</text>
+						<category translate="label">
+							<label>Category Upcoming</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</category>
+						<!--<upcoming_from_6 translate="label">
+                            <label>Upcoming From</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>featurepage/adminhtml_system_config_date</frontend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </upcoming_from_6>
+                        <upcoming_to_6 translate="label">
+                            <label>Upcoming To</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>featurepage/adminhtml_system_config_date</frontend_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </upcoming_to_6>-->
+						<enable translate="label">
+							<label>Is Active</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>90</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+						<position translate="label">
+							<label>Position</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</position>
+						<type>
+							<label>Block Type</label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>featurepage/adminhtml_system_config_type</frontend_model>
+							<source_model>featurepage/blocktype</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</type>
+					</fields>
+				</block19>
+
+			</groups>
+		</mobile_configuration>
+	</sections>
+</config>

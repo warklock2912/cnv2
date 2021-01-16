@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoShortUrl
+ */
+-->
+<config>
+    <sections>
+        <amseoshorturl translate="label" module="amseoshorturl">
+            <label>SEO Layered Navigation</label>
+            <tab>amasty</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>190512</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                          <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                    </fields>
+                </general>
+
+                <seo translate="label">
+                    <label>URL</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <query_param translate="label">
+                            <label>Query param for URLs with multiple attributes</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>190</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Allows you to tell Google (in the webmaster panel) to skip URL with 2+ values of the same attribute. Will add param_name=true to such urls. Leave empty if you are not sure how to use it.]]></comment>
+                        </query_param>
+                        <special_char translate="label">
+                            <label>Replace special characters with</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>amseoshorturl/source_specialchar</source_model>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-amseoshorturl-symbols</validate>
+                        </special_char>
+                        <option_char translate="label">
+                            <label>Separate attribute options with</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>amseoshorturl/source_options</source_model>
+                            <sort_order>210</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[For example, if a customer selects 3 options for the attribute `color`, the URL will look like http://example.com/red-green-blue.html]]></comment>
+                        </option_char>
+                    </fields>
+                </seo>
+            </groups>
+        </amseoshorturl>
+    </sections>
+</config>

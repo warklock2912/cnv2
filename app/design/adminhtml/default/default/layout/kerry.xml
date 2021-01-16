@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_sales_order_shipment_view>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/kerry/kerry.js</name>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/kerry/kerry.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="form">
+            <action method="setTemplate">
+                <template>kerry/sales/shipment/view/form.phtml</template>
+            </action>
+            <block type="kerry/adminhtml_sales_shipment_view_booking" name="booking_popup" template="kerry/sales/shipment/view/booking-poppup.phtml" />
+        </reference>
+    </adminhtml_sales_order_shipment_view>
+
+    <adminhtml_sales_shipment_index>
+        <reference name="js">
+            <block type="kerry/adminhtml_sales_shipment_js" name="print.awb.js" template="kerry/sales/shipment/js.phtml" />
+        </reference>
+    </adminhtml_sales_shipment_index>
+</layout>

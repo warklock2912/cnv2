@@ -1,0 +1,170 @@
+<?php
+/*
+ * Copyright (c) 2015 www.magebuzz.com
+ */
+?>
+<?php
+$block = $this->getBannerads();
+$banners = $block->getImages();
+$blockType = $block->getDisplayType();
+$helper = Mage::helper('bannerads');
+$isBlockIds = array();
+$urlShow = Mage::getUrl('bannerads/reports/impression');
+$urlClick = Mage::getUrl('bannerads/reports/click');
+?>
+<?php if (!empty($banners)): ?>
+    <?php if ($banners->getSize() > 0): ?>
+        <div class="wrap-bannerads">
+            <!-- Display type Show all -->
+            <?php if ($blockType == 1): ?>
+                <div class="div-banner">
+                    <ul class="banner-carousel">
+                        <?php
+                        $i = 0;
+                        foreach ($banners->getItems() as $banner): $i++;
+                            ?>
+                            <?php $isBlockIds[] = $banner->getBannerId(); ?>
+                            <li
+                                <?php if ($block->getBlockMaxWidth()): ?>style="max-width:<?php echo $block->getBlockMaxWidth() ?>px" <?php endif; ?>>
+                                <a <?php if ($banner->getTarget()): ?> target="_blank" <?php endif; ?> <?php if ($banner->getBannerUrl() != ''): ?> href="<?php echo $banner->getBannerUrl(); ?>"<?php endif ?>
+                                                                       onclick="bannerClicks('<?php echo $urlClick; ?>', '<?php echo $banner->getBannerId() ?>', '<?php echo $block->getBlockId() ?>')">
+
+
+                                    <img
+                                        alt="<?php echo $banner->getBannerTitle(); ?>"
+                                        src="<?php echo $helper->getBannerImage($banner->getBannerImage()); ?>"/>
+                                </a>
+                            </li>
+                        <?php endforeach ?>
+                    </ul>
+                    <?php if ($helper->getReportData()): ?>
+                        <script type="text/javascript">
+                            Event.observe(window, 'load', function () {
+                                var banner_ids = '<?php echo implode(",", $isBlockIds); ?>';
+                                var block_id = '<?php echo $block->getBlockId(); ?>';
+                                var imp_url = '<?php echo $urlShow; ?>';
+                                new Ajax.Request(imp_url, {
+                                    method: 'post',
+                                    parameters: {banner_ids: banner_ids, block_id: block_id},
+                                    onFailure: '',
+                                    onSuccess: ''
+                                });
+                            });
+                        </script>
+                    <?php endif; ?>
+                </div>
+                <!-- Display type random -->
+            <?php elseif ($blockType == 2): ?>
+                <div class="div-banner">
+                    <?php
+                    $i = 0;
+                    foreach ($banners->getItems() as $banner): $i++;
+                        ?>
+                        <div class="banner"
+                             <?php if ($block->getBlockMaxWidth()): ?>style="max-width:<?php echo $block->getBlockMaxWidth() ?>px" <?php endif; ?>>
+                            <a <?php if ($banner->getTarget()): ?> target="_blank" <?php endif; ?> <?php if ($banner->getBannerUrl() != ''): ?> href="<?php echo $banner->getBannerUrl(); ?>" <?php endif ?>
+                                                                   onclick="bannerClicks('<?php echo $urlClick; ?>', '<?php echo $banner->getBannerId() ?>', '<?php echo $block->getBlockId() ?>')">
+
+
+                                <img src="<?php echo $helper->getBannerImage($banner->getBannerImage()); ?>"
+                                     alt="<?php echo $banner->getBannerTitle(); ?>"/>
+                                     <?php $isBlockIds[] = $banner->getBannerId(); ?>
+                            </a>
+                        </div>
+                    <?php endforeach ?>
+                    <?php if ($helper->getReportData()): ?>
+                        <script type="text/javascript">
+                            Event.observe(window, 'load', function () {
+                                var banner_ids = '<?php echo implode(",", $isBlockIds); ?>';
+                                var block_id = '<?php echo $block->getBlockId(); ?>';
+                                var imp_url = '<?php echo $urlShow; ?>';
+                                new Ajax.Request(imp_url, {
+                                    method: 'post',
+                                    parameters: {banner_ids: banner_ids, block_id: block_id},
+                                    onFailure: '',
+                                    onSuccess: ''
+
+                                });
+                            });
+                        </script>
+                    <?php endif; ?>
+                </div>
+                <!-- Display type Slider -->
+            <?php elseif (($blockType == 3) || ($blockType == 4) || ($blockType == 5) || ($blockType == 6)) : ?>
+                <div class="banner"
+                     <?php if ($block->getBlockMaxWidth()): ?>style="max-width:<?php echo $block->getBlockMaxWidth() ?>px" <?php endif; ?>>
+                    <ul class="banner-carousel" id="banner_carousel_<?php echo $block->getBlockId() ?>">
+                        <?php
+                        $i = 0;
+                        foreach ($banners->getItems() as $banner): $i++;
+                            ?>
+                            <li <?php if ($banner->getSelectbanners() == 1) { ?> class="li-video" <?php }; ?>>
+                                <a <?php if ($banner->getTarget()): ?> target="_blank" <?php endif; ?> <?php if ($banner->getBannerUrl() != ''): ?> href="<?php echo $banner->getBannerUrl(); ?>" <?php endif ?>
+                                                                       onclick="bannerClicks('<?php echo $urlClick; ?>', '<?php echo $banner->getBannerId() ?>', '<?php echo $block->getBlockId() ?>')">
+                                                                           <?php if ($banner->getSelectbanners() == 0) { ?>
+                                        <img alt="<?php echo $banner->getBannerTitle(); ?>" src="<?php echo $helper->getBannerImage($banner->getBannerImage()); ?>"/>
+                                    <?php } else { ?>
+                                       
+                                        
+                                        
+                                         <iframe width="100%" height="100%" 
+                                                 src="<?php echo $banner->getVideoUrl(); ?>" frameborder="0"  
+                                                 webkitallowfullscreen mozallowfullscreen></iframe>
+                                            <?php } ?>
+                                </a>
+                                <?php if ($banner->getBannerShowDesc() == '1' && $banner->getBannerDescription() != ''): ?>
+                                    <div class="banner-desc <?php echo $banner->getBannerDescriptionPos() ?>">
+                                        <?php echo $banner->getBannerDescription(); ?>
+                                    </div>
+                                <?php endif; ?>
+                            </li>
+                            <?php $isBlockIds[] = $banner->getBannerId(); ?>
+                        <?php endforeach ?>
+                    </ul>
+                </div>
+                <?php if ($helper->getReportData()): ?>
+                    <script type="text/javascript">
+                        Event.observe(window, 'load', function () {
+                            var banner_ids = '<?php echo implode(",", $isBlockIds); ?>';
+                            var block_id = '<?php echo $block->getBlockId(); ?>';
+                            var imp_url = '<?php echo $urlShow; ?>';
+                            new Ajax.Request(imp_url, {
+                                method: 'post',
+                                parameters: {banner_ids: banner_ids, block_id: block_id},
+                                onFailure: '',
+                                onSuccess: ''
+                            });
+                        });
+                    </script>
+                <?php endif; ?>
+                <?php if ($i > 1): ?>
+                    <script type="text/javascript">
+                        jQuery(document).ready(function () {
+                            jQuery('#banner_carousel_<?php echo $block->getBlockId() ?>').bxSlider({
+                            auto: false,
+                            adaptiveHeight: true,
+                            infiniteLoop: false,
+                            <?php if (($blockType == 3) || ($blockType == 4)): ?>
+                                mode: 'horizontal',
+                            <?php elseif (($blockType == 5) || ($blockType == 6)): ?>
+                                mode: 'fade',
+                            <?php endif; ?>
+                            controls: true,
+                                    speed: <?php echo Mage::helper('bannerads')->getTransitionSpeed() * 1000 ?>,
+                                    preloadImages: 'visible',
+                                    pager: <?php if (Mage::helper('bannerads')->showSliderPager()): ?> true<?php else: ?> false<?php endif; ?>,
+                                    captions: <?php
+                            if (($blockType == 4) || ($blockType == 6))
+                                echo 'true';
+                             else
+                                echo 'false';
+                            ?>
+                        });
+                        });
+                    </script>
+                <?php endif; ?>
+            <?php endif ?>
+            <div style="clear: both;"></div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

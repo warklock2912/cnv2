@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<config>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<config>
+								<children>
+									<cartreservation translate="title" module="cartreservation">
+										<title>Plumrocket Cart Reservation Section</title>
+										<sort_order>1750</sort_order>
+									</cartreservation>
+								</children>
+							</config>
+						</children>
+					</system>
+					<plumrocket>
+						<title>Plumrocket</title>
+						<sort_order>80</sort_order>
+						<children>
+							<cartreservation translate="title" module="cartreservation">
+								<title>Cart Reservation</title>
+								<sort_order>130</sort_order>
+							</cartreservation>
+						</children>
+					</plumrocket>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+	
+	<menu>
+		<plumrocket>
+			<title>Plumrocket</title>
+			<sort_order>80</sort_order>
+			<children>
+				<cartreservation module="cartreservation" translate="title">
+					<title>Cart Reservation</title>
+					<sort_order>130</sort_order>
+					<action>adminhtml/system_config/edit/section/cartreservation</action>
+				</cartreservation>
+			</children>
+		</plumrocket>
+	</menu>
+</config>

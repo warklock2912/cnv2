@@ -1,0 +1,51 @@
+<?php /** @var Magebuzz_Imagehome_Block_Products $this **/ ?>
+<?php $productCollection = $this->getCategoryProducts() ?>
+<?php $categoryTitle=$this->getCategoryTitleFE(); ?>
+<?php $categoryUrl=$this->getCategoryUrlFE(); ?>
+<?php /** @var Mage_Catalog_Helper_Product $productHelper **/ ?>
+<?php $productHelper = Mage::helper('catalog/product') ?>
+<?php /** @var Amasty_Label_Helper_Data $productLabelHelper **/ ?>
+<?php $productLabelHelper = Mage::helper('amlabel') ?>
+
+<div class="image-home-products" style="background:#fff; overflow: hidden">
+    <?php if($productCollection): ?>
+        <?php if($productCollection->getSize()): ?>
+            <div class="block-title">
+                <div class="title"><?php echo $categoryTitle ?></div>
+                <div class="view-all"><a href="<?php  echo $categoryUrl ?>"><?php echo $this->__('view all')   ?></a></div>
+            </div>
+            <?php /** @var Mage_Catalog_Model_Product $product **/ ?>
+            <?php foreach ($productCollection as $product): ?>
+                <div class="image-home-product-item" id="image-home-product-item-<?php echo $product->getId() ?>">
+                    <span class="label">
+                        <?php echo $productLabelHelper->getLabels($product) ?>
+                    </span>
+                    <a class="img" title="<?php echo $product->getName() ?>" href="<?php echo $product->getProductUrl() ?>" style="display: block">
+    <!--                        <img src="--><?php //echo $product->getImageUrl() ?><!--"-->
+    <!--                             alt="--><?php //echo $product->getName() ?><!--"-->
+    <!--                             title="--><?php //echo $product->getName() ?><!--"-->
+    <!--                             style="opacity: 1"/>-->
+                        <img class="img-baseimage"
+                             style="opacity: 1"
+                             id="product-collection-image-<?php echo $product->getId(); ?>"
+                             src="<?php echo Mage::helper('bannerads')->getBaseImage($product)->resize(355); ?>"
+                             alt="<?php echo $this->stripTags($this->getImageLabel($product, 'small_image'), null, true) ?>"/>
+                    </a>
+                    <a class="product-detail" title="<?php echo $product->getName() ?>" href="<?php echo $product->getProductUrl() ?>" style="display: block">
+                        <h4><?php echo $product->getName() ?></h4>
+                    </a>
+                    <?php if ($product->getData('carnival_brand')): ?>
+                        <?php $brandName = $product->getResource()->getAttribute('carnival_brand')->getFrontend()->getValue($product) ?>
+                        <div class="product-brand"><?php echo $brandName ?></div>
+                    <?php endif; ?>
+                    <?php $productListBlock = $this->getLayout()->createBlock('catalog/product_price'); ?>
+                    <?php echo $productListBlock->getPriceHtml($product) ?>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <span><?php echo $this->__('There are no products matching the selection.') ?></span>
+        <?php endif; ?>
+    <?php else: ?>
+        <span><?php echo $this->__('There are no products matching the selection.') ?></span>
+    <?php endif; ?>
+</div>

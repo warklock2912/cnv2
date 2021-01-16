@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Crystal_AppUpdate>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Crystal_AppUpdate>
+    </modules>
+</config>

@@ -1,0 +1,153 @@
+<div class="buttons-set billing-buttons-width" id="billing-buttons-container ">
+  <button id="next-step-2" type="button" title="<?php echo $this->__('Next') ?>" class="button" onclick="to_step_2()"><span><span><?php echo $this->__('Next') ?></span></span></button>
+  <button type="button" title="<?php echo $this->__('Back to Cart') ?>" class="button btn-white box-mobile2" onclick="javascript:location.href = '<?php echo Mage::getUrl('checkout/cart'); ?>'"><span><span><?php echo $this->__('Back to Cart') ?></span></span></button>
+  <span class="please-wait" id="shipping-please-wait" style="display:none;">
+    <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Loading next step...') ?>" title="<?php echo $this->__('Loading next step...') ?>" class="v-middle" /> <?php echo $this->__('Loading next step...') ?>
+  </span>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+  var billing = new Billing('co-billing-form', '<?php echo $this->getUrl('checkout/onepage/getAddress') ?>address/', '<?php echo $this->getUrl('checkout/onepage/saveBilling') ?>');
+  var billingForm = new VarienForm('co-billing-form');
+
+  //billingForm.setElementsRelation('billing:country_id', 'billing:region', '<?php echo $this->getUrl('directory/json/childRegion') ?>', '<?php echo $this->__('Select State/Province...') ?>');
+  $('billing-address-select') && billing.newAddress(!$('billing-address-select').value);
+
+
+  if ($('onepage-guest-register-button')) {
+    Event.observe($('onepage-guest-register-button'), 'click', function (event) {
+      var billingRememberMe = $$('#billing-new-address-form li #remember-me-box');
+      if (billingRememberMe.length > 0) {
+        billingRememberMe = $(billingRememberMe[0].parentNode);
+        if ($('login:guest') && $('login:guest').checked) {
+          billingRememberMe.hide();
+        } else if ($('login:register') && ($('login:register').checked || $('login:register').type == 'hidden')) {
+          billingRememberMe.show();
+        }
+      }
+    });
+  }
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+  var shipping = new Shipping('co-shipping-form', '<?php echo $this->getUrl('checkout/onepage/getAddress') ?>address/', '<?php echo $this->getUrl('checkout/onepage/saveShipping') ?>',
+          '<?php echo $this->getUrl('checkout/onepage/shippingMethod') ?>');
+  var shippingForm = new VarienForm('co-shipping-form');
+  shippingForm.extraChildParams = ' onchange="shipping.setSameAsBilling(false);"';
+  //shippingForm.setElementsRelation('shipping:country_id', 'shipping:region', '<?php echo $this->getUrl('directory/json/childRegion') ?>', '<?php echo $this->__('Select State/Province...') ?>');
+  $('shipping-address-select') && shipping.newAddress(!$('shipping-address-select').value);
+
+
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+  var to_step_2 = function () {
+//      document.getElementById('next-step-2').disabled = true;
+    checkout.setMethod('payment');
+//        billing.save();
+    saveAddressCheckout();
+    if (jQuery("#billing\\:use_for_shipping_no").attr('checked') == 'checked') {
+    }
+  };
+  var saveAddressCheckout = function () {
+    var urlSaveAddressCheckout = '<?php echo $this->getUrl('mastercheckout/onepage/saveAddress', array('_secure' => true)) ?>';
+    if ($('billing:same_as_shipping').checked) {
+      var validatorShipping = new Validation('co-shipping-form');
+      if (validatorShipping.validate()) {
+        var params = Form.serialize('co-shipping-form');
+        params += '&' + Form.serialize('co-billing-form');
+        var request = new Ajax.Request(urlSaveAddressCheckout, {
+          method: 'post',
+          parameters: params,
+          onCreate: function () {
+            checkout.setLoadWaiting('shipping');
+          }.bind(this),
+          onLoading: function () {
+            document.getElementById('next-step-2').disabled = true;
+          },
+          onComplete: function () {
+            checkout.setLoadWaiting(false);
+            document.getElementById('next-step-2').disabled = false;
+          },
+          onSuccess: shipping.nextStep,
+          onFailure: checkout.ajaxFailure.bind(checkout)
+        }
+        );
+      }
+    } else {
+      var validatorShipping = new Validation('co-shipping-form');
+      var validatorBilling = new Validation('co-billing-form');
+      if (validatorShipping.validate() && validatorBilling.validate()) {
+        var params = Form.serialize('co-shipping-form');
+        params += '&' + Form.serialize('co-billing-form');
+        var request = new Ajax.Request(urlSaveAddressCheckout, {
+          method: 'post',
+          parameters: params,
+          onCreate: function () {
+            checkout.setLoadWaiting('shipping');
+          }.bind(this),
+          onComplete: function () {
+            checkout.setLoadWaiting(false);
+            document.getElementById('next-step-2').disabled = false;
+          },
+          onSuccess: shipping.nextStep,
+          onFailure: checkout.ajaxFailure.bind(checkout)
+        }
+        );
+      }
+    }
+  }
+  jQuery(document).ready(function () {
+    if (jQuery("#billing\\:use_for_shipping_no").attr('checked') == 'checked') {
+      $('checkout_shipping').show();
+    }
+  });
+
+  function saveToAddressBook(fromformaddress) {
+    var url = '<?php echo $this->getUrl('mastercheckout/onepage/saveToAddressBook', array('_secure' => true)) ?>';
+    var params = 'from_form_address=' + fromformaddress;
+    params += '&' + Form.serialize('co-' + fromformaddress + '-form');
+    var validator = new Validation('co-' + fromformaddress + '-form');
+    if (validator.validate()) {
+      var request = new Ajax.Request(
+              url,
+              {
+                method: 'post',
+                parameters: params,
+                onCreate: function () {
+                  AmAjaxLoginObj.showAnimation();
+                }.bind(this),
+                onComplete: function () {
+                  AmAjaxLoginObj.hideAnimation();
+                },
+                onSuccess: function (response) {
+                  if (response.responseJSON.message == 'success') {
+                    var checkoutAddressId = response.responseJSON.checkout_address_id
+                    var checkoutAddressInput = response.responseJSON.checkout_address_input;
+
+                    $(fromformaddress + '-address-input-choosed').value = checkoutAddressId;
+                    $(fromformaddress + '-address-input').update(checkoutAddressInput);
+                    $(fromformaddress + '-lablel-' + checkoutAddressId).update(checkoutAddressInput);
+                    $(fromformaddress + '_address_hidden_' + checkoutAddressId).setAttribute(fromformaddress + '_firstname', response.responseJSON.firstname);
+                    $(fromformaddress + '_address_hidden_' + checkoutAddressId).setAttribute(fromformaddress + '_lastname', response.responseJSON.lastname);
+                    $(fromformaddress + '_address_hidden_' + checkoutAddressId).setAttribute(fromformaddress + '_street', response.responseJSON.street);
+                    $(fromformaddress + '_address_hidden_' + checkoutAddressId).setAttribute(fromformaddress + '_region', response.responseJSON.region);
+                    $(fromformaddress + '_address_hidden_' + checkoutAddressId).setAttribute(fromformaddress + '_city', response.responseJSON.city);
+                    $(fromformaddress + '_address_hidden_' + checkoutAddressId).setAttribute(fromformaddress + '_subdistrict', response.responseJSON.subdistrict);
+                    $(fromformaddress + '_address_hidden_' + checkoutAddressId).setAttribute(fromformaddress + '_postcode', response.responseJSON.postcode);
+                    $(fromformaddress + '_address_hidden_' + checkoutAddressId).setAttribute(fromformaddress + '_telephone', response.responseJSON.telephone);
+
+                    $(fromformaddress + '-new-address-form').hide();
+                  }
+                }
+              }
+      );
+    }
+  }
+//]]>
+</script>

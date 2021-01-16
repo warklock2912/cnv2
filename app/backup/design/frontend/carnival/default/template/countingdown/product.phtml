@@ -1,0 +1,39 @@
+<?php
+$countingup_ = Mage::helper('countingdown')->getTimecommingup();
+?>
+
+
+<?php if (($countingup_) > 0) { ?>
+    <div class="upcoming-title">
+        <div>
+            <div class="clock"></div>
+            <div class="title">
+                <h3>
+                    <?php echo $this->__('Upcoming') ?>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var clock;
+        var time = <?php echo $countingup_ ?>;
+        $j(document).ready(function () {
+            if (time > 0) {
+
+                var clock;
+                clock = $j('.clock').FlipClock({
+                    clockFace: 'DailyCounter',
+                    autoStart: false,
+                    callbacks: {
+                        stop: function () {
+                            location.reload();
+                        }
+                    }
+                });
+                clock.setTime(time);
+                clock.setCountdown(true);
+                clock.start();
+            }
+        });
+    </script>
+<?php } ?>

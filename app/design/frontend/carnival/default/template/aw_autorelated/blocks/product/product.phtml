@@ -1,0 +1,128 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Autorelated
+ * @version    2.4.9
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php
+$abstractBlock = $this->helper('awautorelated')->getAbstractProductBlock();
+$collection = $this->getCollection();
+
+if ($this->getPosition() == AW_Autorelated_Model_Source_Position::INSTEAD_NATIVE_RELATED_BLOCK) {
+
+    $this->iterateBlock();
+
+    if ($collection && $collection->getSize()) {
+        $this->markAsShowed();
+    } elseif ($this->showNativeBlock()) {
+        $this->markAsShowed();
+        echo $this->getParent()->getChildHtml('catalog-product-related');
+    }
+}
+?>
+<?php if ($collection && $collection->getSize()) : ?>
+    <div class="block block-related aw-arp-block aw-arp-block-<?php echo $this->getData('id') ?>">
+        <div class="block-title">
+            <h2><?php echo $this->htmlEscape($this->getData('name')) ?></h2>
+        </div>
+        <div class="block-content aw-arp-block-content slider-mobile">
+            <?php $_collectionSize = $collection->count() ?>
+            <?php $_columnCount = 5; ?>
+            <ul class="products-grid products-grid--max-<?php echo $_columnCount; ?>-col" >
+                <?php $i=0; foreach ($collection as $_product) : $i++;?>
+                    <li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
+                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image">
+                            <?php echo Mage::helper('amlabel')->getLabels($_product, 'category'); ?>
+                            <?php $_imgSize = 210; ?>
+
+                          <img class="img-baseimage" id="product-collection-image-<?php echo $_product->getId(); ?>"
+                               src="<?php echo Mage::helper('bannerads')->getBaseImage($_product)->resize($_imgSize); ?>"
+                               alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+
+                          <img class="img-smallimage" id="product-collection-image-small-<?php echo $_product->getId(); ?>"
+                               src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($_imgSize); ?>"
+                               alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+
+                            <?php if(!$_product->getStockItem() || !$_product->getStockItem()->getIsInStock()): ?>
+                                <p class="sold-out"><span><?php echo $this->__('sold out') ?></span></p>
+                            <?php endif; ?>     
+                        </a>
+                        <div class="product-info">
+                          <div class="info-left">
+                            <?php
+                              if ($_product->getData('brands')):
+                              $brandName = $_product->getResource()->getAttribute('brands')->getFrontend()->getValue($_product);
+                            ?>
+                              <div class="product-brand"><?php echo $brandName; ?></div>
+                            <?php endif; ?>
+                                
+                            <h2 class="product-name">
+                              <a href="<?php echo $abstractBlock->getProductUrl($_product) ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>">
+                                <?php $_productNameStripped = $this->htmlEscape($_product->getName()) ?>
+                                <?php
+                                  if(iconv_strlen($_productNameStripped,'UTF-8')>40) {
+                                    $_productNameStripped = iconv_substr($_productNameStripped, 0, 40, 'UTF-8');
+                                    $_productNameStripped .= '...';
+                                  }
+                                ?>
+                                <?php echo $_productNameStripped ?>
+                              </a>
+                            </h2>
+                            <?php
+                            // Provides extra blocks on which to hang some features for products in the list
+                            // Features providing UI elements targeting this block will display directly below the product name
+                            if ($this->getChild('name.after')) {
+                                $_nameAfterChildren = $this->getChild('name.after')->getSortedChildren();
+                                foreach ($_nameAfterChildren as $_nameAfterChildName) {
+                                    $_nameAfterChild = $this->getChild('name.after')->getChild($_nameAfterChildName);
+                                    $_nameAfterChild->setProduct($_product);
+                                    echo $_nameAfterChild->toHtml();
+                                }
+                            }
+                            ?>
+
+                          </div>
+                          <div class="info-right">
+                            <?php echo $abstractBlock->getPriceHtml($_product, true, '-related') ?>
+                          </div> 
+                        </div>
+                    </li>
+                <?php endforeach ?>
+            </ul>
+        </div>
+    <script>
+      if(jQuery( window ).width() < 700){
+        jQuery('.aw-arp-block-<?php echo $this->getData('id') ?> .products-grid').bxSlider({
+          pager: false,
+          infiniteLoop: false,
+          controls: true,
+          hideControlOnEnd: true,
+          slideMargin: 10,
+          slideWidth: 145,
+          maxSlides: 2,
+          minSlides: 2
+        });
+      }
+    </script>
+
+    </div>
+<?php endif;?>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Crystal_Campaignmanage>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_CatalogRule /><!-- so the config is loaded after the one from Mage_Contacts -->
+            </depends>
+        </Crystal_Campaignmanage>
+    </modules>
+</config>

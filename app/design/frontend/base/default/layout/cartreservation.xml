@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+
+	<default>
+		<reference name="head">
+			<action method="addItem" ifconfig="cartreservation/general/enable"><type>js</type><name>plumrocket/jquery-1.10.2.min.js</name></action>
+            <action method="addItem" ifconfig="cartreservation/general/enable"><type>js</type><name>plumrocket/countdown-1.5.1/jquery.countdown.js</name></action>
+			<action method="addItem" ifconfig="cartreservation/general/enable"><type>skin_js</type><name>js/plumrocket/cartreservation/cart.js</name></action>
+			<action method="addCss" ifconfig="cartreservation/general/enable"><stylesheet>css/cartreservation.css</stylesheet></action>
+            <action method="addCss" ifconfig="cartreservation/general/enable"><stylesheet>css/plumrocket/cartreservation/cartreservation-additional.css</stylesheet></action>
+			
+			<block type="cartreservation/header" name="cart.reservation.header" template="cartreservation/header.phtml">
+				<block type="cartreservation/popup" name="cart.reservation.popup" as="popup" template="cartreservation/popup.phtml" />
+			</block>
+		</reference>
+
+		<!-- cart popup - enterprise -->
+        <reference name="topCart.extra_actions">
+        	<block type="cartreservation/cart" name="cart.reservation" template="cartreservation/cart.phtml" before="-" />
+        </reference>
+
+        <!-- cart popup - 1.9 -->
+        <reference name="minicart_content">
+        	<action method="setTemplate" ifconfig="cartreservation/general/enable"><template>cartreservation/minicart.phtml</template></action>
+
+        	<!-- <block type="cartreservation/cart" name="cart.reservation" as="cartreservation" template="cartreservation/cart.phtml"/> -->
+        </reference>
+	</default>
+	
+	<checkout_cart_index translate="label">
+		<reference name="checkout.cart.top_methods">
+			<block type="cartreservation/cart" name="cart.reservation" template="cartreservation/cart.phtml" before="-" />
+		</reference>
+    </checkout_cart_index>
+	
+	<checkout_onepage_index translate="label">
+        <reference name="content">
+            <block type="cartreservation/cart" name="cart.reservation" as="cartreservation" template="cartreservation/cart.phtml" before="-" />
+		</reference>
+	</checkout_onepage_index>
+
+	<!-- Add countdown timer to product page if product reserved -->
+	<PRODUCT_TYPE_simple>
+        <reference name="product.info.simple.extra">
+            <block type="cartreservation/reversed" name="cartreservation_reversed" template="cartreservation/reserved.phtml"/>
+        </reference>
+<!--        <reference name="product.info.simple.extra">-->
+<!--            <block type="cartreservation/product" name="cartreservation_product" template="cartreservation/product.phtml"/>-->
+<!--        </reference>-->
+    </PRODUCT_TYPE_simple>
+    <PRODUCT_TYPE_virtual>
+        <reference name="product.info.simple.extra">
+            <block type="cartreservation/reversed" name="cartreservation_reversed" template="cartreservation/reserved.phtml"/>
+        </reference>
+<!--        <reference name="product.info.virtual.extra">-->
+<!--            <block type="cartreservation/product" name="cartreservation_product" template="cartreservation/product.phtml" />-->
+<!--        </reference>-->
+    </PRODUCT_TYPE_virtual>
+    <PRODUCT_TYPE_grouped>
+        <reference name="product.info.simple.extra">
+            <block type="cartreservation/reversed" name="cartreservation_reversed" template="cartreservation/reserved.phtml"/>
+        </reference>
+<!--        <reference name="product.info.grouped.extra">-->
+<!--            <block type="cartreservation/product" name="cartreservation_product" template="cartreservation/product.phtml" />-->
+<!--        </reference>-->
+    </PRODUCT_TYPE_grouped>
+    <PRODUCT_TYPE_configurable>
+        <reference name="product.info.configurable.extra">
+            <block type="cartreservation/product" name="cartreservation_product" template="cartreservation/product.phtml" />
+        </reference>
+    </PRODUCT_TYPE_configurable>
+    <PRODUCT_TYPE_bundle>
+        <reference name="product.info.simple.extra">
+            <block type="cartreservation/reversed" name="cartreservation_reversed" template="cartreservation/reserved.phtml"/>
+        </reference>
+<!--        <reference name="product.info.extrahint">-->
+<!--            <block type="cartreservation/product" name="cartreservation_product" template="cartreservation/product.phtml" />-->
+<!--        </reference>-->
+    </PRODUCT_TYPE_bundle>
+</layout>

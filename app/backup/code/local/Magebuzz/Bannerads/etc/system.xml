@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<config>
+  <tabs>
+    <magebuzz translate="label">
+      <label>Sales Motivation</label>
+      <sort_order>400</sort_order>
+    </magebuzz>
+  </tabs>
+  <sections>
+    <bannerads translate="label" module="bannerads">
+      <label>Banner Ads</label>
+      <tab>magebuzz</tab>
+      <frontend_type>text</frontend_type>
+      <sort_order>299</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+      <comment>
+        <![CDATA[
+              <div style="border:1px solid #ccc; padding:5px;">
+                <p style="color:#EB5E00">To use banner ads in cms pages or static block, you can the following code: <code>{{block type="bannerads/blockdatacustom" block_banner_id="Block_Id" name="bannerads.custom" template="bannerads/bannerads.phtml"}}</code></p>              
+                <p style="color:#EB5E00">If you want to use Banner in a phtml file, please add this code: <code>$this->getLayout()->createBlock('bannerads/blockdatacustom')->setTemplate('bannerads/bannerads.phtml')->setBlockBannerId('Block_id')->toHtml();</code></p>
+                <p style="color:#EB5E00"> NOTE : block_banner_id is ID of Block Banners </p>
+              </div>
+            ]]>
+      </comment>
+      <groups>
+        <general translate="label">
+          <label>General Setting</label>
+          <frontend_type>text</frontend_type>
+          <sort_order>1</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+          <fields>
+            <enable translate="label">
+              <label>Enable Module</label>
+              <frontend_type>select</frontend_type>
+              <sort_order>1</sort_order>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </enable>
+            <include_js translate="label comment">
+              <label>Include jQuery</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>2</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>0</show_in_store>
+              <comment><![CDATA[Turn off jquery library if you already include it from another module]]></comment>
+            </include_js>
+						<enable_report translate="label comment">
+              <label>Enable to accumulate report data</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>3</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>0</show_in_store>
+              <comment><![CDATA[Enable this will trigger ajax request to retrieve report data in frontend. It may cause the site slow.]]></comment>
+            </enable_report>
+          </fields>
+        </general>
+        <display_setting translate="label">
+          <label>Display Setting</label>
+          <frontend_type>text</frontend_type>
+          <sort_order>3</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+          <fields>
+            <is_show_paging translate="label comment">
+              <label>Slider pager</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>2</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>0</show_in_store>
+              <comment><![CDATA[]]></comment>
+            </is_show_paging>
+            <transition_speed>
+              <label>Slider transition speed</label>
+              <comment><![CDATA[Unit is second]]></comment>
+              <frontend_type>text</frontend_type>
+              <sort_order>5</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </transition_speed>
+          </fields>
+        </display_setting>
+      </groups>
+    </bannerads>
+  </sections>
+</config>

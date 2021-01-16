@@ -1,0 +1,25 @@
+<?xml version="1.0"  ?>
+<config>
+    <menu>
+        <pushnotification translate="title" module="pushnotification">
+            <title>Notification </title>
+            <sort_order>72</sort_order>
+            <action>adminhtml/pushnotification</action>
+        </pushnotification>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <pushnotification translate="title" module="pushnotification">
+                        <title>Notification Manage</title>
+                        <sort_order>1000</sort_order>
+                    </pushnotification>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/flipclock.css</name>
+            </action>
+            <!--<action method="addItem">
+                <type>skin_css</type>
+                <name>css/bootstrap.min.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/bootstrap.js</name>
+            </action>-->
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/flipclock.js</name>
+            </action>
+        </reference>
+    </default>
+    <countingdown_index_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="breadcrumbs">
+            <action method="addCrumb"><crumbName>Home</crumbName><crumbInfo><label>Home</label><title>Home</title><link>/</link></crumbInfo></action>
+            <action method="addCrumb"><crumbName>Upcoming</crumbName><crumbInfo><label>Upcoming</label><title>Upcoming</title></crumbInfo></action>
+        </reference>
+        <reference name="content">
+            <block type="countingdown/countingdown" name="countingdown" template="countingdown/countingdown.phtml" />
+        </reference>
+    </countingdown_index_index>
+    
+    
+    <countingdown_countingdownhome_index>
+        <reference name="content">
+            <block type="countingdown/countingdownhome" name="countingdowns_" template="countingdown/countingdownhome.phtml" />
+        </reference>
+    </countingdown_countingdownhome_index>
+    
+    <catalog_product_view>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/flipclock.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/flipclock.js</name>
+            </action>
+        </reference>
+        <!-- fix for Magento 1.4.0.x -->
+        <reference name="product.info">
+            <block type="core/template" name="product.countingdown" as="product.countingdown" template="countingdown/product.phtml"/>
+        </reference>
+        <reference name="product.info.addtocart">
+            <action method="setTemplate">
+                <template>countingdown/customize.phtml</template>
+            </action>
+        </reference>
+    </catalog_product_view>
+</layout> 

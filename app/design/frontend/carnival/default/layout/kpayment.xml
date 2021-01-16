@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <kpayment>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+            <remove name="right.reports.product.viewed" />
+        </reference>
+    </kpayment>
+
+    <kpayment_qrcode_redirect_index>
+        <update handle="kpayment"/>
+        <reference name="content">
+            <block type="kpayment/qrcode_redirect" name="kpayment" template="kpayment/qrredirect.phtml" />
+        </reference>
+    </kpayment_qrcode_redirect_index>
+    <!--<kpayment_qrcode_callback_index>-->
+        <!--<update handle="kpayment"/>-->
+        <!--<reference name="content">-->
+            <!--<block type="kpayment/qrcode_redirect" name="kpayment" template="member/menu.phtml" />-->
+        <!--</reference>-->
+    <!--</kpayment_qrcode_callback_index>-->
+</layout>

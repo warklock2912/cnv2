@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoTags
+ */
+-->
+<config>
+    <modules>
+        <Amasty_SeoTags>
+            <version>1.0.5</version>
+        </Amasty_SeoTags>
+    </modules>
+
+    <global>
+        <helpers>
+            <amseotags>
+                <class>Amasty_SeoTags_Helper</class>
+            </amseotags>
+        </helpers>
+
+        <blocks>
+            <amseotags>
+                <class>Amasty_SeoTags_Block</class>
+            </amseotags>
+            <adminhtml>
+                <rewrite>
+                    <system_config_form>Amasty_SeoTags_Block_Adminhtml_Config_Form</system_config_form>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+
+        <models>
+            <amseotags>
+                <class>Amasty_SeoTags_Model</class>
+            </amseotags>
+            <tag>
+                <rewrite>
+                    <tag>Amasty_SeoTags_Model_Tag_Tag</tag>
+                </rewrite>
+            </tag>
+        </models>
+
+        <resources>
+            <amseotags_setup>
+                <setup>
+                    <module>Amasty_SeoTags</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </amseotags_setup>
+
+            <amseotags_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </amseotags_write>
+
+            <amseotags_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </amseotags_read>
+        </resources>
+
+        <events>
+            <controller_action_layout_render_before_tag_product_list>
+                <observers>
+                    <amseotags>
+                        <type>singleton</type>
+                        <class>amseotags/observer</class>
+                        <method>initMetaHelper</method>
+                    </amseotags>
+                </observers>
+            </controller_action_layout_render_before_tag_product_list>
+            <controller_front_init_routers>
+                <observers>
+                    <amseotags>
+                        <type>singleton</type>
+                        <class>amseotags/observer</class>
+                        <method>initControllerRouters</method>
+                    </amseotags>
+                </observers>
+            </controller_front_init_routers>
+        </events>
+    </global>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <amseotags after="Mage_Adminhtml">Amasty_SeoTags_Adminhtml</amseotags>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <default>
+        <web>
+            <routers>
+                <amseotags>
+                    <area>frontend</area>
+                    <class>Amasty_SeoTags_Controller_Router</class>
+                </amseotags>
+            </routers>
+        </web>
+    </default>
+
+</config>

@@ -1,0 +1,10 @@
+<?php 
+$helper = Mage::helper('omise_gateway');
+$publickey = $helper->getPublicKey();
+?>
+<script src="https://cdn.omise.co/omise.js"></script>
+<!-- <script src="https://cdn.omise.co/card.js"></script> -->
+
+<script>
+  // Omise.setPublicKey("<?php echo $publickey ?>");
+</script>

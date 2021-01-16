@@ -1,0 +1,49 @@
+<?php /** @var Tigren_Kerry_Block_Adminhtml_Sales_Shipment_View_Booking $this **/ ?>
+<div class="modal fade booking-modal" id="booking-modal">
+    <script type="text/javascript">
+        'use strict';
+
+        var kerryAPI = new KerryAPI({
+            popupElement: 'booking-modal',
+            confirmBookingBtn: 'confirm-booking-btn',
+            totalPackages: 'tot_pkg',
+            receiveShipmentDataUrl: '<?php echo $this->getUrl('kerry/adminhtml_request/getShipment', array('shipment_id' => $this->getRequest()->getParam('shipment_id'), 'isAjax' => true, 'form_key' => $this->getFormKey())) ?>',
+            APIUrl: '<?php echo $this->getApiUrl() ?>',
+            accessAPIUrl: '<?php echo $this->getUrl('kerry/adminhtml_request/accessKerry', array('shipment_id' => $this->getRequest()->getParam('shipment_id'), 'isAjax' => true, 'form_key' => $this->getFormKey())) ?>',
+        });
+
+    </script>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><?php echo __('Booking Kerry') ?></h4>
+                <button type="button" class="close" data-dismiss="modal" onclick="jQuery('#booking-modal').hide()">&times;</button>
+                <div style="clear: both"></div>
+            </div>
+            <div class="modal-body">
+                <span class="field-row">
+                    <label class="normal" for="tot_pkg">กรุณาระบุจำนวนกล่องที่ต้องการ</label>
+                    <?php $totalPackages = Mage::getStoreConfig('kerry/general/maximum_box') ?>
+                    <?php if($totalPackages): ?>
+                        <select name="tot_pkg" id="tot_pkg">
+                            <?php for($total = 1; $total <= $totalPackages; $total++): ?>
+                                <option value="<?php echo $total ?>"><?php echo $total ?></option>
+                            <?php endfor; ?>
+                        </select>
+                    <?php else: ?>
+                        <select name="tot_pkg" id="tot_pkg">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    <?php endif; ?>
+                </span>
+                <button type="button" id="confirm-booking-btn" onclick="kerryAPI.receiveShipment()">
+                    <span><?php echo __('Confirm Booking') ?></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

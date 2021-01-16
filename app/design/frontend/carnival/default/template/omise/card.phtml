@@ -1,0 +1,267 @@
+<?php
+$customerApiId = $this->getCustomerApiId();
+?>
+<div class="page-title">
+    <h1><?php echo $this->__('My Credit/Debit Card') ?></h1>
+    <a class="new-card" id="new-card" title="<?php echo $this->__('New Credit/Debit Card')?>" onclick=""><?php echo $this->__('New Credit/Debit Card')?></a>
+</div>
+<?php $_code= 'omise_gateway' ?>
+<form id="omise-form" action="<?php echo $this->getUrl('raffle/index/updateNewCardToCustomer') ?>" method="post" style="display: none">
+    <h2 class="legend"><?php echo $this->__('New Credit/Debit Card') ?></h2>
+
+    <ul class="form-list" id="creadit_card_form_<?php echo $_code ?>">
+        <li class="omise-validation-advice">
+            <div class="validation-advices"></div></li>
+        <input data-omise="omise_token" type="hidden" name="card[omise_token]">
+        <!-- Credit Card Number -->
+        <li>
+            <label for="<?php echo $_code ?>_cc_number" class="required"><em>*</em><?php echo $this->__('Card number') ?></label>
+            <div class="input-box">
+                <input autocomplete="off" maxlength="16" type="text" data-omise="number" id="<?php echo $_code ?>_cc_number" title="<?php echo $this->__('Card number') ?>" class="input-text required-entry validate-cc-number validate-cc-type required" value="" />
+            </div>
+        </li>
+
+        <!-- Credit Card Holder Name -->
+        <li>
+            <label for="<?php echo $_code ?>_cc_owner" class="required"><em>*</em><?php echo $this->__('Name on card') ?></label>
+            <div class="input-box">
+                <input autocomplete="off" type="text" data-omise="holder_name" id="<?php echo $_code ?>_cc_name" title="<?php echo $this->__('Name on card') ?>" class="input-text required-entry"/>
+            </div>
+        </li>
+
+        <!-- Expiration Date -->
+        <li id="<?php echo $_code ?>_cc_type_exp_div">
+            <label for="<?php echo $_code ?>_expiration" class="required"><em>*</em><?php echo $this->__('Expiration Date') ?></label>
+            <div class="input-box">
+                <div class="v-fix">
+                    <select autocomplete="off" data-omise="expiration_month" id="<?php echo $_code ?>_expiration" class="month validate-cc-exp required-entry">
+                        <?php foreach ($this->getCcMonths() as $k=>$v): ?>
+                            <option value="<?php echo $k?$k:'' ?>"><?php echo $v ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
+                <div class="v-fix">
+                    <select autocomplete="off" data-omise="expiration_year" id="<?php echo $_code ?>_expiration_yr" class="year required-entry">
+                        <?php foreach ($this->getCcYears() as $k=>$v): ?>
+                            <option value="<?php echo $k?$k:'' ?>"><?php echo $v ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
+            </div>
+        </li>
+
+        <li id="<?php echo $_code ?>_cc_type_cvv_div">
+            <label for="<?php echo $_code ?>_cc_cid" class="required"><em>*</em><?php echo $this->__('CVV') ?></label>
+            <div class="input-box">
+                <div class="v-fix">
+                    <input autocomplete="off" data-omise="security_code" maxlength="3" type="text" title="<?php echo $this->__('CVV') ?>" class="input-text cvv required-entry validate-cc-cvn" id="<?php echo $_code ?>_cc_cid" value="" />
+                </div>
+            </div>
+        </li>
+        <li class="control">
+            <input type="checkbox" value="1" id="save_card" name="save_card" class="checkbox">
+            <label for="save_card"><?php echo $this->__('Save Card') ?></label>
+        </li>
+        <li class="control">
+            <input type="checkbox" value="1" id="accept_term_condition" name="accept_term_condition" class="checkbox required-entry">
+            <label for="accept_term_condition"><?php echo $this->__('Accept term & Condition') ?></label>
+        </li>
+    </ul>
+    <div class="buttons-set style1">
+        <button type="button" id="close-omise-form"
+                class="button button-back btn-white">
+            <span><span><?php echo $this->__('Back'); ?></span></span>
+        </button>
+        <button type="button" id="submit-omise-form"
+                class="button" onclick="createOmiseToken()">
+            <span><span><?php echo $this->__('Save'); ?></span></span>
+        </button>
+    </div>
+</form>
+
+<?php if ($customerApiId): ?>
+    <?php $cardList = $this->getCardList($customerApiId) ?>
+    <?php $defaultCard = $this->getDefaultCard($customerApiId) ?>
+    <?php if(!empty($cardList) && !empty($cardList['data'])): ?>
+        <table class="data-table" id="my-apps-table">
+            <col width="" align="right" />
+            <col width="" align="right" />
+            <col width="1" align="right" />
+            <thead>
+            <tr>
+                <th><?php echo $this->__('Card Number') ?></th>
+                <th><div><?php echo $this->__('Set as primary card') ?></div></th>
+                <th><?php echo $this->__('Delete') ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php $cardNumber = array() ?>
+            <?php foreach ($cardList['data'] as $card) :?>
+                <tr>
+                    <td>
+                        <div class="<?php echo $card['brand']?>">
+                            <span class="cart-number"><?php echo $this->__('**** **** **** '.$card['last_digits']) ?></span> <br/>
+                            <span class="cart-date"><?php echo $this->__('Expries') .'&nbsp'. $card['expiration_month'] .'/'. $card['expiration_year'] ?></span>
+                        </div>
+                    </td>
+                    <td>
+                        <input disabled="disabled" onclick="preventDefault(this)" type="checkbox" value="1" name="set_as_default" <?php if($defaultCard == $card['id']): ?> checked<?php endif; ?> >
+                        <label onclick="setDefaultCard('<?php echo $card['id'] ?>')"><?php echo $this->__('set default') ?></label>
+                    </td>
+                    <td><a class="remove" href="#" onclick="removeCard('<?php echo $card['id'] ?>')"><?php echo $this->__('x') ?></a></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+        <div class="popup-delete-card" id="popup-delete-card" style="display: none" >
+            <div class="popup-content">
+                <span class="close-popup" id="popup-close-top"><?php echo $this->__('Close') ?></span>
+                <h2><?php echo $this->__('Delete') ?></h2>
+                <div class="text-content">
+                    <?php echo $this->__('Are you sure you want to delete this credit card?') ?>
+                </div>
+                <div class="buttons-set style1">
+                    <button type="button" id="popup-close"
+                            class="button button-back btn-white">
+                        <span><span><?php echo $this->__('Cancel'); ?></span></span>
+                    </button>
+                    <button type="button" id="delete-card-info" data-id-card="hehe"
+                            class="button">
+                        <span><span><?php echo $this->__('Delete'); ?></span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="popup-delete-card" id="popup-update-card" style="display: none" >
+            <div class="popup-content">
+                <span class="close-popup" id="popup-close-top"><?php echo $this->__('Close') ?></span>
+                <h2><?php echo $this->__('Set as primary card') ?></h2>
+                <div class="text-content">
+                    <?php echo $this->__('Are you sure you want to set this card as primary card?') ?>
+                </div>
+                <div class="buttons-set style1">
+                    <button type="button" id="popup-close"
+                            class="button button-back btn-white">
+                        <span><span><?php echo $this->__('Cancel'); ?></span></span>
+                    </button>
+                    <button type="button" id="update_card_info" data-id-card="hehe"
+                            class="button">
+                        <span><span><?php echo $this->__('Are you sure? '); ?></span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    <?php else: ?>
+        <p><?php echo $this->__('You have no saved cards.'); ?></p>
+    <?php endif; ?>
+<?php endif; ?>
+<script type="text/javascript">
+    //<![CDATA[
+    var omiseForm = new VarienForm('omise-form', true);
+    //]]>
+    function preventDefault(e) {
+        e = e || window.event;
+        if (e.preventDefault)
+            e.preventDefault();
+        e.returnValue = false;
+    }
+
+    jQuery('#popup-close, #popup-close-top').on('click', function () {
+        $('popup-delete-card').hide();
+        $('popup-update-card').hide();
+    });
+
+    jQuery('.new-card').on('click', function () {
+        $('omise-form').show();
+    });
+
+    jQuery('#close-omise-form').on('click', function () {
+        $('omise-form').hide();
+    });
+
+
+    function removeCard(id) {
+        $('popup-delete-card').show();
+        jQuery('#delete-card-info').on('click', function () {
+            var idCard = jQuery('#delete-card-info').attr('data-id-card');
+            window.location = '<?php echo $this->getUrl('raffle/index/destroyCardOmise') ?>'+'?id='+id;
+        });
+    }
+    function setDefaultCard(id) {
+        $('popup-update-card').show();
+        jQuery('#update_card_info').on('click', function () {
+            window.location = '<?php echo $this->getUrl('raffle/index/setDefaultCardOmise') ?>'+'?id='+id;
+        });
+    }
+
+    function createOmiseToken() {
+        var omiseValidation = new Validation('omise-form');
+        if (omiseValidation.validate()) {
+            jQuery.ajaxSetup({async: false});
+            jQuery.getScript("https://cdn.omise.co/omise.min.js.gz", function () {
+                <?php
+                $config = Mage::getModel('omise_gateway/config')->load(1);
+                $data = array(
+                    'public_key' => $config->public_key,
+                    'secret_key' => $config->secret_key,
+                );
+
+                if ($config->test_mode) {
+                    $data['public_key'] = $config->public_key_test;
+                    $data['secret_key'] = $config->secret_key_test;
+                }
+                ?>
+                // Set Omise key
+                Omise.setPublicKey("<?php echo $data['public_key']; ?>");
+
+                var form = jQuery("#creadit_card_form_omise_gateway"),
+                    formValidation = form.find('.omise-validation-advice'),
+                    formValidationMsg = formValidation.find('.validation-advice');
+
+                // Serialize the form fields into a valid card object.
+                var card = {
+                    "name": form.find("[data-omise=holder_name]").val(),
+                    "number": form.find("[data-omise=number]").val(),
+                    "expiration_month": form.find("[data-omise=expiration_month]").val(),
+                    "expiration_year": form.find("[data-omise=expiration_year]").val(),
+                    "security_code": form.find("[data-omise=security_code]").val()
+                };
+                formValidation.css({'opacity': 0, 'display': 'none'});
+
+                // // Send a request to create a token
+                // // then trigger the callback function once a response is received from Omise.
+                // // * Note that the response could be an error and this needs to be handled
+                // // * within the callback.
+                Omise.createToken("card", card, function (statusCode, response) {
+                    // If has an error (can not create a card's token).
+                    if (response.object == "error") {
+                        // Display an error message - "Omise Response: "+response.message.
+                        formValidation.css({'opacity': 1, 'display': 'block'});
+                        alert(response.message);
+                        return false;
+                    } else if (typeof response.card != 'undefined' && !response.card.security_code_check) {
+                        // Display an error message - "Omise Response: Card authorization failure.".
+                        formValidation.css({'opacity': 1, 'display': 'block'});
+                        // formValidationMsg.html("Omise Response: Card authorization failure.");
+                        alert("Omise Response: Card authorization failure.");
+                        return false;
+
+                    } else {
+                        form.find("[data-omise=holder_name]").prop("disabled", true);
+                        form.find("[data-omise=number]").prop("disabled", true);
+                        form.find("[data-omise=expiration_month]").prop("disabled", true);
+                        form.find("[data-omise=expiration_year]").prop("disabled", true);
+                        form.find("[data-omise=security_code]").prop("disabled", true);
+
+                        form.find("[data-omise=omise_token]").val(response.id);
+                        var omise_token = form.find("[data-omise=omise_token]").val();
+                        //<![CDATA[
+                        if (omise_token != '') {
+                            $('omise-form').submit();
+                        }
+                    }
+                });
+            });
+        }
+    }
+</script>

@@ -1,0 +1,345 @@
+/**
+ * MageWorx
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the MageWorx EULA that is bundled with
+ * this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.mageworx.com/LICENSE-1.0.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please refer to http://www.mageworx.com/ for more information
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuite
+ * @copyright  Copyright (c) 2014 MageWorx (http://www.mageworx.com/)
+ * @license    http://www.mageworx.com/LICENSE-1.0.html
+ */
+
+/**
+ * Search Suite extension
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuiteAutocomplete
+ * @author     MageWorx Dev Team
+ */
+a:focus { outline: none; }
+.highlight {
+    color: #FF2F00 !important;
+    font-weight: bold;
+}
+.reset-button{
+    position: absolute;
+    border: 0px;
+    width: 16px;
+    background-color: transparent;
+    padding: 0px 6px 6px 2px;
+    z-index: 100;
+    color: #DE5400;
+    font-size: 10pt;
+    cursor: pointer;
+    left: 0;
+    vertical-align: middle;
+    display:none!important;
+}
+@-moz-document url-prefix() 
+{
+    .reset-button{margin-top: 0px;}
+}
+input.spinner, input.spinner:focus {
+    background-repeat: no-repeat !important;
+    background-position: right center;
+    background-image: url(../../../images/mageworx/searchsuiteautocomplete/spinner.gif) !important;
+}
+.s_separator{
+    border-top: 1px solid #AAA;
+}
+.s_separator:first-child{
+    border-top: none;
+}
+#search_autocomplete{
+    z-index: 999;
+    position: static!important;
+}
+.searchautocomplete-container{
+    float: left;
+    width: 100%;
+    margin-top: 6px;
+}
+.search-container .span_item{
+    padding-left: 4px;
+}
+
+.searchautocomplete-search{
+    float: left;
+    width: 100%;
+    padding:10px 0 0px;
+    display: block;
+    position: relative;
+}
+.searchautocomplete-search:before{
+    content: "";
+    position: absolute;
+    height: 1px;
+    background:#ebebeb;
+    width:200%;
+    top:0px;
+    left:-50%;
+    z-index: 1;
+}
+.search-header {
+    margin: 0 0 10px;
+    text-align: left;
+    padding: 0;
+    height: 25px;
+    line-height: 25px;
+    font-weight: normal;
+    color: #363636;
+    font-size: 14px;
+    letter-spacing: 0px;
+    clear: both;
+    text-transform: none;
+}
+.search-container.products-grid {
+    width:100%;
+}
+.search-container.products-grid ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    float:left;
+}
+.search-container.products-grid .item{
+  float:left;
+  width:200px;
+  margin-right:20px;
+}
+.search-container.products-grid .item:nth-last-child(1){
+    margin-right:0px;
+}
+.s_item,.s_category,.s_suggest{
+    padding-left: 10px;
+    padding-right: 5px;  
+    padding-top: 5px;
+}
+
+.s_item a:link,
+.s_item a:hover,
+.s_item a:visited {    
+    color: #2F2F2F;
+    text-decoration: none;
+}
+.s_icon{
+    float: left;
+    height: auto;
+    display: table-cell;
+    margin-right: 5px;
+}
+.s_details{
+    text-align: left;
+    display: table-cell;
+    width: 420px;
+}
+.s_item:after{
+    display: block;
+    clear: both;
+    height: 0px;
+    content: '';
+}
+.s_description{
+    font-size: 11px;
+}
+.s_item_name{
+    font-weight: bold;
+    height: auto !important;
+    min-height: 15px;
+    height: 15px;
+}
+.s_item_name > span{
+    float: left;
+}
+.s_review{
+    clear: both;
+}
+.s_ratings {
+    font-size: 11px;
+    line-height: 1.25;
+    margin: 7px 0;
+    width: 70px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    display: block;
+}
+
+.s_item_name .a_review {
+    color: #1E7EC8 !important;
+}
+.s_sku {
+    font-size: 10px;
+}
+.searchautocomplete-search .s_button button.button span {
+    background: none repeat scroll 0 0 #F18200;
+    /*    border: 1px solid #DE5400;*/
+    color: white;
+    display: block;
+    font: bold 12px/19px Arial,Helvetica,sans-serif;
+    height: 19px;
+    padding: 0 8px;
+    text-align: center;
+    white-space: nowrap;
+}
+.s_category {
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+}
+.s_category a{
+    color: #2F2F2F;
+    text-decoration: none;
+}
+.resultbox-b {
+    height: 16px;
+    text-align: right;
+    font-weight: bold;
+    font-size: 13px;
+    padding-right: 5px;
+    display:none;
+}
+.resultbox-b a,
+.resultbox-b a:link, 
+.resultbox-b a:visited, 
+.resultbox-b a:hover {
+    color: #999999;
+    text-decoration: none;
+}
+.search-results{
+    text-align: left;
+    /*border-bottom: 1px #ccc dotted;*/
+}
+.search-results:first-child{
+
+}
+.search-results{
+    background-color: #fff;
+    display: block;
+}
+.search-container-suggest div{
+    display: inline-block;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+/*fix magento style*/
+#searchautocomplete-search-1 ul{
+    background: none;
+    border: 0;
+}
+/*#searchautocomplete-search-1 ul li{
+    padding: 0;
+    border: 0;
+}*/
+/*#searchautocomplete-search-1 button,#searchautocomplete-search-1 button span{
+    background-image: none;
+}*/
+/**/
+#search::-ms-clear {
+    display: none !important;
+}
+@media only screen and (max-width:770px){
+.searchautocomplete-search:before {
+    width:100%;
+    left:0px;
+}
+}
+@media only screen and (max-width:499px) {
+    #search_autocomplete {
+        width: calc(100% + 70px);
+        margin-left: -35px;
+    }
+    .searchautocomplete-search:before {
+        display:none;
+    }
+    .search-header {
+        display:none;
+    }
+    .search-container.products-grid ul,
+    #search_autocomplete .mCSB_horizontal.mCSB_inside > .mCSB_container{
+        width:100%!important;
+    }
+    .searchautocomplete-search {
+        padding: 0px 10px;
+        background: #fff;
+    }
+    .search-container.products-grid .item {
+        float:left;
+        width:100%;
+        padding:10px 0;
+        border-bottom:solid 1px #ebebeb;
+        position: relative;
+    }
+    .search-container.products-grid .item .product-image {
+        float:left;
+        width:35%;
+        position: static;
+    }
+    .search-container.products-grid .item .product-image .amlabel-table {
+        left:100%!important;
+        margin-left:-40px;
+    }
+    .search-container.products-grid .item .product-image img{
+        border: solid 1px #ebebeb;
+    }
+    .search-container.products-grid .item .product-info{
+        float:left;
+        width:65%;
+        padding-left:5px;
+        display:block;
+    }
+
+    .search-container.products-grid .product-info .info-left,
+    .search-container.products-grid .product-info .info-right{
+        float:left;
+        width:100%;
+        display:block;
+        text-align: left;
+    }
+    .search-container.products-grid  .product-info .price-box {
+        float:left;
+    }
+    .search-container.products-grid .product-name {
+        max-width:100%;
+    }
+    .search-container.products-grid .price-box .special-price .price{
+        padding:0px;
+    }
+    .searchautocomplete-container {
+        position: fixed;
+        left: 0px;
+        top: 44px;
+        max-height: calc(100% - 44px);
+        overflow-y: auto;
+    }
+    .resultbox-b{
+        display:block;
+        padding:10px 0;
+        float: left;
+        width: 100%;
+        height: auto;
+    }
+    .resultbox-b a, .resultbox-b a:link, .resultbox-b a:visited, .resultbox-b a:hover {
+        color: #000;
+        text-decoration: none;
+        float: left;
+        width: 100%;
+        border: solid 1px #000;
+        text-align: center;
+        line-height: 20px;
+        padding: 10px;
+        font-size: 15px;
+        font-weight: bold;
+    }
+}

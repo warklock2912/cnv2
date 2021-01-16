@@ -1,0 +1,14 @@
+<!--@subject Winner! @-->
+{{template config_path="design/email/header"}}
+{{inlinecss file="email-inline.css"}}
+
+<h1>Congratulations!!!</h1>
+<strong>YOU WIN</strong><br/>
+<strong>YOUR NUMBER IS</strong>: {{var data.ruffle_number}}<br/>
+<p>Now you can buy this product:</p>
+<a href="{{var link}}" title="{{var data.product_name}}">{{var data.product_name}}</a></br>
+<strong>Product Sku</strong>: {{var data.product_sku}}<br/>
+{{var options}}
+
+{{template config_path="design/email/footer"}}
+

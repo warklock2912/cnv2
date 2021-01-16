@@ -1,0 +1,114 @@
+#aw_popup_wraper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background: #000000;
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    /* IE10-specific styles */
+    #aw_popup_wraper {
+        background: transparent;
+        background: rgba(0,0,0,0.7);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4c000000,endColorstr=#4c000000);
+        zoom: 1;
+    }
+}
+
+#aw_popup_window {
+    position: fixed;
+    z-index: 1000;
+    background: #ffffff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    /*border: solid 1px;*/
+    /*border-radius: 6px;*/
+    /*padding: 10px;*/
+    max-width: 96%;
+    max-height: 96%;
+}
+#aw_popup_content{
+    overflow: hidden;
+    /*position:absolute;*/
+    max-width:100%;
+    max-height:100%;
+    top:0px;
+    left:0px;
+}
+
+#aw_popup_title {
+    font-weight: bold;
+}
+
+#aw_popup_close_btn {
+    cursor: pointer;
+    float: right;
+    margin-right: -35px;
+}
+
+#aw_popup_content .newsletter-popup {
+    display:table;
+    width:100%;
+}
+#aw_popup_content .newsletter-popup .box-image,
+#aw_popup_content .newsletter-popup .box-content  {
+    display:table-cell;
+    width:50%;
+    vertical-align: middle;
+}
+#aw_popup_content .newsletter-popup .box-content  {
+    padding:30px;
+    font-size:14px;
+    color:#464646;
+}
+#aw_popup_content .newsletter-popup .box-content h3{
+    font-size: 24px;
+    color: #000;
+    font-weight: bold;
+    margin-bottom:10px;
+}
+#aw_popup_content .newsletter-popup .box-content form {
+  width:270px;
+    max-width:100%;
+}
+#aw_popup_content .newsletter-popup .box-content input  {
+    width:100%;
+    margin-bottom:15px;
+}
+#aw_popup_content .newsletter-popup .box-content button {
+    width:100%;
+    font-family:'HelveticaNeue';
+    font-size:14px;
+    font-weight:bold;
+    padding:10px 15px;
+}
+@media only screen and (max-width: 700px) {
+    #aw_popup_content .newsletter-popup .box-image{
+        display:none;
+    }
+    #aw_popup_content .newsletter-popup .box-content {
+        width: 300px;
+        max-width: 100%;
+        display: block;
+        margin: auto;
+        padding:15px;
+    }
+    #aw_popup_close_btn {
+        margin-right:0px;
+        background: #000;
+        border-radius: 100%;
+        position: absolute;
+        right: 0px;
+        top:0px;
+    }
+    #aw_popup_window {
+        width:auto!important;
+        height:auto!important;
+    }
+}

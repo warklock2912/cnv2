@@ -1,0 +1,110 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Customform
+ */
+?>
+
+<div class="entity-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('catalog')->__('Manage Titles') ?></h4>
+    </div>
+    <div class="box">
+        <div class="hor-scroll">
+            <table class="dynamic-grid" cellspacing="0" id="attribute-labels-table">
+                <tr>
+                    <?php foreach ($this->getStores() as $_store): ?>
+                        <th><?php echo $_store->getName() ?></th>
+                    <?php endforeach; ?>
+                </tr>
+                <tr>
+                    <?php foreach ($this->getStores() as $_store): ?>
+                        <td>
+                            <input class="input-text<?php if($_store->getId()==0): ?> required-entry<?php endif; ?>" type="text" name="label[<?php echo $_store->getId() ?>]" value="<?php echo $this->htmlEscape($this->getField()->getLabel($_store->getId())) ?>" />
+                        </td>
+                    <?php endforeach; ?>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<br/>
+
+<div class="entity-edit" id="matage-options-panel">
+    <div class="entry-edit-head">
+    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('amcustomform')->__('Manage Options (values of your field)') ?></h4>
+    </div>
+    <div class="box">
+        <div class="hor-scroll">
+            <table id="attribute-options-table" class="dynamic-grid" cellspacing="0"  cellpadding="0">
+                <tr>
+                    <th id="group_name_column" style="display: none;" > </th>
+                    <?php foreach ($this->getStores() as $_store): ?>
+                        <th><?php echo $_store->getName() ?></th>
+                    <?php endforeach; ?>
+                        <th><?php echo Mage::helper('catalog')->__('Is Default') ?></th>
+                        <th><?php echo Mage::helper('catalog')->__('Position') ?></th>
+                        <th id="AddNewButton">
+                            <?php echo $this->getAddNewButtonHtml(); ?>
+                        </th>
+                    </tr>
+            </table>
+        </div>
+        <input type="hidden" id="option-count-check" value="" />
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+ 
+var DynamicOptions = Class.create(DynamicChildren, {
+    isMultiselectOptions: <?php echo json_encode($this->getField()->isMultipleOptionsAllowed()) ?>,
+
+    initialize: function() {
+        this.childElementName = 'tr';
+        this.childrenClassName = 'option-row';
+        this.removeButtonClassName = 'delete-option';
+        this.container = $('attribute-options-table');
+        this.sortingField = 'position';
+    },
+
+    getTemplateHTML: function(data) {
+        return '<tr class="option-row"><td class="group_name" style="display: none;">{{group_name}}<input  type="hidden" name="option[{{id}}][group_id]" value="{{group_id}}"></td>' +
+            <?php foreach ($this->getStores() as $_store): ?>
+            '<td><input name="option[{{id}}][label][<?php echo $_store->getId() ?>]" value="{{label_store<?php echo $_store->getId() ?>}}" class="input-text" type="text" /><\/td>'+
+            <?php endforeach; ?>
+            '<td>' + this.getIsDefaultInputTemplate(data) +'</td>' +
+            '<td><input class="input-text validate-number" type="text" name="option[{{id}}][position]" value="{{position}}"><\/td>'+
+            '<td class="a-left">'+
+            '<input type="hidden" class="delete-flag" name="option[{{id}}][delete]" value="" />'+
+            '<div><?php echo $this->getDeleteButtonHtml() ?></div>'+
+            '<\/td>'+
+            '<\/tr>';
+    },
+
+    getIsDefaultInputTemplate: function(data) {
+        var checked = '';
+        if (data.is_default == 1) {
+            checked = ' checked';
+        }
+        if (this.isMultiselectOptions) {
+            return '<input type="hidden" name="option[{{id}}][is_default]" value="0"><input type="checkbox" name="option[{{id}}][is_default]" value="1"' + checked + '>';
+        } else {
+            return '<input type="radio" name="default_option" value="{{id}}"' + checked + '>';
+        }
+    }
+});
+
+dynamicOptions = new DynamicOptions();
+
+if($('add_new_option_button')){
+    Event.observe('add_new_option_button', 'click', function() { dynamicOptions.add({}) });
+}
+
+<?php foreach ($this->getOptionValues() as $optionJson): ?>
+    dynamicOptions.add(<?php echo $optionJson ?>);
+<?php endforeach; ?>
+
+//]]>
+</script>

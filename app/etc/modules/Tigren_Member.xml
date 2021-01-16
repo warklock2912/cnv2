@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Tigren_Member>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Tigren_Member>
+    </modules>
+</config>

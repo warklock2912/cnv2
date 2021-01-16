@@ -1,0 +1,110 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Magpleasure_Blog
+ */
+?>
+
+<?php $collection = $this->getCollection();?>
+<?php if (count($collection)): ?>
+  <div id="popular-stories-blog" class="tab-content list-posts">
+    <ul>
+      <?php foreach ($collection as $post): ?>
+        <?php $categories = $this->getCategories($post->getId());
+        ?>
+        <li class="post-item">
+          <?php if ($post->getListThumbnailSrc()): ?>
+            <a class="post-image"
+               href="<?php echo $post->getPostUrl(); ?>"
+               title="<?php echo $this->escapeHtml($post->getTitle()); ?>">
+              <img class="thumbnail"
+                   src="<?php echo $post->getListThumbnailSrc(); ?>"
+                   alt="<?php echo $this->escapeHtml($post->getTitle()); ?>"/>
+            </a>
+          <?php endif; ?>
+          <div class="post-info">
+            <p class="post-cat">
+              <?php foreach($categories as $category):  ?>
+                <a href="<?php echo $category->getUrl() ?>" title="<?php echo $category->getName(); ?>"><?php echo $category->getName(); ?></a>
+              <?php endforeach; ?>
+            </p>
+            <div class="post-views-time">
+              <?php if (Mage::helper('mpblog')->getDisplayViews()): ?>
+                <?php
+                if($post->getViews()){
+                  $_views = $post->getViews();
+                }else{
+                  $_views =0;
+                }
+
+                ?>
+                <span class="post-views"><strong><?php echo $_views; ?></strong><?php echo $this->__('Views') ?></span>
+              <?php endif; ?>
+              <?php if ($post->getCreatedAt()): ?>
+                <span class="post-time">
+                        <?php echo $this->renderDate($post->getCreatedAt()); ?>
+                    </span>
+              <?php endif; ?>
+
+            </div>
+            <h4 class="post-title">
+              <a href="<?php echo $post->getPostUrl(); ?>">
+                <?php $_postTitleStripped = $this->escapeHtml($post->getTitle()); ?>
+                <?php
+                if(iconv_strlen($_postTitleStripped,'UTF-8')>40) {
+                  $_postTitleStripped = iconv_substr($_postTitleStripped, 0, 40, 'UTF-8');
+                  $_postTitleStripped .= '...';
+                }
+                ?>
+                <?php echo $_postTitleStripped ?>
+              </a>
+            </h4>
+            <div class="post-shortdes">
+              <?php $_shortContentStripped = $post->getShortContent(); ?>
+              <?php
+              if(iconv_strlen($_shortContentStripped,'UTF-8')>180) {
+                $_shortContentStripped = iconv_substr($_shortContentStripped, 0, 185, 'UTF-8');
+                $_shortContentStripped .= '...';
+              }
+              ?>
+              <?php echo $_shortContentStripped ?>
+            </div>
+            <p class="post-by"><?php echo $this->__('By').' ' ?><span><?php echo $post->getPostedBy() ;?></span></p>
+          </div>
+        </li>
+      <?php endforeach; ?>
+    </ul>
+    <?php if(count($this->getCollection()) < $this->gettotalPostCategoryPopular()): ?>
+      <div class="ias_trigger"><a href="javascript:void(0)" onclick="loadmorePopularCategory()"><?php echo $this->__('Load more') ?></a></div>
+    <?php endif; ?>
+  </div>
+  <script type="text/javascript">
+    function loadmorePopularCategory(){
+
+      var url = '<?php echo $this->getUrl('mpblog/index/loadmorePopularCategory')?>';
+      var currentpost = '<?php echo count($this->getCollection()) ?>';
+      var load = new Ajax.Request(url,{
+        parameters:{
+          currentNumberPostPopularCategory: currentpost,
+          id : '<?php echo $this->getRequest()->getParam('id')?>'
+        },
+        onCreate: function(){
+          AmAjaxObj.showAnimation();
+        },
+        onSuccess: function(transport){
+          var response = transport.responseText.evalJSON();
+//        if(response.success){
+          jQuery('#list-content-popular').html(response.html);
+//        }
+          AmAjaxObj.hideAnimation();
+        }
+
+      });
+    }
+  </script>
+<?php else: ?>
+  <?php echo $this->__("There are no posts yet."); ?>
+<?php endif; ?>
+
+

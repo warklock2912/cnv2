@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Ajaxlogin
+ */
+-->
+<config>
+    <translate>
+        <modules>
+            <Amasty_Amajaxlogin>
+                <files>
+                    <default>Amasty_Amajaxlogin.csv</default>
+                </files>
+            </Amasty_Amajaxlogin>
+        </modules>
+    </translate>
+</config>

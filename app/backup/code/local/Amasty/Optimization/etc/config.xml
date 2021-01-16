@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2017 Amasty (https://www.amasty.com)
+ * @package Amasty_Optimization
+ */
+-->
+<config>
+    <modules>
+        <Amasty_Optimization>
+            <version>1.0.5</version>
+        </Amasty_Optimization>
+    </modules>
+
+    <global>
+        <models>
+            <amoptimization>
+                <class>Amasty_Optimization_Model</class>
+                <resourceModel>amoptimization_resource</resourceModel>
+            </amoptimization>
+            <amoptimization_resource>
+                <class>Amasty_Optimization_Model_Resource</class>
+                <entities>
+                    <task>
+                        <table>amasty_amoptimization_task</table>
+                    </task>
+                </entities>
+            </amoptimization_resource>
+            <catalog>
+                <rewrite>
+                    <product_image>Amasty_Optimization_Model_Product_Image</product_image>
+                </rewrite>
+            </catalog>
+        </models>
+
+        <blocks>
+            <amoptimization>
+                <class>Amasty_Optimization_Block</class>
+            </amoptimization>
+        </blocks>
+
+        <resources>
+            <amoptimization_setup>
+                <setup>
+                    <module>Amasty_Optimization</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </amoptimization_setup>
+
+            <amoptimization_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </amoptimization_write>
+
+            <amoptimization_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </amoptimization_read>
+        </resources>
+
+        <translate>
+            <modules>
+                <Amasty_Optimization>
+                    <files>
+                        <default>Amasty_Optimization.csv</default>
+                    </files>
+                </Amasty_Optimization>
+            </modules>
+        </translate>
+
+        <helpers>
+            <amoptimization>
+                <class>Amasty_Optimization_Helper</class>
+            </amoptimization>
+        </helpers>
+    </global>
+
+    <frontend>
+        <events>
+            <controller_front_send_response_before>
+                <observers>
+                    <amoptimization>
+                        <type>singleton</type>
+                        <class>amoptimization/observer_minification</class>
+                        <method>onControllerResponseSendBefore</method>
+                    </amoptimization>
+                </observers>
+            </controller_front_send_response_before>
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <amoptimization>
+                        <type>singleton</type>
+                        <class>amoptimization/observer</class>
+                        <method>onBlockToHtmlAfter</method>
+                    </amoptimization>
+                </observers>
+            </core_block_abstract_to_html_after>
+        </events>
+    </frontend>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <amoptimization>
+                    <file>amasty/amoptimization/amoptimization.xml</file>
+                </amoptimization>
+            </updates>
+        </layout>
+    </adminhtml>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Amasty_Optimization after="Mage_Adminhtml">Amasty_Optimization_Adminhtml</Amasty_Optimization>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <crontab>
+        <jobs>
+            <amoptimization_minify>
+                <schedule>
+                    <cron_expr>* * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>amoptimization/observer_cron::processQueue</model>
+                </run>
+            </amoptimization_minify>
+        </jobs>
+    </crontab>
+
+    <default>
+        <amoptimization>
+            <js>
+                <level>WHITESPACE_ONLY</level>
+                <ignore_min>1</ignore_min>
+            </js>
+			<footerjs>
+			    <ignore_list><![CDATA[google-analitycs
+yandex
+]]></ignore_list>
+			</footerjs>
+            <images>
+                <jpeg_cmd>jpegoptim --all-progressive --strip-xmp --strip-com --strip-exif --strip-iptc %f</jpeg_cmd>
+                <png_cmd>optipng %f</png_cmd>
+                <gif_cmd>gifsicle %f -o %f</gif_cmd>
+            </images>
+            <debug>
+                <log_minification_errors>1</log_minification_errors>
+            </debug>
+        </amoptimization>
+    </default>
+</config>

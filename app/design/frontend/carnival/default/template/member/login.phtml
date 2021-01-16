@@ -1,0 +1,24 @@
+<div class="member-page">
+    <div class="content">
+        <div class="mf-login-container">
+            <div class="login-box">
+                <form method="post" action="login" id="loginForm">
+                    <div class="login-form">
+                        <h2><a href="#"><?php echo Mage::helper('adminhtml')->__('Margin Frame') ?></a></h2>
+                        <div id="messages">
+                            <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+                            <?php echo $this->getChildHtml('global_messages'); ?>
+                        </div>
+                        <div class="input-box">
+                            <input type="password" id="login" name="login[password]" class="required-entry input-text" placeholder="Password" value="" /></div>
+                        <div class="form-buttons">
+                            <input type="submit" class="form-button" value="<?php echo Mage::helper('adminhtml')->__('Login') ?>" title="<?php echo Mage::helper('adminhtml')->__('Login') ?>" /></div>
+                    </div>
+                </form>
+                <script type="text/javascript">
+                    var loginForm = new VarienForm('loginForm');
+                </script>
+            </div>
+        </div>
+    </div>
+</div>

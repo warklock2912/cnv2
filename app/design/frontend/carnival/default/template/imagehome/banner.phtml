@@ -1,0 +1,48 @@
+<?php
+$block = $this->getBannerads();
+$banners = $block->getImages();
+$helper = Mage::helper('bannerads');
+$urlShow = Mage::getUrl('bannerads/reports/impression');
+$urlClick = Mage::getUrl('bannerads/reports/click');
+$bannerTitle=$this->getBannerTitleCustom();
+$bannerUrl=$this->getBannerUrlCustom();
+?>
+
+<div class="image-home-banner" style="background:#fff; overflow: hidden">
+    <div class="div-banner">
+        <div class="block-title">
+            <div  class="title"><a href="<?php  echo $bannerUrl ?>"><?php echo $bannerTitle ?></a></div>
+        </div>
+        <ul class="custom-banner-homepage">
+
+
+        <?php if (!empty($banners)): ?>
+<?php if ($banners->getSize() > 0): ?>
+                <?php
+                $i = 0;
+                foreach ($banners->getItems() as $banner): $i++;
+                    ?>
+                    <li>
+                        <a  <?php if ($banner->getTarget()): ?> target="_blank" <?php endif; ?> <?php if ($banner->getBannerUrl() != ''): ?> href="<?php echo $banner->getBannerUrl(); ?>"<?php endif ?>
+                            onclick="bannerClicks('<?php echo $urlClick; ?>', '<?php echo $banner->getBannerId() ?>', '<?php echo $block->getBlockId() ?>')">
+                            <img style="  opacity: 1; !important;"
+                                alt="<?php echo $banner->getBannerTitle(); ?>"
+                                src="<?php echo $helper->getBannerImage($banner->getBannerImage()); ?>"/>
+                        </a>
+                        <div  class="image-description">
+                            <a  <?php if ($banner->getTarget()): ?> target="_blank" <?php endif; ?> <?php if ($banner->getBannerUrl() != ''): ?> href="<?php echo $banner->getBannerUrl(); ?>"<?php endif ?>
+                                    onclick="bannerClicks('<?php echo $urlClick; ?>', '<?php echo $banner->getBannerId() ?>', '<?php echo $block->getBlockId() ?>')">
+                                <p style="    margin: 0;"> <?php echo $banner->getBannerDescription(); ?></p>
+
+                            </a>
+                        </div>
+                    </li>
+                <?php endforeach ?>
+
+
+
+<?php endif; ?>
+<?php endif; ?>
+        </ul>
+    </div>
+</div>

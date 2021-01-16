@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<CNV_CustomerGrid>
+			<active>true</active>
+			<codePool>local</codePool>
+			<depends>
+				<Mage_Customer />	<!-- this module depends on Mage_Customer -->
+				<Mage_Adminhtml />	<!-- this module depends on Mage_Adminhtml also -->
+			</depends>
+		</CNV_CustomerGrid>
+	</modules>
+</config>

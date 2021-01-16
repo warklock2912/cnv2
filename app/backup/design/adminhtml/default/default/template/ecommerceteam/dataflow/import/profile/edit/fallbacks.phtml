@@ -1,0 +1,96 @@
+<?php
+/**
+ * Dataflow - Magento Extension
+ *
+ * @package Dataflow
+ * @category EcommerceTeam
+ * @copyright Copyright 2016 EcommerceTeam Inc. (http://www.ecommerce-team.com)
+ * @version: 2.5.0
+ */
+
+/** @var $this EcommerceTeam_Dataflow_Block_Adminhtml_Profile_Import_Edit_Tab_Fallbacks */
+$fallbacks = $this->getFallbacks();
+$conditions = $this->getConditions();
+?>
+<div class="grid">
+    <table cellspacing="0" id="fallbacksTable" class="data border" style="width:600px;">
+        <thead>
+        <tr class="headings">
+            <th style="width:200px"><?php echo $this->__('Attribute');?></th>
+            <th style="width:50px"><?php echo $this->__('Condition');?></th>
+            <th><?php echo $this->__('Value');?></th>
+            <th><?php echo $this->__('Actions');?></th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <td colspan="6"><button onclick="fallbacks.addRow(); return false;" class="button"><span><span><?php echo $this->__('Add')?></span></span></button></td>
+        </tr>
+        </tfoot>
+        <tbody>
+        <?php $id = 0;  if (empty($fallbacks)):?>
+            <tr>
+                <td><input type="text" class="input-text" name="fallbacks[<?php echo $id;?>][code]" value="" /></td>
+                <td>
+                    <select name="fallbacks[<?php echo $id;?>][condition]">
+                        <?php foreach ($conditions as $code => $condition):?>
+                            <option value="<?php echo $code ?>"><?php echo $condition ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </td>
+                <td><input type="text" class="input-text" name="fallbacks[<?php echo $id;?>][value]" value="" /></td>
+                <td><button onclick="return fallbacks.removeRow(this, event);" class="button delete"><span><span><?php echo $this->__('Delete')?></span></span></button></td>
+            </tr>
+        <?php else:?>
+            <?php foreach ($fallbacks as $fallback):?>
+                <tr>
+                    <td><input type="text" class="input-text" name="fallbacks[<?php echo $id;?>][code]" value="<?php echo $fallback['code'];?>" /></td>
+                    <td>
+                        <select name="fallbacks[<?php echo $id;?>][condition]">
+                                <?php foreach ($conditions as $code => $condition):?>
+                                    <option value="<?php echo $code ?>" <?php if ($fallback['condition'] == $code):?>selected="selected"<?php endif?>><?php echo $condition ?></option>
+                                <?php endforeach ?>
+                        </select>
+                    </td>
+                    <td><input type="text" class="input-text" name="fallbacks[<?php echo $id;?>][value]" value="<?php echo $fallback['value'];?>" /></td>
+                    <td><button onclick="return fallbacks.removeRow(this, event);" class="button delete"><span><span><?php echo $this->__('Delete')?></span></span></button></td>
+                </tr>
+                <?php $id++ ;endforeach;?>
+        <?php endif;?>
+        </tbody>
+    </table>
+    <script type="text/javascript">
+        var Fallbacks = Class.create({
+            currentId: null,
+            initialize: function(currentId) {
+                this.currentId = currentId;
+            },
+            removeRow: function(btn, event) {
+                var tr = Event.findElement(event, 'tr');
+                if (tr) {
+                    Element.select(tr, ['input', 'select']).each(function(elem){elem.hide();elem.disabled = true});
+                    Element.hide(tr);
+                }
+                return false;
+            },
+            addRow: function () {
+                var cols = '<td><input type="text" class="input-text" name="fallbacks[%id%][code]" value="" /></td>' +
+                    '<td>'+
+                    '<select name="fallbacks[%id%][condition]">'+
+                           <?php foreach ($conditions as $code => $condition):?>
+                               '<option value="<?php echo $code ?>"><?php echo $condition ?></option>'+
+                           <?php endforeach ?>
+                    '</select>'+
+                    '</td>' +
+                    '<td><input type="text" class="input-text" name="fallbacks[%id%][value]" value="" /></td>' +
+                    '<td><button onclick="return fallbacks.removeRow(this, event);" class="button delete"><span><span><?php echo $this->__('Delete')?></span></span></button></td>';
+                cols = cols.replace(/%id%/g, this.currentId);
+                var row = document.createElement('tr');
+                row.innerHTML = cols;
+                $$('#fallbacksTable tbody')[0].appendChild(row);
+                this.currentId++;
+            }
+        });
+        var fallbacks = new Fallbacks(<?php echo $id+1;?>)
+    </script>
+</div>

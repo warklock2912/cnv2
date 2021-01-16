@@ -1,0 +1,76 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Followup
+ */
+?>
+<?php
+    $quoteItems = $this->getItems();
+?>
+
+<?php $l = count($quoteItems); ?>
+<div style="border:1px solid #E0E0E0; padding:15px; background:#F9F9F9;">
+<table cellspacing="0" cellpadding="0" border="0" width="650">
+    <tr>
+    <?php $i = 0; foreach ($quoteItems as $_item){ $i++ ?>
+        <?php
+        
+            $_product = $this->loadProduct($_item);
+            if ($_product) {
+        
+        
+            $price = $this->getPrice($_item);
+            
+            $discountPrice = $this->getDiscountPrice($price);
+            $showDiscount = $price != $discountPrice && $this->showDiscount();
+            
+        ?>
+        
+        <td width="32%">
+            <?php if ($this->showImage()) {?>
+            <p align="center" style="font-size:12px;"><a href="<?php echo $this->getProductUrl($_product) ?>"><img src="<?php echo $this->getImageUrl($_product) ?>" style="border:1px solid #ccc;" width="<?php echo $this->getImageWidht();?>" height="<?php echo $this->getImageHeight();?>" alt="" /></a></p>
+            <?php }?>
+            <p align="center" style="font-size:12px;"><a href="<?php echo $this->getProductUrl($_product) ?>" style="color:#203548;"><strong><?php echo $this->escapeHtml($_product->getName()) ?></strong></a></p>
+            <?php if ($this->showPrice()) {?>
+            <p align="center" style="font-size:12px; <?php print $showDiscount ? "text-decoration: line-through;" : "";?>"><?php 
+                print $this->__('Price:') ;
+                print "&nbsp;";
+                print Mage::app()->getLocale()->currency($this->getCurrencyCode())
+                    ->toCurrency($price);
+                if ($_item->getQty() > 1){
+                    print '&nbsp;x&nbsp;'.floor($_item->getQty());
+                }
+            ?></p>
+            <?php }?>
+            <?php if ($showDiscount) {?>
+            <p align="center" style="font-size:12px;">
+                
+                <p align="center" style="font-size:12px;"><?php 
+                    print $this->__('Discount Price').":" ;
+                    print "&nbsp;";
+                    print Mage::app()->getLocale()->currency($this->getCurrencyCode())
+                        ->toCurrency($discountPrice);
+                    if ($_item->getQty() > 1){
+                        print '&nbsp;x&nbsp;'.floor($_item->getQty());
+                    }
+                ?></p>
+            </p>
+            
+            <?php }?>
+        </td>
+        <?php if ($i%3!=0) { ?>
+            <td width="2%"></td>
+        <?php } else { ?>
+           </tr>
+            <tr>
+                <td colspan="5">&nbsp;</td>
+            </tr>
+            <?php if ($i<$l) { ?>
+               <tr>
+            <?php } ?>
+        <?php } ?>
+       <?php }?>
+    <?php } ?>
+</table>
+</div>

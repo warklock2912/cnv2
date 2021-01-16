@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Ajaxlogin
+ */
+-->
+<config>
+    <modules>
+        <Amasty_Ajaxlogin>
+            <version>1.0.2</version>
+        </Amasty_Ajaxlogin>
+    </modules>
+
+    
+    <frontend>
+        <translate>
+            <modules>
+                <Amasty_Ajaxlogin>
+                    <files>
+                        <default>Amasty_Ajaxlogin.csv</default>
+                    </files>
+                </Amasty_Ajaxlogin>
+            </modules>
+        </translate>
+        
+        <layout>
+            <updates>
+                <amajaxlogin>
+                    <file>amasty/amajaxlogin.xml</file>
+                </amajaxlogin>
+            </updates>
+        </layout>
+        
+        <routers>
+            <amajaxlogin>
+                <use>standard</use>
+                <args>
+                    <module>Amasty_Ajaxlogin</module>
+                    <frontName>amajaxlogin</frontName>
+                </args>
+            </amajaxlogin>
+        </routers>
+    </frontend>
+    
+    
+    <adminhtml>
+        <translate>
+            <modules>
+                <Amasty_Ajaxlogin>
+                    <files>
+                        <default>Amasty_Ajaxlogin.csv</default>
+                    </files>
+                </Amasty_Ajaxlogin>
+            </modules>
+        </translate>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <amajaxlogin translate="title" module="amajaxlogin">
+                                            <title>Ajax Login</title>
+                                        </amajaxlogin>
+                                    </children>
+                                </config>
+                            </children>
+                        </system> 
+                     </children>
+                </admin> 
+            </resources>
+        </acl>
+    </adminhtml>
+    
+    
+    
+    <global>
+        <models>
+            <amajaxlogin>
+                <class>Amasty_Ajaxlogin_Model</class>
+            </amajaxlogin>
+        </models>
+        
+		<resources>
+             <amajaxlogin_setup>
+                <setup>
+                    <module>Amasty_Ajaxlogin</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </amajaxlogin_setup>
+		    <amajaxlogin_write>
+		        <connection>
+                    <use>core_write</use>
+                </connection>
+		    </amajaxlogin_write>
+		    <amajaxlogin_read>
+		        <connection>
+                    <use>core_read</use>
+                </connection>
+		    </amajaxlogin_read>
+		</resources>
+		  
+        
+        <blocks>
+            <amajaxlogin>
+                <class>Amasty_Ajaxlogin_Block</class>
+            </amajaxlogin>
+
+        </blocks>
+        
+        <helpers>
+            <amajaxlogin>
+                <class>Amasty_Ajaxlogin_Helper</class>
+            </amajaxlogin>
+        </helpers>
+
+        
+    </global>
+    
+    <default>
+        <amajaxlogin>
+            <general>
+                <enable>1</enable>
+                <redirect>0</redirect>
+                <redirect_url></redirect_url>
+		<enable_jquery>1</enable_jquery>
+            </general>
+        </amajaxlogin>
+    </default>
+</config>

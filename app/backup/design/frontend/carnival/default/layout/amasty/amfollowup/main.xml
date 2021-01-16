@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Followup
+ */
+-->
+<layout version="0.1.0">
+<!--
+Email layouts section
+-->
+    <amfollowup_email_quote>
+            
+        <block type="amfollowup/email_items_quote" name="items" template="/amasty/amfollowup/items.phtml">
+        
+            <block type="amfollowup/email_items_quote" name="table" template="/amasty/amfollowup/table.phtml"/>
+        
+            <block type="amfollowup/email_items_quote" name="list" template="/amasty/amfollowup/list.phtml"/>    
+        </block>
+        
+    </amfollowup_email_quote>
+    
+    <amfollowup_email_crosssell>
+        <block type="amfollowup/email_items_crosssell" name="items" template="/amasty/amfollowup/items.phtml">
+        
+            <block type="amfollowup/email_items_crosssell" name="table" template="/amasty/amfollowup/table.phtml" />
+        
+            <block type="amfollowup/email_items_crosssell" name="list" template="/amasty/amfollowup/list.phtml" />    
+        </block>
+    </amfollowup_email_crosssell>
+    
+    <amfollowup_email_wishlist>
+        <block type="amfollowup/email_items_wishlist" name="items" template="/amasty/amfollowup/items.phtml">
+        
+            <block type="amfollowup/email_items_wishlist" name="table" template="/amasty/amfollowup/table.phtml" />
+        
+            <block type="amfollowup/email_items_wishlist" name="list" template="/amasty/amfollowup/list.phtml" />    
+        </block>
+    </amfollowup_email_wishlist>
+    
+</layout>

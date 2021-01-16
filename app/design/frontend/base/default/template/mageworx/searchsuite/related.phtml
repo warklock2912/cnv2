@@ -1,0 +1,31 @@
+<?php
+/**
+ * MageWorx
+ * Search Suite
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuite
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+$related = $this->getRelatedSearches();
+
+if (count($related) > 0):
+    $helper = Mage::helper('mageworx_searchsuite');
+    $attr = null;
+    if ($helper->isSearchByAttributes() && $helper->getSearchParameter()) {
+        $attr = $helper->getSearchParameter();
+    }
+    ?>
+    <div class="searchsuite-related">
+        <span class="searchsuite-related-label"><?php echo $this->__('Related searches:'); ?> </span>
+        <?php
+        foreach ($related as $item):
+            $params = array('q' => $item['query_text']);
+            if (!is_null($attr)):
+                $params['a'] = $attr;
+            endif;
+            ?>
+            <a class="searchsuite-related-link" href="<?php echo $this->getUrl('*/*', array('_query' => $params)); ?>"><?php echo $helper->formatKeyword($item['query_text']); ?></a>    
+    <?php endforeach; ?>
+    </div>
+<?php endif; ?>

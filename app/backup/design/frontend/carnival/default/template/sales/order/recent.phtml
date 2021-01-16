@@ -1,0 +1,119 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div class="box-account box-recent">
+	<?php $_orders = $this->getOrders(); ?>
+	<div class="box-head">
+		<h2><?php echo $this->__('My Orders') ?></h2>
+		<a class="button-viewall" href="<?php echo Mage::getUrl('sales/order/history'); ?>" title="<?php echo $this->__('View all') ?>"><?php echo $this->__('View all') ?></a>
+	</div>
+	<?php if( sizeof($_orders->getItems()) > 0 ): ?>
+		<ul class="my-orders-list">
+			<?php foreach ($_orders as $_order): ?>
+				<li class="history_order">
+					<!-- Real Order Id -->
+					<div class="order-title">
+
+						<span class="history_order_label" order_id="<?php echo $_order->getId() ?>"></span>
+						<div class="date-order">
+							<?php echo $this->__('Date:') ?>
+							<strong><?php echo $this->formatDate($_order->getCreatedAtStoreDate(), 'short', null, false);  ?></strong>
+						</div>
+						<label>
+							<div class="order-number">
+								<span><?php echo $this->__('view order') ?></span>
+								<a title="<?php echo $this->__('view order') ?>" href="<?php echo $this->getViewUrl($_order) ?>"><?php echo '#'.$_order->getRealOrderId(); ?></a>
+							</div>
+							<div class="status-order">
+								<?php echo $this->__('Status:') ?>
+								<span><?php echo $_order->getStatusLabel();?></span>
+							</div>
+						</label>
+					</div>
+					<div class="history_order_detail_content" id="history_order_detail_content_<?php echo $_order->getId() ?>">
+						<span id="loading<?php echo $_order->getId() ?>" class="loading" style="display:none;"><?php echo $this->__('Loading...') ?></span>
+					</div>
+				</li>
+			<?php endforeach; ?>
+		</ul>
+		<div class="box-mobile2 box-viewall">
+			<a class="button-viewall" href="<?php echo Mage::getUrl('sales/order/history'); ?>" title="<?php echo $this->__('View all') ?>"><?php echo $this->__('View all') ?></a>
+		</div>
+
+		<script type="text/javascript">
+			$$(".history_order_label").each(function(e) {
+				var order_id = e.getAttribute('order_id');
+				var order_content_e = jQuery('#history_order_detail_content_' + order_id);
+				e.observe('click', function() {
+					if(e.hasClassName('show')){
+						e.removeClassName('show');
+					}
+					else{
+						e.addClassName('show');
+					}
+
+					/* if content has already loaded, no need to call ajax */
+					if (order_content_e.hasClass("content_updated")) {
+						/* toggle */
+						order_content_e.toggle(200);
+						return;
+					}
+
+					new Ajax.Request("<?php echo Mage::getUrl('myaccount/index/get_order_html_in_list',array('_secure'=>true)); ?>", {
+						parameters: {
+							order_id: order_id
+						},
+
+						onCreate: function() {
+							//ajaxCart.ajaxLoading.show();
+							jQuery('#loading' + order_id).show();
+							order_content_e.addClass("content_loading");
+						},
+
+
+						onSuccess: function(transport) {
+							var response = transport.responseText.evalJSON();
+							if (response.html) {
+								/* add flag content update */
+								order_content_e.addClass("content_updated");
+								order_content_e.html(response.html);
+
+							}
+							if (response.error) {
+								console.log(response.error);
+							}
+
+							jQuery('#loading' + order_id).hide();
+						}
+					})
+				});
+			});
+		</script>
+		<script type="text/javascript">decorateTable('my-orders-table')</script>
+	<?php else: ?>
+		<p><?php echo $this->__('You have placed no orders.'); ?></p>
+	<?php endif; ?>
+</div>

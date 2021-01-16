@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Segments
+ */
+-->
+<config>
+    <sections>
+        <amsegments translate="label" module="amsegments">
+            <label>Customers Segmentation</label>
+            <tab>amasty</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>32119</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>0</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <time translate="label">
+                            <label>Cron Execution Time</label>
+                            <comment/>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <can_be_empty>1</can_be_empty>
+                            <source_model>amsegments/source_time</source_model>
+                        </time>
+                        <customer_attributes translate="label">
+                            <label>Registered Customers Attributes</label>
+                            <comment/>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <can_be_empty>1</can_be_empty>
+                            <source_model>amsegments/source_customer_attributes</source_model>
+                        </customer_attributes>
+                    </fields>
+                </general>
+            </groups>
+        </amsegments>
+    </sections>
+</config>

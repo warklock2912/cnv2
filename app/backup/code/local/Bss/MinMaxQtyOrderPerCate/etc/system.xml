@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<config>
+      <tabs>
+        <bss translate="label" module="minmaxqtyorderpercate">
+            <label><![CDATA[BSS Commerce]]></label>
+            <sort_order>200</sort_order>
+        </bss>
+      </tabs>
+      <sections>
+        <minmaxqtyorder_per_cate  translate="label" module="minmaxqtyorderpercate">                    
+        <label>Min/Max Order Qty per Category for Customer Group</label>
+        <tab>bss</tab>
+        <frontend_type>text</frontend_type>
+        <sort_order>100</sort_order>
+        <show_in_default>1</show_in_default>
+        <show_in_website>1</show_in_website>
+        <show_in_store>1</show_in_store>            
+                    <groups>
+                      <min_max_qty_gr translate="label"> 
+                      <label> Min/Max Order Qty per Category for Customer Group</label>
+                      <frontend_type>text</frontend_type>
+                      <sort_order>0</sort_order>
+                      <show_in_default>1</show_in_default>
+                      <show_in_website>1</show_in_website>
+                      <show_in_store>1</show_in_store>
+                       <fields>
+                         <enable translate="label">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Select Yes to enable the module]]></comment>
+                          </enable>
+                          <show_category translate="label">
+                            <label>Show category</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Show all category of product on shopping cart]]></comment>
+                          </show_category>
+                          <mess_err_max translate="label">
+                            <label>Messages Limit Max</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[]]></comment>
+                          </mess_err_max>
+                          <mess_err_min translate="label">
+                            <label>Messages Limit Min</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[]]></comment>
+                          </mess_err_min>
+                          <min_max_qty translate="label">
+                            <label>Min/max Order Quantity</label>
+                            <frontend_model>Bss_MinMaxQtyOrderPerCate_Block_Config_OptionMinMaxQty</frontend_model>
+                            <backend_model>Bss_MinMaxQtyOrderPerCate_Model_System_OptionMinMax</backend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Set Option for min/max qty per category for customer group]]></comment>
+                          </min_max_qty>
+                       </fields>
+                       </min_max_qty_gr>
+                    </groups>
+        </minmaxqtyorder_per_cate>
+      </sections>
+</config>

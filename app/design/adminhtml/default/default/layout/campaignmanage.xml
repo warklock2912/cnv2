@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_campaignmanage_index>
+        <reference name="content">
+            <block type="campaignmanage/adminhtml_campaignmanage" name="campaignmanage"/>
+        </reference>
+    </adminhtml_campaignmanage_index>
+    <adminhtml_campaign_index>
+        <reference name="content">
+            <block type="campaignmanage/adminhtml_campaign" name="campaign"/>
+        </reference>
+    </adminhtml_campaign_index>
+    <adminhtml_raffleonline_index>
+        <reference name="content">
+            <block type="campaignmanage/adminhtml_raffleonline" name="raffle.online.mobile"/>
+        </reference>
+    </adminhtml_raffleonline_index>
+    <adminhtml_cropanddrop_index>
+        <reference name="content">
+            <block type="campaignmanage/adminhtml_cropanddrop" name="cropanddrop"/>
+        </reference>
+    </adminhtml_cropanddrop_index>
+    <adminhtml_campaign_grid>
+        <block type="core/text_list" name="root">
+            <block type="campaignmanage/adminhtml_campaign_edit_tab_item" name="campaign.grid" />
+        </block>
+
+    </adminhtml_campaign_grid>
+    <adminhtml_campaign_product>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="campaignmanage/adminhtml_campaign_edit_tab_item" name="campaign.edit.tab.item" />
+            <block type="adminhtml/widget_grid_serializer" name="campaign_grid_serializer">
+                <action method="initSerializerBlock">
+                    <grid_block_name>campaign.edit.tab.item</grid_block_name>
+                    <data_callback>getSelectedRuffleItems</data_callback>
+                    <hidden_input_name>product_ids</hidden_input_name>
+                    <reload_param_name>ruffle_items</reload_param_name>
+                </action>
+            </block>
+        </block>
+    </adminhtml_campaign_product>
+    <adminhtml_raffleonline_product>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="campaignmanage/adminhtml_raffleonline_edit_tab_item" name="campaignonline.edit.tab.item" />
+            <block type="adminhtml/widget_grid_serializer" name="raffleonline_grid_serializer">
+                <action method="initSerializerBlock">
+                    <grid_block_name>campaignonline.edit.tab.item</grid_block_name>
+                    <data_callback>getSelectedRuffleItems</data_callback>
+                    <hidden_input_name>product_ids</hidden_input_name>
+                    <reload_param_name>ruffle_items</reload_param_name>
+                </action>
+            </block>
+        </block>
+    </adminhtml_raffleonline_product>
+    <adminhtml_raffleonline_winner>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="campaignmanage/adminhtml_raffleonline_edit_tab_winner" name="campaignonline.edit.tab.winner" />
+            <block type="adminhtml/widget_grid_serializer" name="raffleonline_grid_serializer">
+                <action method="initSerializerBlock">
+                    <grid_block_name>campaignonline.edit.tab.winner</grid_block_name>
+                    <data_callback>getSelectedRaffleMember</data_callback>
+                    <hidden_input_name>winner_ids</hidden_input_name>
+                    <reload_param_name>ruffle_members</reload_param_name>
+                </action>
+            </block>
+        </block>
+    </adminhtml_raffleonline_winner>
+</layout>

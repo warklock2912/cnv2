@@ -1,0 +1,34 @@
+<?php if (!Mage::getSingleton('customer/session')->isLoggedIn()): ?>
+  <a class="a-account" href="<?php echo Mage::getUrl('customer/account/login'); ?>" title="<?php echo $this->__('Login') ?>"><?php echo $this->__('Login') ?></a>
+  <a class="a-signup" href="<?php echo Mage::getUrl('customer/account/create'); ?>" title="<?php echo $this->__('SIGN UP') ?>"><?php echo $this->__('SIGN UP') ?></a>
+<?php else: ?>
+  <div class="customer-info">
+    <span class="a-account customer-name">
+      <?php $_customerNameStripped = $this->escapeHtml(Mage::getSingleton('customer/session')->getCustomer()->getName()) ?>
+      <?php
+      if(iconv_strlen($_customerNameStripped,'UTF-8')>12) {
+        $_customerNameStripped = iconv_substr($_customerNameStripped, 0, 12, 'UTF-8');
+        $_customerNameStripped .= '...';
+      }
+      ?>
+      <?php echo $_customerNameStripped ?>
+    </span>
+    <ul class="box-myaccount-header">
+      <li><a title="<?php echo $this->__("My Account")?>" href="<?php echo Mage::getUrl('customer/account'); ?>"><?php echo $this->__("My Account")?></a></li>
+      <li><a title="Log-out" href="<?php echo Mage::getUrl('customer/account/logout'); ?>"><?php echo $this->__("Log out")?></a></li>
+    </ul>
+    <script type="text/javascript">
+      jQuery('.customer-info .customer-name').click(function(){
+        jQuery(this).next().slideToggle(0);
+        if (!jQuery(this).hasClass('active')){
+          jQuery(this).addClass('active');
+        }
+        else {
+          jQuery(this).removeClass('active');
+        }
+      });
+    </script>
+  </div>
+
+<?php endif; ?>
+

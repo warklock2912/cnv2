@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_bannerads_edit>
+        <update handle="editor"/>
+    </adminhtml_bannerads_edit>
+    <adminhtml_bannerads_index>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="bannerads/adminhtml_bannerads" name="bannerads"/>
+        </reference>
+    </adminhtml_bannerads_index>
+    <adminhtml_bannerads_categories_edit>
+        <update handle="editor"/>
+    </adminhtml_bannerads_categories_edit>
+    <adminhtml_bannerads_categories_index>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="bannerads/adminhtml_categories" name="categories"/>
+        </reference>
+    </adminhtml_bannerads_categories_index>
+    <adminhtml_bannerads_images_edit>
+        <reference name="head">
+            <action method="addJs">
+                <script>magebuzz/changeimages.js</script>
+            </action>
+        </reference>
+        
+        <update handle="editor"/>
+    </adminhtml_bannerads_images_edit>
+    <adminhtml_bannerads_images_index>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="bannerads/adminhtml_images" name="images"/>
+        </reference>
+    </adminhtml_bannerads_images_index>
+
+    <adminhtml_bannerads_reports_index>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="bannerads/adminhtml_reports" name="report_banner"/>
+        </reference>
+    </adminhtml_bannerads_reports_index>
+
+    <adminhtml_bannerads_reportsblock_index>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="bannerads/adminhtml_Reportsblock" name="report_block"/>
+        </reference>
+    </adminhtml_bannerads_reportsblock_index>
+
+    <adminhtml_bannerads_images_categorylist>
+        <block type="core/text_list" name="root">
+            <block type="bannerads/adminhtml_images_edit_tab_categories" name="images.edit.tab.categories"/>
+            <block type="adminhtml/widget_grid_serializer" name="related_grid_serializer">
+                <action method="initSerializerBlock">
+                    <grid_block_name>images.edit.tab.categories</grid_block_name>
+                    <data_callback>getSelectedCategories</data_callback>
+                    <hidden_input_name>in_categories</hidden_input_name>
+                    <reload_param_name>ocategory</reload_param_name>
+                </action>
+            </block>
+        </block>
+    </adminhtml_bannerads_images_categorylist>
+    <adminhtml_bannerads_images_categorylistgrid>
+        <block type="core/text_list" name="root">
+            <block type="bannerads/adminhtml_images_edit_tab_categories" name="bannerads.edit.tab.images"/>
+        </block>
+    </adminhtml_bannerads_images_categorylistgrid>
+
+    <adminhtml_bannerads_imagelist>
+        <block type="core/text_list" name="root">
+            <block type="bannerads/adminhtml_bannerads_edit_tab_imagebanner" name="bannerads.edit.tab.images"/>
+            <block type="adminhtml/widget_grid_serializer" name="related_grid_serializer">
+                <action method="initSerializerBlock">
+                    <grid_block_name>bannerads.edit.tab.images</grid_block_name>
+                    <data_callback>getSelectedBannerImages</data_callback>
+                    <hidden_input_name>in_banner</hidden_input_name>
+                    <reload_param_name>oblock</reload_param_name>
+                </action>
+            </block>
+        </block>
+    </adminhtml_bannerads_imagelist>
+    <adminhtml_bannerads_imagelistgrid>
+        <block type="core/text_list" name="root">
+            <block type="bannerads/adminhtml_bannerads_edit_tab_imagebanner" name="bannerads.edit.tab.images"/>
+        </block>
+    </adminhtml_bannerads_imagelistgrid>
+
+    <adminhtml_bannerads_images_block_tab>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="bannerads/adminhtml_images_edit_tab_block" name="images_edit_tab_block"/>
+            <block type="adminhtml/widget_grid_serializer" name="images_serializer_block">
+                <action method="initSerializerBlock">
+                    <grid_block_name>images_edit_tab_block</grid_block_name>
+                    <data_callback>getSelectedBlocks</data_callback>
+                    <hidden_input_name>block_ids</hidden_input_name>
+                    <reload_param_name>blocks</reload_param_name>
+                </action>
+            </block>
+        </block>
+    </adminhtml_bannerads_images_block_tab>
+
+    <adminhtml_bannerads_images_block_grid>
+        <block type="core/text_list" name="root">
+            <block type="bannerads/adminhtml_images_edit_tab_block" name="images_edit_tab_block"/>
+        </block>
+    </adminhtml_bannerads_images_block_grid>
+    <adminhtml_bannerads_categories>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="bannerads/adminhtml_bannerads_edit_tab_categories" name="bannerads.edit.tab.categories"/>
+        </block>
+    </adminhtml_bannerads_categories>
+</layout>

@@ -1,0 +1,35 @@
+<?php 
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Ajaxlogin
+ */  
+?>
+<style>
+    body {margin:0;}
+#am-google-image{
+    color: #FFFFFF;
+     height: 22px;
+    padding: 10px 0 0 35px;
+    text-align: center;
+    width: 78px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: url("<?php echo  Mage::getDesign()->getSkinUrl('images/amasty/amajaxlogin/google.png',array('_area'=>'frontend'))?>");
+    cursor: pointer;  
+   font: 12px/15px Arial,Helvetica,sans-serif;
+}
+
+#am-google-image:hover{
+    background-position: bottom;
+}
+</style>
+<?php if(!Mage::getSingleton('core/session')->getData('amajaxlogin_google_token')){?>
+<div id="am-google-image" onclick="window.parent.AmAjaxLoginObj.loginTw(this);" data="<?php echo $this->getGoogleConnectUrl()?>" dataTw="<?php echo $this->getUrlParaml()?>">
+    <?php echo  $this->__('Sign in'); ?>
+</div>
+<?php }else {?>
+<div id="am-google-image" onclick="window.parent.AmAjaxLoginObj.loginS(this);" data="<?php echo $this->getGoogleConnectUrl()?>" dataTw="<?php echo $this->getUrlParaml()?>">
+    <?php echo  $this->__('Connect'); ?>
+</div>
+<?php }?>

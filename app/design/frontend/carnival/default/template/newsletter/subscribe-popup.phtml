@@ -1,0 +1,25 @@
+
+
+<form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletterpopup-validate-detail">
+    <div class="block-content">
+        <div class="input-box">
+            <input type="email" required aria-required="true" autocapitalize="off" autocorrect="off" spellcheck="false" name="email" id="newsletter-popup" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Sign up for our newsletter')) ?>" placeholder="<?php echo $this->__('Enter your email') ?>" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?php echo $this->__('Enter your email') ?>'" class="input-text required-entry validate-email" />
+        </div>
+        <button type="submit" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Subscribe')) ?>" class="button"><span><span><?php echo $this->__('join now') ?></span></span></button>
+    </div>
+</form>
+<script type="text/javascript">
+    //<![CDATA[
+    var email = document.getElementById("newsletter-popup");
+
+    email.addEventListener("keyup", function (event) {
+        if (email.validity.typeMismatch) {
+            email.setCustomValidity("I expect an e-mail, darling!");
+        } else {
+            email.setCustomValidity("I expect an e-mail, darling!");
+        }
+    });
+    var newsletterSubscriberFormDetail = new VarienForm('newsletterpopup-validate-detail');
+    //]]>
+</script>
+

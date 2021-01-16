@@ -1,0 +1,183 @@
+<?php
+$Imagehome_grid = 0;
+
+$Imagehomes = Mage::helper('imagehome')->getImagehomes();
+
+if ($Imagehomes->getImagehomeGrid()) {
+    $Imagehome_grid = $Imagehomes->getImagehomeGrid();
+}
+?>
+<style type="text/css">
+    .grid-stack {
+        background: lightgoldenrodyellow;
+    }
+
+    .grid-stack-item-content {
+        color: #2c3e50;
+        text-align: center;
+        /*background-color: #18bc9c;*/
+    }
+
+
+</style>
+<div class="container-fluid">
+    <div data-bind="component: {name: 'dashboard-grid_', params: $data}"></div>
+</div>
+<template id="gridstack-template">
+    <div class="grid-stack" data-bind="foreach: {data: widgets, afterRender: afterAddWidget}">
+        <div class="grid-stack-item" data-bind="attr: {'data-gs-x': $data.x, 'data-gs-y': $data.y, 'data-gs-width': $data.width, 'data-gs-height': $data.height, 'data-gs-auto-position': $data.auto_position , 'data-index' : $data.index} ">
+            <div class="grid-stack-item-content home-img" data-bind=" attr: { 'style': 'background-image:' + 'url(<?php echo Mage::getBaseUrl('media'); ?>magebuzz\/' + $data.image + ')' }" style="">
+                <img data-bind="
+                        visible: ($data.image) ? true : false,
+                        attr: { 'src': '<?php echo Mage::getBaseUrl('media'); ?>magebuzz\/' + $data.image  }
+                    "
+                    style="width: 100%; height: 100%;position: absolute;z-index: -10;margin: 0;padding: 0;left: 0;top: 0;"
+                    src=""
+                    alt="your image" />
+                <textarea hidden="true"  data-bind='text: $data.html' id="magebuzz_html"  name="magebuzz_html[]" style="float: left;width: 100%;" placeholder="html"></textarea>
+                <input type="hidden" id="categoryId" data-bind=" attr: {'value' : $data.category}" />
+                <input type="hidden" id="categoryTitle" data-bind=" attr: {'value' : $data.category_title}" />
+                <input type="hidden" id="categoryUrl" data-bind=" attr: {'value' : $data.category_url}" />
+                <input type="hidden" id="bannerId" data-bind=" attr: {'value' : $data.banner}" />
+                <input type="hidden" id="bannerTitle" data-bind=" attr: {'value' : $data.banner_title}" />
+                <input type="hidden" id="bannerUrl" data-bind=" attr: {'value' : $data.banner_url}" />
+
+                <input type="hidden" id="indexImageHome" data-bind=" attr: {'value' : $data.index}" />
+
+
+                <div id="magebuzz_htmlgrid"></div>
+                <div id="magebuzz_htmlgrid_products"></div>
+                <div id="magebuzz_htmlgrid_banner"></div>
+
+            </div>
+        </div>
+    </div><!-- <---- NO SPACE BETWEEN
+
+
+     THESE CLOSING TAGS -->
+</template>
+<script type="text/javascript">
+    var $jqs = jQuery.noConflict();
+
+    ko.components.register('dashboard-grid_', {
+        viewModel: {
+            createViewModel: function (controller, componentInfo) {
+                var ViewModel = function (controller, componentInfo) {
+                    var grid = null;
+                    var self = this;
+                    this.widgets = controller.widgets;
+
+                    this.afterAddWidget = function (items) {
+                        if (grid == null) {
+                            grid = $jqs(componentInfo.element).find('.grid-stack').gridstack({
+                                auto: false
+
+                            }).data('gridstack');
+                        }
+                        if($('magebuzz_html').value){
+                            $('magebuzz_htmlgrid').innerHTML = $('magebuzz_html').value;
+                            var firstChild = $('magebuzz_htmlgrid').children[0];
+                            if(firstChild.getAttribute('href')){
+                                var url = firstChild.getAttribute('href');
+                                var parentElm = $('magebuzz_htmlgrid').parentNode;
+                                var firstImge = parentElm.children[0];
+                                firstImge.onclick = function() {
+                                    window.location.href = url;
+                                };
+                                firstImge.style.cursor = 'pointer';
+                            }
+                        }
+                        if($('categoryId').value){
+                            self.getProductsHtml($('indexImageHome').value, $('categoryId').value,$('categoryTitle').value,$('categoryUrl').value);
+                        }
+                        if($('bannerId').value)
+                        {
+                            self.getBannerHtml($('indexImageHome').value, $('bannerId').value,$('bannerTitle').value,$('bannerUrl').value);
+                        }
+                        var item = _.find(items, function (i) {
+                            return i.nodeType == 1
+                        });
+                        grid.addWidget(item);
+                        ko.utils.domNodeDisposal.addDisposeCallback(item, function () {
+                            grid.removeWidget(item);
+                        });
+                    };
+
+                    this.getProductsHtml = function (index, categoryId,categoryTitle,categoryUrl) {
+                        $jqs.ajax({
+                            method: "POST",
+                            url: '<?php echo Mage::getUrl('imagehome/index/products') ?>',
+                            data: {
+                                categoryId : categoryId,
+                                categoryTitle : categoryTitle,
+                                categoryUrl : categoryUrl
+                                },
+                            dataType: "text"
+                        }).done(function(response) {
+                            $jqs('div[data-index="'+index+'"] #magebuzz_htmlgrid_products').append(response);
+                            var items = $jqs('div[data-index="'+index+'"] #magebuzz_htmlgrid_products .image-home-products .image-home-product-item');
+                            if(items.length){
+                                $jqs('div[data-index="'+index+'"]').css({
+                                    'height' : 'auto !important'
+                                });
+                            }
+                            console.log("complete_load_products_category_" + categoryId);
+                        }).always(function() {
+                            console.log("loaded_products_category_" + categoryId);
+                        });
+                    };
+                    this.getBannerHtml =function (index, bannerId,bannerTitle,bannerUrl) {
+                        $jqs.ajax({
+                            method: "POST",
+                            url: '<?php echo Mage::getUrl('imagehome/index/banner') ?>',
+                            data: {
+                                bannerId : bannerId,
+                                bannerTitle : bannerTitle,
+                                bannerUrl : bannerUrl
+                            },
+                            dataType: "text"
+                        }).done(function(response) {
+                            $jqs('div[data-index="'+index+'"] #magebuzz_htmlgrid_banner').append(response);
+                            var items = $jqs('div[data-index="'+index+'"] #magebuzz_htmlgrid_banner');
+                            if(items.length){
+                                $jqs('div[data-index="'+index+'"]').css({
+                                    'height' : 'auto !important'
+
+                                });
+                            }
+                        }).always(function() {
+                            console.log("loaded_banner_" + bannerId);
+                        });
+                    };
+                };
+
+                return new ViewModel(controller, componentInfo);
+            }
+        },
+        template: {element: 'gridstack-template'}
+    });
+
+    $jqs(function () {
+        var Controller = function (widgets) {
+            var self = this;
+            this.widgets = ko.observableArray(widgets);
+
+        };
+        if (<?php echo $Imagehome_grid ?> == 0) {
+            var widgets = [
+                {x: 0, y: 0, width: 2, height: 2, image: 'Desert.jpg', index: 1},
+                {x: 2, y: 0, width: 4, height: 2, image: 'Desert.jpg', index: 2},
+                {x: 6, y: 0, width: 2, height: 4, image: 'Desert.jpg', index: 3},
+                {x: 1, y: 2, width: 4, height: 2, image: 'Desert.jpg', index: 4}
+            ];
+        } else {
+            var widgets = <?php echo $Imagehome_grid ?>;
+        }
+
+        var controller = new Controller(widgets);
+        ko.applyBindings(controller);
+    });
+
+
+
+</script>

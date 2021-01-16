@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Crystal_Braintree>
+      <version>0.1.0</version>
+    </Crystal_Braintree>
+  </modules>
+  <global>
+    <blocks>
+      <braintree>
+        <class>Crystal_Braintree_Block</class>
+      </braintree>
+    </blocks>
+    <models>
+      <braintree><!--need same name module. It define in Mage::getModel-->
+        <class>Crystal_Braintree_Model</class>
+      </braintree>
+    </models>
+    <helpers>
+      <braintree>
+        <class>Crystal_Braintree_Helper</class>
+      </braintree>
+    </helpers>
+  </global>
+  <default>
+    <payment>
+      <crystal_braintree>
+        <model>braintree/Braintree</model>
+        <payment_action>authorize</payment_action>
+        <active>1</active>
+        <title>Braintree</title>
+      </crystal_braintree>
+      <crystal_paypal>
+        <model>braintree/Paypal</model>
+        <order_status>processing</order_status>
+        <payment_action>authorize</payment_action>
+        <active>1</active>
+        <title>Paypal App</title>
+      </crystal_paypal>
+    </payment>
+  </default>
+</config> 

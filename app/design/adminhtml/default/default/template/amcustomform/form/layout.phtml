@@ -1,0 +1,132 @@
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Customform
+ */
+-->
+
+<div class="custom-options">
+    <div class="entry-edit-head">
+        <h4>Form Lines</h4>
+        <div class="right"><?php echo $this->getChildHtml('line_add_button') ?></div>
+    </div>
+    <div id="lines-container">
+    </div>
+</div>
+
+<script type="html/template" id="template-line">
+    <div class="line-box option-box" id="line_{{id}}">
+        <input type="hidden" id="form_line_{{id}}_is_delete" class="delete-flag" name="line[{{id}}][is_deleted]" value="">
+        <table id="form_line_{{id}}"  cellpadding="0" cellspacing="0" style="float: left;margin-bottom:13px;">
+            <thead>
+            <tr>
+                <th><?php echo Mage::helper('amcustomform')->__('Name') ?></th>
+                <th class="opt-order"><?php echo Mage::helper('catalog')->__('Order') ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><input type="text" class="required-entry input-text" name="line[{{id}}][title]" value="{{title}}" style="width:150px;margin-right: 15px"></td>
+                <td><input type="text" class="validate-number" name="line[{{id}}][sort_order]" value="{{sort_order}}" style="width:30px;"></td>
+            </tr>
+            </tbody>
+        </table>
+         <span  style="float:right; display:block;">
+            <?php echo $this->getChildHtml('line_delete_button') ?>
+        </span>
+        <div style="clear:both"></div>
+        <div style="width:100%;">
+            <button id="add_form_field_button_{{id}}" title="<?php echo Mage::helper('amcustomform')->__('Add New Field') ?>" type="button" class="scalable add">
+                <span><span><span><?php echo Mage::helper('amcustomform')->__('Add New Field') ?></span></span></span>
+            </button>
+        </div>
+
+
+        <table id="form_table_{{id}}">
+            <thead style="display: none">
+            <tr>
+                <th>
+                    <?php echo Mage::helper('amcustomform')->__('Field') ?>
+                </th>
+                <th>
+                    <?php echo Mage::helper('catalog')->__('Order') ?>
+                </th>
+                <th>
+                    <?php echo Mage::helper('amcustomform')->__('Default') ?>
+                </th>
+                <th>
+                    <?php echo Mage::helper('amcustomform')->__('Rewrite') ?>
+                </th>
+                <th style="text-align: center">
+                    <?php echo Mage::helper('amcustomform')->__('Remove') ?>
+                </th>
+            </tr>
+            </thead>
+            <tbody id="form_fields_container_{{id}}">
+            </tbody>
+        </table>
+
+    </div>
+</script>
+
+<script type="html/template" id="template-form-field">
+
+        <tr>
+            <td>
+                <input type="hidden" class="delete-flag" name="line[{{line_id}}][form_field][{{id}}][is_deleted]" value="0">
+                <select id="field-type-{{id}}" name="line[{{line_id}}][form_field][{{id}}][field_id]">
+                    <?php
+                    foreach ($this->getFieldTypes() as $id => $fieldType) {
+                        echo '<option value="' . $id . '">' . $fieldType['code'] . '</option>' . PHP_EOL;
+                    }
+                    ?>
+                </select>
+            </td>
+            <td>
+                <input type="text" class="validate-number input-text" name="line[{{line_id}}][form_field][{{id}}][sort_order]" value="{{sort_order}}" style="width: 30px;">
+            </td>
+            <td>
+                <div id="default-value-tuner-{{id}}"></div>
+            </td>
+            <td style="text-align: center">
+                <div>
+                    <input type="hidden" name="line[{{line_id}}][form_field][{{id}}][rewrite_default_value]" value="0">
+                    <input type="checkbox" id="rewrite-default-value-{{id}}" name="line[{{line_id}}][form_field][{{id}}][rewrite_default_value]" value="1">
+                </div>
+
+            </td>
+            <td>
+                <button class="form-field-remove-{{line_id}} delete" title="<?php echo Mage::helper('amcustomform')->__('Remove Field') ?>" type="button" class="scalable delete icon-btn" onclick="" style="float:right">
+                    <span><span><span><?php echo Mage::helper('amcustomform')->__('Remove Field') ?></span></span></span>
+                </button>
+            </td>
+        </tr>
+
+</script>
+
+<script type="text/javascript">
+    //<![CDATA[
+
+    var dynamicLines = new DynamicLines();
+    fieldTypesData = <?php echo json_encode($this->getFieldTypes()) ?>;
+    formatDate = '<?php echo $this->getFormatDate() ?>';
+    <?php foreach ($this->getLinesData() as $lineJson): ?>
+    dynamicLines.add(<?php echo $lineJson ?>,true);
+    <?php endforeach; ?>
+
+    Event.observe($('add_new_line_button'), 'click', function() {
+        dynamicLines.add({});
+    });
+
+    Event.observe(window, 'load', function() {
+        var tabId = '<?php echo $this->getSelectedTabId() ?>';
+        if (tabId) {
+            var tab = $(tabId);
+            //IE fix (bubbling event model)
+            form_tabsJsTabs.setSkipDisplayFirstTab();
+            form_tabsJsTabs.showTabContent(tab);
+        }
+    });
+    //]]>
+</script>

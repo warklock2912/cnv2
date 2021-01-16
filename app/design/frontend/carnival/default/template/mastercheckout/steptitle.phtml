@@ -1,0 +1,17 @@
+<?php
+$activeStep = $this->getActiveStep();
+$steps = $this->getSteps();
+?>
+
+<div id="checkout_title" class="checkout_title">
+  <div class="checkout_title_content">
+    <?php $i = 0;
+    foreach ($steps as $_stepId => $_stepInfo): ?>
+    <?php $i++; //echo $_stepId . "<br/>"?>
+    <div id="mastercheckout-<?php echo $_stepId;?>" class="mastercheckout_step_deault  <?php echo ($activeStep == $_stepId || ($activeStep == "billing" && $_stepId == "login" ))? 'mastercheckout_step_active':'mastercheckout_step_passive';?>" onclick="step_click('<?php echo $_stepId;?>')">
+        <div id="<?php echo $_stepId;?>  " class="mastercheckout_active <?php //echo ($activeStep == $_stepId)? 'mastercheckout_step_deault_bg_active':'mastercheckout_step_deault_bg';?>"><span><?php echo $i; ?> </span></div>
+       <span> <?php echo $_stepInfo['label']; ?></span>
+    </div>
+    <?php endforeach ?>
+  </div>  
+</div>

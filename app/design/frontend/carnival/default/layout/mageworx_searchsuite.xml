@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--/**
+ * MageWorx
+ * Search Suite
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuite
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */-->
+
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/mageworx/searchsuite/searchsuite.css</stylesheet></action>
+            <!--<action method="addJs" ifconfig="mageworx_searchsuite/main/jquery_enabled"><script>mageworx/jquery/jquery.min.js</script></action>-->
+            <!--<action method="addJs" ifconfig="mageworx_searchsuite/main/jquery_enabled"><script>mageworx/jquery/noconflict.js</script></action>-->
+<!--            <action method="addJs" ifconfig="dev/js/merge_files"><script>mageworx/searchsuite.js</script></action>-->
+        </reference>
+        <reference name="top.search">
+            <action method="setTemplate"><template>mageworx/searchsuite/form-mini.phtml</template></action>
+        </reference> 
+        <reference name="before_body_end">
+            <block type="core/template" name="searchsuite_wrapper" template="mageworx/searchsuite/wrapper.phtml" />
+        </reference> 
+    </default>
+    <catalogsearch_result_index>
+        <reference name="search.result">
+            <block type="core/template" name="search.result.container1" as="search_result_container1" template="mageworx/searchsuite/container1.phtml">
+                <block type="mageworx_searchsuite/synonym" name="search.synonym" as="search_synonym" template="mageworx/searchsuite/synonym.phtml"/>
+                <block type="mageworx_searchsuite/related" name="search.related" as="search_related" template="mageworx/searchsuite/related.phtml"/>
+            </block>
+            <block type="core/template" name="search.result.container2" as="search_result_container2" template="mageworx/searchsuite/container2.phtml">
+                <block type="core/template" name="search.cmspage" as="search_cmspage" template="mageworx/searchsuite/cmspage.phtml"/>
+                <block type="core/template" name="search.category" as="search_category" template="mageworx/searchsuite/category.phtml"/>
+            </block>
+            <action method="setTemplate"><template>mageworx/searchsuite/result.phtml</template></action>
+            <action method="append"><block>search.result.container</block></action>
+        </reference>
+        
+    </catalogsearch_result_index>
+</layout>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoHtmlSitemap
+ */
+-->
+
+<layout version="0.1.0">
+    <default>
+        <reference name="footer_links">
+            <action method="removeLinkByUrl"><url helper="catalog/map/getCategoryUrl" /></action>
+            <action method="addLink" translate="label title" module="amseohtmlsitemap">
+                <label>Site Map</label>
+                <url helper="amseohtmlsitemap/url/getSitemapUrl" />
+                <title>Site Map</title>
+                <prepare></prepare>
+                <urlParams></urlParams>
+                <position>3</position>
+            </action>
+        </reference>
+    </default>
+
+    <amseohtmlsitemap_index_index translate="label">
+        <label>Contact Us Form</label>
+        <reference name="head">
+            <action method="setTitle" translate="title"><title>Sitemap</title></action>
+            <action method="addCss"><stylesheet>css/amasty/amseohtmlsitemap/amseohtmlsitemap.css</stylesheet></action>
+            <action method="addItem"><type>js</type><name>amasty/amseohtmlsitemap/highlight.js</name></action>
+            <action method="addItem"><type>js</type><name>amasty/amseohtmlsitemap/textSearch.js</name></action>
+        </reference>
+        <reference name="content">
+            <block type="amseohtmlsitemap/sitemap" template="amasty/amseohtmlsitemap/index.phtml"/>
+        </reference>
+    </amseohtmlsitemap_index_index>
+</layout>

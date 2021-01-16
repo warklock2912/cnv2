@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Dataflow - Magento Extension
+ *
+ * @package Dataflow
+ * @category EcommerceTeam
+ * @copyright Copyright 2016 EcommerceTeam Inc. (http://www.ecommerce-team.com)
+ * @version: 2.5.0
+ */
+-->
+<config>
+    <modules>
+        <EcommerceTeam_Dataflow>
+            <version>2.5.0</version>
+        </EcommerceTeam_Dataflow>
+    </modules>
+    <global>
+        <blocks>
+            <ecommerceteam_dataflow>
+                <class>EcommerceTeam_Dataflow_Block</class>
+            </ecommerceteam_dataflow>
+        </blocks>
+        <models>
+            <ecommerceteam_dataflow>
+                <class>EcommerceTeam_Dataflow_Model</class>
+                <resourceModel>ecommerceteam_dataflow_resource</resourceModel>
+            </ecommerceteam_dataflow>
+            <ecommerceteam_dataflow_resource>
+                <class>EcommerceTeam_Dataflow_Model_Resource</class>
+                <entities>
+                    <profile_import>
+                        <table>et_dataflow_profile_import</table>
+                    </profile_import>
+                    <profile_schedule>
+                        <table>et_dataflow_profile_schedule</table>
+                    </profile_schedule>
+                </entities>
+            </ecommerceteam_dataflow_resource>
+        </models>
+        <helpers>
+            <ecommerceteam_dataflow>
+                <class>EcommerceTeam_Dataflow_Helper</class>
+            </ecommerceteam_dataflow>
+        </helpers>
+        <resources>
+            <ecommerceteam_dataflow_setup>
+                <setup>
+                    <module>EcommerceTeam_Dataflow</module>
+                </setup>
+            </ecommerceteam_dataflow_setup>
+        </resources>
+    </global>
+    <crontab>
+        <events>
+            <default>
+                <observers>
+                    <dataflow_cron_observer>
+                        <class>ecommerceteam_dataflow/observer_cron</class>
+                        <method>dispatch</method>
+                    </dataflow_cron_observer>
+                </observers>
+            </default>
+        </events>
+    </crontab>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <ecommerceteam_dataflow before="Mage_Adminhtml">EcommerceTeam_Dataflow_Adminhtml</ecommerceteam_dataflow>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <ecommerceteam>
+        <dataflow>
+            <parser>
+                <csv>
+                    <name>CSV</name>
+                    <model>ecommerceteam_dataflow/import_parser_csv</model>
+                </csv>
+            </parser>
+            <adapter>
+                <import>
+                    <product>
+                        <default>
+                            <name>Import Products</name>
+                            <model>ecommerceteam_dataflow/import_adapter_type_product</model>
+                        </default>
+                    </product>
+                </import>
+            </adapter>
+        </dataflow>
+    <EcommerceTeam_Dataflow><order_id>100004832</order_id><purchase_id>4662</purchase_id></EcommerceTeam_Dataflow></ecommerceteam>
+</config>

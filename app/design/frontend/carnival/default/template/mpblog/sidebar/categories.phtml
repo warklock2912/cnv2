@@ -1,0 +1,34 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Magpleasure_Blog
+ */
+
+/** @var Magpleasure_Blog_Model_Mysql4_Category_Collection $collection  */
+/** @var Magpleasure_Blog_Block_Sidebar_Category $this  */
+$collection = $this->getCollection();
+?>
+<?php if ($this->getDisplay() && count($collection)): ?>
+<div class="block mpblog-categories">
+    <div class="block-title">
+      <strong>
+        <span class="icon-menu"><span></span><span></span><span></span></span>
+        <span><?php echo $this->getBlockHeader(); ?></span>
+        <span class="icon-menu-blog"></span>
+      </strong>
+    </div>
+    <div class="block-content">
+        <ul class="mplog-categories">
+          <li class="mpblog-category <?php if(Mage::app()->getFrontController()->getRequest()->getModuleName() == 'mpblog' && Mage::app()->getFrontController()->getRequest()->getActionName() == 'index'): ?> active <?php endif?>">
+            <a href="<?php echo Mage::getUrl('mpblog/'); ?>"><?php echo $this->__('All Category') ?></a>
+          </li>
+        <?php foreach ($collection as $category): ?>
+            <li class="mpblog-category<?php if ($category->getIsActive()): ?> active<?php endif; ?> mpblog-category-<?php echo $category->getId(); ?>">
+               <a href="<?php echo $category->getCategoryUrl(); ?>"><?php echo $this->escapeHtml($category->getName()); ?></a>
+            </li>
+        <?php endforeach; ?>
+        </ul>
+    </div>
+</div>
+<?php endif; ?>

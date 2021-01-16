@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Crystal_Twoctwop>
+            <version>0.2.0</version>
+        </Crystal_Twoctwop>
+    </modules>
+    <global>
+        <resources>
+            <twoctwop_setup>
+                <setup>
+                    <module>Crystal_Twoctwop</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </twoctwop_setup>
+            <twoctwop_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </twoctwop_write>
+            <twoctwop_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </twoctwop_read>
+        </resources>
+
+        <blocks>
+            <twoctwop>
+                <class>Crystal_Twoctwop_Block</class>
+            </twoctwop>
+        </blocks>
+        <models>
+            <twoctwop><!--need same name module. It define in Mage::getModel-->
+                <class>Crystal_Twoctwop_Model</class>
+                <resourceModel>twoctwop_resource</resourceModel>
+            </twoctwop>
+            <twoctwop_resource><!--need same name module. It define in Mage::getModel-->
+                <class>Crystal_Twoctwop_Model_Resource</class>
+                <entities>
+                    <card>
+                        <table>crystal_cards</table>
+                    </card>
+                </entities>
+            </twoctwop_resource>
+        </models>
+        <helpers>
+            <twoctwop>
+                <class>Crystal_Twoctwop_Helper</class>
+            </twoctwop>
+        </helpers>
+    </global>
+    <default>
+        <payment>
+            <crystal_twoctwop>
+                <model>twoctwop/twoctwop</model>
+                <order_status>processing</order_status>
+                <payment_action>authorize</payment_action>
+                <active>1</active>
+                <title>2C2P</title>
+                <env>test</env>
+            </crystal_twoctwop>
+        </payment>
+    </default>
+</config>

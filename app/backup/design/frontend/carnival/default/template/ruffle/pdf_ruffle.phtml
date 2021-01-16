@@ -1,0 +1,301 @@
+<?php
+$ruffle = $this->getData('ruffle');
+$name = $ruffle->getData('customer_name');
+$email = $ruffle->getData('email_address');
+$number = $ruffle->getData('ruffle_number');
+$_product = Mage::getModel('catalog/product')->load($ruffle->getData('product_id'));
+$_customer = Mage::getModel('customer/customer')->load(Mage::getSingleton('customer/session')->getCustomer()->getId());
+$productType = $_product->getTypeId();
+?>
+<?php
+$attributes = null;
+if($productType == 'configurable' && isset($ruffle['product_options'])){
+  $superAttribute = unserialize($ruffle['product_options']);
+  $attributes = $_product->getTypeInstance(true)->getConfigurableAttributesAsArray($_product);
+}
+?>
+<style>
+  .box-header {
+    border-bottom:dotted  2px #E1E1E1;
+    font-family: tahoma, arial;
+    height: 113px;
+  }
+  .box-header td{
+    vertical-align: middle;
+  }
+  .content {
+    width:760px;
+    padding:15px;
+    margin:auto;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+  }
+  .logo {
+    width:25%;
+  }
+  .logo img{
+    max-width:150px;
+  }
+  .box-header .dl {
+    margin:8px 0;
+  }
+  .box-header td {
+    padding:0 5px;
+  }
+  .box-header .dt {
+    float:left;
+    width:55px;
+    font-size:14px;
+    color:#898989;
+    text-transform: uppercase;
+    clear: left;
+  }
+  .box-header .dd {
+    font-size:14px;
+    color:#252525;
+  }
+  .box-header .info {
+    width:38%;
+    margin-top: 15px;
+  }
+  .box-header .id-order{
+    width:37%;
+    font-size:18px;
+    margin-top: 30px;
+  }
+  .box-main,
+  .address{
+    font-family: tahoma, arial;
+  }
+  .box-main .th{
+    background:#000;
+    padding:5px;
+  }
+  .box-main .th img {
+    max-width:120px;
+    margin-left: 300px;
+  }
+  .box-main .td{
+    vertical-align: top;
+    padding:10px 0 10px 15px;
+    box-sizing: border-box;
+  }
+  .box-main .id-number {
+    text-align: center;
+    border:solid 1px #ebebeb;
+    padding:10px;
+    font-size:18px;
+    color:#959595;
+    margin-bottom:15px;
+  }
+  .box-main .id-number strong{
+    color:#000;
+  }
+  .product-image img{
+    max-width:150px;
+  }
+  .contact-info .label{
+    font-weight: bold;
+    font-size:16px;
+  }
+  .contact-info .dl{
+    padding-left:10px;
+    line-height: 26px;
+  }
+  .contact-info .dt{
+    width: 55px;
+    font-size: 14px;
+    color: #898989;
+    text-transform: uppercase;
+  }
+  .contact-info .dd {
+    font-size: 14px;
+    color:#252525;
+    margin:0px;
+  }
+  .box-main .product-image {
+    float:left;
+    width:150px;
+    border:solid 1px #ebebeb;
+  }
+  .box-main .product-info {
+    margin-left:165px;
+  }
+  .product-info .product-name {
+    text-transform: uppercase;
+    margin-bottom:10px;
+    font-size:16px;
+  }
+  .product-info dl{
+    line-height: 26px;
+  }
+  .product-info dt{
+    width: 55px;
+    font-size: 14px;
+    color: #898989;
+    text-transform: uppercase;
+    float:left;
+  }
+  .product-info dt:after{
+    content:":";
+  }
+  .product-info dd{
+    margin-left:60px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+  }
+  .address {
+    text-align: center;
+    font-size:15px;
+  }
+  .address strong{
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .follow-us {
+    padding:15px 0;
+    border-top:solid 1px #ebebeb;
+    margin-top:15px;
+  }
+  .follow-us .label{
+    float:left;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 18px;
+    margin-top: 12px;
+  }
+  .follow-us .ul {
+    float:left;
+    max-width: 25%;
+  }
+  .follow-us .ul .li {
+    margin-left:20px;
+    text-transform: uppercase;
+    font-size: 11px;
+    padding-left:20px;
+    line-height: 20px;
+    margin-bottom:5px;
+  }
+  .follow-us .face-book {
+    background: url('<?php echo $this->getSkinUrl('images/icon-facebook.png');?>') no-repeat left center;
+  }
+  .instagram {
+    background: url('<?php echo $this->getSkinUrl('images/icon-instagram.png');?>') no-repeat left center;
+  }
+  .youtube {
+    background: url('<?php echo $this->getSkinUrl('images/icon-youtube.png');?>') no-repeat left center;
+  }
+</style>
+
+<div class="box-header">
+  <div class="content">
+    <div class="logo" style="float: left">
+      <img alt="logo" src="<?php echo $this->getSkinUrl('images/logo_pdf.png');?>"/>
+    </div>
+    <div class="info" style="float: left">
+      <div class="dl">
+        <div class="dt">Name</div>
+        <div class="dd"><?php echo $name ?></div>
+      </div>
+      <div class="dl">
+        <div class="dt">E-mail</div>
+        <div class="dd"><?php echo $email ?></div>
+      </div>
+      <div class="dl">
+        <div class="dt">TEL.</div>
+        <div class="dd"><?php echo $_customer->getTelephone(); ?></div>
+      </div>
+    </div>
+    <div class="id-order" style="float: left; margin-top: 30px;">
+      Number is <strong>#<?php echo $number ?></strong>
+    </div>
+  </div>
+</div>
+<div style="clear: both;"></div>
+
+<div class="box-main">
+  <div class="content">
+    <div>
+      <div class="th"><img alt="logo" style="margin-left: 300px" src="<?php echo $this->getSkinUrl('images/logo2_pdf.png');?>"/></div>
+    </div>
+    <div style=" border-left:solid 1px #ebebeb; border-right:solid 1px #ebebeb;">
+      <div class="td" style="width:40%; float: left">
+        <div class="id-number">Number is <strong>#<?php echo $number ?></strong></div>
+        <div class="contact-info">
+          <div class="label">CONTACT INFORMATION</div>
+          <div class="dl">
+            <div class="dt">name</div>
+            <div class="dd"><?php echo $name ?></div>
+            <div class="dt">e-mail</div>
+            <div class="dd"><?php echo $email ?></div>
+          <div class="dt">tel.</div>
+          <div class="dd"><?php echo $_customer->getTelephone(); ?></div>
+      </div>
+    </div>
+  </div>
+  <div class="td" style="width:50%;  float: right">
+    <div class="product-image">
+      <img alt="product-img" src="<?php echo Mage::helper('catalog/image')->init($_product, 'small_image')->resize(150); ?>"/>
+    </div>
+    <div class="product-info">
+      <h3 class="product-name"><?php echo $_product->getName() ?></h3>
+      <?php if ($_product->getData('carnival_brand')): ?>
+        <?php $brandName = $_product->getResource()->getAttribute('carnival_brand')->getFrontend()->getValue($_product);?>
+        <div class="product-brand"><?php echo $brandName; ?></div>
+      <?php endif; ?>
+      <dl>
+        <?php if($attributes): ?>
+          <?php foreach ($attributes as $attribute): ?>
+            <dt><?php echo $attribute['frontend_label']?> : </dt>
+            <?php foreach ($attribute['values'] as $value){
+              if($value['value_index'] == $superAttribute[$attribute['attribute_id']]){ ?>
+                <dd><?php echo $value['label']; ?></dd>
+              <?php  }
+            }
+            ?>
+          <?php endforeach; ?>
+        <?php endif; ?>
+        <dt>price</dt>
+        <dd><?php echo Mage::helper('core')->formatPrice($_product->getFinalPrice(), true, false); ?></dd>
+        <dt>qty</dt>
+        <dd>1</dd>
+      </dl>
+    </div>
+  </div>
+</div>
+<div style="clear: both;"></div>
+<div>
+  <td colspan="2" style="padding:0px;"><div style="background:#000; height:4px;">&nbsp;</div></td>
+</div>
+</div>
+</div>
+<div style="clear: both;"></div>
+
+<div class="box-footer">
+  <div class="content">
+    <div class="address">
+      <strong>Carnival supply CO.,ltd.</strong><br />
+      430/29 Siam Square Soi.10 Rama 1 rd, Pathumwan Bangkok <br />
+      10330 Thailand    Tel. 099-216-4445
+    </div>
+    <div class="follow-us">
+      <div style="width: 13%; float: left; min-height: 200px">
+        <div class="label">follow us</div>
+      </div>
+      <div style="width: 28%; float: left; min-height: 200px">
+        <div class="face-book" style="margin-left:20px; text-transform: uppercase; font-size: 14px; padding-left:25px; line-height: 20px; margin-bottom:10px; margin-bottom:5px;margin-top: 5px">&nbsp; &nbsp;CARNIVALBKK</div>
+        <div style="clear: both;"></div>
+        <div class="face-book" style="margin-left:20px; text-transform: uppercase; font-size: 14px; padding-left:25px; line-height: 20px; margin-bottom:10px; margin-bottom:5px;margin-top: 5px">&nbsp; &nbsp;CARNIVAL STORE</div>
+      </div>
+      <div style="width: 55%; float: left; min-height: 200px">
+        <div class="instagram" style="margin-left:20px; text-transform: uppercase; font-size: 14px; padding-left:25px; line-height: 20px; margin-bottom:10px; margin-bottom:5px;margin-top: 5px">&nbsp; &nbsp;UPPERGROUND BY CARNIVAL</div>
+        <div style="clear: both;"></div>
+        <div class="instagram" style="margin-left:20px; text-transform: uppercase; font-size: 14px; padding-left:25px; line-height: 20px; margin-bottom:10px; margin-bottom:5px;margin-top: 5px">&nbsp; &nbsp;UPPERGROUNDBKK</div>
+        <div style="clear: both;"></div>
+        <div class="youtube" style="margin-left:20px; text-transform: uppercase; font-size: 14px; padding-left:25px; line-height: 20px; margin-bottom:10px; margin-bottom:5px;margin-top: 5px">&nbsp; &nbsp;Carnival Bangkok</div>
+      </div>
+    </div>
+  </div>
+</div>

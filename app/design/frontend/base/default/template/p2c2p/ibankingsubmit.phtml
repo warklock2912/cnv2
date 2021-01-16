@@ -1,0 +1,27 @@
+
+<?php
+$helper=Mage::helper('p2c2p');
+$_order = new Mage_Sales_Model_Order();
+    $orderId = Mage::getSingleton('checkout/session')->getLastRealOrderId();
+    $_order->loadByIncrementId($orderId);
+$payload=$helper->getPayloadIbanking($_order);
+
+$url = "https://t.2c2p.com/SecurePayment/PaymentAuth.aspx";
+$sandboxUrl = "https://demo2.2c2p.com/2C2PFrontEnd/SecurePayment/PaymentAuth.aspx";
+$formUrl='';
+$test_mode = Mage::getStoreConfig('payment/p2c2p_onsite_internet_banking/gatewayurl', Mage::app()->getStore());
+
+if ($test_mode) {
+    $formUrl=$sandboxUrl;
+} else {
+    $formUrl=$url;
+}
+
+?>
+<form action=<?php echo $formUrl ?> method='POST' name='paymentRequestForm'>
+    Processing payment request, Do not close the browser, press back or refresh the page.
+    <?php echo "<input type='hidden' name='paymentRequest' value='".$payload."'>"; ?>
+</form>
+<script language="JavaScript">
+    document.paymentRequestForm.submit();	//submit form to 2c2p PGW
+</script>

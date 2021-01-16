@@ -1,0 +1,41 @@
+<?php
+/**
+ * @category    Bubble
+ * @package     Bubble_DynamicCategory
+ * @version     2.4.2
+ * @copyright   Copyright (c) 2015 BubbleShop (https://www.bubbleshop.net)
+ */
+/**
+ * @var $this Bubble_DynamicCategory_Block_Adminhtml_Category_Dynamic_Conditions_Import
+ */
+?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Import Category Conditions') ?></h4>
+    </div>
+    <div class="box">
+        <?php echo $this->getCategorySelectHtml() ?>
+        <button id="import_conditions_button" title="<?php echo $this->escapeHtml($this->__('Import Conditions')) ?>" type="button" class="scalable">
+            <span><span><span><?php echo $this->__('Import') ?></span></span></span>
+        </button>
+    </div>
+</div>
+
+<?php if ($this->getRequest()->isAjax()): ?>
+<script type="text/javascript">
+    //<![CDATA[
+    $('import_conditions_button').observe('click', function () {
+        new Ajax.Updater(
+            {
+                success: 'category_dynamic_products_conds'
+            },
+            '<?php echo $this->getImportCondsUrl() ?>',
+            {
+                parameters: { category_id: $('import_conditions_field').getValue() },
+                evalScripts: true
+            }
+        );
+    });
+    //]]>
+</script>
+<?php endif ?>

@@ -1,0 +1,74 @@
+
+<?php
+    $user_data = Mage::getSingleton('customer/session')->getSearchmember();
+    if($user_data['group_id'] == 1){
+        $vip_level_value = $this->__('Member');
+    }elseif($user_data['group_id'] == 4){
+        $vip_level_value = $this->__('Vip Member');
+    }
+    // echo $user_data['point_balance'];
+?>
+
+<div class="member-page">
+    <div class="back-link">
+        <a class="back-action" href="/member/search/form"><span><?php echo $this->__('Back')?></span></a>
+    </div>
+    <div class="content">
+        <div class="mem-info-wrapper">
+            <div class="fieldset member-info">
+                <ul>
+                    <li>
+                        <div class="field">
+                            <label class="label"><?php echo $this->__('name')?></label>
+                            <p class="info-value"><?php echo $user_data['firstname']." ".$user_data['lastname']?></p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="field">
+                            <label class="label"><?php echo $this->__('email')?></label>
+                            <p class="info-value"><?php echo $user_data['email']?></p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="field">
+                            <label class="label"><?php echo $this->__('moblie')?></label>
+                            <p class="info-value"><?php echo $user_data['telephone']?></p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="field">
+                            <label class="label"><?php echo $this->__('member id')?></label>
+                            <p class="info-value"><?php echo $user_data['vip_member_id']?></p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="field">
+                            <label class="label"><?php echo $this->__('vip level')?></label>
+                            <p class="info-value"><?php echo $vip_level_value?></p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="field">
+                            <label class="label"><?php echo $this->__('point')?></label>
+                            <p class="info-value point-bal-member"><?php echo $user_data['point_balance'] ?></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="buttons-set">
+                <a class="action-summit" href="/member/vip/change"><span><?php echo $this->__('change to VIP')?></span></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <script type="text/javascript">
+    jQuery.ajax({
+      'url' : '/member/info/getpoint',
+      'dataType':'json',
+      'type':'post',
+      'data':{'member_code':'<?php echo $user_data['vip_member_id']; ?>'},
+      success:function(data){
+        jQuery('.point-bal-member').html(data);
+      }
+    });
+</script> -->

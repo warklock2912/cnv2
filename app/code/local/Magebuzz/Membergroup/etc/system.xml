@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <magebuzz translate="label">
+            <label>Magebuzz Extension</label>
+            <sort_order>400</sort_order>
+        </magebuzz>
+    </tabs>
+    <sections>
+        <membergroup translate="label" module="membergroup">
+            <label>Member group</label>
+            <tab>magebuzz</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>299</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General Setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <minimum_number translate="label comment">
+                            <label>Minimum Total Purchase Number</label>
+                            <comment>
+                                <![CDATA[Minimum total purchase number customer need to change Vip Member]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </minimum_number>
+                        <expire_days translate="label comment">
+                            <label>Expire Days</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </expire_days>
+                        <before_expire_days translate="label comment">
+                            <label>During X days before VIP expired</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </before_expire_days>
+                        <before_expire_days_grand_total translate="label comment">
+                            <label>Grand total in X days</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </before_expire_days_grand_total>
+                        <vip_member_id translate="label comment">
+                            <label>Choose Vip Group</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Magebuzz_Membergroup_Model_Source_Config_CustomerGroup</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </vip_member_id>
+                    </fields>
+                </general>
+                <notifyadmin translate="label">
+                    <label>Notify administration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <emailadmin translate="label">
+                            <label>Email admin receive notify</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </emailadmin>
+                        <emailtemplate>
+                            <label>Email Template Notify To Admin</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </emailtemplate>
+                    </fields>
+                </notifyadmin>
+                <notifycustomer translate="label">
+                    <label>Notify Customer</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <admin_sender translate="label">
+                            <label>Notify Email Sender</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </admin_sender>
+                        <template translate="label">
+                            <label>Email Template Notify To Customer</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </template>
+                    </fields>
+                </notifycustomer>
+            </groups>
+        </membergroup>
+    </sections>
+</config>

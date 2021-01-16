@@ -1,0 +1,39 @@
+<?php
+/**
+ * MageWorx
+ * Search Suite
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuiteAutocomplete
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+?>
+<div id="ssa_cosumizer">
+    <div class="ssa-header"><div><?php echo Mage::helper('mageworx_searchsuiteautocomplete')->__('Customize your popup')?></div></div>
+    <div class="ssa-container"></div>
+    <div class="ssa-overlay"></div>
+</div>
+<script type="text/javascript">//<![CDATA[
+    jQuery(document).ready(function(){
+        customizer = jQuery('#searchautocomplete-search-1').autocompleteCustomizer({
+            field: jQuery('#mageworx_searchsuite_autocomplete_customizer'),
+            menuContainer:jQuery('#ssa_cosumizer .ssa-container'),
+            translate:'<?php echo $this->jsonEncode($this->getTranslate())?>',
+            font:'<?php echo $this->jsonEncode($this->getFont())?>',
+            fontsize:'<?php echo $this->jsonEncode($this->getFontsize())?>'});
+
+        var useDefaultCustomizer = jQuery('#mageworx_searchsuite_autocomplete_customizer_inherit');
+        if(useDefaultCustomizer.length > 0){
+            if(useDefaultCustomizer.is(':checked')){
+                jQuery('.ssa-overlay').show();
+            }
+            useDefaultCustomizer.change(function(){
+                if(jQuery(this).is(':checked')){
+                    jQuery('.ssa-overlay').show();
+                } else {
+                    jQuery('.ssa-overlay').hide();
+                }
+            });
+        }
+    });
+//]]></script>

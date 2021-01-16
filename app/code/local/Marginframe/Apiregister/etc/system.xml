@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <mgfregister>
+            <label>Api Register</label>
+            <sort_order>2</sort_order>
+        </mgfregister>
+    </tabs>
+    <sections>
+         <mgfapisetting>
+            <tab>mgfregister</tab>
+            <label>Api Settings</label>
+            <frontend_type>text</frontend_type>
+            <sort_order>2</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <mgfapi translate="label">
+                    <label>Api Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <apiurl translate="label">
+                            <label><![CDATA[Api Url]]></label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </apiurl>
+                    </fields>
+                </mgfapi>
+            </groups>
+            <groups>
+                <registercode translate="label">
+                    <label>Register Code</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>110</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <datecode translate="label">
+                            <label><![CDATA[Date Code]]></label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </datecode>
+                    </fields>
+                    <fields>
+                        <runcode translate="label">
+                            <label><![CDATA[Running code]]></label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </runcode>
+                    </fields>
+                </registercode>
+            </groups>
+            <groups>
+                <adminchangevip translate="label">
+                    <label>Admin Change VIP</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>120</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <password translate="label">
+                            <label><![CDATA[Password]]></label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </password>
+                    </fields>
+                </adminchangevip>
+            </groups>
+        </mgfapisetting>
+
+    </sections>
+</config>

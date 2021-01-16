@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Marginframe_Shippop>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Marginframe_Shippop>
+    </modules>
+</config>

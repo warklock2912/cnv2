@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <aboutusmobile_options translate="title" module="aboutusmobile">
+                                        <title>About us mobile Configuration Section</title>
+                                        <sort_order>0</sort_order>
+                                    </aboutusmobile_options>
+                                    <cartitems_options translate="title" module="aboutusmobile">
+                                        <title>Cart Items Configuration Section</title>
+                                        <sort_order>10</sort_order>
+                                    </cartitems_options>
+                                    <fcm_options translate="title" module="aboutusmobile">
+                                        <title>FCM Configuration Section</title>
+                                        <sort_order>10</sort_order>
+                                    </fcm_options>
+                                    <kpayment_options translate="title" module="aboutusmobile">
+                                        <title>Kpayment Configuration Section</title>
+                                        <sort_order>20</sort_order>
+                                    </kpayment_options>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

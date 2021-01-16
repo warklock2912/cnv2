@@ -1,0 +1,39 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoReviews
+ */
+?>
+<?php if ($this->getReviewsCount()): ?>
+    <div class="ratings">
+        <?php $helper = Mage::helper('amseoreviews');
+        if($helper->isRedirectToProductPageEnabled()){ ?>
+            <script> window.addEventListener("load", hrefChecker, false);
+            function hrefChecker(){
+                $$("#customer-reviews dt a").each(function(val) {
+                    var label = "<strong><u>" + val.innerHTML + "</u></strong>";
+                    val.replace(label);
+                });
+            }</script>
+        <?php } ?>
+
+        <?php if($this->getRatingSummary()):
+            echo $this->getCssJsHtml(); ?>
+            <div class="rating-box">
+                <div class="rating" style="width:<?php echo $this->getRatingSummary() ?>%"></div>
+            </div>
+        <?php endif; ?>
+        <p class="rating-links">
+            <!-- <a href="<?php //echo $this->getReviewsUrl(Amasty_SeoReviews_Helper_Data::HASH_TYPE_LIST, $this->product) ?>"><?php //echo $this->__('%d Review(s)', $this->getReviewsCount()) ?></a> -->
+            <span class="separator">|</span>
+            <a href="<?php echo $this->getReviewsUrl() ?>#review-form"><?php echo $this->__('Add Your Review') ?></a>
+        </p>
+    </div>
+<?php elseif($this->getDisplayIfEmpty()): ?>
+    <p class="no-rating">
+        <a href="<?php echo $this->getReviewsUrl() ?>#review-form"><?php echo $this->__('Be the first to review this product') ?></a>
+    </p>
+    
+    
+<?php endif; ?>

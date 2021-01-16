@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Tigren_CardId>
+            <version>0.1.0</version>
+        </Tigren_CardId>
+    </modules>
+    <frontend>
+        <routers>
+            <cardid>
+                <use>standard</use>
+                <args>
+                    <module>Tigren_CardId</module>
+                    <frontName>cardid</frontName>
+                </args>
+            </cardid>
+        </routers>
+    </frontend>
+    <global>
+        <blocks>
+            <adminhtml>
+                <rewrite>
+                    <customer_edit_tab_account>Tigren_CardId_Block_Adminhtml_Customer_Edit_Tab_Account</customer_edit_tab_account>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Tigren_Cardid before="Mage_Adminhtml">Tigren_CardId_Adminhtml</Tigren_Cardid>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+
+</config>

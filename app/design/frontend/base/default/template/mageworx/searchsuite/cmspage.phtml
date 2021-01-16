@@ -1,0 +1,38 @@
+<?php
+/**
+ * MageWorx
+ * Search Suite
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuite
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+$helper = Mage::helper('mageworx_searchsuite');
+$fields = $helper->getCmspageFields();
+?>
+
+<div class="page-head">
+    <h4><?php echo $this->__("CMS Pages"); ?></h4>
+</div>
+<?php if (($collection = $helper->getCmspageSearchResults()) && $collection->count()): ?>
+    <ul class="searchsuite-cmspage">
+        <?php foreach ($collection as $item): ?>
+            <li>
+                <?php if (in_array('title', $fields)) : ?>
+                    <div class="searchsuite-cmspage-title">
+                        <a href="<?php echo Mage::helper('cms/page')->getPageUrl($item->getId()) ?>"><?php echo $item->getTitle() ?></a>
+                    </div>
+                <?php endif; ?>
+                <?php if (in_array('content', $fields)) : ?>
+                    <div class="searchsuite-cmspage-content">
+                        <?php echo $helper->sanitizeContent($item) ?>
+                    </div>
+                <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php else: ?>
+    <div class="note-msg">
+        <?php echo $this->__('There are no results.') ?>
+    </div>
+<?php endif; ?>

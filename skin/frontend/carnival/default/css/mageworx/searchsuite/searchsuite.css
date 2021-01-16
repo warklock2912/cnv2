@@ -1,0 +1,191 @@
+/**
+ * MageWorx
+ * Search Suite
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuite
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+#search_mini_form .searchsuite-form-search{
+  background-image: none;
+  width: auto;
+  height: auto;
+}
+#search_mini_form .searchsuite-form-search,#searchsuite_attr_dropdown,#searchsuite_cat_dropdown{
+  border: 0;
+  background-color: #eee;
+  padding: 0;
+}
+.searchsuite-input,.searchsuite-select,.searchsuite-submit{
+  border: 1px solid #ccc;
+  background-color: #fff;
+  float: left;
+  position: relative;
+}
+.searchsuite-input,.searchsuite-select,.searchsuite-submit,.searchsuite-select div,.searchsuite-form-search #search{
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+}
+.searchsuite-input,.searchsuite-select,.searchsuite-submit,.searchsuite-select div,.searchsuite-form-search #search,.reset-button{
+  height: 27px;
+  vertical-align: middle;
+  line-height: 27px;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+.searchsuite-input,.searchsuite-form-search #search{
+  border: none;
+  border-bottom: solid 1px #898989;
+  float: left;
+  width: 100%!important;
+  height: 44px;
+  font-size: 16px;
+  font-weight: normal;
+}
+.searchsuite-form-search .searchsuite-default-text{
+  color: #ccc;
+}
+.searchsuite-select{
+  border-left: 0;
+  border-right: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #777;
+  font: 12px/1.55 Arial, Helvetica, sans-serif;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.searchsuite-submit{
+  float: left;
+  width: 44px;
+  height: 44px;
+  text-indent: -9999px;
+  background: url(../../../images/icon-search.png) no-repeat center center;
+  border: none;
+  margin-left: -48px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.searchsuite-change,.searchsuite-current-value {
+  line-height: 27px;
+  vertical-align: middle;
+}
+.searchsuite-change{
+  font-size: 7px; 
+  padding: 2px;
+}
+.searchsuite-dropdown li:hover{
+
+}
+.searchsuite-dropdown li a, .searchsuite-change{
+  color: #777;
+  text-decoration: none;
+  cursor: pointer;
+}
+.searchsuite-current-value{
+  border-left: 1px #ccc dotted;
+  padding-left: 5px;
+}
+*+html #searchsuite_attr_dropdown,*+html #searchsuite_cat_dropdown{
+  margin-top: 36px; 
+}
+#searchsuite_attr_dropdown,#searchsuite_cat_dropdown{
+  display: none;
+  position: absolute;
+  right: 0;
+  margin-top: 11px;  
+  z-index: 9999;
+}
+#searchsuite_attr_dropdown li,#searchsuite_cat_dropdown li{
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-bottom: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: left;
+  cursor: pointer;
+}
+#searchsuite_attr_dropdown li:last-child,#searchsuite_cat_dropdown li:last-child{
+  border-bottom: 1px solid #ccc;
+}
+#searchsuite_attr_dropdown li a,#searchsuite_cat_dropdown li a{
+  width: 100%;
+  white-space: nowrap;
+}
+#searchsuite_attr_dropdown li a:hover,.searchsuite-change:hover,#searchsuite_attr_dropdown li a:focus,
+#searchsuite_attr_change:focus,#searchsuite_cat_dropdown li a:hover,#searchsuite_cat_dropdown li a:focus,
+#searchsuite_cat_change:focus{
+  color: #ff6600;
+  text-decoration: none;
+}
+.searchsuite-submit:focus{
+  border-color: #ff6600;
+}
+#searchsuite_attr_dropdown:before,#searchsuite_cat_dropdown:before{
+  top: -10px;
+  border-left: 10px solid rgba(1, 187, 187, 0);
+  border-right: 10px solid rgba(1, 187, 187, 0);
+  border-bottom: 10px solid #fff;
+  right: 15px;
+}
+#searchsuite_attr_dropdown:after,#searchsuite_cat_dropdown:after{
+  top: -9px;
+  border-left: 10px solid rgba(238, 238, 238, 0);
+  border-right: 10px solid rgba(238, 238, 238, 0);
+  border-bottom: 10px solid #fff;
+  right: 15px;
+}
+#searchsuite_attr_dropdown:before,#searchsuite_attr_dropdown:after,#searchsuite_cat_dropdown:before,
+#searchsuite_cat_dropdown:after{
+  content: "";
+  position: absolute;
+}
+.searchsuite-synonym-label,.searchsuite-related-label{
+  color: #FF2F00;
+}
+.highlight{
+  color: #FF2F00;
+}
+.searchsuite-cmspage,.searchsuite-category{
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+.searchsuite-category-title a img{
+  float: left;
+  margin: 2px;
+}
+.searchsuite-category li{
+  overflow: auto;
+}
+.header .form-search .search-autocomplete {
+  z-index: 999;
+  left: 0 !important;
+  top: 30px !important;
+}
+#header-search .searchsuite-form-search{
+  position: relative;
+}
+
+@media only screen and (max-width:499px) {
+  .searchsuite-submit {
+    width:30px;
+    height:30px;
+    margin-left:-32px;
+    background: url(../../../images/icon-search.png) no-repeat center center;
+  }
+
+  .searchsuite-input, .searchsuite-form-search #search{
+    background-color: #fff;
+    color: #000;
+    height: 30px;
+    font-size: 15px;
+  }
+    
+  }
+

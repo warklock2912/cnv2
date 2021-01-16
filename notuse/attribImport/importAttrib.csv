@@ -1,0 +1,69 @@
+attribute_id|entity_type_id|attribute_code|attribute_model|backend_model|backend_type|backend_table|frontend_model|frontend_input|frontend_label|frontend_class|source_model|is_required|is_user_defined|default_value|is_unique|note|frontend_input_renderer|is_global|is_visible|is_searchable|is_filterable|is_comparable|is_visible_on_front|is_html_allowed_on_front|is_used_for_price_rules|is_filterable_in_search|used_in_product_listing|used_for_sort_by|is_configurable|apply_to|is_visible_in_advanced_search|position|is_wysiwyg_enabled|is_used_for_promo_rules|_options
+71|4|name|||varchar|||text|Name|||1|0||0|||0|1|1|0|0|0|0|0|0|1|1|1||1|0|0|0|
+72|4|description|||text|||textarea|Description|||1|0||0|||0|1|0|0|1|0|1|0|0|0|0|1||0|0|1|0|
+73|4|short_description|||text|||textarea|"Short Description"|||1|0||0|||0|1|0|0|1|0|1|0|0|1|0|1||0|0|1|0|
+74|4|sku||catalog/product_attribute_backend_sku|static|||text|SKU|||1|0||1|||1|1|0|0|1|0|0|0|0|0|0|1||0|0|0|1|
+75|4|price||catalog/product_attribute_backend_price|decimal|||price|Price|||1|0||0|||2|1|0|1|0|0|0|0|0|1|1|1|simple,configurable,virtual,bundle,downloadable|0|0|0|0|
+76|4|special_price||catalog/product_attribute_backend_price|decimal|||price|"Special Price"|||0|0||0|||2|1|0|0|0|0|0|0|0|1|0|1|simple,configurable,virtual,bundle,downloadable|0|0|0|0|
+77|4|special_from_date||catalog/product_attribute_backend_startdate_specialprice|datetime|||date|"Special Price From Date"|||0|0||0|||2|1|0|0|0|0|0|0|0|1|0|1|simple,configurable,virtual,bundle,downloadable|0|0|0|0|
+78|4|special_to_date||eav/entity_attribute_backend_datetime|datetime|||date|"Special Price To Date"|||0|0||0|||2|1|0|0|0|0|0|0|0|1|0|1|simple,configurable,virtual,bundle,downloadable|0|0|0|0|
+79|4|cost||catalog/product_attribute_backend_price|decimal|||price|Cost|||0|1||0|||2|1|0|0|0|0|0|0|0|0|0|1|virtual,downloadable|0|0|0|0|
+80|4|weight|||decimal|||weight|Weight|||1|0||0|||1|1|0|0|0|0|0|0|0|0|0|1|simple,bundle|0|0|0|0|
+81|4|manufacturer|||int|||select|Manufacturer|||0|1||0|||1|1|0|1|1|0|0|0|0|0|0|1|simple|0|0|0|0|
+82|4|meta_title|||varchar|||text|"Meta Title"|||0|0||0|||0|1|0|0|0|0|0|0|0|0|0|1||0|0|0|0|
+83|4|meta_keyword|||text|||textarea|"Meta Keywords"|||0|0||0|||0|1|0|0|0|0|0|0|0|0|0|1||0|0|0|0|
+84|4|meta_description|||varchar|||textarea|"Meta Description"|||0|0||0|"Maximum 255 chars"||0|1|0|0|0|0|0|0|0|0|0|1||0|0|0|0|
+85|4|image|||varchar||catalog/product_attribute_frontend_image|media_image|"Base Image"|||0|0||0|||0|1|0|0|0|0|0|0|0|0|0|1||0|0|0|0|
+86|4|small_image|||varchar||catalog/product_attribute_frontend_image|media_image|"Small Image"|||0|0||0|||0|1|0|0|0|0|0|0|0|1|0|1||0|0|0|0|
+87|4|thumbnail|||varchar||catalog/product_attribute_frontend_image|media_image|Thumbnail|||0|0||0|||0|1|0|0|0|0|0|0|0|1|0|1||0|0|0|0|
+88|4|media_gallery||catalog/product_attribute_backend_media|varchar|||gallery|"Media Gallery"|||0|0||0|||1|1|0|0|0|0|0|0|0|0|0|1||0|0|0|0|
+89|4|old_id|||int|||text||||0|0||0|||1|0|0|0|0|0|0|0|0|0|0|1||0|0|0|0|
+90|4|group_price||catalog/product_attribute_backend_groupprice|decimal|||text|"Group Price"|||0|0||0|||2|1|0|0|0|0|0|0|0|0|0|1|simple,configurable,virtual,bundle,downloadable|0|0|0|0|
+91|4|tier_price||catalog/product_attribute_backend_tierprice|decimal|||text|"Tier Price"|||0|0||0|||2|1|0|0|0|0|0|0|0|0|0|1|simple,configurable,virtual,bundle,downloadable|0|0|0|0|
+92|4|color|||int|||select|Color|||0|1||0|||1|1|0|1|1|0|0|0|0|0|0|1|simple,configurable|0|0|0|0|Green;Red
+93|4|news_from_date||catalog/product_attribute_backend_startdate|datetime|||date|"Set Product as New from Date"|||0|0||0|||2|1|0|0|0|0|0|0|0|1|0|1||0|0|0|0|
+94|4|news_to_date||eav/entity_attribute_backend_datetime|datetime|||date|"Set Product as New to Date"|||0|0||0|||2|1|0|0|0|0|0|0|0|1|0|1||0|0|0|0|
+95|4|gallery|||varchar|||gallery|"Image Gallery"|||0|0||0|||1|1|0|0|0|0|0|0|0|0|0|1||0|0|0|0|
+96|4|status|||int|||select|Status||catalog/product_status|1|0||0|||2|1|0|0|0|0|0|0|0|1|0|0||0|0|0|0|
+97|4|url_key||catalog/product_attribute_backend_urlkey|varchar|||text|"URL Key"|||0|0||0|||0|1|0|0|0|0|0|0|0|1|0|1||0|0|0|0|
+98|4|url_path|||varchar|||text||||0|0||0|||0|0|0|0|0|0|0|0|0|0|0|1||0|0|0|0|
+99|4|minimal_price|||decimal|||price|"Minimal Price"|||0|0||0|||0|0|0|0|0|0|0|0|0|0|0|1|simple,configurable,virtual,bundle,downloadable|0|0|0|0|
+100|4|is_recurring|||int|||select|"Enable Recurring Profile"||eav/entity_attribute_source_boolean|0|0||0|"Products with recurring profile participate in catalog as nominal items."||1|1|0|0|0|0|0|0|0|0|0|0|simple,virtual|0|0|0|0|
+101|4|recurring_profile||catalog/product_attribute_backend_recurring|text|||text|"Recurring Payment Profile"|||0|0||0|||1|1|0|0|0|0|0|0|0|0|0|0|simple,virtual|0|0|0|0|
+102|4|visibility|||int|||select|Visibility||catalog/product_visibility|1|0|4|0|||0|1|0|0|0|0|0|0|0|0|0|1||0|0|0|0|
+103|4|custom_design|||varchar|||select|"Custom Design"||core/design_source_design|0|0||0|||0|1|0|0|0|0|0|0|0|0|0|1||0|0|0|0|
+104|4|custom_design_from||catalog/product_attribute_backend_startdate|datetime|||date|"Active From"|||0|0||0|||0|1|0|0|0|0|0|0|0|0|0|1||0|0|0|0|
+105|4|custom_design_to||eav/entity_attribute_backend_datetime|datetime|||date|"Active To"|||0|0||0|||0|1|0|0|0|0|0|0|0|0|0|1||0|0|0|0|
+106|4|custom_layout_update||catalog/attribute_backend_customlayoutupdate|text|||textarea|"Custom Layout Update"|||0|0||0|||0|1|0|0|0|0|0|0|0|0|0|1||0|0|0|0|
+107|4|page_layout|||varchar|||select|"Page Layout"||catalog/product_attribute_source_layout|0|0||0|||0|1|0|0|0|0|0|0|0|0|0|1||0|0|0|0|
+108|4|category_ids|||static|||text||||0|0||0|||1|0|0|0|0|0|0|0|0|0|0|1||0|0|0|0|
+109|4|options_container|||varchar|||select|"Display Product Options In"||catalog/entity_product_attribute_design_options_container|0|0|container1|0|||0|1|0|0|0|0|0|0|0|0|0|1||0|0|0|0|
+110|4|required_options|||static|||text||||0|0||0|||1|0|0|0|0|0|0|0|0|1|0|1||0|0|0|0|
+111|4|has_options|||static|||text||||0|0||0|||1|0|0|0|0|0|0|0|0|0|0|1||0|0|0|0|
+112|4|image_label|||varchar|||text|"Image Label"|||0|0||0|||0|0|0|0|0|0|0|0|0|1|0|0||0|0|0|0|
+113|4|small_image_label|||varchar|||text|"Small Image Label"|||0|0||0|||0|0|0|0|0|0|0|0|0|1|0|0||0|0|0|0|
+114|4|thumbnail_label|||varchar|||text|"Thumbnail Label"|||0|0||0|||0|0|0|0|0|0|0|0|0|1|0|0||0|0|0|0|
+115|4|created_at||eav/entity_attribute_backend_time_created|static|||text|Date|||1|0||0|||1|0|0|0|0|0|0|0|0|0|1|1||0|0|0|0|
+116|4|updated_at||eav/entity_attribute_backend_time_updated|static|||text||||1|0||0|||1|0|0|0|0|0|0|0|0|0|0|1||0|0|0|0|
+117|4|country_of_manufacture|||varchar|||select|"Country of Manufacture"||catalog/product_attribute_source_countryofmanufacture|0|0||0|||2|1|0|0|0|0|0|0|0|0|0|0|simple,configurable,bundle,grouped|0|0|0|0|
+118|4|msrp_enabled||catalog/product_attribute_backend_msrp|varchar|||select|"Apply MAP"||catalog/product_attribute_source_msrp_type_enabled|0|0|2|0||adminhtml/catalog_product_helper_form_msrp_enabled|2|1|0|0|0|0|0|0|0|1|0|1|simple,bundle,configurable,virtual,downloadable|0|0|0|0|
+119|4|msrp_display_actual_price_type||catalog/product_attribute_backend_boolean|varchar|||select|"Display Actual Price"||catalog/product_attribute_source_msrp_type_price|0|0|4|0||adminhtml/catalog_product_helper_form_msrp_price|2|1|0|0|0|0|0|0|0|1|0|1|simple,bundle,configurable,virtual,downloadable|0|0|0|0|
+120|4|msrp||catalog/product_attribute_backend_price|decimal|||price|"Manufacturer's Suggested Retail Price"|||0|0||0|||2|1|0|0|0|0|0|0|0|1|0|1|simple,bundle,configurable,virtual,downloadable|0|0|0|0|
+121|4|tax_class_id|||int|||select|"Tax Class"||tax/class_source_product|1|0||0|||2|1|0|0|0|0|0|0|0|1|0|1|simple,configurable,virtual,bundle,downloadable|0|0|0|0|
+122|4|gift_message_available||catalog/product_attribute_backend_boolean|varchar|||select|"Allow Gift Message"||eav/entity_attribute_source_boolean|0|0||0||giftmessage/adminhtml_product_helper_form_config|1|1|0|0|0|0|0|0|0|0|0|0||0|0|0|0|
+123|4|price_type|||int|||||||1|0||0|||1|0|0|0|0|0|0|0|0|1|0|0|bundle|0|0|0|0|
+124|4|sku_type|||int|||||||1|0||0|||1|0|0|0|0|0|0|0|0|0|0|0|bundle|0|0|0|0|
+125|4|weight_type|||int|||||||1|0||0|||1|0|0|0|0|0|0|0|0|1|0|0|bundle|0|0|0|0|
+126|4|price_view|||int|||select|"Price View"||bundle/product_attribute_source_price_view|1|0||0|||1|1|0|0|0|0|0|0|0|1|0|0|bundle|0|0|0|0|
+127|4|shipment_type|||int||||Shipment|||1|0||0|||1|0|0|0|0|0|0|0|0|1|0|0|bundle|0|0|0|0|
+128|4|links_purchased_separately|||int||||"Links can be purchased separately"|||1|0||0|||1|0|0|0|0|0|0|0|0|1|0|0|downloadable|0|0|0|0|
+129|4|samples_title|||varchar||||"Samples title"|||1|0||0|||0|0|0|0|0|0|0|0|0|0|0|0|downloadable|0|0|0|0|
+130|4|links_title|||varchar||||"Links title"|||1|0||0|||0|0|0|0|0|0|0|0|0|0|0|0|downloadable|0|0|0|0|
+131|4|links_exist|||int|||||||0|0|0|0|||1|0|0|0|0|0|0|0|0|1|0|0|downloadable|0|0|0|0|
+139|4|details|||text|||textarea|Details|||0|1||0|||0|1|0|0|0|1|1|0|0|1|0|0||0|0|1|0|
+140|4|sizing|||text|||textarea|Sizing|||0|1||0|||0|1|0|0|0|1|1|0|0|1|0|0||0|0|1|0|
+141|4|outfit|||text|||textarea|Outfit|||0|1||0|||0|1|0|0|0|1|1|0|0|0|0|0||0|0|1|0|
+142|4|return_policy|||text|||textarea|"Return Policy"|||0|1||0|||0|1|0|0|0|1|1|0|0|0|0|0||0|0|1|0|
+154|4|carnival_brand|||int|||select|Brand||eav/entity_attribute_source_table|1|1|23|0|||0|1|1|0|0|1|1|0|0|1|0|0||1|0|0|1|"BENNY GOLD;REASON;GRAND SCHEME;PUBLISH;STANCE;Us versus them ;DOPE;EBBETS FIELD;Denim by Vanquish & fragment;CLAE;MAJESTIC;CHUP;Speedometer;REEBOK;Saucony ;retaW;CARNIVAL;CONVERSE;NIKE;VANS;STUSSY;HERSCHEL;HUF;UNDEFEATED;Diamond;THE QUIET LIFE;PRIMITIVE ;RANSOM;THE HUNDREDS ;Cote & Ciel;TOMS;Losers;JASON MARKK;SSUR;BLACK SCALE;DGK;RASTACLAT ;INCASE;INDIGOSKIN;NATIVE;MEDICOM TOY;BYANYMEANS;CARHARTT WIP;Rompboy shoes;BORN X RAISED;DGK;CBIV;STUSSY WOMEN;Intelligence Magazine;ASICS;HAN CHOLO;HIGHSNOBIETY MAGAZINE;ACAPULCO GOLD;ATMOS LAB;ADIDAS;DIAMOND;UPPERGROUND; CREP PROTECT;MAJOR MINORITY ;FDMTL;PRO-KEDS;THRASHER;CLSC;G-SHOCK;TOKYO 23;NEW ERA;FACELESS"
+156|4|size_products|||int|||select|Size||eav/entity_attribute_source_table|1|1|70|0|||1|1|0|1|1|0|0|0|0|0|0|1|simple,configurable|0|0|0|0|"6;12;11;10.5;10;9.5;9;8.5;8;7.5;7;6.5;XXL;XL;L;M;S;XS;5.5;5;4.5;4;38;36;34;32;30;28;27;26;25;24;37;35;33;31;29;11.5;3XL (14-15 US);XXL (13-14 US);XL (12-13 US);L (11-12 US);M (10-11 US);S (9-10 US);XS ( 8-9 US);XXS ( 7-8 US);L/XL;S/M;43;42;41;40;39;38;9 US WOMEN;8 US WOMEN;7 US WOMEN;6 US WOMEN;5 US WOMEN;4 US WOMEN;IPHONE 6 PLUS;IPHONE 6;11.5 US MEN;11 US MEN;10.5 US MEN;10 US MEN;9.5 US MEN;9 US MEN;8.5 US MEN;8 US MEN;7.5 US MEN;7 US MEN;6.5 US MEN;6 US MEN;5.5 US MEN;5 US MEN;4.5 US MEN;4 US MEN;8.5 US WOMEN;7.5 US WOMEN;6.5 US WOMEN;12 US MEN;12 US WOMEN;11.5 US WOMEN;11 US WOMEN;10.5 US WOMEN;10 US WOMEN;9.5 US WOMEN;3.5 UK ;4 UK;4.5 UK;5 UK;5.5 UK;6 UK;6.5 UK;7 UK;7.5 UK;8 UK;8.5 UK;9 UK ;9.5 UK;10 UK;10.5 UK;11 UK;11.5 UK;AVAILABLE FOR STORE PURCHASE ONLY;COMING SOON;44;5.5 US WOMEN;13 UK;12 UK;11 UK;10 UK;2 UK;1 UK;Silver;Gold;43/44;41/42;39/40;37/38;FREESIZE;7 5\8;7 1\4;7 3\8;7 1\2;3UK;OS;7 1\8;ML"
+166|4|coming_soon|||int|||boolean|"Coming Soon"||eav/entity_attribute_source_boolean|0|1|0|0|||1|1|0|0|0|1|1|0|0|1|0|0|simple,grouped,configurable,virtual,bundle,downloadable|0|0|0|0|

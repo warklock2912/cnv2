@@ -1,0 +1,64 @@
+<div class="mastercheckout_shipping_method" >
+    <div class="mastercheckout_shipment_titles"><?php echo $this->__('Shipping Method') ?></div>
+	<div class="inner">
+    <?php $shippingimg = Mage::getStoreConfig('mastercheckout/shippingbilling/shippingimg'); ?>
+    <?php if (!empty($shippingimg)){ ?>
+    	<div class="mastercheckout_billingimg"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?>mastercheckout/shipping/<?php echo $shippingimg; ?>"/></div>
+    <?php } ?>
+    <?php $shippingmsg = Mage::getStoreConfig('mastercheckout/shippingbilling/shippingmsg'); ?>
+    <?php if (!empty($shippingmsg)){ ?>
+    	<div class="mastercheckout_billingmsg"><?php echo $shippingmsg; ?></div>
+    <?php } ?>
+
+<form id="co-shipping-method-form" action="">
+    <div id="checkout-shipping-method-load">
+        <?php echo $this->getChildHtml('available') ?>
+    </div>
+    <script type="text/javascript">
+    //<![CDATA[
+        var shippingMethod = new ShippingMethod('co-shipping-method-form', "<?php echo $this->getUrl('checkout/onepage/saveShippingMethod') ?>");
+    //]]>
+    </script>
+    <div id="onepage-checkout-shipping-method-additional-load">
+        <?php echo $this->getChildHtml('additional') ?>
+    </div>
+    <div class="" id="shipping-method-buttons-container">
+<!--        <p class="back-link"><a href="#" onclick="checkout.back(); return false;"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>-->
+<!--        <button type="button" class="button" onclick="shippingMethod.save()"><span><span><?php echo $this->__('Continue') ?></span></span></button>-->
+        <span id="shipping-method-please-wait" class="please-wait" style="display:none;">
+            <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Loading next step...') ?>" title="<?php echo $this->__('Loading next step...') ?>" class="v-middle" /> <?php echo $this->__('Loading next step...') ?>
+        </span>
+    </div>
+<?php echo $this->getBlockHtml("formkey") ?></form>
+</div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+    var saveShippingMethod = function(){
+//        console.log("save1111111");
+        if (checkout.loadWaiting!=false) return;
+//        console.log("save2");
+        if (this.validate()) {
+//            console.log("save3");
+//            checkout.setLoadWaiting('shipping-method');
+//            console.log(this.saveUrl);
+            var request = new Ajax.Request(
+                this.saveUrl,
+                {
+                    method:'post',
+//                    onComplete: this.onComplete,
+//                    onSuccess: this.onSave,
+                    onFailure: checkout.ajaxFailure.bind(checkout),
+                    parameters: Form.serialize(this.form)
+                }
+            );
+        }else{
+          document.getElementById('next-step-3').disabled = false;
+          return false;
+        }
+    };
+    shippingMethod.save = saveShippingMethod;
+//]]>
+
+	
+</script>

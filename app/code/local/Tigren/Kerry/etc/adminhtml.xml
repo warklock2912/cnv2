@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<config>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <kerry translate="title">
+                                        <title>Kerry API Settings</title>
+                                        <sort_order>50</sort_order>
+                                    </kerry>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <kerry module="kerry">
+                        <title>Kerry API</title>
+                        <sort_order>72</sort_order>
+                        <children>
+                            <settings module="kerry" translate="title">
+                                <title>Settings</title>
+                                <sort_order>300</sort_order>
+                                <action>adminhtml/system_config/edit/section/kerry</action>
+                            </settings>
+                            <booking module="kerry" translate="title">
+                                <title>Booking</title>
+                            </booking>
+                            <print module="kerry" translate="title">
+                                <title>Print</title>
+                            </print>
+                        </children>
+                    </kerry>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    
+</config>

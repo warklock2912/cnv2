@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Segments
+ */
+-->
+<config>
+    <modules>
+        <Amasty_Segments>
+            <version>1.0.7</version>
+        </Amasty_Segments>
+    </modules>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Amasty_Segments after="Mage_Adminhtml">Amasty_Segments_Adminhtml</Amasty_Segments>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <frontend>
+        <routers>
+            <amsegmentsfront>
+                <use>standard</use>
+                <args>
+                    <module>Amasty_Segments</module>
+                    <frontName>amsegmentsfront</frontName>
+                </args>
+            </amsegmentsfront>
+        </routers>
+        <translate>
+            <modules>
+                <Amasty_Segments>
+                    <files>
+                        <default>Amasty_Segments.csv</default>
+                    </files>
+                </Amasty_Segments>
+            </modules>
+        </translate>
+    </frontend>    
+    <adminhtml>
+        <translate>
+            <modules>
+                <Amasty_Segments>
+                    <files>
+                        <default>Amasty_Segments.csv</default>
+                    </files>
+                </Amasty_Segments>
+            </modules>
+        </translate>
+        <menu>
+            <customer>
+                <children>
+                    <amsegments translate="title" module="amsegments">
+                        <title>Customers Segmentation</title>
+                        <sort_order>1000</sort_order>
+                        <action>adminhtml/amsegments_segment/index</action>
+                    </amsegments>
+                </children>
+            </customer>
+        </menu> 
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <customer>
+                            <children>
+                                <amsegments translate="title" module="amsegments">
+                                    <title>Customers Segmentation</title>
+                                </amsegments>
+                                <system>
+                                    <children>
+                                        <system>
+                                            <children>
+                                                <config>
+                                                    <children>
+                                                        <amsegments>
+                                                            <title>Customers Segmentation</title>
+                                                        </amsegments>
+                                                    </children>
+                                                </config>
+                                            </children>
+                                        </system>
+                                    </children>
+                                </system> 
+                            </children>
+                        </customer>
+                     </children>
+                </admin> 
+            </resources>
+        </acl>
+        
+        <layout>
+            <updates>
+                <amsegments>
+                    <file>amsegments.xml</file>
+                </amsegments>
+            </updates>
+        </layout>
+    </adminhtml>
+    
+    <global>
+        <models>
+            <amsegments>
+                <class>Amasty_Segments_Model</class>
+                <resourceModel>amsegments_mysql4</resourceModel>
+            </amsegments>
+            <amsegments_mysql4>
+                <class>Amasty_Segments_Model_Mysql4</class>
+                <entities>
+                    <segment>
+                        <table>amasty_amsegments_segment</table>
+                    </segment>
+                    <customer>
+                        <table>amasty_amsegments_customer</table>
+                    </customer>
+                    <order>
+                        <table>amasty_amsegments_order</table>
+                    </order>
+                    <index>
+                        <table>amasty_amsegments_index</table>
+                    </index>
+                    <product_index>
+                        <table>amasty_amsegments_product_index</table>
+                    </product_index>
+                    <cart>
+                        <table>amasty_amsegments_cart</table>
+                    </cart>
+                </entities>
+            </amsegments_mysql4>
+            <enterprise_customersegment>
+                <rewrite>
+                    <observer>Amasty_Segments_Model_Customersegment_Observer</observer>
+                </rewrite>
+            </enterprise_customersegment>
+        </models>
+        <resources>
+             <amsegments_setup>
+                <setup>
+                    <module>Amasty_Segments</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </amsegments_setup>
+            <amsegments_write>
+                <connection><use>core_write</use></connection>
+            </amsegments_write>
+            <amsegments_read>
+                <connection><use>core_read</use></connection>
+            </amsegments_read>
+        </resources>
+        <template>
+            <email>
+                
+            </email>
+        </template>
+        <blocks>
+            <amsegments>
+                <class>Amasty_Segments_Block</class>
+            </amsegments>
+            <adminhtml>
+                <rewrite>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+        <helpers>
+            <amsegments>
+                <class>Amasty_Segments_Helper</class>
+            </amsegments>
+        </helpers>
+        <events>
+            
+        <salesrule_rule_condition_combine>
+         <observers>
+             <amasty_segemnts_model_observer>
+                 <type>singleton</type>
+                 <class>amsegments/observer</class>
+                 <method>handleNewConditions</method>
+             </amasty_segemnts_model_observer>
+         </observers>
+       </salesrule_rule_condition_combine>
+
+        </events>
+        <index>
+            <indexer>
+                <amsegemnts_indexer>
+                    <model>amsegments/indexer</model>
+                </amsegemnts_indexer>
+            </indexer>
+        </index>
+        
+    </global>
+    <frontend>
+        <layout>
+              <updates>
+                  <amsegments>
+                      <file>amasty/amsegments/main.xml</file>
+                  </amsegments>
+              </updates>
+        </layout>
+    </frontend>
+    <default>
+        <amsegments>
+            <general>
+                <customer_attributes>website_id,dob,email,firstname,lastname,middlename,gender,group_id</customer_attributes>
+            </general>
+        </amsegments>
+    </default>
+    <crontab>
+        <jobs>
+            <amsegments_index>
+                <schedule>
+                    <cron_expr>0 0 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>amsegments/observer::index</model>
+                </run>
+            </amsegments_index>
+        </jobs>
+    </crontab>
+</config>

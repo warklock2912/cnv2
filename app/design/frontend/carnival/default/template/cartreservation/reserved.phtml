@@ -1,0 +1,5 @@
+<?php
+$_product = $this->getProduct();
+if ($_product->getIsReserved()) : ?>
+    <p class="action availability out-of-stock"><span><?php echo $this->__('ขณะนี้มีลูกค้าท่านอื่นกำลังทำรายการอยู่ หากชำระเงินไม่สำเร็จสินค้าจะกลับมา IN STOCK ใหม่อีกครั้ง') ?></span></p>
+<?php endif; ?>

@@ -1,0 +1,127 @@
+<style type="text/css">
+  #backgroundPopup{
+    display:none;
+    position:fixed;
+    _position:absolute; /* hack for internet explorer 6*/
+    height:100%;
+    width:100%;
+    top:0;
+    left:0;
+    background:#000000;
+    border:1px solid #cecece;
+    z-index:1;
+  }
+  #agreement-content{
+    display:none;
+    position:fixed;
+    _position:absolute; /* hack for internet explorer 6*/
+    height:384px;
+    width:408px;
+    background:#FFFFFF;
+    border:2px solid #cecece;
+    z-index:9999;
+    padding:12px;
+    font-size:13px;
+  }
+  #agreement-content h1{
+    text-align:left;
+    color:#6FA5FD;
+    font-size:22px;
+    font-weight:700;
+    border-bottom:1px dotted #D3D3D3;
+    padding-bottom:2px;
+    margin-bottom:20px;
+  }
+  #agreement-contentClose{
+    font-size:14px;
+    line-height:14px;
+    right:6px;
+    top:4px;
+    position:absolute;
+    color:#6fa5fd;
+    font-weight:700;
+    display:block;
+  }
+
+</style>
+
+<?php if (!$this->getAgreements()) return; ?>
+<?php $payment_code = Mage::getSingleton('checkout/session')->getQuote()->getPayment()->getMethodInstance()->getCode(); ?>
+<?php if ($payment_code == 'omise_gateway') : ?>
+  <form action="" id="checkout-agreements" onsubmit="return false;">
+    <ol class="checkout-agreements">
+      <?php foreach ($this->getAgreements() as $_a): ?>
+        <li>
+          <div id="agreement-content" class="agreement-content"<?php echo ($_a->getContentHeight() ? ' style="height:' . $_a->getContentHeight() . '"' : '') ?>>
+            <?php if ($_a->getIsHtml()): ?>
+              <a id="agreement-contentClose">x</a>
+              <?php echo $_a->getContent() ?>
+            <?php else: ?>
+              <?php echo nl2br($this->htmlEscape($_a->getContent())) ?>
+            <?php endif; ?>
+          </div>
+          <p class="agree">
+            <input type="checkbox" id="agreement-<?php echo $_a->getId() ?>" name="agreement[<?php echo $_a->getId() ?>]" value="" title="<?php echo $this->htmlEscape($_a->getCheckboxText()) ?>" class="checkbox " /><label class="mastercheckout-terms-click" id="agreement-<?php echo $_a->getId() ?>"><?php echo $_a->getIsHtml() ? $_a->getCheckboxText() : $this->htmlEscape($_a->getCheckboxText()) ?></label>
+            <br>
+
+            <label style="text-decoration: none;font-size: 11px;">please agree to all the terms and conditions before check out the order</label>
+          </p>
+        </li>
+      <?php endforeach ?>
+    </ol>
+  </form>
+<?php else : ?>
+  <form action="" id="checkout-agreements" onsubmit="return false;" style="display:none">
+    <ol class="checkout-agreements">
+      <?php foreach ($this->getAgreements() as $_a): ?>
+        <li>
+          <div id="agreement-content" class="agreement-content"<?php echo ($_a->getContentHeight() ? ' style="height:' . $_a->getContentHeight() . '"' : '') ?>>
+            <?php if ($_a->getIsHtml()): ?>
+              <a id="agreement-contentClose">x</a>
+              <?php echo $_a->getContent() ?>
+            <?php else: ?>
+              <?php echo nl2br($this->htmlEscape($_a->getContent())) ?>
+            <?php endif; ?>
+          </div>
+          <p class="agree">
+            <input type="checkbox" checked id="agreement-<?php echo $_a->getId() ?>" name="agreement[<?php echo $_a->getId() ?>]" value="" title="<?php echo $this->htmlEscape($_a->getCheckboxText()) ?>" class="checkbox " /><label class="mastercheckout-terms-click" id="agreement-<?php echo $_a->getId() ?>"><?php echo $_a->getIsHtml() ? $_a->getCheckboxText() : $this->htmlEscape($_a->getCheckboxText()) ?></label>
+            <br>
+
+            <label style="text-decoration: none;font-size: 11px;">please agree to all the terms and conditions before check out the order</label>
+          </p>
+        </li>
+      <?php endforeach ?>
+    </ol>
+  </form>
+<?php endif; ?>
+<div id="backgroundPopup"></div>
+
+<script type="text/javascript">
+//<![CDATA[
+
+  jQuery(document).ready(function () {
+    jQuery(".mastercheckout-terms-click").click(function () {
+      //centering with css
+      centerPopup("agreement-content");
+      //load popup
+      loadPopup("agreement-content");
+    });
+
+    //CLOSING POPUP
+    //Click the x event!
+    jQuery("#agreement-contentClose").click(function () {
+      disablePopup("agreement-content");
+    });
+    //Click out event!
+    jQuery("#backgroundPopup").click(function () {
+      disablePopup("agreement-content");
+    });
+    //Press Escape event!
+    jQuery(document).keypress(function (e) {
+      if (e.keyCode == 27 && popupStatus == 1) {
+        disablePopup("agreement-content");
+      }
+    });
+  });
+//]]>
+</script>

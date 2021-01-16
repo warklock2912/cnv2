@@ -1,0 +1,70 @@
+<?php
+class Omise_Gateway_Model_OmiseTransfer extends Omise_Gateway_Model_Omise
+{
+    /**
+     * @param  string $id
+     *
+     * @return OmiseTransfer|array
+     */
+    public function retrieveOmiseTransfer($id = '')
+    {
+        $this->initNecessaryConstant();
+
+        try {
+            return OmiseTransfer::retrieve('', $this->getPublicKey(), $this->getSecretKey());
+        } catch (Exception $e) {
+            return array('error' => $e->getMessage());
+        }
+    }
+
+    /**
+     * @param  array $params
+     *
+     * @return OmiseTransfer|array
+     */
+    public function createOmiseTransfer($params)
+    {
+        $this->initNecessaryConstant();
+
+        try {
+            // Validate $params
+            // If it not contain `amount` key.
+            if (! isset($params['amount'])) {
+                throw new Exception("Amount was required", 1);
+            }
+
+            if ($params['amount'] == '') {
+                throw new Exception("Don't let amount with empty value", 1);
+            }
+
+            // Remove `.`
+            $params['amount'] = str_replace('.', '', $params['amount']);
+
+            return OmiseTransfer::create($params, $this->getPublicKey(), $this->getSecretKey());
+        } catch (Exception $e) {
+            return array('error' => $e->getMessage());
+        }
+    }
+
+    /**
+     * @param  string $id
+     *
+     * @return OmiseTransfer|array
+     */
+    public function deleteOmiseTransfer($id = '')
+    {
+        $this->initNecessaryConstant();
+
+        try {
+            if ($id == '') {
+                throw new Exception("Id was required", 1);
+            }
+
+            $object = OmiseTransfer::retrieve($id, $this->getPublicKey(), $this->getSecretKey());
+
+            return $object->destroy();
+        } catch (Exception $e) {
+            return array('error' => $e->getMessage());
+        }
+    }
+}

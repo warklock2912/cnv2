@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Payrestriction
+ */
+-->
+<!--
+    Copyright (c) 2009-2012 Amasty (http://www.amasty.com) 
+-->
+<config>
+    <modules>
+        <Amasty_Payrestriction>
+            <version>1.1.3</version>
+        </Amasty_Payrestriction>
+    </modules>
+
+    <global>
+        <models>
+            <ampayrestriction>
+                <class>Amasty_Payrestriction_Model</class>
+                <resourceModel>ampayrestriction_mysql4</resourceModel>
+            </ampayrestriction>
+            <ampayrestriction_mysql4>
+                <class>Amasty_Payrestriction_Model_Mysql4</class>
+                <entities>
+                    <rule>
+                        <table>am_payrestriction_rule</table>
+                    </rule> 
+                    <attribute>
+                        <table>am_payrestriction_attribute</table>
+                    </attribute>
+                </entities>
+            </ampayrestriction_mysql4>   
+        </models>     
+        <resources>
+            <ampayrestriction_setup>
+                <setup>
+                    <module>Amasty_Payrestriction</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </ampayrestriction_setup>
+            
+            <ampayrestriction_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </ampayrestriction_write>
+            
+            <ampayrestriction_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </ampayrestriction_read>
+        </resources>
+
+        <blocks>
+            <ampayrestriction>
+                <class>Amasty_Payrestriction_Block</class>
+            </ampayrestriction>
+        </blocks>
+        
+        <helpers>
+            <ampayrestriction>
+                <class>Amasty_Payrestriction_Helper</class>
+            </ampayrestriction>
+            <payment>
+                <rewrite>
+                    <data>Amasty_Payrestriction_Helper_Payment_Data</data>
+                </rewrite>
+            </payment>            
+        </helpers> 
+        <events>     
+            <sales_quote_config_get_product_attributes>
+                <observers>
+                    <ampayrestriction>
+                        <class>ampayrestriction/observer</class>
+                        <method>addProductAttributes</method>
+                    </ampayrestriction>
+                </observers>
+            </sales_quote_config_get_product_attributes>
+          <salesrule_rule_condition_combine>
+                <observers>
+                    <amasty_payrestriction_model_observer>
+                        <type>singleton</type>
+                        <class>ampayrestriction/observer</class>
+                        <method>handleNewConditions</method>
+                    </amasty_payrestriction_model_observer>
+                </observers>
+          </salesrule_rule_condition_combine>                         
+        </events>     
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Amasty_Payrestriction after="Mage_Adminhtml">Amasty_Payrestriction_Adminhtml</Amasty_Payrestriction>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin> 
+    
+    <adminhtml>
+        <menu>
+            <sales>
+                <children>
+                    <ampayrestriction translate="title" module="ampayrestriction">
+                        <title>Payment Restrictions</title>
+                        <sort_order>800</sort_order>
+                        <action>adminhtml/ampayrestriction_rule</action>
+                    </ampayrestriction>
+                </children>
+            </sales>
+        </menu> 
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <sales>
+                            <children>
+                                <ampayrestriction>
+                                    <title>Payment Restrictions</title>
+                                </ampayrestriction>
+                            </children>
+                        </sales> 
+                    </children>
+                </admin> 
+            </resources>
+        </acl>
+        <translate>
+            <modules>
+                <Amasty_Payrestriction>
+                    <files>
+                        <default>Amasty_Payrestriction.csv</default>
+                    </files>
+                </Amasty_Payrestriction>
+            </modules>
+        </translate> 	
+    </adminhtml> 
+</config>

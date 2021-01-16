@@ -1,0 +1,27 @@
+"Check Availability","Check Availability"
+"Connection Timeout","Connection Timeout"
+"Matching mode","Matching mode"
+"Search results ranker","Search results ranker"
+Sphinx,Sphinx
+"Sphinx Host","Sphinx Host"
+"Sphinx Port","Sphinx Port"
+Sql Port,Sql Port
+Sphinx Index,Sphinx Index
+Path to Index,Path to Index
+Path to Deltaindex,Path to Deltaindex
+Path to PID File,Path to PID File
+Path to Search Logs,Path to Search Logs
+Path to Sphinx Logs,Path to Sphinx Logs
+Generate Sphinx Config,Generate Sphinx Config
+"<a href=""http://sphinxsearch.com/docs/current.html#matching-modes"" target=""_blank"">What is Matching mode?</a>","<a href=""http://sphinxsearch.com/docs/current.html#matching-modes"" target=""_blank"">What is Matching mode?</a>"
+"<a href=""http://sphinxsearch.com/docs/current.html#weighting"" target=""_blank"">What is Ranking?</a>","<a href=""http://sphinxsearch.com/docs/current.html#weighting"" target=""_blank"">What is Ranking?</a>"
+"Default host: 127.0.0.1","Default host: 127.0.0.1"
+"Default index: catalogsearch_index","Default index: catalogsearch_index"
+"Default path: /etc/sphinx/","Default path: /etc/sphinx/"
+"Default path: /var/lib/sphinx/","Default path: /var/lib/sphinx/"
+"Default path: /var/lib/sphinx/deltaindex/","Default path: /var/lib/sphinx/deltaindex/"
+"Default path: /var/lib/sphinx/index/","Default path: /var/lib/sphinx/index/"
+"Default path: /var/log/sphinx/","Default path: /var/log/sphinx/"
+"Default port: 9312","Default port: 9312"
+"Default sql port: 3306","Default sql port: 3306"
+"Save the settings prior to generating a file.</br>Check the generated file.","Save the settings prior to generating a file.</br>Check the generated file."

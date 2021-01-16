@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_customer_edit>
+        <reference name="customer_edit_tabs">
+            <action method="addTab">
+                <name>newsnotification_brand</name>
+                <block>newsnotification/adminhtml_customer_brand_tab</block>
+            </action>
+            <action method="addTab">
+                <name>newsnotification_category</name>
+                <block>newsnotification/adminhtml_customer_category_tab</block>
+            </action>
+        </reference>
+    </adminhtml_customer_edit>
+</layout>

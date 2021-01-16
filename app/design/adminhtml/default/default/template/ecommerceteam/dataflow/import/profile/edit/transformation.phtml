@@ -1,0 +1,96 @@
+<?php
+/**
+ * Dataflow - Magento Extension
+ *
+ * @package Dataflow
+ * @category EcommerceTeam
+ * @copyright Copyright 2016 EcommerceTeam Inc. (http://www.ecommerce-team.com)
+ * @version: 2.5.0
+ */
+
+/** @var $this EcommerceTeam_Dataflow_Block_Adminhtml_Profile_Import_Edit_Tab_Transformation */
+$transform = $this->getTransformations();
+$types = $this->getTypes();
+?>
+<div class="grid">
+    <table cellspacing="0" id="transformTable" class="data border" style="width:600px;">
+        <thead>
+        <tr class="headings">
+            <th style="width:50px"><?php echo $this->__('Column Number');?></th>
+            <th style="width:50px"><?php echo $this->__('Transformation type');?></th>
+            <th><?php echo $this->__('Value');?></th>
+            <th><?php echo $this->__('Actions');?></th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <td colspan="6"><button onclick="transform.addRow(); return false;" class="button"><span><span><?php echo $this->__('Add')?></span></span></button></td>
+        </tr>
+        </tfoot>
+        <tbody>
+        <?php $id = 0;  if (empty($transform)):?>
+            <tr>
+                <td><input type="text" class="input-text" name="transform[<?php echo $id;?>][code]" value="" /></td>
+                <td>
+                    <select name="transform[<?php echo $id;?>][type]">
+                        <?php foreach ($types as $code => $type):?>
+                            <option value="<?php echo $code ?>"><?php echo $type ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </td>
+                <td><input type="text" class="input-text" name="transform[<?php echo $id;?>][value]" value="" /></td>
+                <td><button onclick="return transform.removeRow(this, event);" class="button delete"><span><span><?php echo $this->__('Delete')?></span></span></button></td>
+            </tr>
+        <?php else: ?>
+            <?php foreach ($transform as $t):?>
+                <tr>
+                    <td><input type="text" class="input-text" name="transform[<?php echo $id;?>][code]" value="<?php echo $t['code'];?>" /></td>
+                    <td>
+                        <select name="transform[<?php echo $id;?>][type]">
+                                <?php foreach ($types as $code => $type):?>
+                                    <option value="<?php echo $code ?>" <?php if ($t['type'] == $code):?>selected="selected"<?php endif?>><?php echo $type ?></option>
+                                <?php endforeach ?>
+                        </select>
+                    </td>
+                    <td><input type="text" class="input-text" name="transform[<?php echo $id;?>][value]" value="<?php echo $t['value'];?>" /></td>
+                    <td><button onclick="return transform.removeRow(this, event);" class="button delete"><span><span><?php echo $this->__('Delete')?></span></span></button></td>
+                </tr>
+                <?php $id++ ;endforeach;?>
+        <?php endif;?>
+        </tbody>
+    </table>
+    <script type="text/javascript">
+        var Transform = Class.create({
+            currentId: null,
+            initialize: function(currentId) {
+                this.currentId = currentId;
+            },
+            removeRow: function(btn, event) {
+                var tr = Event.findElement(event, 'tr');
+                if (tr) {
+                    Element.select(tr, ['input', 'select']).each(function(elem){elem.hide();elem.disabled = true});
+                    Element.hide(tr);
+                }
+                return false;
+            },
+            addRow: function () {
+                var cols = '<td><input type="text" class="input-text" name="transform[%id%][code]" value="" /></td>' +
+                    '<td>'+
+                    '<select name="transform[%id%][type]">'+
+                           <?php foreach ($types as $code => $type):?>
+                               '<option value="<?php echo $code ?>"><?php echo $type ?></option>'+
+                           <?php endforeach ?>
+                    '</select>'+
+                    '</td>' +
+                    '<td><input type="text" class="input-text" name="transform[%id%][value]" value="" /></td>' +
+                    '<td><button onclick="return transform.removeRow(this, event);" class="button delete"><span><span><?php echo $this->__('Delete')?></span></span></button></td>';
+                cols = cols.replace(/%id%/g, this.currentId);
+                var row = document.createElement('tr');
+                row.innerHTML = cols;
+                $$('#transformTable tbody')[0].appendChild(row);
+                this.currentId++;
+            }
+        });
+        var transform = new Transform(<?php echo $id+1;?>)
+    </script>
+</div>

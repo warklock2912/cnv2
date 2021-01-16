@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Appmerce - Applications for Ecommerce
+ * http://www.appmerce.com
+ *
+ * @extension   Auto-Cancel Orders
+ * @type        Order management
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php 
+ * 
+ * @category	Magento Commerce
+ * @package     Appmerce_AutoCancel
+ * @copyright   Copyright (c) 2011-2013 Appmerce (http://www.appmerce.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Appmerce_AutoCancel>
+            <version>0.1.0</version>
+        </Appmerce_AutoCancel>
+    </modules>
+    <global>
+        <helpers>
+            <autocancel>
+                <class>Appmerce_AutoCancel_Helper</class>
+            </autocancel>
+        </helpers>
+        <blocks>
+            <autocancel>
+                <class>Appmerce_AutoCancel_Block</class>
+            </autocancel>
+        </blocks>
+        <models>
+            <autocancel>
+                <class>Appmerce_AutoCancel_Model</class>
+            </autocancel>
+        </models>
+    </global>
+    <frontend>
+        <translate>
+            <modules>
+                <Appmerce_AutoCancel>
+                    <files>
+                        <default>Appmerce_AutoCancel.csv</default>
+                    </files>
+                </Appmerce_AutoCancel>
+            </modules>
+        </translate>
+    </frontend>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Appmerce_AutoCancel>
+                    <files>
+                        <default>Appmerce_AutoCancel.csv</default>
+                    </files>
+                </Appmerce_AutoCancel>
+            </modules>
+        </translate>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <autocancel>
+                                            <title>Auto-Cancel Orders</title>
+                                        </autocancel>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+    <default>
+        <autocancel>
+            <settings>
+                <cancel_status>canceled</cancel_status>
+            </settings>
+        </autocancel>
+    </default>
+    <crontab>
+        <jobs>
+            <autocancel_status_check>
+                <schedule>
+                    <cron_expr>0 0 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>autocancel/cron::autoCancel</model>
+                </run>
+            </autocancel_status_check>
+        </jobs>
+    </crontab>
+</config>

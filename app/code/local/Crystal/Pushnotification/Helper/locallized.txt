@@ -1,0 +1,22 @@
+//store shuffle
+
+"STORE_SHUFFLE_RANDOM_TITLE" ;
+"STORE_SHUFFLE_RANDOM_CONTENT" ;
+
+// store queue
+"STORE_QUEUE_CALL_SOON_CONTENT" = "%@: Another %@ queues will reach your queue.";
+"STORE_QUEUE_CALL_SOON_TITLE" = "Will be called soon.";
+
+"STORE_QUEUE_YOUR_TURN_TITLE" = "It’s your turn!";
+"STORE_QUEUE_YOUR_TURN_CONTENT" = "%@: Your queue is ready. Please contact staff within 2 minutes.";
+
+// store raffle online and store
+"STORE_RAFFLE_TITLE_WINNER" = "Let’s check Winner Announcement.";
+"STORE_RAFFLE_CONTENT_WINNER" = "The activity has ended, check Winner Announcement now!!";
+
+"ONLINE_RAFFLE_TITLE_LOSS" = "We're sorry.";
+"ONLINE_RAFFLE_CONTENT_LOSS" = "You missed the chance to buy the product.";
+
+// drop and crop
+"CROP_AND_DROP_TITLE" = "Crop or Drop";
+"CROP_AND_DROP_CONTENT" = "%@, Check it out!!";

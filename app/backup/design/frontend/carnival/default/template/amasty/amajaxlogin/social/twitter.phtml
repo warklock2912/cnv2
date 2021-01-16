@@ -1,0 +1,17 @@
+<?php 
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Ajaxlogin
+ */  
+?>
+
+<?php if(!Mage::getSingleton('core/session')->getData('amajaxlogin_twitter_token')){?>
+<div id="am-twitter-image" onclick="window.parent.AmAjaxLoginObj.loginTw(this);" data="<?php echo $this->getTwitterConnectUrl()?>" dataTw="<?php echo $this->getUrlParaml()?>">
+    <?php echo  $this->__('Sign in'); ?>
+</div>
+<?php }else {?>
+<div id="am-twitter-image" onclick="window.parent.AmAjaxLoginObj.loginS(this);" data="<?php echo $this->getTwitterConnectUrl()?>" dataTw="<?php echo $this->getUrlParaml()?>">
+    <?php echo  $this->__('Connect'); ?>
+</div>
+<?php }?>

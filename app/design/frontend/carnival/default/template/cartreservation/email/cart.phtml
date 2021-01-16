@@ -1,0 +1,43 @@
+<?php
+
+/*
+
+Plumrocket Inc.
+
+NOTICE OF LICENSE
+
+This source file is subject to the End-user License Agreement
+that is available through the world-wide-web at this URL:
+http://wiki.plumrocket.net/wiki/EULA
+If you are unable to obtain it through the world-wide-web, please
+send an email to support@plumrocket.com so we can send you a copy immediately.
+
+@package    Plumrocket_Cart_Reservation-v1.5.x
+@copyright  Copyright (c) 2013 Plumrocket Inc. (http://www.plumrocket.com)
+@license    http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ 
+*/
+?>
+<?php $_order = $this->getOrder() ?>
+<table cellspacing="0" cellpadding="0" border="0" width="650" style="border:1px solid #EAEAEA;">
+    <thead>
+        <tr>
+            <th align="center" width="5%" bgcolor="#EAEAEA" style="font-size:13px; padding:3px 9px;"></th>
+            <th align="center" width="10%" bgcolor="#EAEAEA" style="font-size:13px; padding:3px 9px"></th>
+            <th align="left" width="40%"  bgcolor="#EAEAEA" style="font-size:13px; padding:3px 9px"><?php echo $this->__('Item') ?></th>
+            <th align="left"  width="15%" bgcolor="#EAEAEA" style="font-size:13px; padding:3px 9px"><?php echo $this->__('Sku') ?></th>
+            <th align="center"  width="15%" bgcolor="#EAEAEA" style="font-size:13px; padding:3px 9px"><?php echo $this->__('Qty') ?></th>
+            <th align="right"  width="15%" bgcolor="#EAEAEA" style="font-size:13px; padding:3px 9px"><?php echo $this->__('Subtotal') ?></th>
+        </tr>
+    </thead>
+
+	<tbody>
+    <?php foreach($this->getItems() as $_item): 
+        echo $this->getItemHtml($_item);
+    endforeach; ?>
+    </tbody>
+
+    <tbody>
+        <?php echo $this->getChildHtml('totals'); ?>
+    </tbody>
+</table>

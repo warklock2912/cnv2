@@ -1,0 +1,68 @@
+<?php
+
+	 $user_token_id =  Mage::getSingleton('core/session')->getStoredCardId();
+	 $stored_card_token_id = '';
+	 	 
+	 if(Mage::getSingleton('customer/session')->isLoggedIn()) {
+	 	$p2c2pTokenModel = Mage::getModel('p2c2p/token');
+
+	 	if(!$p2c2pTokenModel) {
+	 		die("2C2P Expected Model not available.");
+	         }
+
+	 	$customer_data = $p2c2pTokenModel->load($user_token_id);
+	 	$stored_card_token_id = $customer_data->getData('stored_card_unique_id');
+	 }
+
+	/* Create helper class object */
+	$objRequestHelper = Mage::helper('P2c2p/Request');
+
+	/* get order detail */
+	$_order  = new Mage_Sales_Model_Order();
+	$orderId = Mage::getSingleton('checkout/session')->getLastRealOrderId();
+	$_order->loadByIncrementId($orderId);
+
+	/* Get email when customer is logged in */
+	if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+	    $customer   = Mage::getSingleton('customer/session')->getCustomer();
+	    $cust_email = $customer->getEmail();
+	}else {
+		if(empty($orderId)){ // If Custom can enter direct URL from browser.
+			die("Aunthentication Error: Payment transection failed.");			
+		}
+	    $cust_email = $_order->getBillingAddress()->getEmail(); //Gust Email	    
+	}
+
+	$item_count = count($_order->getAllItems());
+    $current_count = 0;
+	$product_description = '';
+
+	foreach ($_order->getAllItems() as $item) {
+	    $product_description .= $item->getName();
+        $current_count++;
+
+        if($item_count !== $current_count)
+            $product_description .= ',';
+	}
+
+   	$product_description .= '.';
+
+	$currencyType = $_order->getBaseCurrencyCode();
+	$amount = round($_order->getGrandTotal(), 2);
+	$amount = $objRequestHelper->p2c2p_get_amount_by_currency_type($currencyType,$amount);
+	
+	/* Set value in session. */
+	Mage::getSingleton('core/session')->setAmtVal($amount);
+
+	$fun2c2p_args   = array(
+	    'payment_description' => $product_description,
+	    'order_id' => $orderId,
+	    'invoice_no' => $orderId,
+	    'amount' => $amount,
+	    'customer_email' => $cust_email,
+	    'stored_card_unique_id' => $stored_card_token_id != '' ? $stored_card_token_id : '',
+	);
+
+	Mage::getSingleton('core/session')->unsStoredCardId();
+	echo $objRequestHelper->p2c2p_construct_request($fun2c2p_args); 
+?>

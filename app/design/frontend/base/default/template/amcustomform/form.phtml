@@ -1,0 +1,120 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Customform
+ */
+?>
+<?php
+/** @var Amasty_Customform_Block_Form $this */
+
+
+$form = $this->getFormModel();
+$configCaptcha = Mage::helper('amcustomform/captcha')->getConfigNode('enable');
+$captchaEnable = $form->getCaptcha() && $configCaptcha;
+$baseJsUrl = Mage::getBaseUrl('js');
+$session = Mage::getSingleton('customer/session');
+$data = $session->getData('customer-form-data-'.$this->getFormId());
+if($captchaEnable){
+    $captcha = $this->getCaptcha();
+}
+?>
+
+<script type="text/javascript" src="<?php echo $baseJsUrl?>calendar/calendar.js"></script>
+<script type="text/javascript" src="<?php echo $baseJsUrl?>calendar/calendar-setup.js"></script>
+<script type="text/javascript" src="<?php echo $this->getJsUrl('mage/captcha.js') ?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $baseJsUrl?>calendar/calendar-win2k-1.css" media="all" />
+<?php echo $this->getLayout()->createBlock('core/html_calendar')->setTemplate('page/js/calendar.phtml')->toHtml();?>
+
+<style>
+    .customer-forms ul {
+        list-style: none !important;
+    }
+    .customer-forms li {
+        font-style: normal !important;
+    }
+    .customer-forms img.v-middle {
+        display: inline-block;
+        vertical-align: middle;
+        position: relative;
+        left: 2px;
+    }
+    .customer-forms .field-row > input{
+        float: left;
+    }
+    .customer-forms textarea.validation-failed,
+    .customer-forms select.validation-failed{
+        border-color: #df280a;
+    }
+    .customer-forms textarea.validation-failed:focus,
+    .customer-forms select.validation-failed:focus{
+        outline-color: #ef9384;
+    }
+    .customer-forms .validation-advice{
+        clear:both;
+    }
+    .customer-forms textarea{
+        width:365px;
+    }
+    .customer-forms label.required:after,
+    .customer-forms span.required:after {
+        content: ' *';
+        color: #df280a;
+        font-weight: normal;
+        font-family: "Helvetica Neue", Verdana, Arial, sans-serif;
+        font-size: 12px;
+    }
+</style>
+<div class="customer-forms">
+        <form id="custom-form-<?php echo $form->getId()?>" action="<?php echo $this->getUrl('customform/form/submit/',array('preview'=>$this->getPreview())) ?>" method="post">
+        <input type="hidden" name="form_id" value="<?php echo $form->getId() ?>">
+
+        <?php
+        foreach ($form->getActiveLines() as $line) {
+            /** @var Amasty_Customform_Model_Form_Line $line */
+        ?>
+            <div class="fieldset">
+                <ul class="form-list">
+                <?php
+                foreach ($line->getActiveFormFields() as $formField) {
+                    /** @var Amasty_Customform_Model_Form_Field $formField */
+                ?>
+                    <li class="fields">
+                        <div class="field">
+                            <?php $element = $this->createElement($formField); ?>
+                            <?php if($element->getMaxLength()>0){ ?>
+                            <?php $element->addClass('validate-length') ?>
+                            <?php $element->addClass('maximum-length-'.$element->getMaxLength()) ?>
+                            <?php } ?>
+                            <label for="form-field-<?php echo $formField->getId() ?>"><?php echo $formField->getField()->getCurrentStorable('label'); echo ($element->getRequired()) ? ' <span class="required"></span>' : ''; ?></label>
+                            <div class="input-box"><?php echo $element->toHtml(); ?></div>
+                        </div>
+                    </li>
+                <?php } ?>
+                </ul>
+            </div>
+        <?php } ?>
+        <?php if($captchaEnable){ ?>
+        <div class="fieldset">
+            <ul class="form-list">
+                <?php echo $captcha->toHtml() ?>
+            </ul>
+        </div>
+        <?php }?>
+
+        <div class="buttons-set">
+            <button type="submit"  title="<?php echo $this->__('Submit') ?>" class="button"><span><span><?php echo $this->__('Submit') ?></span></span></button>
+            <button type="button" onclick="window.location = '<?php echo $this->getUrl('customform/form/reset/',array('form_id'=>$this->getFormId())) ?>'" title="<?php echo $this->__('Reset') ?>" class="button"><span><span><?php echo $this->__('Reset') ?></span></span></button>
+        </div>
+        </form>
+</div>
+<script type="text/javascript">
+    //<![CDATA[
+    var contactForm<?php echo $form->getId()?> = new VarienForm('custom-form-<?php echo $form->getId()?>', true);
+    <?php  ?>
+    <?php if(!empty($data)){?>
+    contactForm<?php echo $form->getId()?>.validator.validate();
+    <?php } ?>
+
+    //]]>
+</script>

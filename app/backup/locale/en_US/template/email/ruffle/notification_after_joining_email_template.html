@@ -1,0 +1,14 @@
+<!--@subject Ruffle! @-->
+<!--@styles
+@-->
+
+{{template config_path="design/email/header"}}
+{{inlinecss file="email-inline.css"}}
+
+<h1>THANK YOU</h1>
+<strong>YOUR NUMBER IS</strong>: {{var data.ruffle_number}}<br/>
+<strong>Product Name</strong>: {{var data.product_name}}<br/>
+<strong>Product Sku</strong>: {{var data.product_sku}}<br/>
+{{var options}}
+
+{{template config_path="design/email/footer"}}

@@ -1,0 +1,355 @@
+/* Ruffle CSS */
+.ruffle-index-index{
+    background: #111111;
+}
+.ruffle-index-index .wrapper {
+    background: #111111;
+}
+.ruffle-index-index .main-container .main .breadcrumbs {
+    margin-bottom: 0;
+}
+.ruffle-index-index .main-container {
+    /*background: #111111 url("images/ruffle_bg.png") top center no-repeat;*/
+    max-width: 100%;
+    background-size: contain;
+}
+.ruffle-index-index .main-container .col-main {
+    max-width: 1200px;
+    display: block;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 130px 15px 0;
+}
+.ruffle-index-index .main-container .main .breadcrumbs {
+    margin-bottom: 0;
+}
+.ruffle-index-index .main-container .main .breadcrumbs ul {
+    max-width: 1200px;
+    display: block;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+.ruffle-index-index .page-title h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    color: #ffffff;
+    font-weight: bold;
+}
+.ruffle-index-index .page-title .subtitle {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #7d7d7d;
+    margin-bottom: 10px;
+}
+.ruffle-index-index .ruffle-description {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #ebebeb;
+    padding: 30px 0;
+    background: #252525;
+}
+.ruffle-index-index .ruffle-description h1 {
+    font-family: 'HelveticaNeue';
+    font-size: 14px;
+    font-weight: bold;
+    color: #ebebeb;
+}
+.ruffle-index-index .ruffle-list .product-info {
+    text-align: left;
+}
+.ruffle-index-index .ruffle-list .product-info .product-brand {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: bold;
+}
+.ruffle-index-index .ruffle-list .product-info .product-name {float: left;}
+.ruffle-index-index .ruffle-list .product-info .product-name a {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #ffffff;
+}
+.ruffle-index-index .ruffle-list .product-info .price-box {
+    float: right;
+}
+.ruffle-index-index .ruffle-list .product-info .price-box .old-price,
+.ruffle-index-index .ruffle-list .product-info .price-box .special-price {
+    display: block;
+    text-align: right;
+}
+.ruffle-index-index .ruffle-list .product-info .price-box .price{
+    font-family:'HelveticaNeue-CondensedBold';
+    font-size: 14px;
+    color: #ffffff;
+}
+#join-ruffle-button ,button#join-ruffle-login.button.ruffle-joined{
+    background: transparent;
+    color: #1cbbb4;
+    border: 1px solid #1cbbb4;
+    margin-bottom: 5px;
+}
+#join-ruffle-button:hover ,button#join-ruffle-login.button.ruffle-joined:hover{
+    background: #1cbbb4;
+    color: #ffffff;
+    border: 1px solid #1cbbb4;
+}
+button#join-ruffle-login.button.ruffle-joined:hover{ cursor: pointer !important; }
+.poup-close{
+    position: absolute;
+    right: 15px;
+    top: 5px;
+    font-size: 20px;
+    color: #636363;
+    cursor: pointer;
+}
+.ruffle-product-view .main-container {
+    /*background: #111111 url("images/ruffle_bg.png") top center no-repeat;*/
+    max-width: 100%;
+    background-size: contain;
+}
+.ruffle-product-view .main-container .col-main {
+    max-width: 1200px;
+    display: block;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 130px 15px 0;
+}
+.ruffle-product-view .main-container .main .breadcrumbs {
+    margin-bottom: 0;
+}
+.ruffle-product-view .main-container .main .breadcrumbs ul {
+    max-width: 1200px;
+    display: block;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+.ruffle-product-view .product-view .product-essential:before{
+    height: 100%;
+    top: 0;
+}
+.ruffle-product-view .product-collateral .toggle-tabs {
+    background: transparent;
+    color: #ffffff;
+    border-color: #707070;
+}
+.ruffle-product-view .product-collateral .toggle-tabs li > span {
+    color: #707070;
+}
+.ruffle-product-view .product-collateral .toggle-tabs li.current > span {
+    color: #ffffff;
+}
+.ruffle-product-view .product-collateral .toggle-tabs li.current > span:before{
+    background-color: #ffffff;
+}
+.ruffle-product-view .product-view .product-shop.tabs {
+    background: transparent;
+    color: #ffffff;
+}
+.ruffle-product-view .product-view .product-shop {
+    padding-top: 20px;
+}
+.ruffle-product-view .product-collateral .tab-container:before {
+    content: none;
+}
+.ruffle-product-view .product-view .product-shop .product-name .h1, .ruffle-product-view .price-box .price, .ruffle-product-view .product-view .product-shop .no-rating a,
+.ruffle-product-view .skip-sizing, .ruffle-product-view .add-to-links a.link-wishlist, .ruffle-product-view #customer-reviews h2, .ruffle-product-view .block-related .block-title h2,
+.ruffle-product-view .products-grid .product-name a {
+    color: #ffffff;
+}
+.ruffle-product-view .product-view .product-shop .price-box .old-price .price {
+    font-size: 16px;
+}
+.ruffle-product-view .product-view .price-box .special-price .price {
+    color: red;
+}
+.ruffle-product-view .product-options dt  label {
+    font-size: 12px;
+    color: #898989;
+}
+.ruffle-product-view .product-view .add-to-links a.link-wishlist:before {
+    background-position: 0 -572px;
+}
+.ruffle-product-view .product-view .sharing-links a.link-facebook {
+    background-position: -79px -601px;
+}
+.ruffle-index-confirm,
+.ruffle-index-thankyou {
+    background: #111111;
+}
+.ruffle-index-confirm .wrapper, .ruffle-index-thankyou .wrapper {
+    background: #111111;
+    color: #ffffff;
+}
+.ruffle-index-confirm .main-container .main .breadcrumbs, .ruffle-index-thankyou .main-container .main .breadcrumbs {
+    margin-bottom: 0;
+}
+.ruffle-index-confirm .main-container .main .breadcrumbs ul, .ruffle-index-thankyou .main-container .main .breadcrumbs ul {
+    max-width: 1200px;
+    display: block;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+.ruffle-index-confirm .main-container, .ruffle-index-thankyou .main-container {
+    background: url("images/ruffle_confirm_bg.jpg") top center no-repeat;
+    max-width: 100%;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+.ruffle-index-confirm .ruffle-confirm, .ruffle-index-thankyou .ruffle-thankyou {
+    max-width: 425px;
+    margin: 50px auto;
+    overflow: hidden;
+}
+.ruffle-index-confirm .ruffle-confirm h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info{
+    background: #ffffff;
+    padding: 10px;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div {
+    padding: 10px;
+    overflow: hidden;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-contact-info {}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-contact-info h3{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #000;
+    font-weight: bold;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-contact-info ul li{
+    font-family: Tahoma;
+    font-size: 14px;
+    color: #252525;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-contact-info ul li label {
+    font-family: Tahoma;
+    font-size: 14px;
+    color: #898989;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info {
+    border-top: 1px solid #ccc;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info img {
+    float: left;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info {
+    margin-left: 140px;
+    color: #000000;
+    text-align: left;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info .product-name,
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info .product-name a,
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info .product-brand {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #000;
+    text-align: left;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info .product-name {
+    margin: 0;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info .product-brand {
+    margin: 0 0 10px;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info .options,
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info .price,
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info .qty {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #000;
+    text-align: left;
+}
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info .options label,
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info .price label,
+.ruffle-index-confirm .ruffle-confirm .ruffle-info > div.ruffle-product-info .product-info .qty label{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #363636;
+    text-align: left;
+    min-width: 65px;
+    text-transform: uppercase;
+}
+.ruffle-index-confirm .confirm-button button.button {
+    background: transparent;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: #1cbbb4;
+    font-weight: bold;
+    border: 1px solid #1cbbb4;
+    margin: 10px 0;
+    height: 45px;
+    line-height: 45px;
+    width: 100%;
+    padding: 0;
+
+}
+.ruffle-index-confirm .back-link {
+    color: #ffffff;
+}
+.ruffle-index-confirm .confirm-button button.button:hover {
+    background: #1cbbb4;
+    color: #ffffff;
+    border: 1px solid #1cbbb4;
+}
+.ruffle-index-thankyou .ruffle-thankyou {
+    text-align: center;
+}
+.ruffle-index-thankyou .ruffle-thankyou .page-title h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 35px;
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ffffff;
+}
+.ruffle-joined{
+    cursor: not-allowed !important; 
+}
+.ruffle-joined:hover{
+    cursor: not-allowed !important; 
+}
+.ruffle-index-thankyou .ruffle-thankyou h2,
+.ruffle-index-thankyou .ruffle-thankyou p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    color: #ffffff;
+}
+.ruffle-index-thankyou .ruffle-thankyou h2 a {
+    color: #1cbbb4;
+}
+.ruffle-index-thankyou .ruffle-thankyou .actions {
+    margin: 15px 0;
+}
+.ruffle-index-thankyou .ruffle-thankyou .actions button.button {
+    background: transparent;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+}
+.ruffle-index-thankyou .ruffle-thankyou .actions button.button:hover {
+    background: #1cbbb4;
+    border: 1px solid #1cbbb4;
+    color: #ffffff;
+}
+
+@media (min-width: 1500px) {
+    .ruffle-index-index .main-container .col-main, .ruffle-product-view .main-container .col-main {
+        max-width: 1480px;
+        padding: 160px 15px 0;
+    }
+    .ruffle-index-index .main-container .main .breadcrumbs ul,
+    .ruffle-product-view .main-container .main .breadcrumbs ul,
+    .ruffle-index-confirm .main-container .main .breadcrumbs ul,
+    .ruffle-index-thankyou .main-container .main .breadcrumbs ul {
+        max-width: 1480px;
+    }
+}

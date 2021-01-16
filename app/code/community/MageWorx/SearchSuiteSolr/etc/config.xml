@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MageWorx
+ * Search Suite
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuiteSolr
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+-->
+<config>
+    <modules>
+        <MageWorx_SearchSuiteSolr>
+            <version>1.2.0</version>
+        </MageWorx_SearchSuiteSolr>
+    </modules>
+    <global>
+        <helpers>
+            <mageworx_searchsuitesolr>
+                <class>
+                    MageWorx_SearchSuiteSolr_Helper
+                </class>
+            </mageworx_searchsuitesolr>
+        </helpers>
+        
+        <blocks>
+            <mageworx_searchsuitesolr>
+                <class>MageWorx_SearchSuiteSolr_Block</class>
+            </mageworx_searchsuitesolr>
+        </blocks>
+        
+        <models>
+            <mageworx_searchsuitesolr>
+                <class>MageWorx_SearchSuiteSolr_Model</class>
+                <resourceModel>mageworx_searchsuitesolr_resource</resourceModel>
+            </mageworx_searchsuitesolr>
+            <mageworx_searchsuitesolr_resource>
+                <class>MageWorx_SearchSuiteSolr_Model_Resource</class>
+            </mageworx_searchsuitesolr_resource>
+            <mageworx_searchsuite_resource>
+                <entities>
+                    <update_index>
+                        <table>mageworx_searchsuite_update_index</table>
+                    </update_index>
+                </entities>
+            </mageworx_searchsuite_resource>
+        </models>
+        <resources>
+            <mageworx_searchsuitesolr_setup>
+                <setup>
+                    <module>MageWorx_SearchSuiteSphinx</module>
+                    <class>MageWorx_SearchSuiteSphinx_Model_Resource_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </mageworx_searchsuitesolr_setup>
+        </resources>
+    </global>
+
+    <adminhtml>
+        <events>
+            <controller_action_predispatch_adminhtml_system_config_edit>
+                <observers>
+                    <mageworx_searchsuitesolr>
+                        <class>mageworx_searchsuitesolr/observer</class>
+                        <method>controllerActionPredispatchAdminhtmlSystemConfigEdit</method>
+                    </mageworx_searchsuitesolr>
+                </observers>
+            </controller_action_predispatch_adminhtml_system_config_edit>
+        </events>
+        <translate>
+            <modules>
+                <MageWorx_SearchSuiteSolr>
+                    <files>
+                        <default>MageWorx_SearchSuiteSolr.csv</default>
+                    </files>
+                </MageWorx_SearchSuiteSolr>
+            </modules>
+        </translate>
+    </adminhtml>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <MageWorx_SearchSuiteSolr after="Mage_Adminhtml">MageWorx_SearchSuiteSolr_Adminhtml</MageWorx_SearchSuiteSolr>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <default>
+        <mageworx_searchsuite>
+            <solr>
+                <host>127.0.0.1</host>
+                <port>8983</port>
+                <path>solr</path>
+                <timeout>30</timeout>
+            </solr>
+        </mageworx_searchsuite>
+    </default>
+</config>

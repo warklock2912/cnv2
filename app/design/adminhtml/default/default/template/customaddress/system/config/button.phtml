@@ -1,0 +1,10 @@
+<script type="text/javascript">
+	//<![CDATA[
+	function import_thai_address() {
+    if (confirm('All current address data may be lost. Are you sure to import address data?')) {
+      setLocation("<?php echo $this->getUrl('adminhtml/customaddress_data/import') ?>")
+    }
+	}
+    //]]>
+</script>
+<?php echo $this->getButtonHtml() ?>

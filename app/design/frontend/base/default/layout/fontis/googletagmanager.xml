@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Fontis Software License that is available in
+ * the FONTIS-LICENSE.txt file included with this extension. This file is located
+ * by default in the root directory of your Magento installation. If you are unable
+ * to obtain the license from the file, please contact us via our website and you
+ * will be sent a copy.
+ *
+ * @category   Fontis
+ * @copyright  Copyright (c) 2014 Fontis Pty. Ltd. (http://www.fontis.com.au)
+ * @license    Fontis Software License
+ */
+-->
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addItem" ifconfig="fontis_gtm/settings/active"><type>skin_js</type><name>fontis/googletagmanager/js/gtm.js</name></action>
+            <action method="addItem" ifconfig="fontis_gtm/settings/datalayerecommerce"><type>skin_js</type><name>fontis/googletagmanager/js/enhancedecommerce.js</name></action>
+        </reference>
+
+        <reference name="after_body_start">
+            <block type="googletagmanager/dataLayer_personal" name="google_tag_manager_personal" as="google_tag_manager_personal">
+                <action method="setIsPersonalised"><isPersonalised>1</isPersonalised></action>
+                <action method="setFrontendTags">
+                    <tags>account,cart</tags>
+                </action>
+                <action method="setSelector">
+                    <selector>#gtm-personal</selector>
+                </action>
+                <action method="setDefaultContent">
+                    <content><![CDATA[<div id="gtm-personal" style="display:none;"></div>]]></content>
+                </action>
+            </block>
+            <block type="googletagmanager/dataLayer_page" name="google_tag_manager_page" as="google_tag_manager_page" />
+        </reference>
+
+        <reference name="before_body_end">
+            <block type="googletagmanager/dataLayer_pageEnd" name="google_tag_manager_page_end" as="google_tag_manager_page_end" />
+        </reference>
+    </default>
+</layout>

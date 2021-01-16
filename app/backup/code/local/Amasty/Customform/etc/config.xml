@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Customform
+ */
+-->
+<config>
+    <modules>
+        <Amasty_Customform>
+            <version>1.0.0</version>
+        </Amasty_Customform>
+    </modules>
+
+    <global>
+        <helpers>
+            <amcustomform>
+                <class>Amasty_Customform_Helper</class>
+            </amcustomform>
+        </helpers>
+
+        <amcustomform>
+            <class>Amasty_Customform_Model</class>
+            <resourceModel>amcustomform_mysql4</resourceModel>
+        </amcustomform>
+        <resources>
+            <amcustomform_setup>
+                <setup>
+                    <module>Amasty_Customform</module>
+                    <class>Amasty_Customform_Model_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </amcustomform_setup>
+            <amcustomform_write>
+                <connection><use>core_write</use></connection>
+            </amcustomform_write>
+            <amcustomform_read>
+                <connection><use>core_read</use></connection>
+            </amcustomform_read>
+        </resources>
+
+        <blocks>
+            <amcustomform>
+                <class>Amasty_Customform_Block</class>
+            </amcustomform>
+        </blocks>
+
+        <models>
+            <amcustomform>
+                <class>Amasty_Customform_Model</class>
+                <resourceModel>amcustomform_resource</resourceModel>
+            </amcustomform>
+            <amcustomform_resource>
+                <class>Amasty_Customform_Model_Resource</class>
+                <entities>
+                    <field>
+                        <table>amasty_amcustomform_field</table>
+                    </field>
+                    <field_store>
+                        <table>amasty_amcustomform_field_store</table>
+                    </field_store>
+                    <field_option>
+                        <table>amasty_amcustomform_field_option</table>
+                    </field_option>
+                    <field_option_store>
+                        <table>amasty_amcustomform_field_option_store</table>
+                    </field_option_store>
+                    <form>
+                        <table>amasty_amcustomform_form</table>
+                    </form>
+                    <form_store>
+                        <table>amasty_amcustomform_form_store</table>
+                    </form_store>
+                    <form_line>
+                        <table>amasty_amcustomform_form_line</table>
+                    </form_line>
+                    <form_field>
+                        <table>amasty_amcustomform_form_field</table>
+                    </form_field>
+                    <form_submit>
+                        <table>amasty_amcustomform_form_submit</table>
+                    </form_submit>
+                    <form_submit_value_boolean>
+                        <table>amasty_amcustomform_form_submit_value_boolean</table>
+                    </form_submit_value_boolean>
+                    <form_submit_value_date>
+                        <table>amasty_amcustomform_form_submit_value_date</table>
+                    </form_submit_value_date>
+                    <form_submit_value_text>
+                        <table>amasty_amcustomform_form_submit_value_text</table>
+                    </form_submit_value_text>
+                    <form_submit_value_varchar>
+                        <table>amasty_amcustomform_form_submit_value_varchar</table>
+                    </form_submit_value_varchar>
+                </entities>
+            </amcustomform_resource>
+        </models>
+        <template>
+            <email>
+                <amcustomform_email_email_template translate="label" module="amcustomform">
+                    <label>Custom Forms Notification</label>
+                    <file>amcustomform/admin_notification.html</file>
+                    <type>html</type>
+                </amcustomform_email_email_template>
+            </email>
+        </template>
+    </global>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <amcustomform>
+                    <file>amasty/customform.xml</file>
+                </amcustomform>
+            </updates>
+        </layout>
+    </adminhtml>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Amasty_Customform before="Mage_Adminhtml">Amasty_Customform_Adminhtml</Amasty_Customform>
+                    </modules>
+                    <frontName>customform</frontName>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <frontend>
+        <routers>
+            <amcustomform>
+                <use>standard</use>
+                <args>
+                    <module>Amasty_Customform</module>
+                    <frontName>customform</frontName>
+                </args>
+            </amcustomform>
+        </routers>
+    </frontend>
+</config>

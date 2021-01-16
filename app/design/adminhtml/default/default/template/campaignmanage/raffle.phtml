@@ -1,0 +1,84 @@
+<?php $productCollection = $this->getProductCollection(); ?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->helper('adminhtml')->__('Raffle Action'); ?></h4>
+    </div>
+    <fieldset>
+		<?php echo $this->getRaffleRandomButtonHtml(); ?>
+    </fieldset>
+</div>
+
+<?php foreach ($productCollection as $product):; ?>
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $product->getName() ?></h4>
+        </div>
+        <fieldset>
+			<?php if ($product->isConfigurable()) : ?>
+				<?php
+				$options = $this->getOptions($product->getId()); ?>
+				<?php foreach ($options as $option) : ?>
+					<?php $optionValue = $option[0]; ?>
+					<?php $optionsQty = $option[1]; ?>
+                    <ul>
+                        <li>
+                            - <strong>OPTION</strong> :<?php echo Mage::helper('campaignmanage')->getOptionLabel($optionValue).' - ( QTY : '.$optionsQty.' )'; ?>
+                            <div class="grid">
+								<?php $customerCollection = $this->getListWinnerByOption($optionValue,$product->getId()); ?>
+								<?php if (count($customerCollection)): ?>
+                                    <table class="data">
+                                        <thead class="heading">
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                        <th>Card ID</th>
+                                        </thead>
+                                        <tbody>
+										<?php foreach ($customerCollection as $customer) : ?>
+                                            <tr>
+                                                <td><?php echo $customer->getCustomerName(); ?></td>
+                                                <td><?php echo $customer->getEmail(); ?></td>
+                                                <td><?php echo $customer->getCardId(); ?></td>
+                                            </tr>
+										<?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+								<?php endif; ?>
+                            </div>
+                        </li>
+                    </ul>
+				<?php endforeach; ?>
+			<?php else: ?>
+                <ul>
+                    <li>
+                        <?php     $product = Mage::getModel('catalog/product')->load($product->getId());
+                        ?>
+                        <?php $qty = (int) $product->getStockItem()->getQty() ;?>
+                        - <strong>OPTION </strong> : <?php echo $product->getName().' - ( QTY : '.$qty.' )'; ?>
+                        <div class="grid">
+		                    <?php $customerCollection = $this->getListWinnerByProduct($product->getId()); ?>
+		                    <?php if (count($customerCollection)): ?>
+                                <table class="data">
+                                    <thead class="heading">
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Card ID</th>
+                                    </thead>
+                                    <tbody>
+				                    <?php foreach ($customerCollection as $customer) : ?>
+                                        <tr>
+                                            <td><?php echo $customer->getCustomerName(); ?></td>
+                                            <td><?php echo $customer->getEmail(); ?></td>
+                                            <td><?php echo $customer->getCardId(); ?></td>
+                                        </tr>
+				                    <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+		                    <?php endif; ?>
+                        </div>
+                    </li>
+                </ul>
+			<?php endif; ?>
+
+        </fieldset>
+    </div>
+<?php endforeach; ?>

@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <CNV_CustomerGrid>
+      <version>1.0.1</version>
+    </CNV_CustomerGrid>
+  </modules>
+  <global>
+    <blocks>
+      <adminhtml>
+        <rewrite>
+          <customer_grid>CNV_CustomerGrid_Block_Adminhtml_Customer_Grid</customer_grid>
+          <!-- rewrite the customer grid -->
+        </rewrite>
+      </adminhtml>
+    </blocks>
+    <resources>
+        <customergrid_setup>
+            <setup>
+                <module>CNV_CustomerGrid</module>
+                <class>Mage_Customer_Model_Resource_Setup</class>
+            </setup>
+            <connection>
+                <use>core_setup</use>
+            </connection>
+        </customergrid_setup>
+    </resources>
+  </global>
+  <adminhtml>
+    <acl>
+      <resources>
+        <admin>
+          <children>
+            <customer>
+              <children>
+                <export_customer translate="title">
+                  <title>Export customer</title>
+                </export_customer>
+              </children>
+            </customer>
+          </children>
+        </admin>
+      </resources>
+    </acl>
+  </adminhtml>
+</config>

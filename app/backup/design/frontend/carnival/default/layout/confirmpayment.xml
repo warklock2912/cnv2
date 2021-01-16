@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <default>
+  </default>
+  <confirmpayment_index_index>
+    <reference name="head">
+      <action method="setTitle">
+        <title>Confirmation Payment</title>
+      </action>
+      <!--<action method="addItem">-->
+        <!--<type>js</type>-->
+        <!--<name>jquery/jquery.js</name>-->
+      <!--</action>-->
+      <action method="addCss">
+        <stylesheet>css/confirmpayment/cpform.css</stylesheet>
+      </action>
+      <action method="addItem">
+        <type>js_css</type>
+        <name>calendar/calendar-win2k-1.css</name>
+        <params/>
+      </action>
+      <action method="addItem">
+        <type>js_css</type>
+        <name>confirmpayment/jquery.datetimepicker.css</name>
+        <params/>
+      </action>
+      <action method="addItem">
+        <type>js</type>
+        <name>calendar/calendar.js</name>
+      </action>
+      <action method="addItem">
+        <type>js</type>
+        <name>calendar/calendar-setup.js</name>
+      </action>
+      <action method="addItem">
+        <type>js</type>
+        <name>calendar/calendar-setup.js</name>
+      </action>
+      <action method="addItem">
+        <type>js</type>
+        <name>confirmpayment/jquery.datetimepicker.full.js</name>
+        <params/>
+      </action>
+    </reference>
+    <reference name="root">
+      <action method="setTemplate">
+        <template>page/1column.phtml</template>
+      </action>
+      <action method="setHeaderTitle" translate="title" module="confirmpayment">
+        <title>Confirm Payment</title>
+      </action>
+    </reference>
+    <reference name="breadcrumbs">
+      <action method="addCrumb" translate="crumbInfo.label crumbInfo.title">
+        <crumbName>Home</crumbName>
+        <crumbInfo>
+          <label>Home</label>
+          <title>Home</title>
+          <link>/</link>
+        </crumbInfo>
+      </action>
+      <action method="addCrumb" translate="crumbInfo.label crumbInfo.title">
+        <crumbName>Confirm Payment</crumbName>
+        <crumbInfo>
+          <label>Confirmation Payment</label>
+          <title>Payment Confirmation Form</title>
+        </crumbInfo>
+      </action>
+    </reference>
+    <reference name="content">
+      <block type="confirmpayment/confirmpayment" name="confirmpayment" template="confirmpayment/confirmpayment.phtml" >
+        <block type="core/html_calendar" name="html_calendar" as="html_calendar" template="page/js/calendar.phtml"/>
+      </block>
+    </reference>
+  </confirmpayment_index_index>
+</layout>

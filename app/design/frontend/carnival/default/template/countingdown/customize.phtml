@@ -1,0 +1,695 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php $_product = $this->getProduct();
+$check = Mage::helper('ruffle')->checkUserCanJoin($_product);
+if ($_product->getIsRaffle() && $check):
+    ///////////////////////// Raffle /////////////////////////
+    $customer_id = Mage::getSingleton('customer/session')->getCustomerId();
+    if (!empty($check)):
+        $ruffle_id = $check['ruffle_id'];
+        $checkUserCanJoin = $check['is_allow'];
+        $announce_date = date("d-m-Y", strtotime($check['m_announce_date']));
+        $check['announce_date'] = $announce_date;
+
+        $locale = substr(Mage::app()->getLocale()->getLocaleCode(), 0, 2); ?>
+        <script type="text/javascript">
+            jQuery('body').addClass('ruffle-product-view');
+        </script>
+        <?php
+        $locale = substr(Mage::app()->getLocale()->getLocaleCode(), 0, 2);
+        if ($locale == 'th'): ?>
+            <style>
+                .ruffle-product-view .main-container {
+                    background: #111 url("/skin/frontend/carnival/default/css/ruffle/images/ruffle_bg_th.png") top center no-repeat;
+                    max-width: 100%;
+                    background-size: contain;
+                }
+            </style>
+            <?php
+            $email_text = $check['email_join_th'];
+            $check['email_text'] = $email_text;
+        else: ?>
+            <style>
+                .ruffle-product-view .main-container {
+                    background: #111 url("/skin/frontend/carnival/default/css/ruffle/images/ruffle_bg.png") top center no-repeat;
+                    max-width: 100%;
+                    background-size: contain;
+                }
+            </style>
+            <?php
+            $email_text = $check['email_join_en'];
+            $check['email_text'] = $email_text;
+
+        endif;
+///////////////////////// User Can join this raffle /////////////////////////
+
+        if (!$customer_id): ?>
+            <div class="add-to-box">
+                <div class="add_to_cart_">
+                    <div class="add_to_cart_buttons">
+                        <button type="button" id="join-ruffle-login" class="button ruffle-joined"
+                                onclick="return false">
+                            <span><span><?php echo $this->__('Please login to join'); ?></span></span></button>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                Event.observe('join-ruffle-login', 'click', loadLoginWithAjax);
+            </script>
+        <?php
+        else:
+            if ($checkUserCanJoin > 0):
+
+                $isWinnerRuffle = Mage::helper('ruffle')->checkWinnerRuffle($_product, $customer_id);
+                /////////////////////// WINNER /////////////////////////
+                if (!empty($isWinnerRuffle)):
+                    // start comment hide winner function ------------
+                    $buttonTitle = Mage::helper('core')->quoteEscape($this->__('Add to Cart')); ?>
+                    <!-- <div class="add-to-cart"> -->
+                    <?php
+                    // if (!$_product->isGrouped()):
+                    ?>
+                    <!--  <div class="qty-wrapper">
+                              <div class="qtywrapper-update">
+                                <input id="qinput-cart-detail<?php echo $_product->getId(); ?>" readonly type="text" pattern="\d*" name="qty" maxlength="12" value="<?php echo max($this->getProductDefaultQty() * 1, 1) ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Qty')) ?>" class="input-text qty limit-qty" />
+                              </div>
+                            </div> -->
+                    <?php
+                    // endif;
+                    // $isCustomerBought = Mage::helper('ruffle')->checkWinnerBoughtProduct($_product);
+                    // $availableDayCanBuy = Mage::helper('ruffle')->checkAvailableDayCanBuy($_product);
+
+                    // if($isCustomerBought == false && $availableDayCanBuy == true):
+                    ?>
+                    <!-- <div class="add-to-cart-buttons">
+                        <?php echo $this->getChildHtml('', true, true) ?>
+                        <button type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button>
+                      </div> -->
+                    <?php
+                    // endif;
+                    ?>
+                    <!-- </div> -->
+                    <!-- end comment hide winner function-->
+                <?php
+                elseif (empty($isWinnerRuffle)):
+                    if ($check['join_time'] == 'intime'):
+                        $isJoiner = Mage::helper('ruffle')->checkJoinerRuffle($ruffle_id, $customer_id); ?>
+                        <div class="add-to-box">
+                            <div class="add_to_cart_">
+                                <div class="add_to_cart_buttons">
+                                    <?php
+
+
+                                    if ($isJoiner == false):
+                                        // Not join
+                                        ?>
+                                        <button type="button" id="join-ruffle-button" class="button"
+                                                onclick="ruffleForm.submit(this)">
+                                            <span><span><?php echo $this->__('Join Raffle'); ?></span></span></button>
+
+                                    <?php //echo $this->getChildHtml('ruffle.card')
+                                    ?>
+                                    <div class="ruffle-form-popup" id="ruffle_form_popup"></div>
+                                    <script type="text/javascript">
+                                        var noti_phone = '<?php echo $this->__("Telephone must be from 10 digits"); ?>';
+                                    </script>
+                                    <script>
+                                        jQuery(document).ready(function ($) {
+                                            $cf = $('#telephone');
+                                            $cf.blur(function (e) {
+                                                phone = $(this).val();
+                                                phone = phone.replace(/[^0-9]/g, '');
+                                                if (phone.length != 10) {
+                                                    alert(noti_phone);
+                                                    $('#telephone').val('');
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                    <?php elseif ($isJoiner == true): ?>
+                                        <button type="button" id="join-ruffle-button" class="button ruffle-joined"
+                                                onclick="return false">
+                                            <span><span><?php echo $this->__('You joined this product'); ?></span></span>
+                                        </button>
+                                    <?php
+                                    endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                        $isSavedCard = 0;
+                        if (Mage::getSingleton('customer/session')->getCustomer()->getCustomerApiId()) {
+                            $isSavedCard = 1;
+                        }
+                        ?>
+                        <script type="text/javascript">
+                            //<![CDATA[
+                            var ruffleForm = new VarienForm('product_addtocart_form');
+                            var isSavedCard = <?php echo $isSavedCard ?>;
+
+                            ruffleForm.submit = function (e) {
+                                var isUseCard = <?php echo @$check['use_creditcard'] ? 1 : 0 ?>;
+                                var params = '<?php echo $params = json_encode($check);  ?>';
+                                var showRuffleFormUrl = '<?php echo $this->getUrl("ruffle/index/showFormStepOne", array('_secure' => $this->getRequest()->isSecure())) ?>';
+                                if (this.validator.validate()) {
+                                    new Ajax.Request(showRuffleFormUrl, {
+                                        onCreate: function () {
+                                            AmAjaxObj.showAnimation();
+                                        }.bind(this),
+                                        parameters: {
+                                            check: params,
+                                        },
+                                        onComplete: function (response) {
+                                            AmAjaxObj.hideAnimation();
+                                            if (response.responseJSON.success == 'true') {
+                                                $('ruffle_form_popup').update(response.responseJSON.html_popup);
+                                            }
+                                        }.bind(this)
+                                    });
+                                }
+
+                                ruffleForm.validator.reset();
+
+                            }.bind(ruffleForm);
+
+                            function joiner() {
+                                $('ruffle-messages').show();
+                            }
+
+                            jQuery('.popup-close').on('click', function () {
+                                if ($('ruffle-form-info')) {
+                                    $('ruffle-form-info').hide();
+                                }
+                                // if($('ruffle-card-info') $('ruffle-card-info').hide();
+                                if ($('ruffle-card-list')) {
+                                    $('ruffle-card-list').hide();
+                                }
+                                if ($('ruffle_term_list')) {
+                                    $('ruffle_term_list').hide();
+                                }
+                            });
+                            if ($('#ruffle-messages') != null) {
+                                $('ruffle-messages').on('click', function () {
+                                    $(this).hide();
+                                });
+                            }
+
+                            function addmoreInformation() {
+                                $('product_addtocart_form').action = '<?php echo $this->getUrl("ruffle/index/confirm")?>';
+                                ruffleForm.validator.reset();
+                                if (ruffleForm.validator.validate()) {
+                                    AmAjaxObj.showAnimation();
+                                    $('product_addtocart_form').submit();
+                                }
+                            }
+
+                            //]]>
+                        </script>
+                    <?php
+                        ///////////////////////// End User Logedin /////////////////////////
+                        ///////////////////////// Start User Not Logedin /////////////////////////
+
+                        ///////////////////////// End User Not Logedin /////////////////////////
+                    endif;   // line 70
+                endif;   // line 63
+
+            ///////////////////////// END Raffle Running /////////////////////////
+            ///////////////////////// User Cant join this raffle /////////////////////////
+            else: ?>
+                <div class="add-to-box">
+                    <div class="add_to_cart_">
+                        <div class="add_to_cart_buttons">
+                            <button type="button" id="join-ruffle-button" class="button ruffle-joined"
+                                    onclick="return false">
+                                <span><span><?php echo $this->__('You Can\'t join this product'); ?></span></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            endif;
+        endif;
+    endif;
+///////////////////////// Counting Down /////////////////////////
+else:
+    $buttonTitle = Mage::helper('core')->quoteEscape($this->__('Add to Cart'));
+    $countingup_ = Mage::helper('countingdown')->getTimecommingup();
+    $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product->getId());
+    // Start Upcoming
+    if ($countingup_ > 0) {
+        if ($stock->getData('is_store_only') == 1):
+            ?>
+            <div class="add-to-box">
+                <div class="add_to_cart_">
+                    <div class="add_to_cart_buttons">
+                        <button type="button" class="button" disabled>
+                            <span><span><?php echo Mage::helper('core')->quoteEscape($this->__('IN STORE ONLY')); ?></span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <?php return; ?>
+        <?php
+        else : ?>
+            <?php
+            $countingup_ = Mage::helper('countingdown')->getTimecommingup();
+        if (($countingup_) > 0):
+                ?>
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('refresh_page')->toHtml(); ?>
+            <?php endif; ?>
+            <div class="add-to-box">
+                <div class="add_to_cart_">
+                    <div class="add_to_cart_buttons">
+                        <button type="button" class="button" disabled>
+                            <span><span><?php echo $buttonTitle ?></span></span></button>
+                    </div>
+                </div>
+            </div>
+            <?php return; ?>
+        <?php
+        endif; ?>
+        <?php
+    } ?>
+    <!-- End Upcoming -->
+    <?php
+    // Start Product timeout countingdown
+    if ($_product->isSaleable()): ?>
+        <?php
+        $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product->getId());
+        if ($stock->getData('is_store_only') == 1):
+            ?>
+            <div class="add-to-box">
+                <div class="add_to_cart_">
+                    <div class="add_to_cart_buttons">
+                        <button type="button" class="button" disabled>
+                            <span><span><?php echo Mage::helper('core')->quoteEscape($this->__('IN STORE ONLY')); ?></span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        <?php
+        else: ?>
+            <div class="add-to-cart">
+                <?php if (!$_product->isGrouped()): ?>
+                    <div class="qty-wrapper">
+                        <div class="qtywrapper-update">
+                            <input type="button" data-item-id="<?php echo $_product->getId(); ?>"
+                                   onclick="decQtyMiniCart('cart-detail<?php echo $_product->getId() ?>')"
+                                   value="<?php echo $this->__('-') ?>" class="update_qty btn_minus out"/>
+                            <input id="qinput-cart-detail<?php echo $_product->getId(); ?>" type="text" pattern="\d*"
+                                   name="qty" maxlength="12"
+                                   value="<?php echo max($this->getProductDefaultQty() * 1, 1) ?>"
+                                   title="<?php echo Mage::helper('core')->quoteEscape($this->__('Qty')) ?>"
+                                   class="input-text qty"/>
+                            <input data-item-id="<?php echo $_product->getId(); ?>" type="button"
+                                   onclick="incQtyMiniCart('cart-detail<?php echo $_product->getId() ?>')"
+                                   value="<?php echo $this->__('+') ?>" class="update_qty btn_plus"/>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <div class="add-to-cart-buttons">
+                    <?php echo $this->getChildHtml('', true, true) ?>
+                    <button type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart"
+                            onclick="productAddToCartForm.submit(this)">
+                        <span><span><?php echo $buttonTitle ?></span></span></button>
+                </div>
+            </div>
+        <?php
+        endif;
+    endif;
+// end Product timeout countingdown
+///////////////////////// End Counting /////////////////////////
+endif; ?>
+<script type="text/javascript">
+    function ruffleCreateOmiseToken() {
+        jQuery.ajaxSetup({async: false});
+        jQuery.getScript("https://cdn.omise.co/omise.min.js.gz", function () {
+            <?php
+            $config = Mage::getModel('omise_gateway/config')->load(1);
+            $data = array(
+                'public_key' => $config->public_key,
+                'secret_key' => $config->secret_key,
+            );
+
+            if ($config->test_mode) {
+                $data['public_key'] = $config->public_key_test;
+                $data['secret_key'] = $config->secret_key_test;
+            }
+            ?>
+            var cardToken = $j('input[type=radio][name="payment[omise_card_id]"]:checked').val();
+            if (cardToken && cardToken != 'new_omise_card') {
+                saveCardToCustomer();
+            } else {
+                // Set Omise key
+                Omise.setPublicKey("<?php echo $data['public_key']; ?>");
+                var omiseForm = new VarienForm('product_addtocart_form', true);
+
+                var form = jQuery("#card_form_omise_gateway"),
+                    formValidation = form.find('.omise-validation-advice'),
+                    formValidationMsg = formValidation.find('.validation-advice');
+                if (omiseForm.validator.validate()) {
+
+                    // Serialize the form fields into a valid card object.
+                    var card = {
+                        "name": form.find("[data-omise=holder_name]").val(),
+                        "number": form.find("[data-omise=number]").val(),
+                        "expiration_month": form.find("[data-omise=expiration_month]").val(),
+                        "expiration_year": form.find("[data-omise=expiration_year]").val(),
+                        "security_code": form.find("[data-omise=security_code]").val()
+                    };
+                    formValidation.css({'opacity': 0, 'display': 'none'});
+
+                    // // Send a request to create a token
+                    // // then trigger the callback function once a response is received from Omise.
+                    // // * Note that the response could be an error and this needs to be handled
+                    // // * within the callback.
+                    AmAjaxObj.showAnimation();
+
+                    Omise.createToken("card", card, function (statusCode, response) {
+                        // If has an error (can not create a card's token).
+                        if (response.object == "error") {
+                            // Display an error message - "Omise Response: "+response.message.
+                            formValidation.css({'opacity': 1, 'display': 'block'});
+                            alert(response.message);
+                            AmAjaxObj.hideAnimation();
+                            return false;
+                        } else if (typeof response.card != 'undefined' && !response.card.security_code_check) {
+                            // Display an error message - "Omise Response: Card authorization failure.".
+                            formValidation.css({'opacity': 1, 'display': 'block'});
+                            // formValidationMsg.html("Omise Response: Card authorization failure.");
+                            alert("Omise Response: Card authorization failure.");
+                            AmAjaxObj.hideAnimation();
+                            return false;
+
+                        } else {
+                            form.find("[data-omise=holder_name]").prop("disabled", true);
+                            form.find("[data-omise=number]").prop("disabled", true);
+                            form.find("[data-omise=expiration_month]").prop("disabled", true);
+                            form.find("[data-omise=expiration_year]").prop("disabled", true);
+                            form.find("[data-omise=security_code]").prop("disabled", true);
+
+                            form.find("[data-omise=omise_token]").val(response.id);
+                            var omise_token = form.find("[data-omise=omise_token]").val();
+                            //<![CDATA[
+                            if (omise_token != '') {
+                                AmAjaxObj.hideAnimation();
+                                saveCardToCustomer();
+                            }
+
+                        }
+                    });
+                }else{
+                    // AmAjaxObj.hideAnimation();
+                }
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+    function ruffleAcceptTerm(button) {
+        var isSavedCard = <?php $isSavedCard = 1;echo $isSavedCard ?>;
+        var termForm = new VarienForm('ruffle_term_list', true);
+        if (termForm.validator.validate()) {
+            var isUseCard = <?php echo @$check['use_creditcard'] ? 1 : 0 ?>;
+            var params = '<?php echo $params = json_encode($check);  ?>';
+            var showRuffleFormUrl = '<?php echo $this->getUrl("ruffle/index/showFormStepTwo", array('_secure' => $this->getRequest()->isSecure())) ?>';
+            if (termForm.validator.validate()) {
+                new Ajax.Request(showRuffleFormUrl, {
+                    onCreate: function () {
+                        AmAjaxObj.showAnimation();
+                    }.bind(this),
+                    parameters: {
+                        check: params,
+                    },
+                    onComplete: function (response) {
+                        AmAjaxObj.hideAnimation();
+                        if (response.responseJSON.success == 'true') {
+                            $('ruffle_form_popup').update(response.responseJSON.html_popup);
+                        }
+                    }.bind(this)
+                });
+            }
+
+            termForm.validator.reset();
+        }
+    }
+
+    function saveCardToCustomer() {
+        $('product_addtocart_form').action = '<?php echo $this->getUrl("ruffle/index/addCardToCustomer")?>';
+        var addCardToCustomerUrl = '<?php echo $this->getUrl('ruffle/index/addCardToCustomer', array('_secure' => true)) ?>';
+        // var params = Form.serialize('product_addtocart_form');
+        var form = jQuery("#card_form_omise_gateway");
+        var omise_card_id = '';
+        if(jQuery('input[name="payment[omise_card_id]"]').length > 0){
+            omise_card_id = jQuery('input[name="payment[omise_card_id]"]:checked').val();
+        }
+        var omise_token = form.find("[data-omise=omise_token]").val();
+        var isSavedCard = form.find("[id=customer-card-detail]").prop('checked');
+        var checkParams = '<?php echo $params = json_encode($check);  ?>';
+
+        var request = new Ajax.Request(
+            addCardToCustomerUrl,
+            {
+                method: 'post',
+                parameters: {
+                    check: checkParams,
+                    omise_token: omise_token,
+                    omise_card_id: omise_card_id,
+                    isSavedCard: isSavedCard ? 1:0
+                },
+                onCreate: function () {
+                    AmAjaxObj.showAnimation();
+                }.bind(this),
+
+                onComplete: function () {
+                    AmAjaxObj.hideAnimation();
+                },
+
+                onSuccess: function (transport) {
+                    // $('ruffle-card-info').hide();
+                    var response = JSON.parse(transport.responseText);
+
+                    if (response.result) {
+                        // $('ruffle-card-list').hide();
+                        // $('ruffle-form-info').show();
+                    }
+
+                    if (response.result) {
+                        // if () {
+                        // $('ruffle-card-list').hide();
+                        // $('ruffle-form-info').show();
+                        // }
+
+                        // if (response.responseJSON.success == 'true') {
+                            $('ruffle_form_popup').update(response.html_popup);
+                        // }
+                    }
+                },
+
+            }
+        );
+    }
+
+</script>
+<?php         $test_mode = Mage::getStoreConfig('payment/p2c2p/gatewayurl', Mage::app()->getStore());
+if ($test_mode):
+    ?>
+    <script type="text/javascript" src="https://demo2.2c2p.com/2C2PFrontEnd/SecurePayment/api/my2c2p.1.6.9.min.js"></script>
+<?php else: ?>
+    <script type="text/javascript" src="https://t.2c2p.com/securepayment/api/my2c2p.1.6.9.min.js"></script>
+<?php endif; ?>
+
+<script type="text/javascript">
+
+    function save2c2pCardToken() {
+        var cardToken = $j('input[type=radio][name="payment[custom_field_one]"]:checked').val();
+
+        if(jQuery('#list-p2c2p-card').length === 0)
+        {
+            ////case customer have no card before
+            cardToken  ='p2c2p_new_card';
+        }
+
+        var p2c2pValidation =   new VarienForm('product_addtocart_form', true);
+        if (p2c2pValidation.validator.validate()) {
+            if (cardToken && cardToken != 'p2c2p_new_card') {
+                var url = "<?php echo $this->getUrl('p2c2p/card/ruffleUseoldcard'); ?>";
+                var checkParams = '<?php echo $params = json_encode($check);  ?>';
+
+                var request = new Ajax.Request(
+                    url,
+                    {
+                        method: 'post',
+                        parameters: {
+                            check: checkParams,
+                            idcardtoken: cardToken,
+                            isfromRuffle: 1
+                        },
+                        onCreate: function () {
+                            AmAjaxObj.showAnimation();
+                        }.bind(this),
+
+                        onComplete: function () {
+                            AmAjaxObj.hideAnimation();
+                        },
+
+                        onSuccess: function (transport) {
+                            // $('ruffle-card-info').hide();
+
+                            try {
+                                JSON.parse(transport.responseText);
+                            } catch (e) {
+                                alert(transport.responseText);
+                                return false;
+                            }
+
+
+                            var response = JSON.parse(transport.responseText);
+
+                            if (response.result) {
+                                // $('ruffle-card-list').hide();
+                                // $('ruffle-form-info').show();
+                            }
+
+                            if (response.result) {
+                                // if () {
+                                // $('ruffle-card-list').hide();
+                                // $('ruffle-form-info').show();
+                                // }
+
+                                // if (response.responseJSON.success == 'true') {
+                                $('ruffle_form_popup').update(response.html_popup);
+                                // }
+                            }
+                        },
+
+                    }
+                );
+            } else if (cardToken == 'p2c2p_new_card') {
+
+
+                var url = "<?php echo $this->getUrl('p2c2p/Card/new'); ?>";
+                /////create form and request
+
+                if(jQuery('#ruffle-cardtoken-form').length)
+                {
+                    jQuery('#ruffle-cardtoken-form').remove();
+
+                }
+                var f = document.createElement("form");
+                f.setAttribute('method', "post");
+                f.setAttribute('id', "ruffle-cardtoken-form");
+                jQuery("#card_form_2c2p_gateway").find('input').each(function () {
+                    f.append(this);
+                });
+                jQuery("#card_form_2c2p_gateway").find('select').each(function () {
+                    f.append(this);
+                });
+
+                document.body.appendChild(f);
+
+                My2c2p.getEncrypted("ruffle-cardtoken-form", function (encryptedData, errCode, errDesc) {
+                        if (errCode != 0) {
+                            alert(errDesc + " (" + errCode + ")");
+                        } else {
+                            // var form = document.getElementById("2c2p-payment-form");
+                            // form.encryptedCardInfo.value = encryptedData.encryptedCardInfo;
+                            // form.maskedCardInfo.value = encryptedData.maskedCardInfo;
+                            // form.expMonthCardInfo.value = encryptedData.expMonthCardInfo;
+                            // form.expYearCardInfo.value = encryptedData.expYearCardInfo;
+                            // form.submit();
+                            var url = "<?php echo $this->getUrl('p2c2p/card/new'); ?>";
+                            var checkParams = '<?php echo $params = json_encode($check);  ?>';
+                            var form2c2p=jQuery('#ruffle-cardtoken-form');
+                            var request = new Ajax.Request(
+                                url,
+                                {
+                                    method: 'post',
+                                    parameters: {
+                                        check: checkParams,
+                                        encryptedCardInfo: encryptedData.encryptedCardInfo,
+                                        maskedCardInfo: encryptedData.maskedCardInfo,
+                                        expMonthCardInfo: encryptedData.expMonthCardInfo,
+                                        expYearCardInfo: encryptedData.expYearCardInfo,
+                                        holder_name: form2c2p.find("input[name=holder_name]").val(),
+                                        card_type: form2c2p.find("input[name=card_type]").val(),
+                                        isSavedCard: form2c2p.find("input[name=p2c2p_is_saved_card]").is(':checked') ? 1 : 0,
+                                        isfromRuffle: 1
+                                    },
+                                    onCreate: function () {
+                                        AmAjaxObj.showAnimation();
+                                    }.bind(this),
+
+                                    onComplete: function () {
+                                        AmAjaxObj.hideAnimation();
+                                    },
+
+                                    onSuccess: function (transport) {
+                                        // $('ruffle-card-info').hide();
+
+                                        try {
+                                            JSON.parse(transport.responseText);
+                                        } catch (e) {
+                                            alert(transport.responseText);
+                                            return false;
+                                        }
+
+
+                                        var response = JSON.parse(transport.responseText);
+
+                                        if (response.result) {
+                                            // $('ruffle-card-list').hide();
+                                            // $('ruffle-form-info').show();
+                                        }
+
+                                        if (response.result) {
+                                            // if () {
+                                            // $('ruffle-card-list').hide();
+                                            // $('ruffle-form-info').show();
+                                            // }
+
+                                            // if (response.responseJSON.success == 'true') {
+                                            $('ruffle_form_popup').update(response.html_popup);
+                                            // }
+                                        }
+                                    },
+
+                                }
+                            );
+
+
+                        }
+                    });
+
+            }
+
+            p2c2pValidation.validator.reset();
+
+        }
+    }
+</script>
+

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<adminhtml_customaddress_region_index>
+		<reference name="content">
+			<block type="customaddress/adminhtml_region" name="customaddress_region" />
+		</reference>
+	</adminhtml_customaddress_region_index>
+
+	<adminhtml_customaddress_city_index>
+		<reference name="content">
+			<block type="customaddress/adminhtml_city" name="customaddress_city" />
+		</reference>
+	</adminhtml_customaddress_city_index>
+
+	<adminhtml_customaddress_subdistrict_index>
+		<reference name="content">
+			<block type="customaddress/adminhtml_subdistrict" name="customaddress_subdistrict" />
+		</reference>
+	</adminhtml_customaddress_subdistrict_index>
+
+	<adminhtml_sales_order_create_index>
+		<reference name="head">
+			<action method="addJs"><file>magebuzz/customaddress.js</file></action>
+		</reference>
+	</adminhtml_sales_order_create_index>
+
+  <adminhtml_sales_order_address>
+    <reference name="head">
+      <action method="addJs"><file>magebuzz/customaddressSaleEditAddressOrder.js</file></action>
+    </reference>
+  </adminhtml_sales_order_address>
+</layout>

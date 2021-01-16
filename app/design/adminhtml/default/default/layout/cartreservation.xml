@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	
+	<adminhtml_system_config_edit>
+	    <update handle="editor"/>
+	    <reference name="head">
+	        <action method="setCanLoadTinyMce"><load>1</load></action>
+	    </reference>
+	</adminhtml_system_config_edit>
+
+	<adminhtml_sales_order_create_index>
+		<reference name="head">
+			<action method="addItem" ifconfig="cartreservation/general/enable"><type>js</type><name>plumrocket/jquery-1.10.2.min.js</name></action>
+			<action method="addItem" ifconfig="cartreservation/general/enable"><type>js</type><name>plumrocket/countdown-1.5.1/jquery.countdown.js</name></action>
+			<action method="addItem" ifconfig="cartreservation/general/enable"><type>skin_js</type><name>js/plumrocket/cartreservation/cart.js</name></action>
+			<action method="addCss" ifconfig="cartreservation/general/enable"><stylesheet>css/cartreservation.css</stylesheet></action>
+		</reference>
+
+		<reference name="cart">
+			<action method="setTemplate" ifconfig="cartreservation/general/enable"><template>cartreservation/adminhtml/sales/items.phtml</template></action>
+			<block type="cartreservation/header" name="cart.reservation.header" as="cart_header" template="cartreservation/header.phtml" />
+			<block type="cartreservation/cart" name="cart.reservation" as="cartreservation" template="cartreservation/cart.phtml" />
+			<block type="cartreservation/checkout_cart_item" name="cart.reservation.item" as="cartreservation_item" template="cartreservation/adminhtml/item.phtml" />
+		</reference>
+	</adminhtml_sales_order_create_index>
+
+	<adminhtml_sales_order_create_load_block_sidebar_cart>
+        <reference name="sidebar_cart">
+        	<action method="setTemplate" ifconfig="cartreservation/general/enable"><template>cartreservation/adminhtml/sales/items.phtml</template></action>
+            <block type="cartreservation/cart" name="cart.reservation" as="cartreservation" template="cartreservation/cart.phtml" />
+            <block type="cartreservation/checkout_cart_item" name="cart.reservation.item" as="cartreservation_item" template="cartreservation/adminhtml/item.phtml" />
+        </reference>
+    </adminhtml_sales_order_create_load_block_sidebar_cart>
+
+    <adminhtml_sales_order_create_load_block_sidebar>
+    	<reference name="cart">
+    		<action method="setTemplate" ifconfig="cartreservation/general/enable"><template>cartreservation/adminhtml/sales/items.phtml</template></action>
+            <block type="cartreservation/cart" name="cart.reservation" as="cartreservation" template="cartreservation/cart.phtml" />
+            <block type="cartreservation/checkout_cart_item" name="cart.reservation.item" as="cartreservation_item" template="cartreservation/adminhtml/item.phtml" />
+        </reference>
+    </adminhtml_sales_order_create_load_block_sidebar>
+
+    <adminhtml_sales_order_create_load_block_data>
+    	<reference name="cart">
+    		<action method="setTemplate" ifconfig="cartreservation/general/enable"><template>cartreservation/adminhtml/sales/items.phtml</template></action>
+    		<block type="cartreservation/header" name="cart.reservation.header" as="cart_header" template="cartreservation/header.phtml" />
+            <block type="cartreservation/cart" name="cart.reservation" as="cartreservation" template="cartreservation/cart.phtml" />
+            <block type="cartreservation/checkout_cart_item" name="cart.reservation.item" as="cartreservation_item" template="cartreservation/adminhtml/item.phtml" />
+        </reference>
+    </adminhtml_sales_order_create_load_block_data>
+
+    <!-- Enterprise -->
+    <adminhtml_checkout_index>
+        <reference name="head">
+			<action method="addItem" ifconfig="cartreservation/general/enable"><type>js</type><name>plumrocket/jquery-1.10.2.min.js</name></action>
+			<action method="addItem" ifconfig="cartreservation/general/enable"><type>js</type><name>plumrocket/countdown-1.5.1/jquery.countdown.js</name></action>
+			<action method="addItem" ifconfig="cartreservation/general/enable"><type>skin_js</type><name>js/plumrocket/cartreservation/cart.js</name></action>
+			<action method="addCss" ifconfig="cartreservation/general/enable"><stylesheet>css/cartreservation.css</stylesheet></action>
+		</reference>
+
+        <reference name="checkout.items">
+        	<action method="setTemplate" ifconfig="cartreservation/general/enable"><template>cartreservation/adminhtml/checkout/items.phtml</template></action>
+    		<block type="cartreservation/header" name="cart.reservation.header" as="cart_header" template="cartreservation/header.phtml" />
+            <block type="cartreservation/cart" name="cart.reservation" as="cartreservation" template="cartreservation/cart.phtml" />
+            <block type="cartreservation/checkout_cart_item" name="cart.reservation.item" as="cartreservation_item" template="cartreservation/adminhtml/item.phtml" />
+        </reference>
+    </adminhtml_checkout_index>
+
+    <adminhtml_checkout_cart>
+        <reference name="checkout.items">
+        	<action method="setTemplate" ifconfig="cartreservation/general/enable"><template>cartreservation/adminhtml/checkout/items.phtml</template></action>
+            <block type="cartreservation/cart" name="cart.reservation" as="cartreservation" template="cartreservation/cart.phtml" />
+            <block type="cartreservation/checkout_cart_item" name="cart.reservation.item" as="cartreservation_item" template="cartreservation/adminhtml/item.phtml" />
+        </reference>
+    </adminhtml_checkout_cart>
+
+    <adminhtml_checkout_manage_load_block_items>
+        <reference name="items">
+        	<action method="setTemplate" ifconfig="cartreservation/general/enable"><template>cartreservation/adminhtml/checkout/items.phtml</template></action>
+            <block type="cartreservation/cart" name="cart.reservation" as="cartreservation" template="cartreservation/cart.phtml" />
+            <block type="cartreservation/checkout_cart_item" name="cart.reservation.item" as="cartreservation_item" template="cartreservation/adminhtml/item.phtml" />
+        </reference>
+    </adminhtml_checkout_manage_load_block_items>
+</layout>

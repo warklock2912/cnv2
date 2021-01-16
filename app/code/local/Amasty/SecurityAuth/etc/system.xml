@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_SecurityAuth
+ */
+-->
+<config>
+    <sections>
+        <amsecurityauth translate="label" module="amsecurityauth">
+            <label>Two-Factor Authentication</label>
+            <tab>amasty</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>202301</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General</label>
+                    <expanded>1</expanded>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label><![CDATA[Enable Two-Factor Authentication]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <discrepancy translate="label comment">
+                            <label><![CDATA[Discrepancy]]></label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Please read <a href="https://amasty.com/docs/doku.php?id=magento_1:two-step_authentication&utm_source=extension&utm_medium=link&utm_campaign=2factor-m1-troubleshooting#troubleshooting" target="_blank">here</a> how to use this setting.]]></comment>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </discrepancy>
+                        <ip_white_list translate="label comment">
+                            <label><![CDATA[IP White List]]></label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Specify IP addresses separated by comma]]></comment>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </ip_white_list>
+                    </fields>
+                </general>
+            </groups>
+        </amsecurityauth>
+    </sections>
+</config>

@@ -1,0 +1,121 @@
+<config>
+    <tabs>
+        <appconfig translate="label" module="appupdate">
+            <label>Mobile App</label>
+            <sort_order>0</sort_order>
+        </appconfig>
+    </tabs>
+    <sections>
+        <appupdate_options translate="label" module="appupdate">
+            <label>App Update Config</label>
+            <tab>appconfig</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <Ios translate="label comment">
+                    <label>IOS Config</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <status>
+                            <label>Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>appupdate/status</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </status>
+                    </fields>
+                    <fields>
+                        <url>
+                            <label>URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </url>
+                    </fields>
+                    <fields>
+                        <lastest>
+                            <label>Lastest</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </lastest>
+                    </fields>
+                    <fields>
+                        <minimum>
+                            <label>Minimum</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </minimum>
+                    </fields>
+                </Ios>
+                <Android translate="label comment">
+                    <label>Android Config</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <status>
+                            <label>Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>appupdate/status</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </status>
+                    </fields>
+                    <fields>
+                        <url>
+                            <label>URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </url>
+                    </fields>
+                    <fields>
+                        <lastest>
+                            <label>Lastest</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </lastest>
+                    </fields>
+                    <fields>
+                        <minimum>
+                            <label>Minimum</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </minimum>
+                    </fields>
+                </Android>
+            </groups>
+        </appupdate_options>
+
+    </sections>
+
+</config>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Followup
+ */
+-->
+<config>
+    <translate>
+        <modules>
+            <Amasty_Followup>
+                <files>
+                    <default>Amasty_Followup.csv</default>
+                </files>
+            </Amasty_Followup>
+        </modules>
+    </translate>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <amfollowup translate="title" module="amfollowup">
+                                        <title>Amasty Follow Up Email</title>
+                                    </amfollowup>
+                                </children>
+                            </config>
+                            <followup_adminsetting translate="title" module="amfollowup">
+                                <title>Amasty Follow Up Email</title>
+                            </followup_adminsetting>
+                        </children>
+                    </system> 
+                 </children>
+            </admin> 
+        </resources>
+    </acl>
+</config>

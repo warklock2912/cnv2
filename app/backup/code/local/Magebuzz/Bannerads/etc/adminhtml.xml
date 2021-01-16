@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<config>
+  <menu>
+    <bannerads module="bannerads">
+      <title>Banner Ads</title>
+      <sort_order>71</sort_order>
+      <children>
+        <items module="bannerads">
+          <title>Manage Banner Blocks</title>
+          <sort_order>0</sort_order>
+          <action>adminhtml/bannerads</action>
+        </items>
+        <images module="bannerads">
+          <title>Manage Banner Images</title>
+          <sort_order>20</sort_order>
+          <action>adminhtml/bannerads_images</action>
+        </images>
+        <report module="bannerads">
+          <title>Report Banner Ads</title>
+          <sort_order>21</sort_order>
+          <children>
+            <banner module="bannerads">
+              <title>Banner</title>
+              <sort_order>1</sort_order>
+              <action>adminhtml/bannerads_reports</action>
+            </banner>
+            <block module="bannerads">
+              <title>Blocks</title>
+              <sort_order>0</sort_order>
+              <action>adminhtml/bannerads_reportsblock</action>
+            </block>
+          </children>
+        </report>
+        <settings module="bannerads" translate="title">
+          <title>Settings</title>
+          <sort_order>300</sort_order>
+          <action>adminhtml/system_config/edit/section/bannerads</action>
+        </settings>
+      </children>
+    </bannerads>
+  </menu>
+  <acl>
+    <resources>
+      <all>
+        <title>Allow Everything</title>
+      </all>
+      <admin>
+        <children>
+          <system>
+            <children>
+              <config>
+                <children>
+                  <bannerads translate="title">
+                    <title>Bannerads Permission Setting</title>
+                    <sort_order>50</sort_order>
+                  </bannerads>
+                </children>
+              </config>
+            </children>
+          </system>
+          <bannerads module="bannerads">
+            <title>Banner Ads</title>
+            <sort_order>71</sort_order>
+            <children>
+              <items module="bannerads">
+                <title>Manage Banner Blocks</title>
+                <sort_order>0</sort_order>
+                <action>adminhtml/bannerads</action>
+              </items>
+              <images module="bannerads">
+                <title>Manage Banner Images</title>
+                <sort_order>20</sort_order>
+                <action>adminhtml/bannerads_images</action>
+              </images>
+              <report module="bannerads">
+                <title>Report Banner Ads</title>
+                <sort_order>21</sort_order>
+                <children>
+                  <banner module="bannerads">
+                    <title>Banner</title>
+                    <sort_order>1</sort_order>
+                  </banner>
+                  <block module="bannerads">
+                    <title>Blocks</title>
+                    <sort_order>0</sort_order>
+                  </block>
+                </children>
+              </report>
+              <settings module="bannerads" translate="title">
+                <title>Settings</title>
+                <sort_order>300</sort_order>
+                <action>adminhtml/system_config/edit/section/bannerads</action>
+              </settings>
+            </children>
+          </bannerads>
+        </children>
+      </admin>
+    </resources>
+  </acl>
+</config>

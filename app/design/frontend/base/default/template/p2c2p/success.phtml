@@ -1,0 +1,61 @@
+<?php
+
+$_order = new Mage_Sales_Model_Order();
+$orderId = Mage::getSingleton('checkout/session')->getLastRealOrderId();
+$_order->loadByIncrementId($orderId);
+$formattedPrice=round($_order->getBaseGrandTotal(),2);
+$formattedPrice1=number_format($formattedPrice, 2, '.', '.');
+$orderId=$_REQUEST['order_id'];
+$home_url = Mage::helper('core/url')->getHomeUrl();
+$approval_code = $_REQUEST['approval_code'];
+$hash_helper = Mage::helper('P2c2p/Hash');
+$amount = Mage::getSingleton('core/session')->getAmtVal();
+
+if(!$hash_helper->isValidHash($_REQUEST)){
+	$_order->cancel();
+	$_order->setState(Mage_Sales_Model_Order::STATE_CANCELED, true, 'Cancel Transaction due to hacking attack.Payment transection fail.');
+	$_order->setStatus("canceled");
+	$_order->save();
+	die("Aunthentication Error: Payment transection fail.");
+}
+
+$current_order = Mage::getModel('sales/order')->loadByIncrementId($orderId);
+$customer = Mage::getSingleton('customer/session')->getCustomer();
+$customer->getPrefix();
+$name=  $customer->getName(); 
+$customer->getSuffix();		
+$order = Mage::getModel('sales/order')->loadByIncrementId($orderId);
+	$status = $order->getData('status'); 
+	$transaction_ref = $order->getData('transaction_ref');
+	$statuscode = $order->getData('statuscode');
+	$approval_code = $_REQUEST['approval_code'];		
+$channel_response_code = $_REQUEST['channel_response_code'];
+?>
+
+<div class="col-main">
+	<div class="page-title"><h1> <?php echo $this->__('Your order has been received') .__(' ') . $name ?> </h1></div>
+	<?php if(strcasecmp($channel_response_code, "000") == 0 || strcasecmp($channel_response_code, "00") == 0) {  ?>
+		<h2 class="sub-title"> <?php echo $this->__('Thank you for your purchase!') ?> </h2> 
+		<p> <?php echo $this->__('We have received your payment successfully.') ?> </p>
+	<?php } ?>
+
+	<?php if(strcasecmp($channel_response_code, "001") == 0) {  ?>
+		<h2 class="sub-title"> <?php echo $this->__('Thank you for your purchase!') ?> </h2> 
+		<p> <?php echo $this->__('Your payment is pending, please make the payment before expiry.') ?> </p>
+	<?php } ?>
+	
+	<p> <?php echo $this->__('Your Refrence order ID is:'). __(' ') . $transaction_ref ?></p>
+
+	<p><?php echo $this->__('Your order ID is:') ?> <a href="<?php echo $home_url;?>sales/order/view/order_id/<?php echo $current_order->getId();?>"><?php echo $orderId;?></a></p>
+
+	<p><?php echo $this->__('Your Purchase Amount is:') . __(' ') . $formattedPrice1 . __('   ') . Mage::app()->getStore()->getCurrentCurrencyCode() ?></p>
+
+	<p><?php echo $this->__('You will receive an order confirmation email with details of your order and a link to track its progress.') ?> </p>
+
+	<p>Click <a href="<?php echo $home_url;?>sales/order/print/order_id/<?php echo $current_order->getId();?>" onclick="this.target='_blank'"><?php echo $this->__('here to print') ?> </a> <?php echo $this->__('a copy of your order confirmation.') ?> </p>
+
+    <div class="buttons-set">
+		<button type="button" class="button" title="Continue Shopping" onclick="window.location='<?php echo $home_url;?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+    </div>
+	
+</div>

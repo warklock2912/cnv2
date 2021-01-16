@@ -1,0 +1,461 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php $_code = $this->getMethodCode() ?>
+<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">
+
+    <li class="omise-validation-advice">
+        <div class="validation-advices"></div>
+    </li>
+    <input type="hidden" name="payment[cc_type]" class='typeomise'>
+    <input data-omise="omise_token" type="hidden" name="payment[omise_token]">
+
+    <?php
+    $listCard = $this->getListCard();
+    ?>
+    <?php if ($listCard && count($listCard) > 0) : ?>
+        <li id="list-omise-card" class="list-omise-card">
+            <!--<h6 class=""><?php /*echo $this->__('Your existed card') */ ?></h6>-->
+            <ul>
+                <?php foreach ($listCard as $card): ?>
+                    <li class="control <?php echo $card['brand'] ?>">
+                        <input type="radio" name="payment[omise_card_id]" id="<?php echo $card['id'] ?>"
+                               value="<?php echo $card['id'] ?>"
+                               <?php if ($card['id'] == $this->getCardDefault()): ?>checked="checked"<?php endif; ?>
+                               class="radio"/><label
+                                for="<?php echo $card['id'] ?>"><span><?php echo '**** **** **** ' . $card['last_digits']; ?></span>
+                        </label>
+                    </li>
+                <?php endforeach; ?>
+                <li class="control new-card">
+                    <input type="radio" name="payment[omise_card_id]" id="new_omise_card" value="new_omise_card"
+                           class="radio"/><label
+                            for="new_omise_card">
+                        <span><?php echo $this->__('Add new credit/debit card') ?></span></label>
+                </li>
+            </ul>
+        </li>
+    <?php endif; ?>
+
+    <li <?php if ($listCard && count($listCard) > 0): ?>style="display: none" <?php endif; ?> id="omise_new_card_form" class="omise_new_card_form">
+
+        <ul>
+            <!-- Credit Card Number -->
+            <li>
+                <label for="<?php echo $_code ?>_cc_number"
+                       class="required"><em>*</em><?php echo $this->__('Card number') ?></label>
+                <div class="input-box">
+                    <input autocomplete="off" maxlength="16" type="text" data-omise="number"
+                           id="<?php echo $_code ?>_cc_number" title="<?php echo $this->__('Card number') ?>"
+                           class="input-text required-entry validate-cc-number validate-cc-type required" value=""/>
+                </div>
+            </li>
+
+            <!-- Credit Card Holder Name -->
+            <li>
+                <label for="<?php echo $_code ?>_cc_owner"
+                       class="required"><em>*</em><?php echo $this->__('Name on card') ?></label>
+                <div class="input-box">
+                    <input autocomplete="off" type="text" data-omise="holder_name" id="<?php echo $_code ?>_cc_name"
+                           title="<?php echo $this->__('Name on card') ?>" class="input-text required-entry"
+                           value="<?php echo $this->escapeHtml($this->getInfoData('cc_owner')) ?>"/>
+                </div>
+            </li>
+
+
+            <!-- Expiration Date -->
+            <li class="omise-sub-info">
+                <ul>
+
+                    <li id="<?php echo $_code ?>_cc_type_exp_div" class="omise-exp-date">
+                        <label for="<?php echo $_code ?>_expiration"
+                               class="required"><em>*</em><?php echo $this->__('Expiration Date') ?></label>
+                        <div class="input-box">
+                            <div class="v-fix">
+                                <select autocomplete="off" data-omise="expiration_month"
+                                        id="<?php echo $_code ?>_expiration"
+                                        class="month validate-cc-exp required-entry">
+                                    <?php $_ccExpMonth = $this->getInfoData('cc_exp_month') ?>
+                                    <?php foreach ($this->getCcMonths() as $k => $v): ?>
+                                        <option value="<?php echo $k ? $k : '' ?>"<?php if ($k == $_ccExpMonth): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+                            <div class="v-fix">
+                                <?php $_ccExpYear = $this->getInfoData('cc_exp_year') ?>
+                                <select autocomplete="off" data-omise="expiration_year"
+                                        id="<?php echo $_code ?>_expiration_yr"
+                                        class="year required-entry">
+                                    <?php foreach ($this->getCcYears() as $k => $v): ?>
+                                        <option value="<?php echo $k ? $k : '' ?>"<?php if ($k == $_ccExpYear): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Security Code -->
+                    <?php echo $this->getChildHtml() ?>
+                    <?php if ($this->hasVerification()): ?>
+                        <li class="omise-cvv-info" id="<?php echo $_code ?>_cc_type_cvv_div">
+                            <label for="<?php echo $_code ?>_cc_cid"
+                                   class="required"><em>*</em><?php echo $this->__('CVV') ?>
+                            </label>
+                            <div class="input-box">
+                                <div class="v-fix">
+                                    <input autocomplete="off" data-omise="security_code" maxlength="3" type="text"
+                                           title="<?php echo $this->__('CVV') ?>"
+                                           class="input-text cvv required-entry validate-cc-cvn"
+                                           id="<?php echo $_code ?>_cc_cid" value=""/>
+                                </div>
+                            </div>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </li>
+
+            <li>
+                <div class="control">
+                    <input type="checkbox" value="1" name="payment[is_saved_card]" id="customer-card-detail"
+                           class="checkbox"/>
+                    <label for="customer-card-detail"><?php echo $this->__('Save Card') ?><p class="raffle-save-card"><?php echo $this->__('Information is encrypted and securely stored') ?></label>
+                </div>
+                <div class="control">
+                    <input type="checkbox" value="1" name="payment[accept_term]" id="accept_term"
+                           class="required-entry checkbox"/>
+                    <label for="accept_term"><?php echo $this->__('Accept Term & Condition') ?></label>
+                </div>
+            </li>
+
+
+            <?php if ($this->hasSsCardType()): ?>
+                <li id="<?php echo $_code ?>_cc_type_ss_div">
+                    <ul class="inner-form">
+                        <li class="form-alt"><label for="<?php echo $_code ?>_cc_issue"
+                                                    class="required"><em>*</em><?php echo $this->__('Switch/Solo/Maestro Only') ?>
+                            </label></li>
+                        <li>
+                            <label for="<?php echo $_code ?>_cc_issue"><?php echo $this->__('Issue Number') ?>:</label>
+                            <span class="input-box">
+                            <input autocomplete="off" type="text" title="<?php echo $this->__('Issue Number') ?>"
+                                   class="input-text validate-cc-ukss cvv" id="<?php echo $_code ?>_cc_issue" value=""/>
+                        </span>
+                        </li>
+
+                        <li>
+                            <label for="<?php echo $_code ?>_start_month"><?php echo $this->__('Start Date') ?>:</label>
+                            <div class="input-box">
+                                <div class="v-fix">
+                                    <select autocomplete="off" id="<?php echo $_code ?>_start_month"
+                                            class="validate-cc-ukss month">
+                                        <?php foreach ($this->getCcMonths() as $k => $v): ?>
+                                            <option value="<?php echo $k ? $k : '' ?>"<?php if ($k == $this->getInfoData('cc_ss_start_month')): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </div>
+                                <div class="v-fix">
+                                    <select autocomplete="off" id="<?php echo $_code ?>_start_year"
+                                            class="validate-cc-ukss year">
+                                        <?php foreach ($this->getSsStartYears() as $k => $v): ?>
+                                            <option value="<?php echo $k ? $k : '' ?>"<?php if ($k == $this->getInfoData('cc_ss_start_year')): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="adv-container">&nbsp;</li>
+                    </ul>
+                    <script type="text/javascript">
+                        //<![CDATA[
+                        var SSChecked<?php echo $_code ?> = function () {
+                            var elm = $('<?php echo $_code ?>_cc_type');
+                            if (['SS', 'SM', 'SO'].indexOf(elm.value) != -1) {
+                                $('<?php echo $_code ?>_cc_type_ss_div').show();
+                            } else {
+                                $('<?php echo $_code ?>_cc_type_ss_div').hide();
+                            }
+                            // alret("D")
+                        };
+
+                        Event.observe($('<?php echo $_code ?>_cc_type'), 'change', SSChecked<?php echo $_code ?>);
+                        SSChecked<?php echo $_code ?>();
+                        //]]>
+                    </script>
+                </li>
+            <?php endif; ?>
+            <li class="buttons-set style1">
+                <button type="button" id="close-omise-form"
+                        class="button button-back btn-white">
+                    <span><span><?php echo $this->__('Back'); ?></span></span>
+                </button>
+                <button type="button" id="submit-omise-form"
+                        class="button" onclick="createOmiseToken()">
+                    <span><span><?php echo $this->__('Save'); ?></span></span>
+                </button>
+            </li>
+        </ul>
+    </li>
+
+</ul>
+<script type="text/javascript">
+
+    jQuery('#<?php echo $_code ?>_cc_number').validateCreditCard(function (result) {
+        var ele = jQuery(this);
+        // ele.removeClass();
+        if (result.card_type == null) {
+            jQuery('.vertical.maestro').slideUp({
+                duration: 200
+            }).animate({
+                opacity: 0
+            }, {
+                queue: false,
+                duration: 200
+            });
+            return;
+        }
+
+        jQuery(this).removeClass('visa');
+        jQuery(this).removeClass('visa_electron');
+        jQuery(this).removeClass('mastercard');
+        jQuery(this).removeClass('jcb');
+        jQuery(this).addClass(result.card_type.name);
+
+        if (result.card_type.name == 'visa') {
+            jQuery('.typeomise').val("VI");
+        } else if (result.card_type.name == 'jcb') {
+            jQuery('.typeomise').val("JC");
+        } else {
+            jQuery('.typeomise').val("MC");
+        }
+
+        if (result.card_type.name === 'maestro') {
+            jQuery('.vertical.maestro').slideDown({
+                duration: 200
+            }).animate({
+                opacity: 1
+            }, {
+                queue: false
+            });
+        } else {
+            jQuery('.vertical.maestro').slideUp({
+                duration: 200
+            }).animate({
+                opacity: 0
+            }, {
+                queue: false,
+                duration: 200
+            });
+        }
+        if (result.valid) {
+            return jQuery(this).addClass('valid');
+        } else {
+            return jQuery(this).removeClass('valid');
+        }
+    }, {
+        accept: ['visa', 'visa_electron', 'mastercard', 'jcb']
+    });
+
+</script>
+<script type="text/javascript">
+    //<![CDATA[
+    function toggleToolTip(event) {
+        if ($('payment-tool-tip')) {
+            $('payment-tool-tip').setStyle({
+                top: (Event.pointerY(event) - 560) + 'px'//,
+                //left: (Event.pointerX(event)+100)+'px'
+            });
+            $('payment-tool-tip').toggle();
+        }
+        Event.stop(event);
+    }
+
+    if ($('payment-tool-tip-close')) {
+        Event.observe($('payment-tool-tip-close'), 'click', toggleToolTip);
+    }
+    $$('.cvv-what-is-this').each(function (element) {
+        Event.observe(element, 'click', toggleToolTip);
+    });
+
+    // Event.observe('omise_use_my_card', 'click', function(e) {
+    //     if (this.checked) {
+    //         this.value = 1;
+    //         $('omise_new_card_form').hide();
+    //         $('list-omise-card').show();
+    //     }
+    //     else {
+    //         this.value = 0;
+    //         $('omise_new_card_form').show();
+    //         $('list-omise-card').hide();
+    //
+    //     }
+    // });
+
+    $j('input[type=radio][name="payment[omise_card_id]"]').on('change', function () {
+        $('omise_new_card_form').hide();
+        // $('list-omise-card').hide();
+        switch ($j(this).val()) {
+            case 'new_omise_card':
+                $('omise_new_card_form').show();
+                break;
+            case 'transfer':
+                break;
+        }
+    });
+
+    Event.observe('omise_use_my_card', 'click', function (e) {
+        if (this.checked) {
+            this.value = 1;
+            $('omise_new_card_form').hide();
+            $('list-omise-card').show();
+        }
+        else {
+            this.value = 0;
+            $('omise_new_card_form').show();
+            $('list-omise-card').hide();
+
+        }
+    });
+
+    function createOmiseToken() {
+        var paymentMethod = jQuery("#co-payment-form").find("input[name='payment[method]']:checked").val();
+        if (paymentMethod == 'omise_gateway') {
+            var omiseValidation = new Validation('co-payment-form');
+            if (omiseValidation.validate()) {
+                checkout.setLoadWaiting('payment');
+                document.getElementById('next-step-3').disabled = true;
+                jQuery.ajaxSetup({async: false});
+                jQuery.getScript("https://cdn.omise.co/omise.min.js.gz", function () {
+                    <?php
+                    $config = Mage::getModel('omise_gateway/config')->load(1);
+                    $data = array(
+                        'public_key' => $config->public_key,
+                        'secret_key' => $config->secret_key,
+                    );
+
+                    if ($config->test_mode) {
+                        $data['public_key'] = $config->public_key_test;
+                        $data['secret_key'] = $config->secret_key_test;
+                    }
+                    ?>
+                    // Set Omise key
+                    Omise.setPublicKey("<?php echo $data['public_key']; ?>");
+                    var form = jQuery("#payment_form_omise_gateway"),
+                        // var form = jQuery("#creadit_card_form_omise_gateway"),
+                        formValidation = form.find('.omise-validation-advice'),
+                        formValidationMsg = formValidation.find('.validation-advice');
+
+                    // Serialize the form fields into a valid card object.
+                    var card = {
+                        "name": form.find("[data-omise=holder_name]").val(),
+                        "number": form.find("[data-omise=number]").val(),
+                        "expiration_month": form.find("[data-omise=expiration_month]").val(),
+                        "expiration_year": form.find("[data-omise=expiration_year]").val(),
+                        "security_code": form.find("[data-omise=security_code]").val()
+                    };
+                    formValidation.css({'opacity': 0, 'display': 'none'});
+
+                    // // Send a request to create a token
+                    // // then trigger the callback function once a response is received from Omise.
+                    // // * Note that the response could be an error and this needs to be handled
+                    // // * within the callback.
+                    Omise.createToken("card", card, function (statusCode, response) {
+                        // If has an error (can not create a card's token).
+                        if (response.object == "error") {
+                            // Display an error message - "Omise Response: "+response.message.
+                            formValidation.css({'opacity': 1, 'display': 'block'});
+                            alert(response.message);
+                            checkout.setLoadWaiting(false);
+                            document.getElementById('next-step-3').disabled = false;
+                            return false;
+                        } else if (typeof response.card != 'undefined' && !response.card.security_code_check) {
+                            // Display an error message - "Omise Response: Card authorization failure.".
+                            formValidation.css({'opacity': 1, 'display': 'block'});
+                            // formValidationMsg.html("Omise Response: Card authorization failure.");
+                            alert("Omise Response: Card authorization failure.");
+                            checkout.setLoadWaiting(false);
+                            document.getElementById('next-step-3').disabled = false;
+                            return false;
+
+                        } else {
+                            form.find("[data-omise=holder_name]").prop("disabled", true);
+                            form.find("[data-omise=number]").prop("disabled", true);
+                            form.find("[data-omise=expiration_month]").prop("disabled", true);
+                            form.find("[data-omise=expiration_year]").prop("disabled", true);
+                            form.find("[data-omise=security_code]").prop("disabled", true);
+
+                            form.find("[data-omise=omise_token]").val(response.id);
+                            var omise_token = form.find("[data-omise=omise_token]").val();
+                            //<![CDATA[
+                            if (omise_token != '') {
+                                // $('omise-form').submit();
+                                var addNewCardUrl = '<?php echo $this->getUrl('mastercheckout/onepage/saveNewCard', array('_secure' => true)) ?>';
+                                var params = {
+                                    card_omise_token: response.id
+                                };
+                                var request = new Ajax.Request(
+                                    addNewCardUrl,
+                                    {
+                                        method: 'post',
+                                        parameters: params,
+                                        onCreate: function () {
+                                        }.bind(this),
+
+                                        onComplete: function (res) {
+                                            if (!res.responseJSON) {
+                                                alert('Have some errors when save Customer Omise!');
+                                            }
+                                            if (res.responseJSON.result == false) {
+                                                alert('Have some errors when save Customer Omise!');
+                                            } else {
+                                                checkout.setLoadWaiting(false);
+                                                document.getElementById('next-step-3').disabled = false;
+                                                location.reload();
+                                            }
+                                        },
+                                    }
+                                );
+                            } else {
+                                alert('Omise token not found!');
+                                document.getElementById('next-step-3').disabled = false;
+                            }
+                        }
+                    });
+                });
+            }
+        }
+    }
+
+    //]]>
+</script>
+<style>
+    /*.omise-sub-info li.omise-exp-date {*/
+    /*width: 60%;*/
+    /*}*/
+
+    /*.omise-sub-info li.omise-cvv-info {*/
+    /*width: 30%;*/
+    /*}*/
+</style>

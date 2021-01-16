@@ -1,0 +1,16 @@
+var gtmPushDataLayer = function(event) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(gtmGatherPersonalDataLayer());
+    window.dataLayer.push({'event' : 'ready'});
+};
+
+var gtmGatherPersonalDataLayer = function() {
+    var formElement = $("gtm-datalayer-personal-encoded-data");
+    if (formElement) {
+        return JSON.parse(formElement.getValue());
+    } else {
+        return {};
+    }
+};
+
+document.addEventListener('DOMContentLoaded', gtmPushDataLayer);

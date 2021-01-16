@@ -1,0 +1,120 @@
+<?php if ($this->getRequest()->getParam('code') != 'registersuccess'): ?>
+<div class="member-page">
+    <div class="back-link">
+        <a class="back-action" href="/member" ><span><?php echo $this->__('Back')?></span></a>
+    </div>
+    <div class="content">
+        <div class="signup-form">
+            <div class="box-title">
+                <h3><?php echo $this->__('sign up')?></h3>
+            </div>
+            <form action="<?php echo Mage::helper('customer')->getRegisterPostUrl() ?>" method="post" id="amajaxregister-register-form" class="scaffold-form" enctype="multipart/form-data">
+<!--            <form id="signup-member">-->
+                <div class="fieldset">
+                    <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
+                    <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
+                    <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+                    <ul class="am-form-list">
+                        <li class="fields">
+                            <div class="customer-name">
+                                <div class="field name-firstname">
+                                    <div class="input-box">
+                                        <input type="text" id="firstname" name="firstname" placeholder="First Name" title="First Name" class="input-text required-entry">
+                                    </div>
+                                </div>
+                                <div class="field name-lastname">
+                                    <div class="input-box">
+                                        <input type="text" id="lastname" name="lastname" placeholder="Last Name" class="input-text required-entry">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="field">
+                                <div class="input-box">
+                                <input type="email" name="email" id="email_address" placeholder="Email" title="Email Address" class="input-text required-entry">
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="field">
+                                <div class="input-box">
+                                <input type="text" name="amcustomerattr[telephone]" id="telephone" placeholder="Telephone" title="Telephone" class="input-text required-entry validate-number">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="fields">
+                            <div class="field">
+                                <div class="input-box">
+                                    <input type="password" name="password" id="password" title="<?php echo $this->quoteEscape($this->__('Password')) ?>" placeholder="<?php echo $this->__('Password') ?>" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?php echo $this->__('Password') ?>'" class="input-text required-entry validate-password" />
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="input-box">
+                                    <input type="password" name="confirmation" title="<?php echo $this->quoteEscape($this->__('Confirm Password')) ?>" id="confirmation" placeholder="<?php echo $this->__('Confirm Password') ?>" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?php echo $this->__('Confirm Password') ?>'" class="input-text required-entry validate-cpassword" />
+                                </div>
+                            </div>
+                        </li>
+                        <!-- <li class="fields">
+                            <div class="field">
+                                <div class="input-box">
+                                    <input type="text" id="new_member_id" name="member_id" placeholder="Member ID" class="input-text">
+                                </div>
+                            </div>
+                        </li> -->
+
+                    </ul>
+                </div>
+                <div class="buttons-set">
+                    <button onclick="AmAjaxLoginObj.Amregister();" title="<?php echo $this->quoteEscape($this->__('Sign up')) ?>" class="button am-login-button action-signup"><span><span><?php echo $this->__('Sign up') ?></span></span></button>
+                </div>
+<!--                <div class="buttons-set">-->
+<!--                    <button class="btn action-signup"><span>--><?php //echo $this->__('sign up')?><!--</span></button>-->
+<!--                </div>-->
+            </form>
+        </div>
+    </div>
+</div>
+<?php else: ?>
+
+<div class="member-page">
+    <div class="back-link">
+        <a class="back-action" href="#"><span><?php echo $this->__('Back')?></span></a>
+    </div>
+    <div class="content">
+        <div class="mem-info-wrapper">
+            <div class="fieldset member-info">
+                <ul>
+                    <li>
+                        <div class="field">
+                            <label class="label"><?php echo $this->__('name')?></label>
+                            <p class="info-value"><?php echo $this->__('Urassaya Sperbund')?></p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="field">
+                            <label class="label"><?php echo $this->__('email')?></label>
+                            <p class="info-value"><?php echo $this->__('Urassaya@gmail.com')?></p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="field">
+                            <label class="label"><?php echo $this->__('number phone')?></label>
+                            <p class="info-value"><?php echo $this->__('089-9992211')?></p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="field">
+                            <label class="label"><?php echo $this->__('member id')?></label>
+                            <p class="info-value"><?php echo $this->__('0001120011')?></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="buttons-set">
+                <a class="action-summit" href="#"><span><?php echo $this->__('Back')?></span></a>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>

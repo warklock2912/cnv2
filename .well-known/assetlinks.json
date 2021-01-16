@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.carnivalbkk.carnivalapp",
+    "sha256_cert_fingerprints":
+    ["FD:3C:57:93:63:66:34:CD:D3:A9:E2:9F:C3:74:4B:10:B7:16:42:8F:09:10:D2:55:39:58:0A:99:63:09:DF:18"]
+  }
+}]

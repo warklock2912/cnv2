@@ -1,0 +1,22 @@
+<?php
+/**
+ * MageWorx
+ * Search Suite
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuite
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+$synonym = $this->getSynonym();
+$helper = Mage::helper('mageworx_searchsuite');
+$params = array('q' => $synonym);
+if ($helper->isSearchByAttributes() && $helper->getSearchParameter()) {
+    $params['a'] = $helper->getSearchParameter();
+}
+if ($synonym != ''):
+    ?>
+    <div class="searchsuite-synonym" style="padding-bottom: 5px;">
+        <span class="searchsuite-synonym-label"><?php echo $this->__('Did you mean:'); ?></span> <a class="searchsuite-synonym-link" href="<?php echo $this->getUrl('*/*', array('_query' => $params)); ?>"><?php echo $helper->formatKeyword($synonym); ?></a>
+    </div>
+<?php endif; ?>
+

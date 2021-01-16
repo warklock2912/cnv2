@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Customform
+ */
+-->
+
+<widgets>
+    <amcustomform_form type="amcustomform/form">
+        <name>Custom Form</name>
+        <description type="desc">Insert a form which created with Custom Form module</description>
+
+        <parameters>
+            <form_id translate="label">
+                <required>1</required>
+                <visible>1</visible>
+                <label>Form</label>
+                <type>select</type>
+                <source_model>amcustomform/form_source</source_model>
+            </form_id>
+        </parameters>
+    </amcustomform_form>
+</widgets>

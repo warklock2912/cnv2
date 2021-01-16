@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Bss_MinMaxQtyOrderPerCate>
+      <active>true</active>
+      <codePool>local</codePool>
+      <depends>
+        <Mage_CatalogInventory/>
+      </depends>
+    </Bss_MinMaxQtyOrderPerCate>
+  </modules>
+</config>

@@ -1,0 +1,78 @@
+<?php
+
+    $user_data = Mage::getSingleton('customer/session')->getSearchmember();
+?>
+<div class="member-page">
+    <div class="back-link">
+        <a class="back-action" href="/member/info/show"><span><?php echo $this->__('Back')?></span></a>
+    </div>
+    <div class="content">
+        <div class="change-vip-form">
+            <div class="box-title">
+                <h3><?php echo $this->__('change to vip')?></h3>
+            </div>
+            <form id="change-to-vip">
+                <div class="fieldset">
+                    <ul class="am-form-list">
+                        <li>
+                            <div class="field">
+                                <div class="input-box">
+                                <input type="text" name="member_id" id="member_id" value="<?php echo $user_data['vip_member_id'] ?>"  title="Member ID" class="input-text" disabled>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="field">
+                            <h3>vip level</h3>
+                                <div class="input-box">
+                                <select name='vip_member_level' class="vip_member_l_value" style="width:361px;height: 35px;">
+                                    <option value="1" <?php if($user_data['group_id'] == 1){ echo "selected='selected'";} ?>><?php echo $this->__('Member'); ?></option>
+                                    <option value="2" <?php if($user_data['group_id'] == 4){ echo "selected='selected'";} ?>><?php echo $this->__('Vip Member'); ?></option>
+                                </select>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="field">
+                                <div class="input-box">
+                                <input type="password" name="password" id="password" placeholder="Admin Password" title="Admin Password" class="input-text">
+                                <span class="password-error" style="color:red;display:none;"><?php echo $this->__('Password not correct'); ?></span>
+                                <span class="password-error-2" style="color:red;display:none;"><?php echo $this->__('Api Cant connect'); ?></span>
+                            </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="buttons-set">
+                    <div class="btn btn-summit submit-vip" style="cursor:pointer;text-align: center"><span><?php echo $this->__('submit')?></span></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery( ".submit-vip" ).click(function() {
+        AmAjaxLoginObj.showAnimation();
+        var passowrd_admin = jQuery('#password').val();
+        var vip_member_l_value = jQuery('.vip_member_l_value').val();
+        jQuery.ajax({
+          'url' : '/member/vip/changevip',
+          'dataType':'json',
+          'type':'post',
+          'data':{'passowrd_admin':passowrd_admin,"vip_member_l_value":vip_member_l_value},
+          success:function(data){
+            if(data.error == 0){
+                // location.reload();
+                window.location.href = '/member';
+            }else if(data.error == 1 ){
+                jQuery('.password-error').show().delay(3000).fadeOut();
+            }else if(data.error == 2 ){
+                jQuery('.password-error-2').show().delay(3000).fadeOut();
+            }
+            AmAjaxLoginObj.hideAnimation();
+          }
+        });
+    });
+</script>

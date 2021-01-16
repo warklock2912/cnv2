@@ -1,0 +1,44 @@
+<?php
+/**
+ * MageWorx
+ * Search Suite
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuite
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+$helper = Mage::helper('mageworx_searchsuite');
+$fields = $helper->getCategoryFields();
+?>
+
+<div class="page-head">
+    <h4><?php echo $this->__("Categories"); ?></h4>
+</div>
+<?php if (($collection = $helper->getCategorySearchResults()) && $collection->count()): ?>
+    <ul class="searchsuite-category">
+        <?php foreach ($collection as $item): ?>
+            <li>
+                <?php if (in_array('name', $fields) || in_array('thumbnail', $fields)) : ?>
+                    <div class="searchsuite-category-title">
+                        <?php if (in_array('thumbnail', $fields) && $item->getThumbnail() && ($thumUrl = $helper->getCategoryThumbnailImageUrl($item))): ?>
+                            <a href="<?php echo $item->getUrl() ?>"><img src="<?php echo $thumUrl ?>" /></a>
+                        <?php endif; ?>
+                        <?php if (in_array('name', $fields)): ?>
+                            <a href="<?php echo $item->getUrl() ?>"><?php echo $item->getName() ?></a>
+                        <?php endif; ?>
+                    </div>
+
+                <?php endif; ?>
+                <?php if (in_array('description', $fields)) : ?>
+                    <div class="searchsuite-category-content">
+                        <?php echo $helper->sanitizeContent($item->getDescription()) ?>
+                    </div>
+                <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php else: ?>
+    <div class="note-msg">
+        <?php echo $this->__('There are no results.') ?>
+    </div>
+<?php endif; ?>

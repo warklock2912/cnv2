@@ -1,0 +1,377 @@
+<config>
+    <!-- <tabs>
+        <aboutusmobile translate="label" module="aboutusmobile">
+            <label>About Us Mobile Config</label>
+            <sort_order>0</sort_order>
+        </aboutusmobile>
+    </tabs> -->
+    <sections>
+        <aboutusmobile_options translate="label" module="aboutusmobile">
+            <label>About Us</label>
+            <tab>appconfig</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <contactus translate="label">
+                    <label>Contact Us Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <contact_phone>
+                            <label>Phone</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </contact_phone>
+                    </fields>
+                    <fields>
+                        <contact_details>
+                            <label>Detail</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </contact_details>
+                    </fields>
+                    <fields>
+                        <contact_email>
+                            <label>Email</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </contact_email>
+                    </fields>
+                </contactus>
+                <Folowus_Facebook_1 translate="label">
+                    <label>Follow Us On Facebook 1</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <isactive>
+                            <label>Is Active</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>aboutusmobile/isactive</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </isactive>
+                    </fields>
+                    <fields>
+                        <label>
+                            <label>Label</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </label>
+                    </fields>
+                    <fields>
+                        <url>
+                            <label>URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </url>
+                    </fields>
+                </Folowus_Facebook_1>
+                <Folowus_Facebook_2 translate="label comment">
+                    <label>Follow Us On Facebook 2</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <isactive>
+                            <label>Is Active</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>aboutusmobile/isactive</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </isactive>
+                    </fields>
+                    <fields>
+                        <label>
+                            <label>Label</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </label>
+                    </fields>
+                    <fields>
+                        <url>
+                            <label>URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </url>
+                    </fields>
+                </Folowus_Facebook_2>
+                <Folowus_Instagram_1 translate="label">
+                    <label>Follow Us On Instagram 1</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <isactive>
+                            <label>Is Active</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>aboutusmobile/isactive</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </isactive>
+                    </fields>
+                    <fields>
+                        <label>
+                            <label>Label</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </label>
+                    </fields>
+                    <fields>
+                        <url>
+                            <label>URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </url>
+                    </fields>
+                </Folowus_Instagram_1>
+                <Folowus_Instagram_2 translate="label">
+                    <label>Follow Us On Instagram 1</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <isactive>
+                            <label>Is Active</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>aboutusmobile/isactive</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </isactive>
+                    </fields>
+                    <fields>
+                        <label>
+                            <label>Label</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </label>
+                    </fields>
+                    <fields>
+                        <url>
+                            <label>URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </url>
+                    </fields>
+                </Folowus_Instagram_2>
+                <Folowus_Youtube translate="label">
+                    <label>Follow Us On Youtube</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <isactive>
+                            <label>Is Active</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>aboutusmobile/isactive</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </isactive>
+                    </fields>
+                    <fields>
+                        <label>
+                            <label>Label</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </label>
+                    </fields>
+                    <fields>
+                        <url>
+                            <label>URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </url>
+                    </fields>
+                </Folowus_Youtube>
+            </groups>
+        </aboutusmobile_options>
+        <cartitems_options translate="label" module="aboutusmobile">
+            <label>Cart Items Config</label>
+            <tab>appconfig</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <Item translate="label comment">
+                    <label>Max items</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <maxitems>
+                            <label>Maximum Items</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </maxitems>
+                    </fields>
+                </Item>
+            </groups>
+        </cartitems_options>
+        <fcm_options translate="label" module="aboutusmobile">
+            <label>FCM Config</label>
+            <tab>appconfig</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1000</sort_order>ey
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <key_config translate="label comment">
+                    <label>FCM Key Config</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <status>
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>aboutusmobile/isactive</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </status>
+                        <dev_key>
+                            <label>Development Environment Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </dev_key>
+                        <live_key>
+                            <label>Live Environment Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </live_key>
+                        <env>
+                            <label>Environment</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>aboutusmobile/environment</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </env>
+                        <broadcast_env>
+                            <label>Broadcast Environment</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>aboutusmobile/broadcastenvironment</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </broadcast_env>
+                    </fields>
+                </key_config>
+            </groups>
+        </fcm_options>
+        <kpayment_options translate="label" module="aboutusmobile">
+            <label>Kpayment Config</label>
+            <tab>appconfig</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1010</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <credit translate="label comment">
+                    <label>Kpayment Credit</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <return_url>
+                            <label>Return url</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </return_url>
+                    </fields>
+                </credit>
+            </groups>
+        </kpayment_options>
+    </sections>
+
+</config>

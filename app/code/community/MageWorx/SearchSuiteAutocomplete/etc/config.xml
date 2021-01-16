@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!--/**
+ * MageWorx
+ * Search Suite
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuiteAutocomplete
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */-->
+<config>
+    <modules>
+        <MageWorx_SearchSuiteAutocomplete>
+            <version>1.2.0</version>
+        </MageWorx_SearchSuiteAutocomplete>
+    </modules>
+    <global>
+        <helpers>
+            <mageworx_searchsuiteautocomplete>
+                <class>
+                    MageWorx_SearchSuiteAutocomplete_Helper
+                </class>
+            </mageworx_searchsuiteautocomplete>
+        </helpers>
+        
+        <blocks>
+            <mageworx_searchsuiteautocomplete>
+                <class>MageWorx_SearchSuiteAutocomplete_Block</class>
+            </mageworx_searchsuiteautocomplete>
+        </blocks>
+        <models>
+            <mageworx_searchsuiteautocomplete>
+                <class>MageWorx_SearchSuiteAutocomplete_Model</class>
+                <resourceModel>mageworx_searchsuiteautocomplete_resource</resourceModel>
+            </mageworx_searchsuiteautocomplete>
+        </models>
+    </global>
+    
+    <frontend>
+        <layout>
+            <updates>
+                <mageworx_searchsuiteautocomplete>
+                    <file>mageworx_searchsuiteautocomplete.xml</file>
+                </mageworx_searchsuiteautocomplete>
+            </updates>
+        </layout>
+        <routers>
+            <mageworx_searchsuiteautocomplete>
+                <use>standard</use>
+                <args>
+                    <module>MageWorx_SearchSuiteAutocomplete</module>
+                    <frontName>autocomplete</frontName>
+                </args>
+            </mageworx_searchsuiteautocomplete>
+        </routers>
+        <events>
+            <controller_action_layout_render_before>
+                <observers>
+                    <mageworx_searchsuiteautocomplete>
+                        <class>mageworx_searchsuiteautocomplete/observer</class>
+                        <method>controllerActionLayoutRenderBefore</method>
+                    </mageworx_searchsuiteautocomplete>
+                </observers>
+            </controller_action_layout_render_before>
+        </events>
+        <translate>
+            <modules>
+                <MageWorx_SearchSuiteAutocomplete>
+                    <files>
+                        <default>MageWorx_SearchSuiteAutocomplete.csv</default>
+                    </files>
+                </MageWorx_SearchSuiteAutocomplete>
+            </modules>
+        </translate>
+    </frontend>
+    
+    <adminhtml>
+        <events>
+            <controller_action_layout_render_before_adminhtml_system_config_edit>
+                <observers>
+                    <mageworx_searchsuiteautocomplete>
+                        <class>mageworx_searchsuiteautocomplete/observer</class>
+                        <method>controllerActionLayoutRenderBeforeAdminhtmlSystemConfigEdit</method>
+                    </mageworx_searchsuiteautocomplete>
+                </observers>
+            </controller_action_layout_render_before_adminhtml_system_config_edit>
+        </events>
+        <translate>
+            <modules>
+                <MageWorx_SearchSuiteAutocomplete>
+                    <files>
+                        <default>MageWorx_SearchSuiteAutocomplete.csv</default>
+                    </files>
+                </MageWorx_SearchSuiteAutocomplete>
+            </modules>
+        </translate>
+    </adminhtml>
+    <default>
+        <mageworx_searchsuite>
+            <autocomplete>
+                <show_popup>1</show_popup>
+                <search_delay>500</search_delay>
+                <show_fields>suggest,product</show_fields>
+                <suggest_results_number>3</suggest_results_number>
+                <product_results_number>10</product_results_number>
+                <product_result_fields>product_name,product_image,short_description,price</product_result_fields> 
+                <show_product_results_grouped_by_categories>0</show_product_results_grouped_by_categories>
+                <product_image_size>80x80</product_image_size>
+                <category_thumbnail_size>80x80</category_thumbnail_size>
+                <animation>default</animation>
+                <category_fields>name</category_fields>
+                <cmspage_fields>title</cmspage_fields>
+            </autocomplete>
+        </mageworx_searchsuite>
+    </default>
+</config>

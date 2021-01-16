@@ -1,0 +1,53 @@
+<?xml version="1.0"  ?>
+<config>
+    <menu>
+        <campaignmanage translate="title" module="campaignmanage">
+            <title>Campaign </title>
+            <sort_order>71</sort_order>
+            <children>
+                <manage module="campaignmanage" translate="title">
+                    <title>Manage Campaign</title>
+                    <sort_order>10</sort_order>
+                    <action>adminhtml/campaignmanage</action>
+                </manage>
+                <raffle module="campaignmanage" translate="title">
+                    <title>Raffle Online</title>
+                    <sort_order>20</sort_order>
+                    <action>adminhtml/raffleonline</action>
+                </raffle>
+                <cropanddrop module="campaignmanage" translate="title">
+                    <title>Crop and Drop</title>
+                    <sort_order>30</sort_order>
+                    <action>adminhtml/cropanddrop</action>
+                </cropanddrop>
+            </children>
+
+        </campaignmanage>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <campaignmanage translate="title" module="campaignmanage">
+                        <title>Campaign Manage</title>
+                        <sort_order>1000</sort_order>
+                        <children>
+                            <manage>
+                                <title>Manage Campaign</title>
+                            </manage>
+                            <raffle>
+                                <title>Raffle Online</title>
+                            </raffle>
+                            <cropanddrop>
+                                <title>Crop and Drop</title>
+                            </cropanddrop>
+                        </children>
+                    </campaignmanage>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

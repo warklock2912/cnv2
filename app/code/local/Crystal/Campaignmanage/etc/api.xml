@@ -1,0 +1,72 @@
+<?xml version="1.0"  ?>
+<config>
+    <api>
+        <resources>
+            <campaignmanage_api translate="title" module="campaignmanage">
+                <model>campaignmanage/api</model>
+                <title>Campaign Api</title>
+                <acl>campaignmanage/api</acl>
+                <methods>
+                    <list translate="title" module="campaignmanage">
+                        <title>List of Campaigns</title>
+                        <method>items</method>
+                    </list>
+                    <info translate="title" module="campaignmanage">
+                        <title>Retrieve campaign data</title>
+                        <method>getInfo</method>
+                    </info>
+                    <create translate="title" module="campaignmanage">
+                        <title>Create a new campaign</title>
+                        <method>create</method>
+                    </create>
+                    <update translate="title" module="campaignmanage">
+                        <title>Update  campaign</title>
+                        <method>update</method>
+                    </update>
+                    <delete translate="title" module="campaignmanage">
+                        <title>Delete a campaign</title>
+                        <method>delete</method>
+                    </delete>
+                </methods>
+                <faults module="campaignmanage"> <!-- module="campaignmanage" specifies the module which will be used for translation. -->
+                    <data_invalid> <!-- if we get invalid input data for customers -->
+                        <code>100</code>
+                        <!-- we cannot know all the errors that can appear, their details can be found in error message for call -->
+                        <message>Invalid product data. Details in error message.</message>
+                    </data_invalid>
+                    <filters_invalid>
+                        <code>101</code>
+                        <message>Invalid filters specified. Details in error message.</message>
+                    </filters_invalid>
+                    <not_exists>
+                        <code>102</code>
+                        <message>product doesn't exist.</message>
+                    </not_exists>
+                    <not_deleted>
+                        <code>103</code>
+                        <message>product was not deleted. Details in error message.</message>
+                    </not_deleted>
+                </faults>
+            </campaignmanage_api>
+        </resources>
+        <resources_alias>
+            <campaign>campaignmanage_api</campaign>
+        </resources_alias>
+        <v2>
+            <resources_function_prefix>
+                <campaign>campaignmanageApi</campaign>
+            </resources_function_prefix>
+        </v2>
+        <acl>
+            <resources>
+                <campaignmanage translate="title" modules="campaignmanage">
+                    <title>Campaigns</title>
+                    <sort_order>5</sort_order>
+                    <campaign translate="title" module="campaignmanage">
+                        <title>Campaigns Data</title>
+                    </campaign>
+                </campaignmanage>
+            </resources>
+        </acl>
+    </api>
+</config>

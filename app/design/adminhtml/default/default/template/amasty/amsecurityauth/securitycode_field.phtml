@@ -1,0 +1,17 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_SecurityAuth
+ */
+?>
+<?php if(Mage::helper('amsecurityauth')->isActive()): ?>
+    <div class="input-box"><label for="input_code"><?php echo Mage::helper('amsecurityauth')->__('Security Code'); ?></label><br/>
+        <input type="text"
+               id="input_code"
+               name="<?php echo Mage::getModel('amsecurityauth/auth')->getCodeName() ?>"
+               value=""
+               class="input-text"
+               style="width:461px;"/>
+    </div>
+<?php endif;?>

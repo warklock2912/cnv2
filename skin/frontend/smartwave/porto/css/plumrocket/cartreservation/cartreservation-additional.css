@@ -1,0 +1,220 @@
+.cart-table thead th, .cart-table tbody td {
+    padding: 10px 5px;
+    min-width: 45px;
+}
+
+.cart-table td img {
+	min-width: 25px;
+}
+
+#cartreservation_popup .holder {
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+#cartreservation_popup #shopping-cart-table .product-name {
+	font-weight: 700;
+	font-size: 14px;
+}
+
+#cartreservation_popup .cart-table {
+    margin: 8px 0;
+}
+
+#cartreservation_popup .cart .cart-collaterals {
+	margin: 0;
+    padding: 0;
+    border: 0!important;
+}
+
+#cartreservation_popup .cart #shopping-cart-totals-table {
+	width: 100%;
+}
+#cartreservation_popup .cart #shopping-cart-totals-table tr {
+	border: 0;
+}
+#cartreservation_popup .cart #shopping-cart-totals-table td.a-right {
+	text-align: right!important;
+}
+
+#cartreservation_popup .cart #shopping-cart-totals-table td {
+    padding: 1px 0px 1px 7px;
+    border: 0;
+}
+
+#cartreservation_popup #cartreservation_popup_close {
+	background: none;
+	width: 25px;
+	height: 25px;
+}
+
+#cartreservation_popup #cartreservation_popup_close:hover {
+	opacity: 0.5;
+}
+#cartreservation_popup #cartreservation_popup_close:before {
+    content: "";
+    border-top: 1px solid #333333;
+    width: 20px;
+    height: 1px;
+    display: block;
+    transform: rotate(45deg);
+    transform-origin: center;
+    position: absolute;
+    top: 13px;
+    margin-top: -2px;
+    left: 50%;
+    margin-left: -10px;
+}
+#cartreservation_popup #cartreservation_popup_close:after {
+    content: "";
+    border-top: 1px solid #333333;
+    width: 20px;
+    height: 1px;
+    display: block;
+    transform: rotate(-45deg);
+    transform-origin: center;
+    position: absolute;
+    top: 13px;
+    margin-top: -2px;
+    left: 50%;
+    margin-left: -10px;
+}
+
+#cartreservation_popup .cart .totals {
+	width: 100%;
+}
+
+#cartreservation_popup .cart-table tr {
+	display: table-row;
+}
+
+#cartreservation_popup .cart-table thead th,
+#cartreservation_popup .cart-table tbody td {
+	width: auto;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: left!important;
+}
+
+#cartreservation_popup .cart-table tbody td span {
+	margin: 0;
+}
+
+#cartreservation_popup .cart-table thead th.a-center,
+#cartreservation_popup .cart-table tbody td.a-center {
+	text-align: center!important;
+}
+
+#cartreservation_popup .cart-table thead th.a-right,
+#cartreservation_popup .cart-table tbody td.a-right {
+	text-align: right!important;
+}
+
+#cartreservation_popup .data-table tbody td img {
+	max-width: 100%;
+	min-width: 80px;
+}
+
+
+@media only screen and (max-width: 767px) {
+	#cartreservation_popup .cart-table thead th .product-image,
+	#cartreservation_popup .cart-table tbody td .product-image {
+		width: auto;
+	}
+	#cartreservation_popup .data-table thead th {
+		vertical-align: top;
+	}
+}
+
+@media only screen and (max-width: 670px) {
+	#cartreservation_popup .holder {
+		width: 90%;
+	    margin-left: -45%;
+	    padding: 20px;
+	    -webkit-box-sizing: border-box;
+	    -moz-box-sizing: border-box;
+	    box-sizing: border-box;
+	}
+	#cartreservation_popup .r .button {
+	    margin-bottom: 10px;
+	    float: none;
+	    width: 100%;
+	}
+}
+
+
+@media only screen and (max-width: 599px) {
+	#cartreservation_popup .data-table tbody tr.expire-soon-row,
+	#cartreservation_popup .data-table tbody tr.expire-soon-row td {
+		background: #FFEFEF!important;
+	}
+	#cartreservation_popup .holder {
+		padding: 15px;
+	}
+	#cartreservation_popup #cartreservation_popup_close + p strong {
+		padding-right: 28px;
+		display: block;
+	}
+	
+	#cartreservation_popup .data-table tbody tr.expire-soon-row td {
+		background: none!important;
+	}
+	#cartreservation_popup .data-table tbody tr td {
+		display: block;
+	}
+	#cartreservation_popup .data-table tbody tr td:first-child {
+	    width: 30px;
+	    float: left;
+	    padding: 20px 5px 0 5px;
+	    min-width: 30px;
+	}
+	#cartreservation_popup .data-table tbody tr td:first-child img {
+		width: 20px;
+		margin: 5px;
+	}
+	#cartreservation_popup .data-table tbody tr.last td, 
+	#cartreservation_popup .data-table tbody td {
+	    border-bottom: none!important;
+	    margin-bottom: 0;
+	    padding: 5px 0 0px 0;
+	    vertical-align: middle;
+	}
+	#cartreservation_popup .data-table tbody tr.last td {
+		padding-bottom: 10px;
+	}
+	#cartreservation_popup .data-table tbody tr.last {
+		border-bottom: 1px solid #B6B6B6!important;
+	}
+	#cartreservation_popup .data-table tbody tr:before,
+	#cartreservation_popup .data-table tbody tr:after {
+		content: "";
+		clear: both;
+		display: block;
+	}
+	#cartreservation_popup .data-table tbody tr td.last {
+		display: none;
+	}
+	#cartreservation_popup .data-table td span[data-label]:before {
+	    content: attr(data-label) ":";
+	    font-size: 12px;
+	    padding-right: 5px;
+	    text-transform: uppercase;
+	}	
+
+	
+	#cartreservation_popup .data-table tr td:nth-child(2) {
+	    width: 30%;
+	    float: left;
+	}
+	#cartreservation_popup .data-table tr td:nth-child(2) a {
+		text-align: center;
+	}
+	#cartreservation_popup .data-table tr td:nth-child(3),
+	#cartreservation_popup .data-table tr td.a-right,
+	#cartreservation_popup .data-table tr td.a-center  {
+		width: 51%;
+		float: right;
+		text-align: left!important;
+	}
+
+}

@@ -1,0 +1,71 @@
+<div id="popup-confirm-unassign" class="modal-unassign">
+    <div class="popup-content modal-content-unassign">
+        <h1>Are you sure to change winner to loser</h1>
+        <a id="unassign-confirm"> <button type="button" title="">Confirm</button></a>
+    </div>
+
+
+</div>
+<style>
+    .modal-unassign {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 999; /* Sit on top */
+        padding-top: 200px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+    /* Modal Content */
+    .modal-content-unassign {
+        background-color: #f4f4f4;
+        margin: auto;
+        padding: 20px;
+        border: 3px solid #9b9b9b;
+        width: 40%;
+        text-align: center;
+
+    }
+    .modal-content-unassign h1
+    {
+        padding-top: 20px;
+        font-weight: 100;
+    }
+    .modal-content-unassign button
+    {
+        border: 0;
+        padding: 12px 100px;
+        background: #b7b7b7;
+        margin: 30px 0 20px 0;
+    }
+
+</style>
+<script type="text/javascript">
+
+
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        var modal= document.getElementById("popup-confirm-unassign");
+        if( event.target.className == 'unassign-button')
+        {
+            event.preventDefault();
+            modal.style.display = "block";
+            document.getElementById("unassign-confirm").href=event.target.getAttribute("href");
+        }
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+
+    }
+
+
+
+
+
+
+</script>

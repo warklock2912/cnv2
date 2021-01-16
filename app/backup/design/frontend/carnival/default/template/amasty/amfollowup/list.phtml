@@ -1,0 +1,77 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Followup
+ */
+?>
+<?php
+    $quoteItems = $this->getItems();
+?>
+<?php
+    foreach ($quoteItems as $_item){
+        
+        $_product = $this->loadProduct($_item);
+        if ($_product) {
+            $price = $this->getPrice($_product);
+
+            $discountPrice = $this->getDiscountPrice($price);
+            $showDiscount = $price != $discountPrice && $this->showDiscount();
+?>
+    <table class="product" cellpadding="0" cellspacing="0">
+        <tr>
+            <?php if ($this->showImage()) {?>
+             <td class="product-image" valign=top style="padding: 20px 10px 20px 20px; width: 100px; height: 100px; font-family: 'Myriad Pro', 'Verdana', Geneva;">
+                <a href="<?php echo $this->getProductUrl($_product) ?>">
+                   <img src="<?php echo $this->getImageUrl($_product) ?>" style="border:1px solid #ccc;" width="<?php echo $this->getImageWidht();?>" height="<?php echo $this->getImageHeight();?>" alt="" />
+                </a>
+            </td> 
+            <?php }?>
+            <td class="product-text" style="padding: 20px 20px 20px 10px;">
+              <table class="product-text">
+                  <tr class="name font_16" style="font-size: 16pt; font-weight: 600;color:black; font-family: 'Myriad Pro', 'Verdana', Geneva;"><td>
+                        <a style="color: black;" href="<?php echo $this->getProductUrl($_product) ?>" ><?php echo $this->escapeHtml($_product->getName()) ?></a>   
+                  </td></tr>
+
+                  <tr class="description font_12" style="font-size: 12pt; font-family: 'Myriad Pro', 'Verdana', Geneva;"><td style="font-family: 'Myriad Pro', 'Verdana', Geneva;">
+                      <?php echo $this->getDescription($_product); ?>
+                  </td></tr>
+
+                  <tr class="product-price" style="font-size: 18pt; color: #FFA453; font-family: 'Myriad Pro', 'Verdana', Geneva;"><td>
+                        <div style="<?php print $showDiscount ? "text-decoration: line-through;" : "";?>">
+                        <?php if ($this->showPrice()) { ?>
+                            <?php 
+
+                                print $this->__('Price:') ;
+
+                                print "&nbsp;";
+
+                                print Mage::app()->getLocale()->currency($this->getCurrencyCode())->toCurrency($price);
+
+                                if ($_item->getQty() > 1){
+                                    print '&nbsp;x&nbsp;'.floor($_item->getQty());
+                                }
+                        ?> 
+                          </div>
+                        <?php if ($showDiscount) {
+                                print $this->__('Discount Price').":" ;
+                                print "&nbsp;";
+                                print Mage::app()->getLocale()->currency($this->getCurrencyCode())
+                                    ->toCurrency($discountPrice);
+                                if ($_item->getQty() > 1){
+                                    print '&nbsp;x&nbsp;'.floor($_item->getQty());
+                                }
+                            }
+                        ?>
+                        <?php }?>
+                    </td></tr>
+                </table> 
+              </td>
+          </tr>
+        </table>
+        <hr style="border: 0; border-top: 1px dashed #FFA453; margin: 0;" />
+ <?php 
+        }
+ }?>
+ 
+

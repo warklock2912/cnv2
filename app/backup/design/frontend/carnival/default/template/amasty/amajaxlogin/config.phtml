@@ -1,0 +1,16 @@
+<?php 
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Ajaxlogin
+ */  
+ 
+if(Mage::getStoreConfig('amajaxlogin/general/enable')): ?>
+<div style="display: none !important;">
+<img src=" <?php  echo Mage::getDesign()->getSkinUrl('images/amasty/amajaxlogin/error.png',  array('_area'=>'frontend')) ?> " alt=''/>
+<img src=" <?php  echo Mage::getDesign()->getSkinUrl('images/amasty/amajaxlogin/success.png',array('_area'=>'frontend')) ?> " alt=''/>
+</div>
+<script type="text/javascript">
+var AmAjaxLoginObj = new AmAjaxLogin(<?php echo Mage::helper('amajaxlogin')->jsParam($this)?>);
+</script>
+ <?php endif; ?>        

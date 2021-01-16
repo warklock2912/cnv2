@@ -1,0 +1,21 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Followup
+ */
+?>
+<?php
+    $mode = $this->getMode();
+    
+    switch ($mode){
+        case "list":
+        case "table":
+            print $this->getChildHtml($mode);
+            break;
+        default:
+            print "unhandled template";
+            break;
+    }
+    
+?>

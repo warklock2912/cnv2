@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Crystal_ConfirmOrder>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Crystal_ConfirmOrder>
+    </modules>
+</config>

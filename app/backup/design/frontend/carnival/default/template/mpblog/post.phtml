@@ -1,0 +1,134 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Magpleasure_Blog
+ */
+
+/** @var Magpleasure_Blog_Helper_Data $helper  */
+$helper = $this->_helper();
+/** @var Magpleasure_Blog_Model_Post $post  */
+$post = $this->getPost();
+$categories = $this->getCategories($post->getId());
+/** @var Magpleasure_Blog_Block_Content_Post $this */
+?>
+<div class="mpblog-container">
+  <div class="blog-mobile">
+    <div class="blog-header">
+      <h1 class="mp-title"><?php echo $this->__('Blog'); ?></h1>
+      <a id="menu-category-blog" class="icon-menu icon-menu-blog" href="javascript:void(0)"><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span></a>
+      <a id="mobile-blog-search" class="mobile skip-search" href="#/" title="Search" onclick="showMobileBlogSearch()">
+        <img src="<?php echo $this->getSkinUrl('images/search-magnifier-interface-symbol.png')?>">
+      </a>
+    </div>
+    <div class="block mpblog-search" id="mobile_search" style="display: none;">
+      <div class="block-title">
+        <strong><span><?php echo $this->__("Search the blog") ?></span></strong>
+      </div>
+      <div class="block-content">
+        <form id="mp_blog_search_mobile" action="<?php echo Mage::getBlockSingleton('mpblog/sidebar_search')->getSearchUrl(); ?>" method="get">
+          <div class="input-box">
+            <input type="text" placeholder="<?php echo Mage::getBlockSingleton('mpblog/sidebar_search')->getBlockHeader(); ?>" class="input-text required-entry placeholder" title="<?php echo Mage::getBlockSingleton('mpblog/sidebar_search')->getBlockHeader(); ?>" id="search-blog" name="query" value="<?php echo Mage::getBlockSingleton('mpblog/sidebar_search')->getQuery(); ?>" maxlength="100" />
+          </div>
+          <button class="button" title="<?php echo $this->__("Search"); ?>" type="submit"><span><span><?php echo $this->__("Search"); ?></span></span></button>
+        </form>
+        <script type="text/javascript">
+          //<![CDATA[
+          new VarienForm('mp_blog_search_mobile');
+          //]]>
+        </script>
+      </div>
+    </div>
+    <p class="post-cat">
+      <?php foreach($categories as $category):  ?>
+        <a href="<?php echo $category->getUrl() ?>" title="<?php echo $category->getName(); ?>"><?php echo $category->getName(); ?></a>
+      <?php endforeach; ?>
+    </p>
+    <div class="mp-blog-head fix-me">
+      <h1 class="post-title"><?php echo $this->escapeHtml($post->getTitle()); ?></h1>
+    </div>
+    <div class="mp-header fix-me">
+      <?php echo $this->getHeaderHtml($post); ?>
+      <?php if ($helper->getSocialEnabled()): ?>
+        <?php echo $this->getSocialHtml(); ?>
+      <?php endif; ?>
+    </div>
+  </div>
+  <div class="blog-desktop">
+    <div class="mp-blog-head fix-me">
+      <h1 class="post-title"><?php echo $this->escapeHtml($post->getTitle()); ?></h1>
+    </div>
+  </div>
+  <?php
+     $blogimages = Mage::getModel('mpblog/blogimages')->getCollection()->addFieldToFilter('post_id', $post->getPostId());
+      if($blogimages->getSize()){
+  ?>
+     <div class="post-thumbnail box-slider fotorama" data-nav="thumbs" data-width="100%" data-maxheight="600" data-loop="true">
+        <?php
+            foreach ($blogimages as $blogimage) {
+        ?>
+            <img alt="image" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . DS . 'magebuzz' . DS . $blogimage->getImages() ?>"/>
+        <?php }?>
+     </div>
+  <?php }?>
+  <div class="post-item mpblog-post-detail">
+    <div class="blog-desktop">
+      <p class="post-cat">
+        <?php foreach($categories as $category):  ?>
+          <a href="<?php echo $category->getUrl() ?>" title="<?php echo $category->getName(); ?>"><?php echo $category->getName(); ?></a>
+        <?php endforeach; ?>
+      </p>
+      <div class="mp-blog-head fix-me">
+          <?php if ($helper->getSocialEnabled()): ?>
+              <?php echo $this->getSocialHtml(); ?>
+          <?php endif; ?>
+      </div>
+      <?php if($post->getShortContent()):?>
+        <div class="mp-header-shortcontent">
+          <?php echo $post->getShortContent(); ?>
+        </div>
+      <?php endif; ?>
+      <div class="mp-header fix-me">
+          <?php echo $this->getHeaderHtml($post); ?>
+      </div>
+    </div>
+    <div class="mp-content std fix-me">
+        <?php echo $post->getFullContent(); ?>
+    </div>
+    <?php if ($helper->getSocialEnabled()): ?>
+      <div class="bottom-social">  <?php echo $this->getSocialHtml(); ?> </div>
+    <?php endif; ?>
+    <?php echo $this->getChildHtml('mpblog_recentpost') ?>
+  </div>
+  <div class="mpblog-right">
+    <?php echo $this->getChildHtml('sidebar_category'); ?>
+    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('carnival-blog-sidebar')->toHtml() ?>
+  </div>
+</div>
+<?php if($blogimages->getSize() > 1 ): ?>
+
+<?php endif; ?>
+<script type="text/javascript">
+  jQuery('.icon-menu-blog').on('click', function() {
+    if(jQuery(this).hasClass('active')){
+      jQuery('.block.mpblog-categories').slideToggle(300);
+      jQuery('.icon-menu-blog').removeClass('active');
+    }
+    else{
+      jQuery('.icon-menu-blog').removeClass('active');
+      jQuery(this).addClass('active');
+      jQuery('.block.mpblog-categories').slideToggle(300);
+    }
+  });
+  function showMobileBlogSearch(){
+    var formId = jQuery("#mobile_search");
+      if(formId.hasClass('active')){
+        formId.removeClass('active');
+        formId.hide();
+      }
+    else{
+        formId.addClass('active');
+        formId.show();
+      }
+  }
+</script>

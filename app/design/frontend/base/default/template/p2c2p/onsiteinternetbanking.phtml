@@ -1,0 +1,47 @@
+<?php
+$code = $this->getMethodCode();
+?>
+
+<?php
+ $channels=$this->getChannels();
+?>
+<div id="payment_form_<?php echo $code; ?>" class="internet-banking" style="display:none;">
+    <?php   foreach ( $channels  as $group): ?>
+    <div class="internet-banking-group-item">
+        <!-- <span class="internet-banking-group-title"><?php echo $group['group_name'] ?></span> -->
+        <ul>
+        <?php foreach ($group['items'] as $channel): ?>
+            <?php
+            $channelData=array(
+                'channelCode'=>$channel['group_code'],
+                'agentCode'=>$channel['service_code']
+            );
+            $channelDataJson=json_encode($channelData);
+            ?>
+            <li class="item" onclick="changebank(this)">
+                <input id="p2c2p_internet_banking_<?php echo $channel['group_code'].'-'.$channel['service_code'] ?>" type="radio" name="payment[onsite]" value=<?php echo $channelDataJson ?> class="radio" checked="checked" />
+
+                <label for="p2c2p_internet_banking_<?php echo  $channel['group_code'].'-'.$channel['service_code'] ?>">
+                    <div class="logo-wrapper <?php echo  $channel['group_code'].'-'.$channel['service_code'] ?>">
+                      <img src="<?php echo  $channel['service_image']  ?>">
+                    </div>
+                    <div class="internet-banking-text-wrapper">
+                        <span class="title"><?php echo $channel['service_name'] ?></span><br/>
+                    </div>
+                </label>
+            </li>
+        <?php endforeach; ?>
+        </ul>
+    </div>
+    <?php endforeach; ?>
+</div>
+<script type="text/javascript">
+    jQuery('#payment_form_p2c2p_onsiteinternetbanking').customRadioCheckbox();
+    var paymentMethodForm = new VarienForm('co-payment-form');
+
+    function changebank(e) {
+        jQuery('.internet-banking-group-item  > ul  > li > label').removeClass('selected');
+        jQuery(e).find('label').addClass('selected');
+
+    }
+</script>

@@ -1,0 +1,87 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition End User License Agreement
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magento.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license http://www.magento.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Customer login form template
+ *
+ * @see app/design/frontend/base/default/template/customer/form/login.phtml
+ */
+/** @var $this Mage_Customer_Block_Form_Login */
+?>
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+<form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="login-form-popup" class="login-form" >
+    <?php echo $this->getBlockHtml('formkey'); ?>
+    <div class="content fieldset">
+      <div class="box-login-facebook">
+        <label><?php echo $this->__('Connect to your Facebook account') ?></label>
+        <?php echo $this->getChildHtml('amajaxlogin_social'); ?>
+        <span class="or"><?php echo $this->__('or') ?></span>
+      </div>
+      <div class="form-content">
+        <h2><?php echo $this->__('Already have an account?') ?></h2>
+        <ul class="form-list">
+            <li>
+                <div class="input-box icon-email">
+                    <input type="email" placeholder="<?php echo $this->__('Email') ?>" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?php echo $this->__('Email') ?>'" autocapitalize="off" autocorrect="off" spellcheck="false" name="login[username]" value="<?php echo $this->escapeHtml($this->getUsername()) ?>" id="email" class="input-text required-entry validate-email" title="<?php echo $this->quoteEscape($this->__('Email Address')) ?>" />
+                </div>
+            </li>
+            <li>
+                <div class="input-box icon-pass">
+                    <input type="password" placeholder="<?php echo $this->__('Password') ?>" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?php echo $this->__('Password') ?>'" name="login[password]" class="input-text required-entry validate-password" id="pass" title="<?php echo $this->quoteEscape($this->__('Password')) ?>" />
+                </div>
+            </li>
+            <?php echo $this->getChildHtml('form.additional.info'); ?>
+            <li class="li-forgotpassword">
+                <a href="<?php echo $this->getForgotPasswordUrl() ?>" class="f-left"><?php echo $this->__('Forgotten password ?') ?></a>
+            </li>
+            <?php echo $this->getChildHtml('persistent.remember.me'); ?>
+        </ul>
+        <div class="buttons-set">
+          <button type="submit" class="button" title="<?php echo $this->quoteEscape($this->__('Login')) ?>" name="send" id="send2"><span><span><?php echo $this->__('Login') ?></span></span></button>
+        </div>
+          <div class="buttons-set">
+              <button type="button" class="button" title="<?php echo $this->quoteEscape($this->__('Sign Up')) ?>" name="send-signup" id="continue-checkout"><span><span><?php echo $this->__('Sign Up') ?></span></span></button>
+          </div>
+      </div>
+    </div>
+    <div class="box-continue" style="display: none">
+        <a href="javascript:void(0)" id="continue-checkout"><?php echo $this->__('Continue Checkout') ?> &raquo;</a>
+      </div>
+    <?php if (Mage::helper('checkout')->isContextCheckout()): ?>
+        <input name="context" type="hidden" value="checkout" />
+    <?php endif; ?>
+</form>
+<a href="javascript:void(0)" id="close-popup" class="close-popup"><?php echo $this->__('close') ?></a>
+
+<script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('login-form-popup', true);
+//]]>
+jQuery("#close-popup, #continue-checkout").click(function() {
+  jQuery("#checkout_login").hide();
+});
+</script>

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--/**
+ * MageWorx
+ * Search Suite
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuite
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */-->
+<layout>
+    <adminhtml_sales_order_view>
+        <reference name="sales_order_tabs">
+            <action method="addTab"><name>search_queries</name><block>mageworx_searchsuite/adminhtml_sales_order_view_tab_search</block></action>
+        </reference>
+    </adminhtml_sales_order_view>
+    <adminhtml_mageworx_searchsuite_attributes_index>   
+        <reference name="content">
+            <block type="mageworx_searchsuite/adminhtml_attributes" name="searchsuite.attributes.grid.container" template="mageworx/searchsuite/attributes.phtml"></block>
+        </reference>
+    </adminhtml_mageworx_searchsuite_attributes_index>
+    <adminhtml_mageworx_searchsuite_synonyms_index>   
+        <reference name="content">
+            <block type="mageworx_searchsuite/adminhtml_synonyms" name="searchsuite.synonyms.grid.container" template="mageworx/searchsuite/synonyms.phtml"></block>
+        </reference>
+    </adminhtml_mageworx_searchsuite_synonyms_index>
+    <adminhtml_mageworx_searchsuite_synonyms_edit>
+        <reference name="content">
+            <block type="mageworx_searchsuite/adminhtml_synonyms_edit" name="synonyms_edit" />
+        </reference>
+    </adminhtml_mageworx_searchsuite_synonyms_edit>
+    <adminhtml_mageworx_searchsuite_stopwords_index>   
+        <reference name="content">
+            <block type="mageworx_searchsuite/adminhtml_stopwords" name="searchsuite.stopwords.grid.container" template="mageworx/searchsuite/stopwords.phtml"></block>
+        </reference>
+    </adminhtml_mageworx_searchsuite_stopwords_index>
+    <adminhtml_mageworx_searchsuite_stopwords_edit>
+        <reference name="content">
+            <block type="mageworx_searchsuite/adminhtml_stopwords_edit" name="stopwords_edit" />
+        </reference>
+    </adminhtml_mageworx_searchsuite_stopwords_edit>
+    <adminhtml_mageworx_searchsuite_stopwords_import>
+        <reference name="content">
+            <block type="mageworx_searchsuite/adminhtml_stopwords_import" name="stopwords_import" />
+        </reference>
+    </adminhtml_mageworx_searchsuite_stopwords_import>
+</layout>
+
+        

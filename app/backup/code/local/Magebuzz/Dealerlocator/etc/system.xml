@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <tabs>
+    <magebuzz translate="label" module="dealerlocator">
+      <label>Magebuzz Add-ons</label>
+      <sort_order>400</sort_order>
+    </magebuzz>
+  </tabs>
+  <sections>
+    <dealerlocator translate="label" module="dealerlocator">
+      <label>Dealer Locator</label>
+      <tab>magebuzz</tab>
+      <sort_order>400</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+      <groups>
+        <google_map_options translate="label" module="dealerlocator">
+          <label>General Options</label>
+          <frontend_type>text</frontend_type>
+          <sort_order>1</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+          <fields>
+            <google_geo_api_url translate="label">
+              <label>Google Geo API URL</label>
+              <comment><![CDATA[Leave empty for default.<br/>Format: <b>https://maps.googleapis.com/maps/api/geocode/json</b>]]></comment>
+              <frontend_type>text</frontend_type>
+              <sort_order>10</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </google_geo_api_url>
+            <google_api_key translate="label">
+              <label>Google API Key</label>
+              <comment><![CDATA[<a href="https://code.google.com/apis/console">Get API key for your domain. It is required if you want to have more than 25k request per day.</a>]]></comment>
+              <frontend_type>text</frontend_type>
+              <sort_order>20</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </google_api_key>
+            <show_search_form translate="label">
+              <label>Allow customer to search dealer</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>30</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </show_search_form>
+            <enable_search_suggestion translate="label">
+              <label>Enable Ajax Suggestions when Typing Searching Address</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>40</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </enable_search_suggestion>
+            <default_dealer_icon translate="label">
+              <label>Default Dealer Icon Image</label>
+              <frontend_type>image</frontend_type>
+              <backend_model>adminhtml/system_config_backend_image</backend_model>
+              <upload_dir config="system/filesystem/media" scope_info="1">dealers/icons</upload_dir>
+              <base_url type="media" scope_info="1">dealers/icons</base_url>
+              <sort_order>50</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </default_dealer_icon>
+            <default_location_address translate="label">
+              <label>Default Location Address</label>
+              <frontend_type>text</frontend_type>
+              <sort_order>60</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </default_location_address>
+            <search_radius translate="label comment">
+              <label>Search Radius</label>
+              <comment><![CDATA[Separated by comma.]]></comment>
+              <frontend_type>text</frontend_type>
+              <sort_order>70</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </search_radius>
+            <default_search_radius translate="label comment">
+              <label>Default Search Radius</label>
+              <frontend_type>text</frontend_type>
+              <sort_order>80</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </default_search_radius>
+            <distance_units translate="label">
+              <label>Distance Unit</label>
+              <frontend_type>select</frontend_type>
+              <source_model>dealerlocator/distanceunits</source_model>
+              <sort_order>90</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </distance_units>
+
+            <show_top_link translate="label">
+              <label>Show Link on Top Menu</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>100</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </show_top_link>
+            <show_email_and_website translate="label">
+              <label>Show Email And Website</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>110</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </show_email_and_website>
+            <page_type translate="label">
+              <label>Page Type</label>
+              <frontend_type>select</frontend_type>
+              <source_model>dealerlocator/system_config_source_pagetype</source_model>
+              <sort_order>120</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </page_type>
+
+            <show_per_page_values translate="label comment">
+              <label>Dealers per Page Allowed Values</label>
+              <comment>Comma-separated.</comment>
+              <frontend_type>text</frontend_type>
+              <sort_order>130</sort_order>
+              <validate>validate-per-page-value-list</validate>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </show_per_page_values>
+            <show_per_page translate="label comment">
+              <label>Dealers per Page Default Value</label>
+              <comment>Must be in the allowed values list.</comment>
+              <frontend_type>text</frontend_type>
+              <sort_order>140</sort_order>
+              <validate>validate-per-page-value</validate>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </show_per_page>
+            <display_tag_filter translate="label comment">
+              <label>Display filter by tags</label>
+              <frontend_type>select</frontend_type>
+              <sort_order>150</sort_order>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </display_tag_filter>
+          </fields>
+        </google_map_options>
+      </groups>
+    </dealerlocator>
+  </sections>
+</config>

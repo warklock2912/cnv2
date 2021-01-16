@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MageWorx
+ * Search Suite
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuiteSolr
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+-->
+<config>
+    <sections>
+        <mageworx_searchsuite>
+            <groups>
+                <solr translate="label" module="mageworx_searchsuitesolr">
+                    <label>Apache Solr</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>15</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <host translate="label">
+                            <label>Apache Host</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Default host: 127.0.0.1]]></comment>
+                        </host>
+                        <port translate="label">
+                            <label>Apache Port</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Default port for Jetty Server: 8983, Default port for Tomcat Server: 8080]]></comment>
+                        </port>
+                        <timeout translate="label">
+                            <label>Connection Timeout</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </timeout>
+                        <path translate="label">
+                            <label>Solr Path</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Default path: solr]]></comment>
+                        </path>
+                        <check translate="label">
+                            <label>Check Availability</label>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>mageworx_searchsuitesolr/adminhtml_system_config_form_field_check</frontend_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </check>
+                    </fields>
+                </solr>
+            </groups>
+        </mageworx_searchsuite>
+    </sections>
+</config>

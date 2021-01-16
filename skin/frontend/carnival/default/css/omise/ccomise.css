@@ -1,0 +1,56 @@
+form #omise_gateway_cc_name{
+	width: 100%;
+    height: 38px;
+    padding: 10px;
+    border-radius: 0px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+
+form #omise_gateway_cc_number {
+    background-image: url(../../images/omise/images.png), url(../../images/omise/images.png);
+    background-position: 2px -110px, 250px -58px;
+    background-size: 120px 361px, 120px 361px;
+    background-repeat: no-repeat;
+
+
+	width: 100%;
+    height: 38px;
+    padding: 10px;
+    /*padding-left: 54px;*/
+    border-radius: 0px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+
+form #omise_gateway_cc_number.visa {
+  background-position: 2px -147px, 260px -57px;
+}
+form #omise_gateway_cc_number.visa_electron {
+  background-position: 2px -189px, 260px -57px;
+}
+form #omise_gateway_cc_number.mastercard {
+  background-position: 2px -221px, 260px -57px;
+}
+form #omise_gateway_cc_number.maestro {
+  background-position: 2px -257px, 260px -57px;
+}
+form #omise_gateway_cc_number.discover {
+  background-position: 2px -294px, 260px -57px;
+}
+form #omise_gateway_cc_number.jcb {
+  background-position: 2px -332px, 260px -57px;
+}
+form #omise_gateway_cc_number.valid.visa {
+  background-position: 2px -148px, 250px -81px;
+}
+form #omise_gateway_cc_number.valid.visa_electron {
+  background-position: 2px -189px, 250px -81px;
+}
+form #omise_gateway_cc_number.valid.mastercard {
+  background-position: 2px -220px, 250px -81px;
+}
+form #omise_gateway_cc_number.valid.maestro {
+  background-position: 2px -273px, 250px -81px;
+}
+form #omise_gateway_cc_number.valid.discover {
+  background-position: 2px -315px, 260px -87px;
+}

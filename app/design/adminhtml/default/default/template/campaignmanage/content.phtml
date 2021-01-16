@@ -1,0 +1,121 @@
+<?php if ($this->checkShuffle()): ?>
+    <h3>Please Shuffle Before Start Queue</h3>
+<?php else: ?>
+    <?php $queueFilterByStatusCurent = Mage::getModel('campaignmanage/queue')->getCollection()->addFieldToFilter('campaign_id', $this->getCampaignId())->addFieldToFilter('queue_status', 2); ?>
+    <?php $queueFilterByStatusDone = Mage::getModel('campaignmanage/queue')->getCollection()->addFieldToFilter('campaign_id', $this->getCampaignId())->addFieldToFilter('queue_status', 3); ?>
+    <?php $queueCollection = Mage::getModel('campaignmanage/queue')->getCollection()->addFieldToFilter('campaign_id', $this->getCampaignId()); ?>
+
+    <?php if (!count($queueFilterByStatusCurent) && !count($queueFilterByStatusDone)):; ?>
+        <div>
+            <?php echo $this->getStartQueueButtonHtml(); ?>
+        </div>
+    <?php elseif (count($queueFilterByStatusCurent)) : ?>
+        <div class="entry-edit">
+            <!--    <div id="assign_product_warrning" style="display: none;">-->
+            <!--        <ul class="messages">-->
+            <!--            <li class="error-msg">-->
+            <!--                <ul>-->
+            <!--                    <li>-->
+            <?php //echo $this->__('Links with associated products will retain only after saving current product.') ?><!--</li>-->
+            <!--                </ul>-->
+            <!--            </li>-->
+            <!--        </ul>-->
+            <!--    </div>-->
+
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('campaignmanage')->__('Current Customer') ?></h4>
+            </div>
+            <fieldset>
+                <div class="grid">
+                    <table class="data">
+                        <thead>
+                        <tr class="heading">
+                            <th>No.</th>
+                            <th>Customer ID</th>
+                            <th>Personal ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php $currentCustomer = $this->getCurrentCustomer(); ?>
+                        <tr>
+                            <td><?php echo $currentCustomer->getNoOfQueue(); ?></td>
+                            <td><?php echo $currentCustomer->getCustomerId(); ?></td>
+                            <td><?php echo $currentCustomer->getCardId(); ?></td>
+                            <td><?php echo $currentCustomer->getCustomerName(); ?></td>
+                            <td><?php echo $currentCustomer->getEmail(); ?></td>
+                            <td><?php echo $currentCustomer->getPhone(); ?></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <?php if (count($queueCollection) - 1 !== count($queueFilterByStatusDone)): ?>
+                    <?php echo $this->getNextQueueButtonHtml() ?>
+                <?php endif; ?>
+            </fieldset>
+        </div>
+
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('campaignmanage')->__('Queue') ?></h4>
+            </div>
+            <fieldset>
+                <?php echo $this->getLayout()->createBlock('campaignmanage/adminhtml_campaign_edit_queue_queue')->toHtml() ?>
+            </fieldset>
+        </div>
+    <?php else: ?>
+        <h3>Queue  is END</h3>
+    <?php endif; ?>
+<?php endif; ?>
+
+<script type="text/javascript">
+    <?php $key = Mage::getSingleton('core/session')->getFormKey(); ?>
+    <?php $campaignId = $this->getCampaignId(); ?>
+    jQuery(document).ready(function () {
+        jQuery("button[name=start_queue]").click(function () {
+            jQuery.ajax({
+                beforeSend: function () {
+                    jQuery('#loading-mask').show();
+                },
+                url: "<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/campaign/startQueue/', array('id' => $this->getRequest()->getParam('id')));?>",
+                type: "POST",
+                dataType: 'json',
+                data: {
+                    form_key: '<?php echo $key;?>',
+                    campaign_id: <?php echo $campaignId;?>
+                },
+                success: function (data) {
+                    console.log(data);
+                    jQuery('#queue_content').html(data.outputHtml);
+                },
+                complete: function () {
+                    jQuery('#loading-mask').hide();
+                }
+            });
+        })
+        jQuery("button[name=next_queue]").click(function () {
+            jQuery.ajax({
+                beforeSend: function () {
+                    jQuery('#loading-mask').show();
+                },
+                url: "<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/campaign/nextQueue/', array('id' => $this->getRequest()->getParam('id')));?>",
+                type: "POST",
+                dataType: 'json',
+                data: {
+                    form_key: '<?php echo $key;?>',
+                    campaign_id: <?php echo $campaignId;?>
+                },
+                success: function (data) {
+                    console.log(data);
+                    jQuery('#queue_content').html(data.outputHtml);
+                },
+                complete: function () {
+                    jQuery('#loading-mask').hide();
+                }
+            });
+        })
+    })
+
+</script>

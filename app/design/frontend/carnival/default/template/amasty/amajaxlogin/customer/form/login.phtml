@@ -1,0 +1,52 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Ajaxlogin
+ */
+?>
+<div class="account-login">
+  <lable class="sub-title"><?php echo $this->__('Not a member yet?') ?><a href="#" onclick="AmAjaxLoginObj.sendRegisterAjax();" title="<?php echo $this->__('Sign up') ?>"><?php echo $this->__('Sign up') ?></a> </lable>
+  <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="amajaxlogin-login-form">
+    <div class="am-form-block">
+      <ul class="am-form-list">
+        <li>
+        <!-- <label for="email" class="required"><em>*</em><?php //echo $this->__('Email Address') ?></label>  -->
+          <div class="input-box">
+            <input type="text" onKeyPress="sendRequestByEnter(event)" name="login[username]" placeholder="<?php echo $this->__('Enter your email') ?>" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?php echo $this->__('Enter your email') ?>'" value="<?php echo $this->htmlEscape($this->getUsername()) ?>" id="email" class="input-text required-entry validate-email" title="<?php echo $this->__('Email Address') ?>" />
+          </div>
+        </li>
+        <li>
+          <!-- <label for="pass" class="required"><em>*</em><?php //echo $this->__('Password') ?></label>    -->
+          <div class="input-box">
+            <input type="password" onKeyPress="sendRequestByEnter(event)" name="login[password]" placeholder="<?php echo $this->__('Password') ?>" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?php echo $this->__('Password') ?>'" class="input-text required-entry validate-password" id="pass" title="<?php echo $this->__('Password') ?>" />
+          </div>
+        </li>
+        <?php echo $this->getChildHtml('form.additional.info'); ?>
+      </ul>
+      <div class="am-password-login"><a onclick="AmAjaxLoginObj.forgotPassword();" class=""><?php echo $this->__('Forgot Your Password?') ?></a></div>
+      <div class="button am-login-button am-login" onclick="AmAjaxLoginObj.login();"><span><?php echo $this->__('Login') ?></span></div>
+    </div>
+    <div class="am-form-block amform-block-account">
+      <div class="amform-block-account-container">
+        <?php if(Mage::helper('amajaxlogin/google')->isEnable() || Mage::helper('amajaxlogin/facebook')->isEnable() || Mage::helper('amajaxlogin/twitter')->isEnable()) {?>
+          <div class="or_use_that"><?php echo $this->__('or') ?></div>
+          <div class="amform-block-social">
+            <?php if(Mage::helper('amajaxlogin/google')->isEnable()) {?>
+              <div id="am-ajax-google"><iframe width="115" height="32" scrolling="no" style="border: 0;" src="<?php echo Mage::helper('amajaxlogin/google')->getIframeUrl()?>"></iframe></div>
+            <?php } ?>
+            <?php if(Mage::helper('amajaxlogin/facebook')->isEnable()) {?>
+              <div id="am-ajax-facebook"><iframe width="360" height="40" scrolling="no" style="border: 0;" src="<?php echo Mage::helper('amajaxlogin/facebook')->getIframeUrl()?>"></iframe></div>
+            <?php } ?>
+            <?php if(Mage::helper('amajaxlogin/twitter')->isEnable()) {?>
+              <div id="am-ajax-twitter"><?php echo Mage::helper('amajaxlogin/twitter')->getTwitterHtml()?></div>
+            <?php } ?>
+          </div>
+        <?php } ?>
+      </div>
+
+    </div>
+    <div style="clear:both"></div>
+  </form>
+
+</div>

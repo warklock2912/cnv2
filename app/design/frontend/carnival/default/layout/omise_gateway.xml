@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<mastercheckout_index_index>
+        <!-- <reference name='head'>
+            <block type='core/template' template="omise/js.phtml" />
+        </reference> -->
+        
+		<reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/omise/jquery.creditCardValidator.js</name></action>
+            <action method="addCss">
+                <stylesheet>css/omise/ccomise.css</stylesheet>
+            </action>
+        </reference>
+        
+	</mastercheckout_index_index>
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action ifconfig="payment/omise_gateway/active" method="addLink" translate="label" module="customer">
+                <name>card</name>
+                <path>omise/card/list</path>
+                <label>My Credit/Debit Card</label>
+            </action>
+        </reference>
+    </customer_account>
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action  ifconfig="payment/p2c2p/active"  method="addLink" translate="label" module="customer">
+                <name>card(p2c2p)</name>
+                <path>p2c2p/card/list</path>
+                <label>My Credit Card</label>
+            </action>
+        </reference>
+    </customer_account>
+    <p2c2p_card_list translate="label">
+        <label>Customer My Account 2c2p Saved Cards</label>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="p2c2p/card" name="p2c2p_customer_card_list" template="p2c2p/card.phtml"/>
+        </reference>
+    </p2c2p_card_list>
+
+
+    <omise_gateway_card_list translate="label">
+        <label>Customer My Account Omise Saved Cards</label>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="omise_gateway/card" name="omise_customer_card_list" template="omise/card.phtml"/>
+        </reference>
+    </omise_gateway_card_list>
+</layout>

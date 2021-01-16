@@ -1,0 +1,75 @@
+<?php
+/**
+ * MageWorx
+ * Search Suite
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuite
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+$catalogSearchHelper = $this->helper('catalogsearch');
+$searchHelper = Mage::helper('mageworx_searchsuite');
+?>
+<form id="search_mini_form" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
+    <div class="searchsuite-form-search">
+        <input id="search" type="text" tabindex="1" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" value="<?php echo $catalogSearchHelper->getEscapedQueryText() ?>" class="searchsuite-input" maxlength="<?php echo $catalogSearchHelper->getMaxQueryLength(); ?>" />
+        <?php if ($searchHelper->isSearchByCategories()): ?>
+            <?php
+            $searchCat = $searchHelper->getSearchCategory();
+            $categories = $searchHelper->getQuickSearchCategories();
+            ?>
+            <div class="searchsuite-select searchsuite-select-cat">
+                <div class="searchsuite-current-value" id="searchsuite_cat_current_value">All</div>
+                <a href="#" tabindex="2" class="searchsuite-change" id="searchsuite_cat_change">&#9660</a>
+                <ul class="searchsuite-dropdown" id="searchsuite_cat_dropdown">
+                </ul>
+                <select id="searchsuite_categories" name="cat" style="display: none;">
+                    <option value="all"><?php echo $searchHelper->__('All Categories') ?></option>
+                    <?php foreach ($categories as $cat):
+                        if ($cat->getName()):
+                            ?>
+                            <option value="<?php echo $cat->getId(); ?>" <?php if ($searchCat == $cat->getId()) echo 'selected="selected"'; ?>><?php echo $cat->getName() ?></option>
+                        <?php endif;
+                    endforeach;
+                    ?>
+                </select>
+            </div>
+        <?php endif; ?>
+
+        <?php if ($searchHelper->isSearchByAttributes()): ?>
+            <?php
+            $searchParam = $searchHelper->getSearchParameter();
+            $attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+                    ->addVisibleFilter()
+                    ->addFieldToFilter('is_attributes_search', array('eq' => '1'));
+            ?>
+            <div class="searchsuite-select searchsuite-select-attr">
+                <div class="searchsuite-current-value" id="searchsuite_attr_current_value">All</div>
+                <a href="#" tabindex="2" class="searchsuite-change" id="searchsuite_attr_change">&#9660</a>
+                <ul class="searchsuite-dropdown" id="searchsuite_attr_dropdown">
+                </ul>
+                <select id="searchsuite_attributes" name="a" style="display: none;">
+                    <option value="all"><?php echo $searchHelper->__('All Attributes') ?></option>
+                    <?php foreach ($attributes as $attr): ?>
+                        <option value="<?php echo $attr->getName(); ?>" <?php if ($searchParam == $attr->getName()) echo 'selected="selected"'; ?>><?php echo $attr->getFrontendLabel(); ?></option>
+    <?php endforeach; ?>
+                </select>
+            </div>
+<?php endif; ?>
+        <input type="submit" tabindex="3" title="<?php echo $this->__('Search') ?>" value="<?php echo $this->__('Search') ?>" class="searchsuite-submit"/>
+        <a class="skip-link close-search" href="#header-search" title="<?php echo $this->__('Close') ?>"><?php echo $this->__('Close') ?></a>
+        <div id="search_autocomplete" class="search-autocomplete"></div>
+        <script type="text/javascript">
+            //<![CDATA[
+            var searchForm = new Varien.searchForm('search_mini_form', 'search', '');
+            searchForm.initAutocomplete('<?php echo $catalogSearchHelper->getSuggestUrl() ?>', 'search_autocomplete');
+            jQuery(document).ready(function() {
+                jQuery('#search').searchSuite({text: "<?php echo $searchHelper->getDefaultSearchText() ?>",
+                    value: "<?php echo $catalogSearchHelper->getEscapedQueryText() ?>",
+                    attributes:<?php echo $searchHelper->isSearchByAttributes(); ?>,
+                    categories:<?php echo $searchHelper->isSearchByCategories(); ?>});
+            });
+            //]]>
+        </script>
+    </div>
+</form>

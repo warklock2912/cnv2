@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_SecurityAuth
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <amsecurityauth translate="title" module="amsecurityauth">
+                                        <title>Two-Factor Authentication</title>
+                                    </amsecurityauth>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <translate>
+        <modules>
+            <Amasty_Orderarchive>
+                <files>
+                    <default>Amasty_SecurityAuth.csv</default>
+                </files>
+            </Amasty_Orderarchive>
+        </modules>
+    </translate>
+</config>
