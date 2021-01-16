@@ -74,6 +74,7 @@ class Crystal_Twoctwop_Helper_Data extends Mage_Core_Helper_Abstract
         $responsePayloadJson = $pgw_helper->requestAPI($apiEnv, $requestPayloadJson);
         Mage::log($responsePayloadJson);
 
+        $result['message'] = 'Invalid Signature';
         if($pgw_helper->containPayload($responsePayloadJson)){
             Mage::log('IF1');
             Mage::log($pgw_helper->containPayload($responsePayloadJson));
