@@ -68,14 +68,20 @@ class Crystal_Twoctwop_Helper_Data extends Mage_Core_Helper_Abstract
         $pgw_helper = new PaymentGatewayHelper();
         //Do Payload
         $requestPayloadJson = $pgw_helper->generatePayload($paymentTokenRequest, $secretKey);
-
+        var_dump($requestPayloadJson);
         //Do Payment Token API request
         $responsePayloadJson = $pgw_helper->requestAPI($apiEnv, $requestPayloadJson);
-
+var_dump($responsePayloadJson);
         $result['message'] = 'Invalid Signature';
         if($pgw_helper->containPayload($responsePayloadJson)){
+            var_dump($pgw_helper->containPayload($responsePayloadJson));
             if($pgw_helper->validatePayload($responsePayloadJson, $secretKey)) {
+                echo 2;
+                var_dump($pgw_helper->validatePayload($responsePayloadJson, $secretKey));
+
                 $paymentTokenResponse = $pgw_helper->parseAPIResponse($responsePayloadJson);
+
+                var_dump($paymentTokenResponse);
                 if ($paymentTokenResponse->paymentToken && $paymentTokenResponse->paymentToken != '') {
                     $result['status'] = true;
                     $result['payment_response'] = $paymentTokenResponse;
