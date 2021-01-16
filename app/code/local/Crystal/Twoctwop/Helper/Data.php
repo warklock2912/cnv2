@@ -66,25 +66,24 @@ class Crystal_Twoctwop_Helper_Data extends Mage_Core_Helper_Abstract
 
         //Important: Generate signature
         $pgw_helper = new PaymentGatewayHelper();
-        $hashed_signature = $pgw_helper->generateSignature($paymentTokenRequest, $secretKey);
-        $paymentTokenRequest->signature = $hashed_signature;
+        //Do Payload
+        $requestPayloadJson = $pgw_helper->generatePayload($paymentTokenRequest, $secretKey);
+
         //Do Payment Token API request
-        $encoded_payment_token_response = $pgw_helper->requestAPI($apiEnv, $paymentTokenRequest);
-        $is_valid_signature = $pgw_helper->validateSignature($encoded_payment_token_response, $secretKey);
+        $responsePayloadJson = $pgw_helper->requestAPI($apiEnv, $requestPayloadJson);
 
-        if ($is_valid_signature) {
-            //Valid signature, Get payment token and pass token to your mobile application.
-            $payment_token_response = $pgw_helper->parseAPIResponse($encoded_payment_token_response);
-
-            if ($payment_token_response->paymentToken && $payment_token_response->paymentToken != '') {
-                $result['status'] = true;
-                $result['payment_response'] = $payment_token_response;
-                $result['message'] = $payment_token_response->respDesc;
-            } else {
-                $result['message'] = $payment_token_response->respDesc;
+        $result['message'] = 'Invalid Signature';
+        if($pgw_helper->containPayload($responsePayloadJson)){
+            if($pgw_helper->validatePayload($responsePayloadJson, $secretKey)) {
+                $paymentTokenResponse = $pgw_helper->parseAPIResponse($responsePayloadJson);
+                if ($paymentTokenResponse->paymentToken && $paymentTokenResponse->paymentToken != '') {
+                    $result['status'] = true;
+                    $result['payment_response'] = $paymentTokenResponse;
+                    $result['message'] = $paymentTokenResponse->respDesc;
+                } else {
+                    $result['message'] = $paymentTokenResponse->respDesc;
+                }
             }
-        } else {
-            $result['message'] = 'Invalid Signature';
         }
         return $result;
     }
