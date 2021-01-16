@@ -65,6 +65,7 @@ class Crystal_Twoctwop_Helper_Data extends Mage_Core_Helper_Abstract
         $paymentTokenRequest->userDefined5 = $paymentDetail->userDefined5;
 
         Mage::log('START');
+        Mage::log($paymentTokenRequest);
         //Important: Generate signature
         $pgw_helper = new PaymentGatewayHelper();
         //Do Payload
