@@ -50,14 +50,14 @@ class Crystal_Twoctwop_Helper_Data extends Mage_Core_Helper_Abstract
 
         $paymentTokenRequest = new stdClass();
 
-        $paymentTokenRequest->version = $this->api_version;
         $paymentTokenRequest->merchantID = $mid;
-        $paymentTokenRequest->nonceStr = $nonce_str;
-        $paymentTokenRequest->request3DS = CardSecureMode::NO;
         $paymentTokenRequest->invoiceNo = $paymentDetail->invoiceNo;
-        $paymentTokenRequest->desc = $paymentDetail->desc;
+        $paymentTokenRequest->description = $paymentDetail->desc;
         $paymentTokenRequest->amount = $paymentDetail->amount;
         $paymentTokenRequest->currencyCode = $paymentDetail->currencyCode;
+        $paymentTokenRequest->paymentChannel = array("ALL");
+        $paymentTokenRequest->request3DS = CardSecureMode::NO;
+        $paymentTokenRequest->nonceStr = $nonce_str;
         $paymentTokenRequest->userDefined1 = $paymentDetail->userDefined1;
         $paymentTokenRequest->userDefined2 = $paymentDetail->userDefined2;
         $paymentTokenRequest->userDefined3 = $paymentDetail->userDefined3;
