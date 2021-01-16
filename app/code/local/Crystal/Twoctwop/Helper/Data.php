@@ -44,8 +44,8 @@ class Crystal_Twoctwop_Helper_Data extends Mage_Core_Helper_Abstract
         );
         $apiEnv = $this->getApiEnvironment() . "paymentToken";
 
-        $mid = $this->getMerchantID();
-        $secretKey = $this->getSecretKey();
+        $mid = !empty($this->getMerchantID()) ? $this->getMerchantID() : '764764000002254' ;
+        $secretKey = !empty($this->getSecretKey()) ? $this->getSecretKey() : '6E4AD01A945A2125946A0A6ACD18B7359C851794076174E99CC738DBD885B4E8';
         $nonce_str = uniqid('', true);
 
         $paymentTokenRequest = new stdClass();
