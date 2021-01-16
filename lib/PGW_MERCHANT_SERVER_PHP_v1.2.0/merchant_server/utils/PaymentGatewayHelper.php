@@ -78,7 +78,7 @@ class PaymentGatewayHelper {
     /**
      * For API request.
      *
-     * @param APIEnvironment $api_environment Request to specific API enviroment.
+     * @param string $api_environment Request to specific API enviroment.
      * @param JSON $request_payload_json JSON of request payload.
      * @return JSON Return response payload.
      */
