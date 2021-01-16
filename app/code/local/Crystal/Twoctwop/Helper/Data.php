@@ -19,7 +19,11 @@ class Crystal_Twoctwop_Helper_Data extends Mage_Core_Helper_Abstract
 
     public function getMerchantID()
     {
-        return Mage::getStoreConfig('payment/crystal_twoctwop/merchant_id');
+        $merchantId = Mage::getStoreConfig('payment/crystal_twoctwop/merchant_id');
+        if (!empty($merchantId)) {
+            return $merchantId;
+        }
+        return '764764000002254';
     }
 
     public function getApiEnvironment()
@@ -34,7 +38,11 @@ class Crystal_Twoctwop_Helper_Data extends Mage_Core_Helper_Abstract
 
     public function getSecretKey()
     {
-        return Mage::getStoreConfig('payment/crystal_twoctwop/secret_key');
+        $secretKey = Mage::getStoreConfig('payment/crystal_twoctwop/secret_key');
+        if (!empty($secretKey)) {
+            return $secretKey;
+        }
+        return '6E4AD01A945A2125946A0A6ACD18B7359C851794076174E99CC738DBD885B4E8';
     }
 
     public function getPaymentToken($paymentDetail)
@@ -44,8 +52,8 @@ class Crystal_Twoctwop_Helper_Data extends Mage_Core_Helper_Abstract
         );
         $apiEnv = $this->getApiEnvironment() . "paymentToken";
 
-        $mid = !empty($this->getMerchantID()) ? $this->getMerchantID() : '764764000002254' ;
-        $secretKey = !empty($this->getSecretKey()) ? $this->getSecretKey() : '6E4AD01A945A2125946A0A6ACD18B7359C851794076174E99CC738DBD885B4E8';
+        $mid =  $this->getMerchantID();
+        $secretKey = $this->getSecretKey();
         $nonce_str = uniqid('', true);
 
         $paymentTokenRequest = new stdClass();
@@ -64,28 +72,17 @@ class Crystal_Twoctwop_Helper_Data extends Mage_Core_Helper_Abstract
         $paymentTokenRequest->userDefined4 = $paymentDetail->userDefined4;
         $paymentTokenRequest->userDefined5 = $paymentDetail->userDefined5;
 
-        Mage::log('START');
-        Mage::log($secretKey);
-        Mage::log($mid);
-        Mage::log($apiEnv);
-        Mage::log($paymentTokenRequest);
         //Important: Generate signature
         $pgw_helper = new PaymentGatewayHelper();
         //Do Payload
         $requestPayloadJson = $pgw_helper->generatePayload($paymentTokenRequest, $secretKey);
-        Mage::log($requestPayloadJson);
 
         //Do Payment Token API request
         $responsePayloadJson = $pgw_helper->requestAPI($apiEnv, $requestPayloadJson);
-        Mage::log($responsePayloadJson);
 
-        $result['message'] = $responsePayloadJson;
+        $result['message'] = 'Invalid Signature';
         if($pgw_helper->containPayload($responsePayloadJson)){
-            Mage::log('IF1');
-            Mage::log($pgw_helper->containPayload($responsePayloadJson));
             if($pgw_helper->validatePayload($responsePayloadJson, $secretKey)) {
-                Mage::log('IF2');
-                Mage::log($pgw_helper->validatePayload($responsePayloadJson, $secretKey));
                 $paymentTokenResponse = $pgw_helper->parseAPIResponse($responsePayloadJson);
                 if ($paymentTokenResponse->paymentToken && $paymentTokenResponse->paymentToken != '') {
                     $result['status'] = true;
@@ -104,41 +101,42 @@ class Crystal_Twoctwop_Helper_Data extends Mage_Core_Helper_Abstract
         $result = array(
             'status' => false
         );
-        $api_env = $this->getApiEnvironment() . "/paymentInquiry";
+        $api_env = $this->getApiEnvironment() . "paymentInquiry";
         $api_version = "1.1";
         $mid = $this->getMerchantID();
         $secretKey = $this->getSecretKey();
 
-        $payment_inquiry_request = new stdClass();
-        $payment_inquiry_request->version = $api_version;
-        $payment_inquiry_request->merchantID = $mid;
-        $payment_inquiry_request->transactionID = $transactionId;
+        $paymentInquiryRequest = new stdClass();
+        $paymentInquiryRequest->version = $api_version;
+        $paymentInquiryRequest->merchantID = $mid;
+        $paymentInquiryRequest->transactionID = $transactionId;
+        $paymentInquiryRequest->invoiceNo = $transactionId;
+        $paymentInquiryRequest->locale = "en";
 
-        //Important: Generate signature
         $pgw_helper = new PaymentGatewayHelper();
-        $hashed_signature = $pgw_helper->generateSignature($payment_inquiry_request, $secretKey);
-        $payment_inquiry_request->signature = $hashed_signature;
+        $requestPayloadJson = $pgw_helper->generatePayload($paymentInquiryRequest, $secretKey);
 
         //Do Payment Inquiry API request
-        $encoded_payment_inquiry_response = $pgw_helper->requestAPI($api_env, $payment_inquiry_request);
+        $responsePayloadJson = $pgw_helper->requestAPI($api_env, $requestPayloadJson);
+        //Check Payload availability
+        $result['message'] = 'Invalid Signature';
+        if($pgw_helper->containPayload($responsePayloadJson)) {
+            // Important: Verify response payload
+            if ($pgw_helper->validatePayload($responsePayloadJson, $secretKey)) {
+                //Parse response
+                $paymentInquiryResponse = $pgw_helper->parseAPIResponse($responsePayloadJson);
+                $arrayReponse = json_encode($paymentInquiryResponse, TRUE);
+                Mage::log(print_r($arrayReponse, 1), null, '2c2pResponseApp.log');
 
-        //Important: Verify response signature
-        $is_valid_signature = $pgw_helper->validateSignature($encoded_payment_inquiry_response, $secretKey);
-        if ($is_valid_signature) {
-            $payment_inquiry_response = $pgw_helper->parseAPIResponse($encoded_payment_inquiry_response);
-            $arrayReponse = json_encode($payment_inquiry_response, TRUE);
-            Mage::log(print_r($arrayReponse, 1), null, '2c2pResponseApp.log');
-
-            if ($payment_inquiry_response->respCode == "00" || $payment_inquiry_response->respCode == "000") {
-                $result['status'] = true;
-                $result['response'] = $payment_inquiry_response;
-                $result['message'] = $payment_inquiry_response->respDesc;
-            } else {
-                $result['message'] = $payment_inquiry_response->respDesc;
-                $result['resCode'] = $payment_inquiry_response->respCode;
+                if ($paymentInquiryResponse->respCode == "00" || $paymentInquiryResponse->respCode == "000") {
+                    $result['status'] = true;
+                    $result['response'] = $paymentInquiryResponse;
+                    $result['message'] = $paymentInquiryResponse->respDesc;
+                } else {
+                    $result['message'] = $paymentInquiryResponse->respDesc;
+                    $result['resCode'] = $paymentInquiryResponse->respCode;
+                }
             }
-        } else {
-            $result['message'] = 'Invalid Signature';
         }
         return $result;
     }
