@@ -42,7 +42,7 @@ class Crystal_Twoctwop_Helper_Data extends Mage_Core_Helper_Abstract
         $result = array(
             'status' => false
         );
-        $apiEnv = $this->getApiEnvironment() . "/paymentToken";
+        $apiEnv = $this->getApiEnvironment() . "paymentToken";
 
         $mid = $this->getMerchantID();
         $secretKey = $this->getSecretKey();
@@ -65,6 +65,8 @@ class Crystal_Twoctwop_Helper_Data extends Mage_Core_Helper_Abstract
         $paymentTokenRequest->userDefined5 = $paymentDetail->userDefined5;
 
         Mage::log('START');
+        Mage::log($secretKey);
+        Mage::log($mid);
         Mage::log($apiEnv);
         Mage::log($paymentTokenRequest);
         //Important: Generate signature
