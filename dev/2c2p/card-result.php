@@ -54,7 +54,7 @@ if (isset($_REQUEST['transaction_id'])) {
         $paymentInquiry = Mage::helper('twoctwop')->inquiryPayment($transactionID);
         $paymentResult = $paymentInquiry['response'];
         if ($paymentInquiry['status']) {
-            $cardNumber = $paymentResult->pan;
+            $cardNumber = $paymentResult->cardNo;
             $cardToken = $paymentResult->cardToken;
             $cardType = $paymentResult->channelCode;
             $transID = $paymentResult->tranRef;

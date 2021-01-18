@@ -59,6 +59,7 @@ class Crystal_Twoctwop_Helper_Data extends Mage_Core_Helper_Abstract
         $paymentTokenRequest = new stdClass();
 
         $paymentTokenRequest->merchantID = $mid;
+        $paymentTokenRequest->transactionID = $paymentDetail->invoiceNo;
         $paymentTokenRequest->invoiceNo = $paymentDetail->invoiceNo;
         $paymentTokenRequest->description = $paymentDetail->desc;
         $paymentTokenRequest->amount = $paymentDetail->amount;
