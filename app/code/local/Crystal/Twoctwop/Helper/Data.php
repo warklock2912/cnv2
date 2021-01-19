@@ -58,8 +58,8 @@ class Crystal_Twoctwop_Helper_Data extends Mage_Core_Helper_Abstract
 
         $paymentTokenRequest = new stdClass();
 
-        $paymentTokenRequest->merchantID = $mid;
-        $paymentTokenRequest->transactionID = $paymentDetail->invoiceNo;
+        //$paymentTokenRequest->merchantID = $mid;
+        //$paymentTokenRequest->transactionID = $paymentDetail->invoiceNo;
         $paymentTokenRequest->invoiceNo = $paymentDetail->invoiceNo;
         $paymentTokenRequest->description = $paymentDetail->desc;
         $paymentTokenRequest->amount = $paymentDetail->amount;
@@ -67,6 +67,7 @@ class Crystal_Twoctwop_Helper_Data extends Mage_Core_Helper_Abstract
         $paymentTokenRequest->paymentChannel = array("ALL");
         $paymentTokenRequest->request3DS = CardSecureMode::NO;
         $paymentTokenRequest->nonceStr = $nonce_str;
+        $paymentTokenRequest->cardTokenOnly = true;
         $paymentTokenRequest->userDefined1 = $paymentDetail->userDefined1;
         $paymentTokenRequest->userDefined2 = $paymentDetail->userDefined2;
         $paymentTokenRequest->userDefined3 = $paymentDetail->userDefined3;
@@ -108,9 +109,9 @@ class Crystal_Twoctwop_Helper_Data extends Mage_Core_Helper_Abstract
         $secretKey = $this->getSecretKey();
 
         $paymentInquiryRequest = new stdClass();
-        $paymentInquiryRequest->version = $api_version;
+        //$paymentInquiryRequest->version = $api_version;
         $paymentInquiryRequest->merchantID = $mid;
-        $paymentInquiryRequest->transactionID = $transactionId;
+        //$paymentInquiryRequest->transactionID = $transactionId;
         $paymentInquiryRequest->invoiceNo = $transactionId;
         $paymentInquiryRequest->locale = "en";
 
